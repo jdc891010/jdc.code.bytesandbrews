@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brews and Bytes</title>
+  <link rel="stylesheet" href="place-card.css">
+  <link rel="stylesheet" href="heatmap-styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Overlay for detailed view -->
+    <div class="overlay hidden" id="overlay">
+      <!-- The 'hidden' class is added initially -->
+      <div class="detail-container">
+        <!-- Header -->
+        <div class="detail-header">
+          <!-- Return button will be added here by JavaScript -->
+          <h2 class="detail-title" id="detail-title">Coffee Shop Name</h2>
+          <button class="close-button" id="close-button">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <!-- Content -->
+        <div class="detail-content">
+          <div class="content-grid">
+            <!-- Location Info -->
+            <div class="detail-card">
+              <h3 class="section-title">Location Details</h3>
+
+              <div class="info-section">
+                <div class="address-section">
+                  <div class="info-row">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <p class="address-text" id="address-text">12 Bright Street, Somerset West, Cape Town</p>
+                  </div>
+                  <div class="info-row" id="location-spend-row">
+                    <i class="fas fa-money-bill-wave info-icon"></i>
+                    <p class="location-spend-text" id="location-spend-text">Average Spend: R45 - R75</p>
+                  </div>
+                  <div class="info-row" id="location-internet-row">
+                    <i class="fas fa-wifi info-icon"></i>
+                    <p class="location-internet-text" id="location-internet-text">Internet: Limited</p>
+                  </div>
+                  <div class="info-row" id="location-handicapped-row">
+                    <i class="fas fa-wheelchair info-icon"></i>
+                    <p class="location-handicapped-text" id="location-handicapped-text">Handicapped Facilities: Yes</p>
+                  </div>
+                  <div class="map-links">
+                    <a href="#" class="map-link">
+                      Google Maps <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="map-link">
+                      Apple Maps <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="map-link">
+                      Uber <i class="fas fa-location-arrow"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="info-row">
+                  <i class="fas fa-clock info-icon"></i>
+                  <div>
+                    <p class="hours-text" id="hours-text">Hours: 7:00am - 6:00pm</p>
+                  </div>
+                </div>
+
+                <div class="info-row">
+                  <i class="fas fa-phone info-icon"></i>
+                  <div>
+                    <p class="phone-text" id="phone-text">+27 21 851 5555</p>
+                    <a href="#" class="call-link">Call for bookings</a>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="rating-section">
+                  <div class="rating-row">
+                    <div class="rating-text">Google Rating: <span class="rating-value"
+                        id="rating-value">4.7/5</span>
+                    </div>
+                    <div class="review-count" id="review-count">(356 reviews)</div>
+                  </div>
+                  <div class="stars" id="stars">
+                    <!-- Stars will be inserted by JavaScript -->
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="tribes-section">
+                  <h4 class="sub-section-title">Popular Among:</h4>
+                  <div class="tribes-container" id="tribes-container">
+                    <!-- Tribes will be inserted by JavaScript -->
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="rankings-section">
+                  <h4 class="sub-section-title">Rankings:</h4>
+                  <div class="rankings-grid">
+                    <div class="ranking-item wifi-ranking">
+                      <div class="ranking-label">Wi-Fi Speed</div>
+                      <div class="ranking-value" id="speed-rank">#1</div>
+                    </div>
+                    <div class="ranking-item vibe-ranking">
+                      <div class="ranking-label">Vibe</div>
+                      <div class="ranking-value" id="vibe-rank">#2</div>
+                    </div>
+                    <div class="ranking-item parking-ranking">
+                      <div class="ranking-label">Parking</div>
+                      <div class="ranking-value" id="parking-rank">#3</div>
+                    </div>
+                    <div class="ranking-item noise-ranking">
+                      <div class="ranking-label">Noise</div>
+                      <div class="ranking-value" id="noise-rank">#2</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div id="overall-score-container" class="overall-score-container">
+                      <h4 class="sub-section-title">Overall Workspace Score:</h4>
+                      <div class="overall-score">4.2<span class="score-unit">/5</span></div>
+                      <div class="score-note">Click "Overall Workspace Rating" below to see details</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heatmap section -->
+            <div class="detail-card">
+              <div class="metric-header">
+                <h3 class="section-title" id="metric-title">Wi-Fi Speed Heatmap</h3>
+
+                <div class="metric-buttons">
+                  <button class="metric-button active" id="speed-button">
+                    <i class="fas fa-wifi"></i> Speed
+                  </button>
+                  <button class="metric-button" id="vibe-button">
+                    <i class="fas fa-comment"></i> Vibe
+                  </button>
+                  <button class="metric-button" id="parking-button">
+                    <i class="fas fa-car"></i> Parking
+                  </button>
+                  <button class="metric-button" id="noise-button">
+                    <i class="fas fa-volume-down"></i> Noise
+                  </button>
+                </div>
+              </div>
+
+              <p class="metric-description" id="metric-description">Median Mbps by day and time</p>
+
+              <!-- Heatmap -->
+              <div class="heatmap-container">
+                <div class="heatmap-wrapper">
+                  <!-- X-axis labels -->
+                  <div class="x-axis-labels" id="x-axis-labels">
+                    <!-- Time labels will be inserted by JavaScript -->
+                  </div>
+
+                  <!-- Heatmap grid -->
+                  <div class="heatmap-grid" id="heatmap-grid">
+                    <!-- Heatmap cells will be inserted by JavaScript -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Heatmap legend -->
+              <div class="heatmap-legend">
+                <h4 class="legend-title" id="legend-title">Speed legend (Mbps):</h4>
+
+                <div class="legend-items" id="speed-legend">
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-1"></div>
+                    &lt;10
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-2"></div>
+                    10-20
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-3"></div>
+                    20-30
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-4"></div>
+                    30-40
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-5"></div>
+                    40-60
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color speed-color-6"></div>
+                    60+
+                  </div>
+                </div>
+
+                <div class="legend-items hidden" id="vibe-legend">
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-1"></div>
+                    &lt;2.5
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-2"></div>
+                    2.5-3
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-3"></div>
+                    3-3.5
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-4"></div>
+                    3.5-4
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-5"></div>
+                    4-4.5
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color vibe-color-6"></div>
+                    4.5+
+                  </div>
+                </div>
+
+                <div class="legend-items hidden" id="parking-legend">
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-1"></div>
+                    Very Limited
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-2"></div>
+                    Limited
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-3"></div>
+                    Moderate
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-4"></div>
+                    Good
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-5"></div>
+                    Very Good
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color parking-color-6"></div>
+                    Excellent
+                  </div>
+                </div>
+
+                <div class="legend-items hidden" id="noise-legend">
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-1"></div>
+                    Very Noisy
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-2"></div>
+                    Noisy
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-3"></div>
+                    Moderate
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-4"></div>
+                    Quiet
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-5"></div>
+                    Very Quiet
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color noise-color-6"></div>
+                    Silent
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick stats -->
+              <div class="stats-grid" id="stats-container">
+                <!-- Stats will be inserted by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Radar chart will be inserted here by JavaScript -->
+            <!-- This will be inserted before the Talking Points section -->
+            <div class="detail-card collapsible" id="radar-chart-card">
+              <div class="collapsible-header">
+                <h3 class="section-title">Overall Workspace Rating</h3>
+                <button class="toggle-button" id="radar-toggle-button">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="radar-chart-container" class="radar-chart-container collapsed">
+                <!-- Radar chart will be rendered here when expanded -->
+              </div>
+            </div>
+            <!-- Talking points and Comments in a side-by-side grid -->
+            <div class="content-grid">
+              <!-- Talking points -->
+              <div class="detail-card">
+                <h3 class="section-title" id="talking-points-title">Talking Points with Code Conjurers</h3>
+                <div class="talking-points">
+                  <div class="dos-section">
+                    <h4 class="sub-section-title">Do's:</h4>
+                    <ul class="talking-points-list" id="dos-list">
+                      <!-- Do's will be inserted by JavaScript -->
+                    </ul>
+                  </div>
+                  <div class="donts-section">
+                    <h4 class="sub-section-title">Don'ts:</h4>
+                    <ul class="talking-points-list" id="donts-list">
+                      <!-- Don'ts will be inserted by JavaScript -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Comments section -->
+              <div class="detail-card">
+                <h3 class="section-title">What People Are Saying</h3>
+                <div class="comments-container" id="comments-container">
+                  <!-- Comments will be inserted by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="ensureTalkingPointsStructure.js"></script>
+    <script src="place-card.js"></script>
+    <script>
+      // Initialize the connector once the DOM is loaded
+      document.addEventListener('DOMContentLoaded', function () {
+        // Initialize event listeners
+        const closeButton = document.getElementById('close-button');
+        if (closeButton) {
+          closeButton.addEventListener('click', function () {
+            const overlay = document.getElementById('overlay');
+            if (overlay) overlay.classList.add('hidden');
+          });
+        }
+
+        // Enable closing on outside click
+        const overlay = document.getElementById('overlay');
+        const detailContainer = document.querySelector('.detail-container');
+
+        if (overlay && detailContainer) {
+          overlay.addEventListener('click', function (e) {
+            // If the click was on the overlay itself (not its children)
+            if (e.target === overlay) {
+              overlay.classList.add('hidden');
+            }
+          });
+        }
+      });
+    </script>
+  </div>
+</body>
+
+</html>

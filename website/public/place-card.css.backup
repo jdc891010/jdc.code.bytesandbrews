@@ -1,0 +1,41 @@
+/* Heatmap */
+/* .heatmap-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+} */
+
+/* .heatmap-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 24px;
+} */
+
+@media (max-width: 767px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heatmap-container {
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+
+  .day-label {
+    width: 4rem;
+    min-width: 4rem;
+  }
+
+  .radar-chart-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .weight-list {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

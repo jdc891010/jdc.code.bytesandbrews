@@ -1,0 +1,728 @@
+/* Tribes Section Styles */
+.tribes-section {
+    padding: 5rem 0;
+    background-color: #fff;
+}
+
+.tribes-intro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin: 3rem 0;
+    align-items: center;
+}
+
+.tribes-intro-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.tribes-intro-text h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    margin-bottom: 1.5rem;
+}
+
+.tribes-intro-text p {
+    color: #4b5563;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.tribes-intro-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.tribes-intro-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tribes-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tribe-stat {
+    flex: 1;
+    min-width: 200px;
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00A1D6;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Psychology of Belonging Section */
+.tribe-psychology {
+    margin: 5rem 0;
+}
+
+.tribe-psychology h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.psychology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.psychology-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.psychology-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.psychology-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #FFF8E1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.psychology-icon i {
+    font-size: 2rem;
+    color: #FFC107;
+}
+
+.psychology-card h4 {
+    font-size: 1.3rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.psychology-card p {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+/* Color variations for different tribe headers */
+#code-conjurers .tribe-card-header {
+    background-color: #3949AB; /* Deep Blue */
+}
+
+#pixel-wizards .tribe-card-header {
+    background-color: #8E24AA; /* Purple */
+}
+
+#word-weavers .tribe-card-header {
+    background-color: #00897B; /* Teal */
+}
+
+#buzz-beasts .tribe-card-header {
+    background-color: #EF6C00; /* Orange */
+}
+
+#strategy-sages .tribe-card-header {
+    background-color: #455A64; /* Blue Gray */
+}
+
+#knowledge-seekers .tribe-card-header {
+    background-color: #0277BD; /* Light Blue */
+}
+
+#vision-voyagers .tribe-card-header {
+    background-color: #D81B60; /* Pink */
+}
+
+#digital-nomads .tribe-card-header {
+    background-color: #689F38; /* Green */
+}
+
+/* Tribes Catalog Section */
+.tribes-catalog {
+    margin: 5rem 0;
+}
+
+.tribes-catalog h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.tribes-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tribes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.tribe-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tribe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tribe-card-header {
+    padding: 1.5rem;
+    background-color: #4A2C2A;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.tribe-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.tribe-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.tribe-card-header h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.tribe-sector {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.tribe-card-content {
+    padding: 1.5rem;
+}
+
+.tribe-card-content p {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.tribe-preferences {
+    margin-bottom: 1.5rem;
+}
+
+.preference-item {
+    margin-bottom: 0.75rem;
+}
+
+.preference-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.preference-bar {
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.preference-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.high-preference::after {
+    width: 90%;
+    background-color: #00A1D6;
+}
+
+.medium-preference::after {
+    width: 60%;
+    background-color: #FFC107;
+}
+
+.low-preference::after {
+    width: 30%;
+    background-color: #4A2C2A;
+}
+
+.tribe-members {
+    font-size: 0.9rem;
+    color: #6b7280;
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.tribe-members span {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+/* Updated Interactive Community Benefits Grid Styles */
+.tribe-community-benefits {
+    margin: 5rem 0;
+}
+
+.tribe-community-benefits h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Interactive Grid Layout */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.benefit-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 250px;
+    cursor: pointer;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.benefit-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #F0F4FF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(0.8);
+    background-color: #00A1D6;
+}
+
+.benefit-icon i {
+    font-size: 1.8rem;
+    color: #00A1D6;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon i {
+    color: #fff;
+}
+
+.benefit-card h4 {
+    font-size: 1.4rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.benefit-card p {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+/* Interactive Hover Effect */
+/* Updated Interactive Community Benefits Grid Styles with Expanding Cards */
+.tribe-community-benefits {
+    margin: 5rem 0;
+}
+
+.tribe-community-benefits h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Interactive Grid Layout */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+    position: relative;
+}
+
+.benefit-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease, z-index 0s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 250px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10; /* Bring hovered card to front */
+}
+
+.benefit-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #F0F4FF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(0.8);
+    background-color: #00A1D6;
+}
+
+.benefit-icon i {
+    font-size: 1.8rem;
+    color: #00A1D6;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon i {
+    color: #fff;
+}
+
+.benefit-card h4 {
+    font-size: 1.4rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.benefit-card p {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+/* Interactive Hover Effect with Expansion */
+.benefit-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #4A2C2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    padding: 0;
+    pointer-events: none;
+    overflow: auto; /* Allow scrolling if content is tall */
+}
+
+.benefit-card:hover .benefit-hover {
+    opacity: 0.98;
+    transform: translateY(0);
+    height: auto;
+    min-height: 100%;
+    padding: 2rem;
+    pointer-events: all; /* Enable scrolling when visible */
+}
+
+.hover-content {
+    color: white;
+    max-width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease 0.1s; /* Delayed to start after card expands */
+}
+
+.benefit-card:hover .hover-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hover-content h5 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #FFC107;
+}
+
+.hover-content p {
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.benefit-example {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.example-label {
+    color: #FFC107;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Animated Card Colors - Different color for each card */
+.benefit-card:nth-child(1) .benefit-icon {
+    background-color: #E8F5E9;
+}
+.benefit-card:nth-child(1) .benefit-icon i {
+    color: #2E7D32;
+}
+.benefit-card:nth-child(1):hover .benefit-icon {
+    background-color: #2E7D32;
+}
+.benefit-card:nth-child(1) .benefit-hover {
+    background-color: #2E7D32;
+}
+
+.benefit-card:nth-child(2) .benefit-icon {
+    background-color: #E3F2FD;
+}
+.benefit-card:nth-child(2) .benefit-icon i {
+    color: #1565C0;
+}
+.benefit-card:nth-child(2):hover .benefit-icon {
+    background-color: #1565C0;
+}
+.benefit-card:nth-child(2) .benefit-hover {
+    background-color: #1565C0;
+}
+
+.benefit-card:nth-child(3) .benefit-icon {
+    background-color: #F3E5F5;
+}
+.benefit-card:nth-child(3) .benefit-icon i {
+    color: #7B1FA2;
+}
+.benefit-card:nth-child(3):hover .benefit-icon {
+    background-color: #7B1FA2;
+}
+.benefit-card:nth-child(3) .benefit-hover {
+    background-color: #7B1FA2;
+}
+
+.benefit-card:nth-child(4) .benefit-icon {
+    background-color: #FFF8E1;
+}
+.benefit-card:nth-child(4) .benefit-icon i {
+    color: #F57C00;
+}
+.benefit-card:nth-child(4):hover .benefit-icon {
+    background-color: #F57C00;
+}
+.benefit-card:nth-child(4) .benefit-hover {
+    background-color: #F57C00;
+}
+
+.benefit-card:nth-child(5) .benefit-icon {
+    background-color: #E0F2F1;
+}
+.benefit-card:nth-child(5) .benefit-icon i {
+    color: #00897B;
+}
+.benefit-card:nth-child(5):hover .benefit-icon {
+    background-color: #00897B;
+}
+.benefit-card:nth-child(5) .benefit-hover {
+    background-color: #00897B;
+}
+
+.benefit-card:nth-child(6) .benefit-icon {
+    background-color: #E8EAF6;
+}
+.benefit-card:nth-child(6) .benefit-icon i {
+    color: #3949AB;
+}
+.benefit-card:nth-child(6):hover .benefit-icon {
+    background-color: #3949AB;
+}
+.benefit-card:nth-child(6) .benefit-hover {
+    background-color: #3949AB;
+}
+
+/* Animation for cards on page load */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.benefit-card {
+    animation: cardFadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.benefit-card:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card:nth-child(2) { animation-delay: 0.2s; }
+.benefit-card:nth-child(3) { animation-delay: 0.3s; }
+.benefit-card:nth-child(4) { animation-delay: 0.4s; }
+.benefit-card:nth-child(5) { animation-delay: 0.5s; }
+.benefit-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .benefit-card {
+        height: 230px;
+        padding: 1.5rem;
+    }
+    
+    .benefit-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-card h4 {
+        font-size: 1.2rem;
+    }
+    
+    .benefit-card p {
+        font-size: 0.9rem;
+    }
+    
+    /* Enhance mobile experience */
+    .benefit-card:hover {
+        transform: translateY(-5px) scale(1.03);
+    }
+    
+    .benefit-hover {
+        max-height: 80vh; /* Limit height on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefit-card {
+        height: auto;
+        min-height: 200px;
+    }
+}
+
+.find-your-tribe {
+    text-align: center;
+    margin: 5rem 0 3rem;
+    padding: 3rem;
+    background-color: #f9fafb;
+    border-radius: 10px;
+}
+
+.find-your-tribe h3 {
+    font-size: 2rem;
+    color: #4A2C2A;
+    margin-bottom: 1.5rem;
+}
+
+.find-your-tribe p {
+    color: #4b5563;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.tribe-cta {
+    font-size: 1.1rem;
+    padding: 0.9rem 2.5rem;
+}

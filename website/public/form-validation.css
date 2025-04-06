@@ -1,0 +1,184 @@
+/* Styles for form validation */
+
+/* Disabled submit button */
+.cta-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #888;
+}
+
+/* Highlight for fields that need interaction */
+.needs-interaction {
+    position: relative;
+    animation: pulse 2s infinite;
+    border-radius: 8px;
+}
+
+.needs-interaction input,
+.needs-interaction select,
+.needs-interaction textarea,
+.needs-interaction .range-container {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+.needs-interaction label {
+    color: #ff6b6b;
+}
+
+/* Small message under fields needing interaction */
+.interaction-message {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Submit button validation message */
+.submit-validation-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.submit-validation-message i {
+    margin-top: 2px;
+}
+
+/* Validation message that appears at the top */
+.validation-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff6b6b;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 90%;
+    animation: slideDown 0.4s ease-out;
+}
+
+.validation-message i {
+    font-size: 18px;
+}
+
+.validation-message .close-message {
+    margin-left: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.validation-message .close-message:hover {
+    opacity: 1;
+}
+
+/* Animation for the highlighting */
+@keyframes pulse {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 107, 107, 0.1);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { transform: translate(-50%, -20px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Enhanced form styles for better UX */
+.form-group, .rating-item {
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+/* Visual indicator for interacted fields */
+.form-group.interacted, .rating-item.interacted {
+    position: relative;
+}
+
+.form-group.interacted::after, .rating-item.interacted::after {
+    content: '✓';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Add a subtle border to indicate interacted fields */
+.form-group.interacted label, .rating-item.interacted label {
+    color: #4CAF50;
+}
+
+.form-group.interacted input, 
+.form-group.interacted select, 
+.form-group.interacted textarea,
+.rating-item.interacted .range-container {
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+/* Make range sliders clearer */
+.rating-slider {
+    height: 20px;
+}
+
+.rating-slider:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+}
+
+.rating-slider::-webkit-slider-thumb {
+    cursor: pointer;
+}
+
+/* Tooltip to explain interaction requirement */
+.form-header-notice {
+    background-color: #f8f9fa;
+    border-left: 4px solid #4a6cf7;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #555;
+    border-radius: 4px;
+}
+
+.form-header-notice i {
+    color: #4a6cf7;
+    margin-right: 8px;
+}

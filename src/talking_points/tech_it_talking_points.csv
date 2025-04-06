@@ -1,0 +1,101 @@
+id,secondary_profession,try_these,avoid_these,text
+T1-Software Developer,Software Developer,True,False,Spill the beans - what's your wildest Python hack?
+T2-Software Developer,Software Developer,True,False,Ever debugged a Java mess over a latte?
+T3-Software Developer,Software Developer,True,False,Favorite IDE: VS Code or Vim? Brews on me!
+T4-Software Developer,Software Developer,True,False,What's the quirkiest Git commit you've pushed?
+T5-Software Developer,Software Developer,True,False,Rust or C++ - which byte brews your vibe?
+A1-Software Developer,Software Developer,False,True,Why's your code always crashing?
+A2-Software Developer,Software Developer,False,True,"You still use outdated languages, huh?"
+A3-Software Developer,Software Developer,False,True,Can't you just Google that bug?
+A4-Software Developer,Software Developer,False,True,"Your commits are a mess, right?"
+A5-Software Developer,Software Developer,False,True,Coding's so dull - why bother?
+T1-Web Developer,Web Developer,True,False,Best CSS flexbox trick you've brewed up?
+T2-Web Developer,Web Developer,True,False,Ever coded a React site over cold brew?
+T3-Web Developer,Web Developer,True,False,Chrome or Firefox - which browser's your jam?
+T4-Web Developer,Web Developer,True,False,What's your slickest JavaScript hack?
+T5-Web Developer,Web Developer,True,False,Tailwind or Bootstrap - pick your web potion!
+A1-Web Developer,Web Developer,False,True,Why do your sites load so slow?
+A2-Web Developer,Web Developer,False,True,"You just steal HTML templates, huh?"
+A3-Web Developer,Web Developer,False,True,Web dev's dead with AI - agree?
+A4-Web Developer,Web Developer,False,True,That CSS is a nightmare - fix it!
+A5-Web Developer,Web Developer,False,True,Your pages look ancient already.
+T1-Mobile App Developer,Mobile App Developer,True,False,Craziest Swift feature you've coded?
+T2-Mobile App Developer,Mobile App Developer,True,False,Ever built an Android app over espresso?
+T3-Mobile App Developer,Mobile App Developer,True,False,Flutter or Kotlin - which byte's your brew?
+T4-Mobile App Developer,Mobile App Developer,True,False,What's your smoothest app store win?
+T5-Mobile App Developer,Mobile App Developer,True,False,Best UI tweak - spill the mobile tea!
+A1-Mobile App Developer,Mobile App Developer,False,True,Why's your app full of bugs?
+A2-Mobile App Developer,Mobile App Developer,False,True,"iOS devs are snobs, right?"
+A3-Mobile App Developer,Mobile App Developer,False,True,That last update broke everything!
+A4-Mobile App Developer,Mobile App Developer,False,True,"Mobile apps are pointless now, huh?"
+A5-Mobile App Developer,Mobile App Developer,False,True,"You just copy other apps, don't you?"
+T1-DevOps Engineer,DevOps Engineer,True,False,Wildest Docker container you've spun up?
+T2-DevOps Engineer,DevOps Engineer,True,False,Ever fixed a CI/CD pipeline over coffee?
+T3-DevOps Engineer,DevOps Engineer,True,False,Kubernetes or Jenkins - which rules your cloud?
+T4-DevOps Engineer,DevOps Engineer,True,False,What's your slickest automation brew?
+T5-DevOps Engineer,DevOps Engineer,True,False,Terraform or Ansible - pick your DevOps vibe!
+A1-DevOps Engineer,DevOps Engineer,False,True,Why'd the server crash again?
+A2-DevOps Engineer,DevOps Engineer,False,True,"DevOps is just buzzword nonsense, huh?"
+A3-DevOps Engineer,DevOps Engineer,False,True,You broke the build - admit it!
+A4-DevOps Engineer,DevOps Engineer,False,True,Can't you just do it manually?
+A5-DevOps Engineer,DevOps Engineer,False,True,Your pipelines are too slow - ugh!
+T1-Systems Administrator,Systems Administrator,True,False,Best Linux command you've brewed up?
+T2-Systems Administrator,Systems Administrator,True,False,Ever rebooted a server over a cappuccino?
+T3-Systems Administrator,Systems Administrator,True,False,Windows or Ubuntu - which byte's your jam?
+T4-Systems Administrator,Systems Administrator,True,False,What's your quirkiest uptime story?
+T5-Systems Administrator,Systems Administrator,True,False,Bash script win - spill the sysadmin tea!
+A1-Systems Administrator,Systems Administrator,False,True,Why's the network always down?
+A2-Systems Administrator,Systems Administrator,False,True,"You just restart stuff, right?"
+A3-Systems Administrator,Systems Administrator,False,True,Servers are obsolete - agree?
+A4-Systems Administrator,Systems Administrator,False,True,"That outage was your fault, huh?"
+A5-Systems Administrator,Systems Administrator,False,True,Sysadmins are so boring - true?
+T1-Cybersecurity Analyst,Cybersecurity Analyst,True,False,Craziest hack you've halted over coffee?
+T2-Cybersecurity Analyst,Cybersecurity Analyst,True,False,Ever caught a phishing scam mid-latte?
+T3-Cybersecurity Analyst,Cybersecurity Analyst,True,False,Wireshark or Nmap - which tool's your vibe?
+T4-Cybersecurity Analyst,Cybersecurity Analyst,True,False,What's your slickest firewall tweak?
+T5-Cybersecurity Analyst,Cybersecurity Analyst,True,False,Best pen-test story - spill the byte beans!
+A1-Cybersecurity Analyst,Cybersecurity Analyst,False,True,Why'd you let that breach happen?
+A2-Cybersecurity Analyst,Cybersecurity Analyst,False,True,"Security's just paranoia, huh?"
+A3-Cybersecurity Analyst,Cybersecurity Analyst,False,True,"You hack people too, right?"
+A4-Cybersecurity Analyst,Cybersecurity Analyst,False,True,That VPN's useless - admit it!
+A5-Cybersecurity Analyst,Cybersecurity Analyst,False,True,Cyber's overhyped - agree?
+T1-Data Scientist,Data Scientist,True,False,Wildest Pandas trick you've brewed up?
+T2-Data Scientist,Data Scientist,True,False,Ever crunched data over a doppio?
+T3-Data Scientist,Data Scientist,True,False,R or Python - which stat's your brew?
+T4-Data Scientist,Data Scientist,True,False,What's your smoothest visualization win?
+T5-Data Scientist,Data Scientist,True,False,Best dataset find - spill the data tea!
+A1-Data Scientist,Data Scientist,False,True,"Your models are always wrong, huh?"
+A2-Data Scientist,Data Scientist,False,True,"Data science is just guesswork, right?"
+A3-Data Scientist,Data Scientist,False,True,Why's your graph so confusing?
+A4-Data Scientist,Data Scientist,False,True,You just play with Excel - true?
+A5-Data Scientist,Data Scientist,False,True,Stats are boring - admit it!
+T1-Machine Learning Engineer,Machine Learning Engineer,True,False,Craziest TensorFlow model you've trained?
+T2-Machine Learning Engineer,Machine Learning Engineer,True,False,Ever tuned an AI over a flat white?
+T3-Machine Learning Engineer,Machine Learning Engineer,True,False,PyTorch or Keras - which byte's your buzz?
+T4-Machine Learning Engineer,Machine Learning Engineer,True,False,What's your slickest neural net win?
+T5-Machine Learning Engineer,Machine Learning Engineer,True,False,Best overfitting fix - spill the ML tea!
+A1-Machine Learning Engineer,Machine Learning Engineer,False,True,Why's your AI so dumb?
+A2-Machine Learning Engineer,Machine Learning Engineer,False,True,"ML's all hype - no results, huh?"
+A3-Machine Learning Engineer,Machine Learning Engineer,False,True,"You just copy GitHub code, right?"
+A4-Machine Learning Engineer,Machine Learning Engineer,False,True,That model's a flop - fix it!
+A5-Machine Learning Engineer,Machine Learning Engineer,False,True,AI's taking over - scared yet?
+T1-IT Support Specialist,IT Support Specialist,True,False,Wildest tech fix you've brewed up?
+T2-IT Support Specialist,IT Support Specialist,True,False,Ever solved a ticket over a mocha?
+T3-IT Support Specialist,IT Support Specialist,True,False,Windows or Mac - which OS brews better?
+T4-IT Support Specialist,IT Support Specialist,True,False,What's your quirkiest user story?
+T5-IT Support Specialist,IT Support Specialist,True,False,Best troubleshooting hack - spill it!
+A1-IT Support Specialist,IT Support Specialist,False,True,Why can't you fix it faster?
+A2-IT Support Specialist,IT Support Specialist,False,True,"IT support's just rebooting, huh?"
+A3-IT Support Specialist,IT Support Specialist,False,True,You broke my laptop - admit it!
+A4-IT Support Specialist,IT Support Specialist,False,True,Tech's fine - stop bothering me!
+A5-IT Support Specialist,IT Support Specialist,False,True,Your help's useless - true?
+T1-Cloud Architect,Cloud Architect,True,False,Craziest AWS setup you've brewed?
+T2-Cloud Architect,Cloud Architect,True,False,Ever scaled a cloud over cold brew?
+T3-Cloud Architect,Cloud Architect,True,False,Azure or GCP - which sky's your vibe?
+T4-Cloud Architect,Cloud Architect,True,False,What's your slickest migration win?
+T5-Cloud Architect,Cloud Architect,True,False,Best cloud hack - spill the byte tea!
+A1-Cloud Architect,Cloud Architect,False,True,Why's the cloud always down?
+A2-Cloud Architect,Cloud Architect,False,True,"You just bill us more, huh?"
+A3-Cloud Architect,Cloud Architect,False,True,Cloud's too complex - agree?
+A4-Cloud Architect,Cloud Architect,False,True,"That outage was your fault, right?"
+A5-Cloud Architect,Cloud Architect,False,True,On-prem's better - admit it!

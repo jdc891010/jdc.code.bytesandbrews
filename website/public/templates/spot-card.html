@@ -1,0 +1,90 @@
+<div class="spot-card">
+    <!-- Left side - Info and links -->
+    <div class="spot-card-left">
+        <div class="spot-rank">${index + 1}</div>
+        <div class="spot-header">
+            <h3 class="spot-name">${spot.name}</h3>
+        </div>
+        <div class="spot-address">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>${spot.address}</span>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodedAddress}" 
+           target="_blank" class="directions-link">
+            <i class="fas fa-directions"></i> Get Directions
+        </a>
+        <div class="spot-metric">
+            <i class="${metricIcons[category]}"></i>
+            <span class="spot-metric-value">${spot.metricValue}</span>
+        </div>
+        <div class="speed-test-meta">
+            <div class="timestamp">Last tested: ${spot.lastTestDate || 'March 5, 2025'}</div>
+            <div class="test-count">
+                <i class="fas fa-chart-bar"></i>
+                <span>${spot.testCount || Math.floor(Math.random() * 15) + 5} data points</span>
+                <div class="confidence-indicator">
+                    ${generateConfidenceIndicator(spot.testCount || Math.floor(Math.random() * 15) + 5)}
+                </div>
+            </div>
+        </div>
+        <div class="tribe-badge">
+            <i class="fas fa-users"></i> Ruled by ${spot.dominantTribe}
+        </div>
+    </div>
+    
+    <!-- Right side - Ratings -->
+    <div class="spot-card-right">
+        <div class="ratings-section">
+            <div class="rating-grid">
+                <div class="rating-item">
+                    <span class="rating-label">Vibe:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.vibe)};">
+                        ${generateDotRating(spot.ratings.vibe)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Noise:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.noise)};">
+                        ${generateDotRating(spot.ratings.noise)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Power:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.power)};">
+                        ${generateDotRating(spot.ratings.power)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Video:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.video)};">
+                        ${generateDotRating(spot.ratings.video)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Coffee:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.coffee)};">
+                        ${generateDotRating(spot.ratings.coffee)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Price:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.price)};">
+                        ${generateDotRating(spot.ratings.price)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Staff:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.staff)};">
+                        ${generateDotRating(spot.ratings.staff)}
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <span class="rating-label">Parking:</span>
+                    <div class="dot-rating" style="--rating-color: ${getColorForRating(spot.ratings.parking)};">
+                        ${generateDotRating(spot.ratings.parking)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

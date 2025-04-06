@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Brews and Bytes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="place-card.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Keep Leaflet as fallback mapping option -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="tribe-selection.css">
+    <link rel="stylesheet" href="form-validation.css">
+    <link rel="stylesheet" href="rating-widgets.css">
+    <link rel="stylesheet" href="spot-card.css">
+    <link rel="stylesheet" href="tribes-community-section.css">
+    <link rel="stylesheet" href="styles/heatmap-styles.css">
+    
+    <!-- Additional CSS for terms of service page -->
+    <style>
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .terms-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .terms-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .terms-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .terms-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .terms-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .terms-header h1 {
+            color: var(--primary-color);
+        }
+        
+        .terms-content {
+            padding: 7rem 0 3rem;
+        }
+        
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .back-to-home i {
+            margin-right: 0.5rem;
+        }
+        
+        .back-to-home:hover {
+            color: var(--primary-color);
+        }
+        
+        .contact-info {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+        }
+        
+        .contact-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo p {
+            margin-top: 1rem;
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 150px;
+            margin-bottom: 1.5rem;
+            padding-right: 1rem;
+        }
+        
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #00A1D6;
+        }
+        
+        .footer-column p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 0.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form button {
+            background-color: #4A2C2A;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #00A1D6;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-legal a {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-legal a:hover,
+        .footer-legal a.active {
+            color: #00A1D6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Brews and Bytes Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#map-section">Map</a></li>
+                    <li><a href="index.html#top-spots">Top Spots</a></li>
+                    <li><a href="index.html#review-section">Review</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#tribes">Tribes</a></li>
+                    <li><a href="index.html#feature-roadmap">Roadmap</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Terms of Service Content -->
+    <section class="terms-content">
+        <div class="container">
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+            
+            <div class="terms-container">
+                <div class="terms-header">
+                    <h1>Terms of Service</h1>
+                    <p class="last-updated">Last Updated: April 3, 2025</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>1. Introduction</h3>
+                    <p>Welcome to Brews and Bytes. These Terms of Service ("Terms") govern your access to and use of the Brews and Bytes website, services, and applications (collectively, the "Service"). By accessing or using the Service, you agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use the Service.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>2. Definitions</h3>
+                    <p>Throughout these Terms, we use certain defined terms:</p>
+                    <ul>
+                        <li><strong>"Service"</strong> refers to the Brews and Bytes website, applications, and all services provided by Brews and Bytes.</li>
+                        <li><strong>"User"</strong> refers to any individual who accesses or uses the Service.</li>
+                        <li><strong>"Content"</strong> refers to any information, text, graphics, photos, or other materials uploaded, downloaded, or appearing on the Service.</li>
+                        <li><strong>"User Content"</strong> refers to Content that users submit, post, or transmit to, or through, the Service.</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>3. Eligibility</h3>
+                    <p>You must be at least 13 years old to use the Service. By using the Service, you represent and warrant that you are at least 13 years old and that your use of the Service does not violate any applicable laws or regulations.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>4. User Accounts</h3>
+                    <p>Some features of the Service may require you to create an account. When you create an account, you must provide accurate and complete information. You are solely responsible for the activity that occurs on your account, and you must keep your account password secure. You must notify Brews and Bytes immediately of any breach of security or unauthorized use of your account.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>5. User Content</h3>
+                    <p>The Service allows you to submit, post, and share Content, including reviews, ratings, and comments about workspaces. You retain all rights in, and are solely responsible for, the User Content you post to the Service.</p>
+                    <p>By submitting User Content to the Service, you grant Brews and Bytes a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, distribute, and display such User Content in connection with the Service.</p>
+                    <p>You represent and warrant that:</p>
+                    <ul>
+                        <li>You own or have the necessary rights to use and authorize Brews and Bytes to use all User Content you submit;</li>
+                        <li>Your User Content does not violate any third party's intellectual property rights, privacy rights, publicity rights, or other personal or proprietary rights;</li>
+                        <li>Your User Content does not contain any material that is defamatory, obscene, indecent, abusive, offensive, harassing, violent, hateful, inflammatory, or otherwise objectionable.</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>6. Prohibited Uses</h3>
+                    <p>You may use the Service only for lawful purposes and in accordance with these Terms. You agree not to use the Service:</p>
+                    <ul>
+                        <li>In any way that violates any applicable federal, state, local, or international law or regulation;</li>
+                        <li>To transmit, or procure the sending of, any advertising or promotional material, including any "junk mail," "chain letter," "spam," or any other similar solicitation;</li>
+                        <li>To impersonate or attempt to impersonate Brews and Bytes, a Brews and Bytes employee, another user, or any other person or entity;</li>
+                        <li>To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Service, or which, as determined by Brews and Bytes, may harm Brews and Bytes or users of the Service, or expose them to liability.</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>7. Intellectual Property Rights</h3>
+                    <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Brews and Bytes and its licensors. The Service is protected by copyright, trademark, and other laws of both South Africa and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Brews and Bytes.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>8. Disclaimer of Warranties</h3>
+                    <p>THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. BREWS AND BYTES EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+                    <p>BREWS AND BYTES DOES NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE SERVICE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>9. Limitation of Liability</h3>
+                    <p>IN NO EVENT SHALL BREWS AND BYTES, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES, BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>10. Indemnification</h3>
+                    <p>You agree to defend, indemnify, and hold harmless Brews and Bytes, its directors, employees, partners, agents, suppliers, and affiliates, from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Service.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>11. Governing Law</h3>
+                    <p>These Terms shall be governed and construed in accordance with the laws of South Africa, without regard to its conflict of law provisions.</p>
+                    <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>12. Changes to Terms</h3>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                    <p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>13. Contact Us</h3>
+                    <div class="contact-info">
+                        <h4>If you have any questions about these Terms, please contact us:</h4>
+                        <p>Email: support@brewsandbytes.co.za</p>
+                        <p>Address: 123 Main Street, Somerset West, 7130, South Africa</p>
+                        <p>Phone: +27 21 555 1234</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://via.placeholder.com/150x50" alt="Brews and Bytes Logo">
+                    <p>Empowering remote workers with the perfect workspaces.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#map-section">Map</a></li>
+                            <li><a href="index.html#test-section">Test Your Spot</a></li>
+                            <li><a href="index.html#review-section">Submit Review</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Subscribe</h4>
+                        <p>Get updates on new workspace additions</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brews and Bytes. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="active">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load main script file -->
+    <script src="script.js"></script>
+</body>
+
+</html>
