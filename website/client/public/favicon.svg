@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Coffee cup base -->
+  <path d="M8 8L9 24C9 26.2091 10.7909 28 13 28H19C21.2091 28 23 26.2091 23 24L24 8H8Z" fill="#4A2C2A"/>
+  
+  <!-- Coffee cup inner -->
+  <path d="M10 10L10.8 24C10.8 25.1046 11.6954 26 12.8 26H19.2C20.3046 26 21.2 25.1046 21.2 24L22 10H10Z" fill="#F5E8C7"/>
+  
+  <!-- Cup handle -->
+  <path d="M24 12C26.2091 12 28 13.7909 28 16C28 18.2091 26.2091 20 24 20V12Z" fill="#4A2C2A"/>
+  
+  <!-- Steam/WiFi waves -->
+  <path d="M13 4C10.5 5 9 6.5 9 8" stroke="#00A1D6" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M16 2C12.5 3 10 5.5 10 8" stroke="#00A1D6" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M19 4C21.5 5 23 6.5 23 8" stroke="#FFC107" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Winking eye -->
+  <path d="M15 16C15 16.5523 15.4477 17 16 17C16.5523 17 17 16.5523 17 16" stroke="#4A2C2A" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Smile -->
+  <path d="M14 19C14.8 19.6667 16.2 19.6667 17 19" stroke="#4A2C2A" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

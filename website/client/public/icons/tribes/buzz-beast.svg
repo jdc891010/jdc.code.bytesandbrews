@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#e6f0ff" />
+  
+  <!-- Megaphone and social/digital elements -->
+  <g transform="translate(40, 40)">
+    <!-- Megaphone -->
+    <path d="M30,70 L30,50 L20,50 A15,15 0 0,1 20,70 Z" fill="#3b82f6" />
+    <path d="M30,50 L60,30 L60,90 L30,70 Z" fill="#60a5fa" />
+    <ellipse cx="60" cy="60" rx="5" ry="30" fill="#1e40af" />
+    
+    <!-- Sound waves -->
+    <path d="M70,40 Q80,60 70,80" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7">
+      <animate attributeName="d" values="M70,40 Q80,60 70,80;M70,45 Q85,60 70,75;M70,40 Q80,60 70,80" dur="1s" repeatCount="indefinite" />
+    </path>
+    <path d="M80,30 Q95,60 80,90" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.5">
+      <animate attributeName="d" values="M80,30 Q95,60 80,90;M80,35 Q100,60 80,85;M80,30 Q95,60 80,90" dur="1.5s" repeatCount="indefinite" />
+    </path>
+    <path d="M90,20 Q110,60 90,100" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.3">
+      <animate attributeName="d" values="M90,20 Q110,60 90,100;M90,25 Q115,60 90,95;M90,20 Q110,60 90,100" dur="2s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Social media / digital marketing icons -->
+    <g transform="translate(95, 40)">
+      <!-- Stylized icons floating around -->
+      <!-- WiFi/signal icon -->
+      <path d="M0,10 Q10,0 20,10" stroke="#1e40af" stroke-width="2" fill="none">
+        <animate attributeName="transform" attributeType="XML" type="rotate" from="0" to="10" dur="2s" repeatCount="indefinite" />
+      </path>
+      <path d="M5,5 Q10,0 15,5" stroke="#1e40af" stroke-width="2" fill="none">
+        <animate attributeName="transform" attributeType="XML" type="rotate" from="0" to="10" dur="2s" repeatCount="indefinite" />
+      </path>
+      
+      <!-- @ symbol -->
+      <g transform="translate(-20, 20)">
+        <circle cx="0" cy="0" r="6" stroke="#1e40af" stroke-width="2" fill="none">
+          <animate attributeName="r" values="6;7;6" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <path d="M0,-6 L0,0 L5,0" stroke="#1e40af" stroke-width="2" fill="none">
+          <animate attributeName="d" values="M0,-6 L0,0 L5,0;M0,-7 L0,0 L6,0;M0,-6 L0,0 L5,0" dur="3s" repeatCount="indefinite" />
+        </path>
+      </g>
+      
+      <!-- Hash tag -->
+      <g transform="translate(15, 25)">
+        <path d="M-5,-5 L5,5 M-5,5 L5,-5" stroke="#1e40af" stroke-width="2" />
+      </g>
+      
+      <!-- Graph trending up -->
+      <g transform="translate(-15, -15)">
+        <path d="M-5,5 L0,0 L5,2 L10,-5" stroke="#1e40af" stroke-width="2" fill="none" />
+        <path d="M10,-5 L10,0 L5,-5 Z" fill="#1e40af" />
+      </g>
+    </g>
+    
+    <!-- Beast-like elements (subtle) -->
+    <g transform="translate(60, 95)">
+      <path d="M-10,0 L10,0" stroke="#1e40af" stroke-width="2" />
+      <circle cx="-5" cy="-5" r="2" fill="#1e40af">
+        <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="5" cy="-5" r="2" fill="#1e40af">
+        <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Buzz/lightning elements -->
+  <path d="M145,55 L155,75 L140,85 L150,105" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <animate attributeName="opacity" values="1;0.6;1" dur="1s" repeatCount="indefinite" />
+  </path>
+  <path d="M45,55 L55,75 L40,85 L50,105" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" />
+  </path>
+</svg>

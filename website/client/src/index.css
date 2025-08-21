@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom z-index for dialog to ensure it stays above maps */
+.coffee-shop-dialog {
+  z-index: 9999 !important;
+}
+
+/* Ensure map stays below dialog overlay */
+.gm-style {
+  z-index: 0 !important;
+}
+
+:root {
+  --background: 0 0% 96.1%;
+  --foreground: 29 28.3% 22.9%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 29 15.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 29 25.3% 22.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 29 25.3% 22.9%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  
+  /* Custom brand colors */
+  --coffee-brown: 0 25% 23.5%;
+  --tech-blue: 196 100% 42.2%;
+  --vibe-yellow: 43 100% 50%;
+  --cream-white: 39 65.7% 85.9%;
+  
+  /* Shadcn mapped colors */
+  --primary: 0 25% 23.5%; /* Coffee Brown */
+  --primary-foreground: 39 65.7% 95.9%;
+  --secondary: 196 100% 42.2%; /* Tech Blue */
+  --secondary-foreground: 211 100% 99%;
+  --accent: 43 100% 50%; /* Vibe Yellow */
+  --accent-foreground: 29 25.3% 12.9%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 0 25% 23.5%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 29 25.3% 7.9%;
+  --foreground: 39 65.7% 85.9%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 29 25.3% 9.9%;
+  --popover-foreground: 39 65.7% 85.9%;
+  --card: 29 25.3% 9.9%;
+  --card-foreground: 39 65.7% 85.9%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 0 25% 23.5%;
+  --primary-foreground: 39 65.7% 95.9%;
+  --secondary: 196 100% 42.2%;
+  --secondary-foreground: 211 100% 99%;
+  --accent: 43 100% 50%;
+  --accent-foreground: 29 25.3% 8.9%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-[#F5E8C7] text-[#2A1A18];
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-bold;
+  }
+}
+
+@layer utilities {
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .font-pacifico {
+    font-family: 'Pacifico', cursive;
+  }
+  
+  .bg-coffee-brown {
+    background-color: #4A2C2A;
+  }
+  
+  .bg-tech-blue {
+    background-color: #00A1D6;
+  }
+  
+  .bg-vibe-yellow {
+    background-color: #FFC107;
+  }
+  
+  .bg-cream-white {
+    background-color: #F5E8C7;
+  }
+  
+  .bg-dark-brown {
+    background-color: #2A1A18;
+  }
+  
+  .bg-soft-cream {
+    background-color: #FAF3E0;
+  }
+  
+  .text-coffee-brown {
+    color: #4A2C2A;
+  }
+  
+  .text-tech-blue {
+    color: #00A1D6;
+  }
+  
+  .text-vibe-yellow {
+    color: #FFC107;
+  }
+  
+  .text-cream-white {
+    color: #F5E8C7;
+  }
+  
+  .text-dark-brown {
+    color: #2A1A18;
+  }
+  
+  .border-coffee-brown {
+    border-color: #4A2C2A;
+  }
+  
+  .border-tech-blue {
+    border-color: #00A1D6;
+  }
+  
+  .border-vibe-yellow {
+    border-color: #FFC107;
+  }
+  
+  .border-cream-white {
+    border-color: #F5E8C7;
+  }
+  
+  .page-section {
+    scroll-margin-top: 5rem;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(74, 44, 42, 0.1), 0 4px 6px -2px rgba(74, 44, 42, 0.05);
+  }
+  
+  .wifi-bar {
+    transition: width 1s ease-in-out;
+  }
+  
+  .tribe-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .brand-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .brand-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+  }
+  
+  .brand-btn:hover::after {
+    left: 100%;
+  }
+  
+  /* Modern horizontal scrollbar styling */
+  .modern-horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .modern-horizontal-scroll::-webkit-scrollbar-track {
+    background: rgba(74, 44, 42, 0.1);
+    border-radius: 10px;
+  }
+  
+  .modern-horizontal-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #4A2C2A, #00A1D6);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .modern-horizontal-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #2A1A18, #0088B8);
+    transform: scaleY(1.2);
+  }
+  
+  /* Modern vertical scrollbar styling */
+  .modern-vertical-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .modern-vertical-scroll::-webkit-scrollbar-track {
+    background: rgba(74, 44, 42, 0.1);
+    border-radius: 10px;
+  }
+  
+  .modern-vertical-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4A2C2A, #00A1D6);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .modern-vertical-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2A1A18, #0088B8);
+    transform: scaleX(1.2);
+  }
+  
+  /* Apply modern scrollbar to body for vertical scrolling */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: #4A2C2A rgba(74, 44, 42, 0.1);
+  }
+  
+  body::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgba(74, 44, 42, 0.1);
+    border-radius: 10px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4A2C2A, #00A1D6);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2A1A18, #0088B8);
+    transform: scaleX(1.2);
+  }
+}

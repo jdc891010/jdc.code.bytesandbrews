@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#e6f0ff" />
+  
+  <!-- Code brackets and wizard hat -->
+  <g transform="translate(40, 40)">
+    <!-- Left code bracket -->
+    <path d="M20,20 L0,60 L20,100" stroke="#3b82f6" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Right code bracket -->
+    <path d="M100,20 L120,60 L100,100" stroke="#3b82f6" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Wizard hat -->
+    <path d="M60,10 L30,50 L90,50 Z" fill="#1e40af" />
+    <path d="M40,50 L60,25 L80,50 Z" fill="#60a5fa" />
+    
+    <!-- Sparkles -->
+    <circle cx="25" cy="30" r="3" fill="#60a5fa" />
+    <circle cx="95" cy="30" r="3" fill="#60a5fa" />
+    <circle cx="40" cy="70" r="4" fill="#60a5fa" />
+    <circle cx="80" cy="70" r="4" fill="#60a5fa" />
+    <circle cx="60" cy="90" r="5" fill="#60a5fa" />
+    
+    <!-- Laptop stand-in beneath the code brackets -->
+    <rect x="35" y="70" width="50" height="30" rx="3" fill="#1e40af" />
+    <rect x="35" y="65" width="50" height="5" rx="2" fill="#3b82f6" />
+  </g>
+  
+  <!-- Optional: animated pulse effect, works in most modern browsers -->
+  <circle cx="100" cy="100" r="30" fill="#3b82f6" opacity="0.2">
+    <animate attributeName="r" values="30;40;30" dur="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.2;0.1;0.2" dur="2s" repeatCount="indefinite" />
+  </circle>
+</svg>

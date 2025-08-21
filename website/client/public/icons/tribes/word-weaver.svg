@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#f8f2ec" />
+  
+  <!-- Typewriter and quill -->
+  <g transform="translate(40, 40)">
+    <!-- Scroll/paper -->
+    <path d="M30,20 C20,25 20,95 30,100 L90,100 C100,95 100,25 90,20 Z" fill="white" stroke="#8b5cf6" stroke-width="2" />
+    
+    <!-- Text lines on scroll -->
+    <line x1="40" y1="35" x2="80" y2="35" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    <line x1="40" y1="45" x2="70" y2="45" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    <line x1="40" y1="55" x2="75" y2="55" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    <line x1="40" y1="65" x2="65" y2="65" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    <line x1="40" y1="75" x2="80" y2="75" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    <line x1="40" y1="85" x2="70" y2="85" stroke="#8b5cf6" stroke-width="2" opacity="0.7" />
+    
+    <!-- Quill -->
+    <g transform="translate(65, 55) rotate(-30)">
+      <!-- Feather shape -->
+      <path d="M-5,40 C-10,30 -10,10 0,-10 L5,-10 L5,40 Z" fill="#854d0e" />
+      <path d="M0,-10 L0,40 C10,30 10,10 5,-10 Z" fill="#a16207" />
+      
+      <!-- Feather details -->
+      <path d="M-4,5 L4,5 M-5,15 L5,15 M-5,25 L5,25 M-4,35 L4,35" stroke="white" stroke-width="1" stroke-linecap="round" />
+      
+      <!-- Quill tip/nib -->
+      <path d="M0,40 L-2,50 L0,55 L2,50 L0,40 Z" fill="#422006" />
+      <circle cx="0" cy="54" r="1" fill="#ca8a04" /> <!-- Ink drop at tip -->
+    </g>
+    
+    <!-- Ink drops forming into letters -->
+    <g>
+      <!-- W forming -->
+      <circle cx="30" cy="30" r="2" fill="#854d0e">
+        <animate attributeName="cx" values="30;35" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="40" cy="30" r="2" fill="#854d0e">
+        <animate attributeName="cx" values="40;45" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <!-- O forming -->
+      <circle cx="55" cy="30" r="2" fill="#854d0e">
+        <animate attributeName="cx" values="55;60" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="30;25;30" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <!-- R forming -->
+      <circle cx="70" cy="30" r="2" fill="#854d0e">
+        <animate attributeName="cy" values="30;25;30" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="70" cy="35" r="2" fill="#854d0e">
+        <animate attributeName="cx" values="70;75" dur="3s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Thread/weaving pattern around the edge -->
+  <path d="M70,40 Q50,60 70,80 Q90,100 70,120 Q50,140 70,160" stroke="#854d0e" stroke-width="2" fill="none" opacity="0.5" />
+  <path d="M130,40 Q150,60 130,80 Q110,100 130,120 Q150,140 130,160" stroke="#854d0e" stroke-width="2" fill="none" opacity="0.5" />
+</svg>
