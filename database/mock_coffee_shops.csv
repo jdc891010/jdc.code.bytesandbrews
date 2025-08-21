@@ -1,0 +1,11 @@
+id,name,description,address,city,country,wifi_speed,created_at,updated_at
+1,Starbucks Downtown,"Popular coffee chain with reliable WiFi and comfortable seating","123 Main Street","San Francisco","USA",50,"2023-05-15 10:00:00","2023-05-15 10:00:00"
+2,Blue Bottle Coffee,"Specialty coffee roasters with excellent brews and ambiance","456 Market Street","San Francisco","USA",75,"2023-05-16 11:00:00","2023-05-16 11:00:00"
+3,Intelligentsia,"Third-wave coffee company known for quality and sustainability","789 Broadway","New York","USA",60,"2023-05-17 12:00:00","2023-05-17 12:00:00"
+4,Stumptown Coffee,"Portland-based roaster with unique blends and cozy atmosphere","321 Oak Street","Portland","USA",80,"2023-05-18 13:00:00","2023-05-18 13:00:00"
+5,Counter Culture,"Direct trade coffee with educational focus and great workspace","654 Pine Street","Durham","USA",70,"2023-05-19 14:00:00","2023-05-19 14:00:00"
+6,Local Grounds,"Local independent coffee shop with artisanal pastries","987 Elm Street","Seattle","USA",90,"2023-05-20 15:00:00","2023-05-20 15:00:00"
+7,Café Luna,"Cozy neighborhood spot with organic options and quiet corners","147 River Road","Boston","USA",55,"2023-05-21 16:00:00","2023-05-21 16:00:00"
+8,The Coffee Station,"24-hour coffee shop perfect for night owls and early birds","258 Central Avenue","Austin","USA",65,"2023-05-22 17:00:00","2023-05-22 17:00:00"
+9,Brew & Beans,"Modern café with great coffee and collaborative workspace","369 University Drive","Chicago","USA",85,"2023-05-23 18:00:00","2023-05-23 18:00:00"
+10,Morning Ritual,"Specialty coffee with a focus on single-origin beans","741 Lake Street","Miami","USA",45,"2023-05-24 19:00:00","2023-05-24 19:00:00"

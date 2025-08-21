@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: brews_and_bytes_db
+    environment:
+      POSTGRES_DB: brews_and_bytes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+      - ./mock_places.csv:/docker-entrypoint-initdb.d/data/mock_places.csv
+      - ./mock_tribes.csv:/docker-entrypoint-initdb.d/data/mock_tribes.csv
+      - ./mock_place_tribes.csv:/docker-entrypoint-initdb.d/data/mock_place_tribes.csv
+      - ./mock_reviews.csv:/docker-entrypoint-initdb.d/data/mock_reviews.csv
+      - ./mock_metrics.csv:/docker-entrypoint-initdb.d/data/mock_metrics.csv
+      - ./mock_metric_details.csv:/docker-entrypoint-initdb.d/data/mock_metric_details.csv
+      - ./mock_heatmap_data.csv:/docker-entrypoint-initdb.d/data/mock_heatmap_data.csv
+    networks:
+      - brews_and_bytes_network
+    command: ["postgres", "-c", "log_statement=all"]
+
+  adminer:
+    image: adminer
+    container_name: brews_and_bytes_adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - brews_and_bytes_network
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+networks:
+  brews_and_bytes_network:
+    driver: bridge

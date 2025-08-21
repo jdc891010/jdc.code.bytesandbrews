@@ -1,10 +1,15 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { Button } from "../components/ui/button";
 import { motion } from "framer-motion";
 
 const About = () => {
   return (
     <section className="py-28 bg-vibe-yellow bg-opacity-10 page-section">
+      <Helmet>
+        <title>About Brews and Bytes - Our Story</title>
+        <meta name="description" content="Learn about the story behind Brews and Bytes. We're a community-driven platform dedicated to helping remote workers find the best coffee shops with reliable Wi-Fi." />
+      </Helmet>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <motion.h1 
@@ -32,7 +37,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <img 
-              src="https://picsum.photos/1000/600?random=70" 
+              src="https://placehold.co/1000x600/E8D4B2/6F4E37?text=Our+Story" 
               alt="Team working in coffee shop" 
               className="rounded-xl shadow-lg w-full" 
             />

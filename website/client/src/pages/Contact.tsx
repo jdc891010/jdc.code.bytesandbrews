@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "@/lib/animations";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Contact Brews and Bytes - Get in Touch</title>
+        <meta name="description" content="Contact Brews and Bytes for partnerships, questions, or suggestions. We'd love to hear from you!" />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-16 bg-coffee-brown text-white">
         <div className="container mx-auto px-4">

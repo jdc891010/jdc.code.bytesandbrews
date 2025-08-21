@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import SignUpForm from "@/components/SignUpForm";
 import { fadeIn, staggerContainer, fadeInUp } from "@/lib/animations";
+import { Helmet } from "react-helmet-async";
 
 const Download = () => {
   const [showAppFeatures, setShowAppFeatures] = useState(true);
@@ -58,6 +59,10 @@ const Download = () => {
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Download the Brews and Bytes App</title>
+        <meta name="description" content="Download the Brews and Bytes app to find the best coffee shops for remote work. Available on the App Store and Google Play." />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-16 bg-coffee-brown text-white">
         <div className="container mx-auto px-4">
@@ -110,7 +115,7 @@ const Download = () => {
             >
               <div className="relative z-10 bg-white p-2 rounded-3xl shadow-xl rotate-3 transform">
                 <img 
-                  src="https://picsum.photos/800/400?random=20" 
+                  src="https://placehold.co/800x400/E8D4B2/6F4E37?text=App+Screenshot" 
                   alt="App screenshot" 
                   className="rounded-2xl" 
                 />

@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,9 +16,9 @@ const Community = () => {
       id: 1,
       title: "10 Essential Apps for Digital Nomads",
       excerpt: "Our top picks for productivity, organization, and finding the best workspaces around the world.",
-      image: "https://picsum.photos/500/300?random=40",
+      image: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Blog+Post",
       author: "Emma Rodriguez",
-      authorImage: "https://picsum.photos/100/100?random=41",
+      authorImage: "https://placehold.co/100x100/E8D4B2/6F4E37?text=ER",
       date: "May 15, 2023",
       category: "productivity",
       featured: true
@@ -26,9 +27,9 @@ const Community = () => {
       id: 2,
       title: "How to Negotiate Free Wi-Fi Upgrades at Coffee Shops",
       excerpt: "The art of asking for better internet without being 'that customer' everyone dreads.",
-      image: "https://picsum.photos/500/300?random=42",
+      image: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Blog+Post",
       author: "Alex Thompson",
-      authorImage: "https://picsum.photos/100/100?random=43",
+      authorImage: "https://placehold.co/100x100/E8D4B2/6F4E37?text=AT",
       date: "June 2, 2023",
       category: "tips"
     },
@@ -36,9 +37,9 @@ const Community = () => {
       id: 3,
       title: "Coffee Shop Owner Spotlight: Bean There",
       excerpt: "How one small coffee shop became the favorite workspace for creative professionals.",
-      image: "https://picsum.photos/500/300?random=44",
+      image: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Blog+Post",
       author: "Maya Johnson",
-      authorImage: "https://picsum.photos/100/100?random=45",
+      authorImage: "https://placehold.co/100x100/E8D4B2/6F4E37?text=MJ",
       date: "June 18, 2023",
       category: "stories"
     },
@@ -46,9 +47,9 @@ const Community = () => {
       id: 4,
       title: "Setting Up the Perfect Mobile Office",
       excerpt: "From ergonomic laptop stands to noise-cancelling headphones, here's what you need for your mobile workspace.",
-      image: "https://picsum.photos/500/300?random=46",
+      image: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Blog+Post",
       author: "David Chen",
-      authorImage: "https://picsum.photos/100/100?random=47",
+      authorImage: "https://placehold.co/100x100/E8D4B2/6F4E37?text=DC",
       date: "July 5, 2023",
       category: "tips"
     },
@@ -56,9 +57,9 @@ const Community = () => {
       id: 5,
       title: "The Psychology of Productivity in Public Spaces",
       excerpt: "Why some people thrive in busy coffee shops while others need silence to focus.",
-      image: "https://picsum.photos/500/300?random=48",
+      image: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Blog+Post",
       author: "Emma Rodriguez",
-      authorImage: "https://picsum.photos/100/100?random=49",
+      authorImage: "https://placehold.co/100x100/E8D4B2/6F4E37?text=ER",
       date: "July 22, 2023",
       category: "productivity"
     }
@@ -82,7 +83,7 @@ const Community = () => {
       description: "A modern cafe with dedicated coworking space and bookable meeting rooms for remote workers.",
       vibes: ["Focus Factory", "Digital Hub"],
       popularWith: ["Code Conjurers", "Deal Drivers"],
-      imageUrl: "https://picsum.photos/500/300?random=50"
+      imageUrl: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Digital+Bean+Cafe"
     },
     {
       name: "Mug & Keyboard",
@@ -90,12 +91,16 @@ const Community = () => {
       description: "Tech-oriented coffee shop with power outlets at every table and noise-dampening booths.",
       vibes: ["Tech Haven", "Quiet Zen"],
       popularWith: ["Web Wizards", "Data Druids"],
-      imageUrl: "https://picsum.photos/500/300?random=51"
+      imageUrl: "https://placehold.co/500x300/E8D4B2/6F4E37?text=Mug+&+Keyboard"
     }
   ];
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Brews and Bytes Community - Stories and Tips</title>
+        <meta name="description" content="Join the Brews and Bytes community. Read stories from other remote workers, get tips for productivity, and find the best coffee shops for your needs." />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-16 bg-coffee-brown text-white">
         <div className="container mx-auto px-4">

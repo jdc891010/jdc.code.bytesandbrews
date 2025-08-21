@@ -1,0 +1,11 @@
+id,name,address,latitude,longitude,phone,average_spend_min,average_spend_max,internet_quality,handicapped,created_at
+1,"Starbucks Downtown","123 Main Street, San Francisco, CA 94105",37.774929,-122.419418,"(415) 555-0123",3.50,8.50,"Excellent",true,"2023-05-15 10:00:00"
+2,"Blue Bottle Coffee","456 Market Street, San Francisco, CA 94103",37.790630,-122.400210,"(415) 555-0456",4.50,9.50,"Good",false,"2023-05-16 11:00:00"
+3,"Intelligentsia","789 Broadway, New York, NY 10003",40.730610,-73.997450,"(212) 555-0789",5.00,11.00,"Excellent",true,"2023-05-17 12:00:00"
+4,"Stumptown Coffee","321 Oak Street, Portland, OR 97204",45.523064,-122.676483,"(503) 555-0321",4.00,9.00,"Good",false,"2023-05-18 13:00:00"
+5,"Counter Culture","654 Pine Street, Durham, NC 27701",35.994032,-78.898620,"(919) 555-0654",3.75,8.75,"Fair",true,"2023-05-19 14:00:00"
+6,"Local Grounds","987 Elm Street, Seattle, WA 98101",47.606210,-122.332071,"(206) 555-0987",4.25,9.25,"Excellent",true,"2023-05-20 15:00:00"
+7,"Café Luna","147 River Road, Boston, MA 02108",42.360081,-71.058884,"(617) 555-0147",3.25,7.50,"Good",false,"2023-05-21 16:00:00"
+8,"The Coffee Station","258 Central Avenue, Austin, TX 78701",30.267153,-97.743057,"(512) 555-0258",3.00,7.00,"Fair",true,"2023-05-22 17:00:00"
+9,"Brew & Beans","369 University Drive, Chicago, IL 60601",41.878114,-87.629799,"(312) 555-0369",4.75,10.50,"Excellent",true,"2023-05-23 18:00:00"
+10,"Morning Ritual","741 Lake Street, Miami, FL 33101",25.761681,-80.191788,"(305) 555-0741",3.50,8.00,"Good",false,"2023-05-24 19:00:00"

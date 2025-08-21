@@ -1,0 +1,21 @@
+id,place_id,user_name,rating,comment,created_at
+1,1,"John Doe",4.5,"Great coffee and reliable WiFi. Perfect for working remotely.",2023-05-15 10:30:00
+2,1,"Jane Smith",4.0,"Good atmosphere but gets crowded during peak hours.",2023-05-16 14:45:00
+3,2,"Bob Johnson",5.0,"Excellent single-origin beans and spacious seating.",2023-05-17 09:15:00
+4,2,"Alice Williams",4.5,"Knowledgeable baristas and consistent quality.",2023-05-18 16:20:00
+5,3,"Charlie Brown",4.0,"Perfect for meetings with clients. Professional atmosphere.",2023-05-19 11:00:00
+6,3,"Diana Prince",4.5,"Great selection of pastries and comfortable chairs.",2023-05-20 13:45:00
+7,4,"Ethan Hunt",3.5,"Good coffee but limited seating during rush hour.",2023-05-21 08:30:00
+8,4,"Fiona Gallagher",4.0,"Relaxed vibe and friendly staff.",2023-05-22 15:15:00
+9,5,"George Lucas",4.5,"Best coffee in the area. Great for focused work.",2023-05-23 12:00:00
+10,5,"Hannah Montana",4.0,"Consistent quality and reasonable prices.",2023-05-24 17:30:00
+11,6,"Ian Malcolm",5.0,"Perfect 24-hour spot for night owls like me.",2023-05-25 09:45:00
+12,6,"Julia Roberts",4.5,"Great for early morning work sessions.",2023-05-26 14:20:00
+13,7,"Keanu Reeves",4.0,"Cozy atmosphere and good selection of tea.",2023-05-27 11:10:00
+14,7,"Lucy Liu",3.5,"A bit noisy but good coffee.",2023-05-28 16:50:00
+15,8,"Morgan Freeman",4.5,"Always busy but worth the wait.",2023-05-29 10:25:00
+16,8,"Natalie Portman",4.0,"Good for quick coffee breaks between meetings.",2023-05-30 13:15:00
+17,9,"Oscar Isaac",5.0,"Fantastic workspace with great coffee.",2023-05-31 15:30:00
+18,9,"Penelope Cruz",4.5,"Modern setup and reliable WiFi.",2023-06-01 09:45:00
+19,10,"Quentin Tarantino",4.0,"Unique atmosphere and good music.",2023-06-02 12:20:00
+20,10,"Reese Witherspoon",3.5,"A bit touristy but decent coffee.",2023-06-03 14:05:00

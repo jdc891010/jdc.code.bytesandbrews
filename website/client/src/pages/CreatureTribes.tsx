@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import TribeCard from "@/components/TribeCard";
 import TribeMatcher from "@/components/TribeMatcher";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const CreatureTribes = () => {
   const tribes = [
@@ -112,6 +113,10 @@ const CreatureTribes = () => {
 
   return (
     <section id="tribes" className="py-28 bg-soft-cream">
+      <Helmet>
+        <title>Creature Tribes - Find Your Fellow Remote Workers</title>
+        <meta name="description" content="Discover your remote work tribe at Brews and Bytes. Connect with like-minded professionals, from Code Conjurers to Word Weavers." />
+      </Helmet>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <motion.h1 

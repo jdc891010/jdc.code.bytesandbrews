@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WifiSpeedBar from "@/components/WifiSpeedBar";
 import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Features = () => {
   const [wifiShops] = useState([
@@ -35,6 +36,10 @@ const Features = () => {
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Brews and Bytes Features - Find Your Perfect Workspace</title>
+        <meta name="description" content="Explore the features of Brews and Bytes, including real-time Wi-Fi speed tests, vibe ratings, creature tribes, and an interactive map of coffee shops." />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-16 bg-tech-blue bg-opacity-5">
         <div className="container mx-auto px-4">

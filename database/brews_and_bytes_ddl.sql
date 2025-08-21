@@ -1,6 +1,69 @@
 -- PostgreSQL DDL for Brews and Bytes schema
 
 -- Drop existing tables if any (cascade to remove dependencies)
+DROP TABLE IF EXISTS coffee_shops CASCADE;
+DROP TABLE IF EXISTS subscribers CASCADE;
+DROP TABLE IF EXISTS signups CASCADE;
+DROP TABLE IF EXISTS contacts CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+-- User Model
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
+);
+
+-- Contact Form Table
+CREATE TABLE contacts (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  subject VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Sign Up / Waitlist Table
+CREATE TABLE signups (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  tribe VARCHAR(255),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Newsletter Subscription Table
+CREATE TABLE subscribers (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Coffee Shop Table (for future implementation)
+CREATE TABLE coffee_shops (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  country VARCHAR(255) NOT NULL,
+  wifi_speed INTEGER,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes for better performance
+CREATE INDEX idx_contacts_email ON contacts(email);
+CREATE INDEX idx_signups_email ON signups(email);
+CREATE INDEX idx_subscribers_email ON subscribers(email);
+CREATE INDEX idx_coffee_shops_city ON coffee_shops(city);
+CREATE INDEX idx_coffee_shops_name ON coffee_shops(name);
+
+-- PostgreSQL DDL for Brews and Bytes schema
+
+-- Drop existing tables if any (cascade to remove dependencies)
 DROP TABLE IF EXISTS heatmap_data CASCADE;
 DROP TABLE IF EXISTS metric_details CASCADE;
 DROP TABLE IF EXISTS metrics CASCADE;

@@ -1,0 +1,11 @@
+id,name,email,city,tribe,created_at
+1,John Doe,john.doe@example.com,San Francisco,Tech Workers,2023-05-15 10:30:00
+2,Jane Smith,jane.smith@example.com,New York,Creative Professionals,2023-05-16 14:45:00
+3,Bob Johnson,bob.johnson@example.com,Austin,Entrepreneurs,2023-05-17 09:15:00
+4,Alice Williams,alice.williams@example.com,Seattle,Remote Workers,2023-05-18 16:20:00
+5,Charlie Brown,charlie.brown@example.com,Portland,Students,2023-05-19 11:00:00
+6,Diana Prince,diana.prince@example.com,Los Angeles,Freelancers,2023-05-20 13:45:00
+7,Ethan Hunt,ethan.hunt@example.com,Chicago,Digital Nomads,2023-05-21 08:30:00
+8,Fiona Gallagher,fiona.gallagher@example.com,Boston,Startup Founders,2023-05-22 15:15:00
+9,George Lucas,george.lucas@example.com,Miami,Content Creators,2023-05-23 12:00:00
+10,Hannah Montana,hannah.montana@example.com,Nashville,Artists,2023-05-24 17:30:00

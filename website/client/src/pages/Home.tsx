@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
@@ -52,7 +53,7 @@ const Home = () => {
   const [coffeeShops, setCoffeeShops] = useState([
     {
       name: "Bootlegger, Somerset West",
-      imageUrl: "https://picsum.photos/400/300?random=1",
+      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Bootlegger",
       tribe: "Code Conjurers",
       speed: 40,
       p10: 32,
@@ -70,7 +71,7 @@ const Home = () => {
     },
     {
       name: "Nom Nom, Somerset Mall",
-      imageUrl: "https://picsum.photos/400/300?random=2",
+      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Nom+Nom",
       tribe: "Word Weavers",
       speed: 25,
       p10: 18,
@@ -88,7 +89,7 @@ const Home = () => {
     },
     {
       name: "Slug & Lettuce, Waterstone",
-      imageUrl: "https://picsum.photos/400/300?random=3",
+      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Slug+&+Lettuce",
       tribe: "Pixel Pixies",
       speed: 15,
       p10: 10,
@@ -122,7 +123,7 @@ const Home = () => {
         // Add the new coffee shop to the list with extended statistics
         const newShop = {
           name: newCoffeeShopName,
-          imageUrl: "https://picsum.photos/400/300?random=21",
+          imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=New+Shop",
           tribe: "Digital Nomad",
           speed: averageSpeed,
           p10: Math.floor(averageSpeed * 0.8), // Estimate p10 as 80% of average
@@ -226,6 +227,10 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Brews and Bytes - Sip, Surf, Succeed</title>
+        <meta name="description" content="Find the best coffee shops for remote work and studying in Somerset West. Brews and Bytes helps you discover locations with great coffee, reliable Wi-Fi, and a productive atmosphere." />
+      </Helmet>
       {/* Hero Section */}
       <section id="home" className="relative h-[70vh] flex items-center page-section">
         <div className="absolute inset-0 z-0">
@@ -458,7 +463,7 @@ const Home = () => {
               description="A sleek, modern coffee shop on Bright Street with perfect lighting for laptop work and plenty of outlets."
               vibes={["Quiet Zen", "Focus Factory"]}
               popularWith={["Code Conjurers", "Word Weavers"]}
-              imageUrl="https://picsum.photos/500/300?random=23"
+              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Bootlegger"
               amenities={{
                 wheelchairAccessible: true,
                 parkingRating: 4,
@@ -473,7 +478,7 @@ const Home = () => {
               description="Cozy café in Somerset Mall with rustic charm, comfortable seating and excellent espresso drinks."
               vibes={["Chatty Buzz", "Creative Chaos"]}
               popularWith={["Pixel Pixies", "Buzz Beasts"]}
-              imageUrl="https://picsum.photos/500/300?random=24"
+              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Nom+Nom"
               amenities={{
                 wheelchairAccessible: true,
                 parkingRating: 5,
@@ -488,7 +493,7 @@ const Home = () => {
               description="Spacious venue with comfortable seating, reliable Wi-Fi and a diverse menu at Waterstone Village."
               vibes={["Focus Factory", "Quiet Zen"]}
               popularWith={["Web Wizards", "Story Spinners"]}
-              imageUrl="https://picsum.photos/500/300?random=25"
+              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Slug+&+Lettuce"
               amenities={{
                 wheelchairAccessible: false,
                 parkingRating: 5,
@@ -586,19 +591,19 @@ const Home = () => {
                 name="Sarah K."
                 tribe="Word Weaver"
                 quote="As a copywriter, finding the perfect vibe is essential. Bootlegger in Somerset West has become my go-to workspace!"
-                imageUrl="https://picsum.photos/400/300?random=26"
+                imageUrl="https://placehold.co/100x100/E8D4B2/6F4E37?text=SK"
               />
               <TestimonialCard
                 name="Johan V."
                 tribe="Code Conjurer"
                 quote="Slug & Lettuce at Waterstone has the perfect background noise level and Wi-Fi speeds for development work."
-                imageUrl="https://picsum.photos/400/300?random=27"
+                imageUrl="https://placehold.co/100x100/E8D4B2/6F4E37?text=JV"
               />
               <TestimonialCard
                 name="Priya M."
                 tribe="Pixel Pixie"
                 quote="Nom Nom at Somerset Mall has the creative atmosphere I need for design work, plus their pastries are amazing!"
-                imageUrl="https://picsum.photos/400/300?random=28"
+                imageUrl="https://placehold.co/100x100/E8D4B2/6F4E37?text=PM"
               />
             </div>
             
