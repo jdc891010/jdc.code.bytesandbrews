@@ -1,10 +1,11 @@
-import express, { type Express } from "express";
-import fs from "fs";
-import path from "path";
+import express from "express";
+import * as fs from "fs";
+import * as path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
-import viteConfig from "../vite.config";
+import viteConfig from "../vite.config.js";
 import { nanoid } from "nanoid";
+import { IncomingMessage, ServerResponse } from "http";
 
 const viteLogger = createLogger();
 
@@ -19,11 +20,11 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function setupVite(app: Express, server: Server) {
+export async function setupVite(app: express.Application, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: true,
+    allowedHosts: true as const,
   };
 
   const vite = await createViteServer({
@@ -46,7 +47,7 @@ export async function setupVite(app: Express, server: Server) {
 
     try {
       const clientTemplate = path.resolve(
-        import.meta.dirname,
+        path.dirname(import.meta.url.substring(process.platform === 'win32' ? 8 : 7)),
         "..",
         "client",
         "index.html",
@@ -67,8 +68,8 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
-export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+export function serveStatic(app: express.Application) {
+  const distPath = path.resolve(path.dirname(import.meta.url.substring(process.platform === 'win32' ? 8 : 7)), "../dist/public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // Simple contact form schema
 const contactFormSimpleSchema = z.object({
@@ -17,6 +19,9 @@ const contactFormSimpleSchema = z.object({
   subject: z.string().min(2, { message: "Please select a subject" }),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
   captcha: z.string().min(1, { message: "Please complete the captcha verification" }),
+  termsAccepted: z.boolean().refine(val => val === true, {
+    message: "You must accept the Terms of Service and Privacy Policy"
+  }),
 });
 
 type ContactFormSimpleValues = z.infer<typeof contactFormSimpleSchema>;
@@ -50,6 +55,7 @@ const ContactFormSimple = () => {
       subject: "",
       message: "",
       captcha: "",
+      termsAccepted: false,
     },
   });
 
@@ -176,6 +182,36 @@ const ContactFormSimple = () => {
                 <FormControl>
                   <Input {...field} placeholder="Enter your answer" />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="termsAccepted"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex items-start space-x-2">
+                  <Checkbox
+                    id="termsAccepted"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <label
+                    htmlFor="termsAccepted"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    I agree to the{" "}
+                    <Link href="/terms-of-service" className="text-tech-blue underline">
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy-policy" className="text-tech-blue underline">
+                      Privacy Policy
+                    </Link>
+                  </label>
+                </div>
                 <FormMessage />
               </FormItem>
             )}

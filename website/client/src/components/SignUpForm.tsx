@@ -2,18 +2,23 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const signUpFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   city: z.string().min(2, { message: "City must be at least 2 characters" }),
   tribe: z.string().optional(),
+  termsAccepted: z.boolean().refine(val => val === true, {
+    message: "You must accept the Terms of Service and Privacy Policy"
+  }),
 });
 
 type SignUpFormValues = z.infer<typeof signUpFormSchema>;
@@ -29,6 +34,7 @@ const SignUpForm = () => {
       email: "",
       city: "",
       tribe: "",
+      termsAccepted: false,
     },
   });
 
@@ -127,6 +133,36 @@ const SignUpForm = () => {
                     <SelectItem value="deal-driver">Deal Driver</SelectItem>
                   </SelectContent>
                 </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="termsAccepted"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex items-start space-x-2">
+                  <Checkbox
+                    id="termsAccepted"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <label
+                    htmlFor="termsAccepted"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    I agree to the{" "}
+                    <Link href="/terms-of-service" className="text-tech-blue underline">
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy-policy" className="text-tech-blue underline">
+                      Privacy Policy
+                    </Link>
+                  </label>
+                </div>
                 <FormMessage />
               </FormItem>
             )}

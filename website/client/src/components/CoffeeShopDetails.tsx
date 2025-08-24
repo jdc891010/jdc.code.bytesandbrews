@@ -199,7 +199,70 @@ const NavigationButtons = ({ location }: { location: Location }) => {
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location.coordinates.lat},${location.coordinates.lng}`;
   const appleMapsUrl = `https://maps.apple.com/?ll=${location.coordinates.lat},${location.coordinates.lng}`;
   const wazeUrl = `https://www.waze.com/ul?ll=${location.coordinates.lat},${location.coordinates.lng}&navigate=yes`;
-  const uberUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${location.coordinates.lat}&dropoff[longitude]=${location.coordinates.lng}`;
+  
+  // Uber click handler with advanced logic
+  const handleUberClick = () => {
+    /**
+     * Safely build Uber deep link URLSearchParams
+     */
+    function buildUberLink({ dropLat, dropLng, name, address, pickup }: {
+      dropLat: number;
+      dropLng: number;
+      name: string;
+      address: string;
+      pickup: { mode: string; lat?: number; lng?: number };
+    }) {
+      const params = new URLSearchParams({ action: 'setPickup' });
+ 
+      if (!pickup || pickup.mode === 'my_location') {
+        params.set('pickup', 'my_location');
+      } else if (pickup.mode === 'fixed' && isFinite(pickup.lat!) && isFinite(pickup.lng!)) {
+        params.set('pickup[latitude]', String(pickup.lat));
+        params.set('pickup[longitude]', String(pickup.lng));
+      } else {
+        // Fallback to in-app manual pickup UI
+        params.set('pickup', 'my_location');
+      }
+ 
+      params.set('dropoff[latitude]', String(dropLat));
+      params.set('dropoff[longitude]', String(dropLng));
+      if (name) params.set('dropoff[nickname]', name);
+      if (typeof address === 'string' && address.trim().length > 0) {
+        params.set('dropoff[formatted_address]', address);
+      }
+ 
+      return `https://m.uber.com/ul/?${params.toString()}`;
+    }
+ 
+    /**
+     * Attempt geolocation to validate permission (optional).
+     * If granted, we still use pickup=my_location (Uber app uses device GPS).
+     * If denied/unavailable, we still proceed (Uber lets user set pickup manually).
+     */
+    function withOptionalGeolocation(continueFn: () => void) {
+      if (!navigator.geolocation) { continueFn(); return; }
+      let resolved = false;
+      const timer = setTimeout(() => { if (!resolved) continueFn(); }, 1200);
+ 
+      navigator.geolocation.getCurrentPosition(
+        () => { resolved = true; clearTimeout(timer); continueFn(); },
+        () => { resolved = true; clearTimeout(timer); continueFn(); },
+        { maximumAge: 30000, timeout: 1000 }
+      );
+    }
+
+    const dropLat = location.coordinates.lat;
+    const dropLng = location.coordinates.lng;
+    const name = location.address.split(',')[0] || 'Coffee Shop';
+    const address = `${location.address}, ${location.city}, ${location.country}`;
+    const pickup = { mode: 'my_location' };
+
+    withOptionalGeolocation(() => {
+      const url = buildUberLink({ dropLat, dropLng, name, address, pickup });
+      // Open in same tab to allow mobile universal link handoff
+      window.location.href = url;
+    });
+  };
   
   return (
     <div className="flex flex-wrap gap-2 mt-4">
@@ -218,11 +281,17 @@ const NavigationButtons = ({ location }: { location: Location }) => {
           <i className="fab fa-waze text-blue-500"></i> Waze
         </Button>
       </a>
-      <a href={uberUrl} target="_blank" rel="noopener noreferrer">
-        <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-gray-100">
-          <i className="fab fa-uber text-black"></i> Uber
-        </Button>
-      </a>
+      <Button 
+        variant="outline" 
+        className="flex items-center gap-2 bg-white hover:bg-gray-100"
+        onClick={handleUberClick}
+        data-drop-lat={location.coordinates.lat}
+        data-drop-lng={location.coordinates.lng}
+        data-drop-name={location.address.split(',')[0] || 'Coffee Shop'}
+        data-drop-address={`${location.address}, ${location.city}, ${location.country}`}
+      >
+        <i className="fab fa-uber text-black"></i> Uber
+      </Button>
     </div>
   );
 };

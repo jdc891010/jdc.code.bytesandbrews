@@ -146,8 +146,8 @@ const Footer = () => {
         <div className="border-t border-white border-opacity-20 mt-8 pt-8 text-center">
           <p className="text-sm opacity-70">&copy; {new Date().getFullYear()} Brews and Bytes. All rights reserved.</p>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</a>
-            <a href="#" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Terms of Service</a>
+            <Link href="/privacy-policy" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Terms of Service</Link>
             <a href="#" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Cookie Policy</a>
           </div>
         </div>

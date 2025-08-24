@@ -10,8 +10,16 @@ import {
   type SignUp,
   type Subscriber 
 } from "@shared/schema";
+import { setupAdminRoutes } from "./admin-routes.js";
+import { createDefaultAdmin } from "./auth.js";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Initialize default admin user
+  await createDefaultAdmin();
+  
+  // Setup admin routes
+  setupAdminRoutes(app);
+  
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
@@ -137,6 +145,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({
         success: false,
         message: "Failed to retrieve subscribers"
+      });
+    }
+  });
+
+  // Get coffee shops (public endpoint)
+  app.get("/api/coffee-shops", async (req, res) => {
+    try {
+      const coffeeShops = await storage.getAllCoffeeShops();
+      return res.status(200).json({
+        success: true,
+        coffeeShops
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve coffee shops"
+      });
+    }
+  });
+
+  // Blog endpoints (public)
+  // Get all published blog posts
+  app.get("/api/blog-posts", async (req, res) => {
+    try {
+      const blogPosts = await storage.getPublishedBlogPosts();
+      return res.status(200).json({
+        success: true,
+        blogPosts
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve blog posts"
+      });
+    }
+  });
+
+  // Get a specific blog post by slug
+  app.get("/api/blog-posts/:slug", async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const blogPost = await storage.getBlogPostBySlug(slug);
+      
+      if (!blogPost) {
+        return res.status(404).json({
+          success: false,
+          message: "Blog post not found"
+        });
+      }
+      
+      // Only return published posts to the public
+      if (blogPost.status !== "published") {
+        return res.status(404).json({
+          success: false,
+          message: "Blog post not found"
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        blogPost
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve blog post"
       });
     }
   });
