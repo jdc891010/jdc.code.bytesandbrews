@@ -95,6 +95,9 @@ export const coffeeShops = sqliteTable("coffee_shops", {
   wifiSpeed: integer("wifi_speed"),
   imageUrl: text("image_url"),
   thumbnailUrl: text("thumbnail_url"),
+  tribe: text("tribe"),
+  vibe: text("vibe"),
+  amenities: text("amenities"), // JSON string
   createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
   updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
@@ -119,6 +122,9 @@ export const coffeeShopSchema = createInsertSchema(coffeeShops).pick({
   wifiSpeed: true,
   imageUrl: true,
   thumbnailUrl: true,
+  tribe: true,
+  vibe: true,
+  amenities: true,
 });
 
 export type CoffeeShop = typeof coffeeShops.$inferSelect;
@@ -228,3 +234,103 @@ export const notificationSchema = createInsertSchema(notifications).pick({
 
 export type Notification = typeof notifications.$inferSelect;
 export type InsertNotification = z.infer<typeof notificationSchema>;
+
+// Specials/Promotions Table
+export const specials = sqliteTable("specials", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  coffeeShopId: integer("coffee_shop_id").references(() => coffeeShops.id).notNull(),
+  discountType: text("discount_type").notNull(), // percentage, fixed, bogo, free_item
+  discountValue: integer("discount_value"), // percentage or cents
+  originalPrice: integer("original_price"), // in cents
+  specialPrice: integer("special_price"), // in cents
+  terms: text("terms"), // terms and conditions
+  imageUrl: text("image_url"),
+  thumbnailUrl: text("thumbnail_url"),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
+  startDate: integer("start_date", { mode: "timestamp" }).notNull(),
+  endDate: integer("end_date", { mode: "timestamp" }).notNull(),
+  displayOnHomepage: integer("display_on_homepage", { mode: "boolean" }).notNull().default(true),
+  priority: integer("priority").notNull().default(0), // higher number = higher priority
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export const specialSchema = createInsertSchema(specials).pick({
+  title: true,
+  description: true,
+  coffeeShopId: true,
+  discountType: true,
+  discountValue: true,
+  originalPrice: true,
+  specialPrice: true,
+  terms: true,
+  imageUrl: true,
+  thumbnailUrl: true,
+  startDate: true,
+  endDate: true,
+  displayOnHomepage: true,
+  priority: true,
+});
+
+export type Special = typeof specials.$inferSelect;
+export type InsertSpecial = z.infer<typeof specialSchema>;
+
+// Featured Spots Table
+export const featuredSpots = sqliteTable("featured_spots", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  coffeeShopId: integer("coffee_shop_id").references(() => coffeeShops.id).notNull(),
+  title: text("title"), // optional custom title
+  description: text("description"), // why it's featured
+  month: integer("month").notNull(), // 1-12
+  year: integer("year").notNull(),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export const featuredSpotSchema = createInsertSchema(featuredSpots).pick({
+  coffeeShopId: true,
+  title: true,
+  description: true,
+  month: true,
+  year: true,
+});
+
+export type FeaturedSpot = typeof featuredSpots.$inferSelect;
+export type InsertFeaturedSpot = z.infer<typeof featuredSpotSchema>;
+
+// Images Table for better image management
+export const images = sqliteTable("images", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  filename: text("filename").notNull(),
+  originalName: text("original_name").notNull(),
+  mimeType: text("mime_type").notNull(),
+  size: integer("size").notNull(), // in bytes
+  url: text("url").notNull(),
+  thumbnailUrl: text("thumbnail_url"),
+  entityType: text("entity_type").notNull(), // coffee_shop, special, featured_spot, blog_post
+  entityId: integer("entity_id"), // reference to the entity
+  altText: text("alt_text"),
+  caption: text("caption"),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export const imageSchema = createInsertSchema(images).pick({
+  filename: true,
+  originalName: true,
+  mimeType: true,
+  size: true,
+  url: true,
+  thumbnailUrl: true,
+  entityType: true,
+  entityId: true,
+  altText: true,
+  caption: true,
+});
+
+export type Image = typeof images.$inferSelect;
+export type InsertImage = z.infer<typeof imageSchema>;

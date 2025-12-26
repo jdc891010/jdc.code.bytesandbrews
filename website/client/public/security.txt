@@ -1,0 +1,10 @@
+# Security Policy for Brews and Bytes
+
+Contact: mailto:security@brewsandbytes.com
+Expires: 2026-08-21T00:00:00Z
+Preferred-Languages: en
+Canonical: https://www.brewsandbytes.com/security.txt
+Policy: https://www.brewsandbytes.com/terms
+
+# We encourage responsible disclosure of security issues
+# Please report any security vulnerabilities to security@brewsandbytes.com

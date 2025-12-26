@@ -1,9 +1,9 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
-import { eq, and } from "drizzle-orm";
+import { eq, and, lte, gte } from "drizzle-orm";
 import {
   users, contacts, signups, subscribers, coffeeShops, adminUsers,
-  coupons, blogPosts, notifications,
+  coupons, blogPosts, notifications, specials, featuredSpots, images,
   type User, type InsertUser,
   type Contact, type InsertContact,
   type SignUp, type InsertSignUp,
@@ -12,7 +12,10 @@ import {
   type AdminUser, type InsertAdminUser,
   type Coupon, type InsertCoupon,
   type BlogPost, type InsertBlogPost,
-  type Notification, type InsertNotification
+  type Notification, type InsertNotification,
+  type Special, type InsertSpecial,
+  type FeaturedSpot, type InsertFeaturedSpot,
+  type Image, type InsertImage
 } from "../shared/schema.js";
 import { type IStorage } from "./storage.js";
 
@@ -305,7 +308,163 @@ export class SQLiteStorage implements IStorage {
 
   async markNotificationAsSent(id: number): Promise<void> {
     await this.db.update(notifications)
-      .set({ sentAt: new Date() })
+      .set({ sentAt: new Date(), updatedAt: new Date() })
       .where(eq(notifications.id, id));
+  }
+
+  // Specials operations
+  async createSpecial(special: InsertSpecial): Promise<Special> {
+    const result = await this.db.insert(specials).values({
+      ...special,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }).returning();
+    return result[0];
+  }
+
+  async getSpecial(id: number): Promise<Special | undefined> {
+    const result = await this.db.select().from(specials).where(eq(specials.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getAllSpecials(): Promise<Special[]> {
+    return await this.db.select().from(specials);
+  }
+
+  async getActiveSpecials(): Promise<Special[]> {
+    const now = new Date();
+    return await this.db.select().from(specials)
+      .where(and(
+        eq(specials.isActive, true),
+        lte(specials.startDate, now),
+        gte(specials.endDate, now)
+      ));
+  }
+
+  async getHomepageSpecials(): Promise<Special[]> {
+    const now = new Date();
+    return await this.db.select().from(specials)
+      .where(and(
+        eq(specials.isActive, true),
+        eq(specials.displayOnHomepage, true),
+        lte(specials.startDate, now),
+        gte(specials.endDate, now)
+      ));
+  }
+
+  async updateSpecial(id: number, specialData: Partial<InsertSpecial>): Promise<Special | undefined> {
+    const result = await this.db.update(specials)
+      .set({ ...specialData, updatedAt: new Date() })
+      .where(eq(specials.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteSpecial(id: number): Promise<boolean> {
+    const result = await this.db.delete(specials).where(eq(specials.id, id));
+    return result.changes > 0;
+  }
+
+  // Featured Spots operations
+  async createFeaturedSpot(featuredSpot: InsertFeaturedSpot): Promise<FeaturedSpot> {
+    const result = await this.db.insert(featuredSpots).values({
+      ...featuredSpot,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }).returning();
+    return result[0];
+  }
+
+  async getFeaturedSpot(id: number): Promise<FeaturedSpot | undefined> {
+    const result = await this.db.select().from(featuredSpots).where(eq(featuredSpots.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getAllFeaturedSpots(): Promise<FeaturedSpot[]> {
+    return await this.db.select().from(featuredSpots);
+  }
+
+  async getActiveFeaturedSpots(): Promise<FeaturedSpot[]> {
+    return await this.db.select().from(featuredSpots).where(eq(featuredSpots.isActive, true));
+  }
+
+  async getCurrentFeaturedSpot(): Promise<FeaturedSpot | undefined> {
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1;
+    const currentYear = now.getFullYear();
+    
+    const result = await this.db.select().from(featuredSpots)
+      .where(and(
+        eq(featuredSpots.isActive, true),
+        eq(featuredSpots.month, currentMonth),
+        eq(featuredSpots.year, currentYear)
+      ))
+      .limit(1);
+    return result[0];
+  }
+
+  async getFeaturedSpotByMonth(month: number, year: number): Promise<FeaturedSpot | undefined> {
+    const result = await this.db.select().from(featuredSpots)
+      .where(and(
+        eq(featuredSpots.month, month),
+        eq(featuredSpots.year, year),
+        eq(featuredSpots.isActive, true)
+      ))
+      .limit(1);
+    return result[0];
+  }
+
+  async updateFeaturedSpot(id: number, featuredSpotData: Partial<InsertFeaturedSpot>): Promise<FeaturedSpot | undefined> {
+    const result = await this.db.update(featuredSpots)
+      .set({ ...featuredSpotData, updatedAt: new Date() })
+      .where(eq(featuredSpots.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteFeaturedSpot(id: number): Promise<boolean> {
+    const result = await this.db.delete(featuredSpots).where(eq(featuredSpots.id, id));
+    return result.changes > 0;
+  }
+
+  // Images operations
+  async createImage(image: InsertImage): Promise<Image> {
+    const result = await this.db.insert(images).values({
+      ...image,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }).returning();
+    return result[0];
+  }
+
+  async getImage(id: number): Promise<Image | undefined> {
+    const result = await this.db.select().from(images).where(eq(images.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getAllImages(): Promise<Image[]> {
+    return await this.db.select().from(images);
+  }
+
+  async getImagesByEntity(entityType: string, entityId: number): Promise<Image[]> {
+    return await this.db.select().from(images)
+      .where(and(
+        eq(images.entityType, entityType),
+        eq(images.entityId, entityId),
+        eq(images.isActive, true)
+      ));
+  }
+
+  async updateImage(id: number, imageData: Partial<InsertImage>): Promise<Image | undefined> {
+    const result = await this.db.update(images)
+      .set({ ...imageData, updatedAt: new Date() })
+      .where(eq(images.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteImage(id: number): Promise<boolean> {
+    const result = await this.db.delete(images).where(eq(images.id, id));
+    return result.changes > 0;
   }
 }

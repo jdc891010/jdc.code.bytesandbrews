@@ -7,6 +7,8 @@ import { type AdminUser, type InsertAdminUser } from "../shared/schema.js";
 import { type Coupon, type InsertCoupon } from "../shared/schema.js";
 import { type BlogPost, type InsertBlogPost } from "../shared/schema.js";
 import { type Notification, type InsertNotification } from "../shared/schema.js";
+import { type Special, type InsertSpecial } from "../shared/schema.js";
+import { type FeaturedSpot, type InsertFeaturedSpot } from "../shared/schema.js";
 
 // Update the interface with required CRUD methods
 export interface IStorage {
@@ -73,6 +75,22 @@ export interface IStorage {
   updateNotification(id: number, notification: Partial<InsertNotification>): Promise<Notification | undefined>;
   deleteNotification(id: number): Promise<boolean>;
   markNotificationAsSent(id: number): Promise<void>;
+
+  // Special/Promotion operations
+  createSpecial(special: InsertSpecial): Promise<Special>;
+  getSpecial(id: number): Promise<Special | undefined>;
+  getAllSpecials(): Promise<Special[]>;
+  getActiveSpecials(): Promise<Special[]>;
+  updateSpecial(id: number, special: Partial<InsertSpecial>): Promise<Special | undefined>;
+  deleteSpecial(id: number): Promise<boolean>;
+
+  // Featured Spot operations
+  createFeaturedSpot(featuredSpot: InsertFeaturedSpot): Promise<FeaturedSpot>;
+  getFeaturedSpot(id: number): Promise<FeaturedSpot | undefined>;
+  getAllFeaturedSpots(): Promise<FeaturedSpot[]>;
+  getActiveFeaturedSpots(): Promise<FeaturedSpot[]>;
+  updateFeaturedSpot(id: number, featuredSpot: Partial<InsertFeaturedSpot>): Promise<FeaturedSpot | undefined>;
+  deleteFeaturedSpot(id: number): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {

@@ -1,6 +1,6 @@
 // Coffee Shop Data
 export interface CoffeeShop {
-  id: number;
+  id: number | string;
   name: string;
   description: string;
   imageUrl: string;
@@ -11,53 +11,24 @@ export interface CoffeeShop {
   city?: string;
   country?: string;
   updated?: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
 }
 
+import generatedPlaces from './generated_places.json';
+
 export const popularCoffeeShops: CoffeeShop[] = [
+  ...generatedPlaces as CoffeeShop[],
+  // Keep original mock data if needed, or comment out
+  /*
   {
     id: 1,
     name: "Urban Grind",
-    description: "A sleek, modern coffee shop with perfect lighting for laptop work and plenty of outlets.",
-    imageUrl: "https://picsum.photos/500/300?random=60",
-    wifiSpeed: 35,
-    vibes: ["Quiet Zen", "Focus Factory"],
-    popularWith: ["Code Conjurers", "Word Weavers"],
-    city: "San Francisco",
-    updated: "2 days ago"
-  },
-  {
-    id: 2,
-    name: "The Bean Connection",
-    description: "Rustic charm meets modern convenience with comfortable seating and excellent espresso.",
-    imageUrl: "https://picsum.photos/500/300?random=61",
-    wifiSpeed: 22,
-    vibes: ["Chatty Buzz", "Creative Chaos"],
-    popularWith: ["Pixel Pixies", "Buzz Beasts"],
-    city: "New York",
-    updated: "Yesterday"
-  },
-  {
-    id: 3,
-    name: "Caffeine Code",
-    description: "Tech-focused coffee shop with private booths, high-speed internet, and themed drinks.",
-    imageUrl: "https://picsum.photos/500/300?random=62",
-    wifiSpeed: 42,
-    vibes: ["Focus Factory", "Quiet Zen"],
-    popularWith: ["Web Wizards", "Story Spinners"],
-    city: "London",
-    updated: "Today"
-  },
-  {
-    id: 4,
-    name: "Byte & Brew",
-    description: "Digital nomad paradise with large tables, 24/7 access, and a supportive community of techies.",
-    imageUrl: "https://picsum.photos/500/300?random=63",
-    wifiSpeed: 48,
-    vibes: ["Tech Haven", "Collaborative"],
-    popularWith: ["Code Conjurers", "Data Druids"],
-    city: "Berlin",
-    updated: "3 days ago"
+    ...
   }
+  */
 ];
 
 // Vibe Categories

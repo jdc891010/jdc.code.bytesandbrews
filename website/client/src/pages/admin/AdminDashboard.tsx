@@ -15,7 +15,9 @@ import {
   LogOut,
   Settings,
   BarChart3,
-  Calendar
+  Calendar,
+  Tag,
+  Star
 } from 'lucide-react';
 import { adminApi, type DashboardAnalytics } from '@/services/adminApi';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -24,6 +26,8 @@ import CouponManagement from '@/components/admin/CouponManagement';
 import BlogManagement from '@/components/admin/BlogManagement';
 import NotificationManagement from '@/components/admin/NotificationManagement';
 import UserManagement from '@/components/admin/UserManagement';
+import SpecialsManagement from '@/components/admin/SpecialsManagement';
+import FeaturedSpotManagement from '@/components/admin/FeaturedSpotManagement';
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
@@ -117,7 +121,7 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Overview
@@ -125,6 +129,14 @@ export default function AdminDashboard() {
             <TabsTrigger value="coffee-shops" className="flex items-center gap-2">
               <Coffee className="h-4 w-4" />
               Coffee Shops
+            </TabsTrigger>
+            <TabsTrigger value="specials" className="flex items-center gap-2">
+              <Tag className="h-4 w-4" />
+              Specials
+            </TabsTrigger>
+            <TabsTrigger value="featured" className="flex items-center gap-2">
+              <Star className="h-4 w-4" />
+              Featured
             </TabsTrigger>
             <TabsTrigger value="coupons" className="flex items-center gap-2">
               <Ticket className="h-4 w-4" />
@@ -250,6 +262,14 @@ export default function AdminDashboard() {
 
           <TabsContent value="coffee-shops">
             <CoffeeShopManagement />
+          </TabsContent>
+
+          <TabsContent value="specials">
+            <SpecialsManagement />
+          </TabsContent>
+
+          <TabsContent value="featured">
+            <FeaturedSpotManagement />
           </TabsContent>
 
           <TabsContent value="coupons">

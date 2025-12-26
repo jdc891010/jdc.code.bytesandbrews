@@ -10,8 +10,12 @@ import {
   adminUsers,
   coupons,
   blogPosts,
-  notifications
+  notifications,
+  specials,
+  featuredSpots,
+  images
 } from '../shared/schema';
+import { eq } from 'drizzle-orm';
 
 const sqlite = new Database('./database.sqlite');
 const db = drizzle(sqlite);
@@ -22,6 +26,9 @@ async function seedDatabase() {
   try {
     // Clear existing data
     console.log('🧹 Clearing existing data...');
+    await db.delete(images);
+    await db.delete(featuredSpots);
+    await db.delete(specials);
     await db.delete(notifications);
     await db.delete(blogPosts);
     await db.delete(coupons);
@@ -78,34 +85,136 @@ async function seedDatabase() {
     console.log('☕ Seeding coffee shops...');
     const coffeeShopData = [
       {
-        name: 'The Daily Grind',
-        description: 'A cozy neighborhood coffee shop with artisanal brews and fresh pastries.',
-        address: '123 Main St, Somerset West, 7130',
+        name: 'Bootlegger Coffee Company',
+        description: 'Trendy coffee chain offering artisanal brews, fresh pastries, and light meals in a stylish setting.',
+        address: 'The Sanctuary Shopping Centre, Cnr R44 & De Beers Ave, Somerset West',
         city: 'Somerset West',
         country: 'South Africa',
-        wifiSpeed: 50,
-        imageUrl: 'dailygrind1.jpg',
-        thumbnailUrl: 'dailygrind_thumb.jpg'
+        latitude: '-34.0841',
+        longitude: '18.8365',
+        wifiSpeed: 52,
+        rating: 4.7,
+        imageUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Code Conjurers',
+        vibe: 'Focus Factory',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 4,
+          videoCallRating: 5,
+          powerAvailability: 5,
+          coffeeQuality: 4
+        })
       },
       {
-        name: 'Bean There Coffee Co.',
-        description: 'Specialty coffee roasters with a focus on single-origin beans.',
-        address: '456 Oak Ave, Strand, 7140',
-        city: 'Strand',
+        name: 'The Millhouse Kitchen',
+        description: 'Relaxed bistro on Lourensford Wine Estate serving seasonal dishes and excellent coffee with mountain views.',
+        address: 'Lourensford Wine Estate, Lourensford Rd, Somerset West',
+        city: 'Somerset West',
         country: 'South Africa',
-        wifiSpeed: 75,
-        imageUrl: 'beanthere1.jpg',
-        thumbnailUrl: 'beanthere_thumb.jpg'
+        latitude: '-34.0722',
+        longitude: '18.8890',
+        wifiSpeed: 35,
+        rating: 4.5,
+        imageUrl: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Word Weavers',
+        vibe: 'Quiet Zen',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 5,
+          videoCallRating: 3,
+          powerAvailability: 3,
+          coffeeQuality: 5
+        })
       },
       {
-        name: 'Café Mocha',
-        description: 'Waterfront café with stunning views and gourmet coffee.',
-        address: '789 Pine Rd, Gordon\'s Bay, 7150',
-        city: 'Gordon\'s Bay',
+        name: 'Stables at Vergelegen',
+        description: 'Elegant bistro offering a contemporary menu and coffee in a beautiful garden setting.',
+        address: 'Vergelegen Wine Estate, Lourensford Rd, Somerset West',
+        city: 'Somerset West',
         country: 'South Africa',
-        wifiSpeed: 40,
-        imageUrl: 'cafemocha1.jpg',
-        thumbnailUrl: 'cafemocha_thumb.jpg'
+        latitude: '-34.0768',
+        longitude: '18.8913',
+        wifiSpeed: 28,
+        rating: 4.6,
+        imageUrl: 'https://images.unsplash.com/photo-1469631423217-c7eb88862ccb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1469631423217-c7eb88862ccb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Creative Chaos',
+        vibe: 'Chatty Buzz',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 5,
+          videoCallRating: 2,
+          powerAvailability: 2,
+          coffeeQuality: 5
+        })
+      },
+      {
+        name: 'Grandma\'s Cafe',
+        description: 'Quaint and cozy cafe serving homemade treats and comforting coffee blends.',
+        address: '147 Main Rd, Somerset West',
+        city: 'Somerset West',
+        country: 'South Africa',
+        latitude: '-34.0833',
+        longitude: '18.8486',
+        wifiSpeed: 22,
+        rating: 4.3,
+        imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Pixel Pixies',
+        vibe: 'Chatty Buzz',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 3,
+          videoCallRating: 2,
+          powerAvailability: 3,
+          coffeeQuality: 4
+        })
+      },
+      {
+        name: 'The Daily Coffee Café',
+        description: 'New-York-meets-Karoo themed coffee shop known for good vibes and great coffee.',
+        address: 'Sitari Village Mall, R102, Somerset West',
+        city: 'Somerset West',
+        country: 'South Africa',
+        latitude: '-34.0995',
+        longitude: '18.7990',
+        wifiSpeed: 45,
+        rating: 4.4,
+        imageUrl: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Web Wizards',
+        vibe: 'Focus Factory',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 5,
+          videoCallRating: 4,
+          powerAvailability: 4,
+          coffeeQuality: 4
+        })
+      },
+      {
+        name: 'Waterstone Café',
+        description: 'Conveniently located cafe with outdoor seating and a wide menu selection.',
+        address: 'Waterstone Village, Main Rd, Somerset West',
+        city: 'Somerset West',
+        country: 'South Africa',
+        latitude: '-34.0712',
+        longitude: '18.8452',
+        wifiSpeed: 30,
+        rating: 4.1,
+        imageUrl: 'https://images.unsplash.com/photo-1507133750069-69d3cdad863a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1507133750069-69d3cdad863a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        tribe: 'Word Weavers',
+        vibe: 'Quiet Zen',
+        amenities: JSON.stringify({
+          wheelchairAccessible: true,
+          parkingRating: 5,
+          videoCallRating: 3,
+          powerAvailability: 3,
+          coffeeQuality: 3
+        })
       }
     ];
     await db.insert(coffeeShops).values(coffeeShopData);
@@ -252,6 +361,153 @@ async function seedDatabase() {
       }
     ];
     await db.insert(notifications).values(notificationData);
+
+    // Fetch coffee shops for linking
+    const allCoffeeShops = await db.select().from(coffeeShops);
+    if (allCoffeeShops.length > 0) {
+      // Seed specials
+      console.log('🏷️ Seeding specials...');
+      const specialsData = [
+        {
+          coffeeShopId: allCoffeeShops[0].id,
+          title: "Morning Kickstart",
+          description: "Get a free pastry with any large coffee before 9 AM.",
+          startDate: new Date(),
+          endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 week
+          isActive: true,
+          displayOnHomepage: true,
+          discountType: 'free_item',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          coffeeShopId: allCoffeeShops[1].id,
+          title: "Work from Cafe Special",
+          description: "Unlimited WiFi and bottomless filter coffee for R80/day.",
+          startDate: new Date(),
+          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+          isActive: true,
+          displayOnHomepage: true,
+          discountType: 'fixed_price',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ];
+      await db.insert(specials).values(specialsData);
+
+      // Seed featured spots
+      console.log('🌟 Seeding featured spots...');
+      const featuredSpotsData = [
+        {
+          coffeeShopId: allCoffeeShops[2].id,
+          month: new Date().getMonth() + 1,
+          year: new Date().getFullYear(),
+          description: "Voted best atmosphere for remote work in Somerset West.",
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ];
+      await db.insert(featuredSpots).values(featuredSpotsData);
+    }
+
+    // Seed images
+    console.log('🖼️ Seeding images...');
+    if (allCoffeeShops.length > 0) {
+      const imagesData = [
+        {
+          filename: 'bootlegger-interior.jpg',
+          originalName: 'bootlegger-interior.jpg',
+          mimeType: 'image/jpeg',
+          size: 1024000,
+          url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[0].id,
+          altText: 'Bootlegger Coffee Company Interior',
+          caption: 'Spacious seating area',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          filename: 'millhouse-view.jpg',
+          originalName: 'millhouse-view.jpg',
+          mimeType: 'image/jpeg',
+          size: 2048000,
+          url: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[1].id,
+          altText: 'Millhouse Kitchen View',
+          caption: 'Mountain views from the terrace',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          filename: 'stables-garden.jpg',
+          originalName: 'stables-garden.jpg',
+          mimeType: 'image/jpeg',
+          size: 1500000,
+          url: 'https://images.unsplash.com/photo-1469631423217-c7eb88862ccb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1469631423217-c7eb88862ccb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[2].id,
+          altText: 'Stables at Vergelegen Garden',
+          caption: 'Beautiful garden setting',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          filename: 'grandmas-cozy.jpg',
+          originalName: 'grandmas-cozy.jpg',
+          mimeType: 'image/jpeg',
+          size: 1200000,
+          url: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[3].id,
+          altText: 'Grandma\'s Cafe Interior',
+          caption: 'Cozy and quaint atmosphere',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          filename: 'daily-coffee-vibe.jpg',
+          originalName: 'daily-coffee-vibe.jpg',
+          mimeType: 'image/jpeg',
+          size: 1800000,
+          url: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[4].id,
+          altText: 'The Daily Coffee Café Vibe',
+          caption: 'Good vibes and great coffee',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          filename: 'waterstone-outdoor.jpg',
+          originalName: 'waterstone-outdoor.jpg',
+          mimeType: 'image/jpeg',
+          size: 1600000,
+          url: 'https://images.unsplash.com/photo-1507133750069-69d3cdad863a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1507133750069-69d3cdad863a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          entityType: 'coffee_shop',
+          entityId: allCoffeeShops[5].id,
+          altText: 'Waterstone Café Outdoor',
+          caption: 'Outdoor seating area',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ];
+      await db.insert(images).values(imagesData);
+    }
 
     console.log('✅ Database seeding completed successfully!');
     console.log('📊 Summary:');

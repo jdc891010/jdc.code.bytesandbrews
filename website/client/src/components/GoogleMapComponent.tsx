@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ENV } from '../lib/env';
 import CoffeeShopDetails from './CoffeeShopDetails';
+import { getCoffeeShopsWithCache, type CoffeeShop } from '../services/coffeeShopApi';
 
 interface HourlyData {
   hour: number;
@@ -256,61 +257,151 @@ const GoogleMapComponent = ({
     }
   }, [center]);
 
-  // Search for coffee shops using Places API
-  const searchCoffeeShops = useCallback(() => {
-    if (!placesService || !map || typeof window === 'undefined' || !window.google || !window.google.maps) return;
+  // Convert database coffee shop to MapLocation format
+  const convertCoffeeShopToMapLocation = useCallback((shop: CoffeeShop): MapLocation => {
+    const wifiSpeed = Math.floor(Math.random() * 50) + 15; // Generate realistic WiFi speed
+    return {
+      name: shop.name,
+      lat: shop.latitude ? parseFloat(shop.latitude) : center.lat,
+      lng: shop.longitude ? parseFloat(shop.longitude) : center.lng,
+      description: shop.description || `${shop.name} - ${shop.address}`,
+      wifiSpeed: wifiSpeed,
+      rating: shop.rating || undefined,
+      vicinity: shop.address,
+      placeId: shop.googlePlaceId || undefined,
+      imageUrl: shop.thumbnailUrl || shop.imageUrl || generateCoffeeIcon(wifiSpeed),
+      address: shop.address,
+      hourlyData: generateHourlyData(wifiSpeed),
+      internetStats: generateInternetStats(wifiSpeed)
+    };
+  }, [center]);
+
+  // Search for coffee shops using database-first approach with Places API fallback
+  const searchCoffeeShops = useCallback(async () => {
+    if (!map || typeof window === 'undefined' || !window.google || !window.google.maps) return;
     
     setIsLoading(true);
     
-    // Use the center prop for the search location
-    const location = new window.google.maps.LatLng(center.lat, center.lng);
-    const request: google.maps.places.PlaceSearchRequest = {
-      location,
-      radius,
-      type: 'cafe',
-      keyword: 'coffee'
-    };
-    
-    placesService.nearbySearch(request, (
-      results: google.maps.places.PlaceResult[] | null, 
-      status: google.maps.places.PlacesServiceStatus
-    ) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
-        const coffeeShopLocations: MapLocation[] = results.map((place: google.maps.places.PlaceResult) => {
-          const wifiSpeed = Math.floor(Math.random() * 50) + 5; // Placeholder for WiFi speed
-          return {
-            name: place.name || 'Unknown Coffee Shop',
-            lat: place.geometry?.location ? place.geometry.location.lat() : center.lat,
-            lng: place.geometry?.location ? place.geometry.location.lng() : center.lng,
-            vicinity: place.vicinity,
-            rating: place.rating,
-            placeId: place.place_id,
-            photos: place.photos,
-            imageUrl: generateCoffeeIcon(wifiSpeed),
-            description: `Rating: ${place.rating || 'N/A'} • ${place.vicinity || ''}`,
-            wifiSpeed: wifiSpeed,
-            hourlyData: generateHourlyData(wifiSpeed),
-            internetStats: generateInternetStats(wifiSpeed)
-          };
-        });
-        
-        setCoffeeShops(coffeeShopLocations);
+    try {
+      // First, try to get coffee shops from database with cache
+      console.log('Fetching coffee shops from database with cache...');
+      const dbResponse = await getCoffeeShopsWithCache(center.lat, center.lng, radius);
+      
+      if (dbResponse.success && dbResponse.coffeeShops.length > 0) {
+        console.log(`Found ${dbResponse.coffeeShops.length} coffee shops in database`);
+        const dbLocations = dbResponse.coffeeShops.map(convertCoffeeShopToMapLocation);
+        setCoffeeShops(dbLocations);
         setIsLoading(false);
+        return;
+      }
+      
+      console.log('No coffee shops found in database, falling back to Places API...');
+      
+      // Fallback to Places API if no database results
+      if (!placesService) {
+        console.warn('Places service not available, using sample locations');
+        setCoffeeShops(sampleLocations);
+        setIsLoading(false);
+        return;
+      }
+      
+      const location = new window.google.maps.LatLng(center.lat, center.lng);
+      const request: google.maps.places.PlaceSearchRequest = {
+        location,
+        radius,
+        type: 'cafe',
+        keyword: 'coffee'
+      };
+      
+      placesService.nearbySearch(request, (
+        results: google.maps.places.PlaceResult[] | null, 
+        status: google.maps.places.PlacesServiceStatus
+      ) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+          const coffeeShopLocations: MapLocation[] = results.map((place: google.maps.places.PlaceResult) => {
+            const wifiSpeed = Math.floor(Math.random() * 50) + 5;
+            return {
+              name: place.name || 'Unknown Coffee Shop',
+              lat: place.geometry?.location ? place.geometry.location.lat() : center.lat,
+              lng: place.geometry?.location ? place.geometry.location.lng() : center.lng,
+              vicinity: place.vicinity,
+              rating: place.rating,
+              placeId: place.place_id,
+              photos: place.photos,
+              imageUrl: generateCoffeeIcon(wifiSpeed),
+              description: `Rating: ${place.rating || 'N/A'} • ${place.vicinity || ''}`,
+              wifiSpeed: wifiSpeed,
+              hourlyData: generateHourlyData(wifiSpeed),
+              internetStats: generateInternetStats(wifiSpeed)
+            };
+          });
+          
+          setCoffeeShops(coffeeShopLocations);
+          setIsLoading(false);
+        } else {
+          console.warn('Place search failed or returned no results:', status);
+          setCoffeeShops(sampleLocations);
+          setIsLoading(false);
+        }
+      });
+      
+    } catch (error) {
+      console.error('Error fetching coffee shops:', error);
+      
+      // Final fallback to Places API or sample locations
+      if (placesService) {
+        console.log('Database error, falling back to Places API...');
+        const location = new window.google.maps.LatLng(center.lat, center.lng);
+        const request: google.maps.places.PlaceSearchRequest = {
+          location,
+          radius,
+          type: 'cafe',
+          keyword: 'coffee'
+        };
+        
+        placesService.nearbySearch(request, (
+          results: google.maps.places.PlaceResult[] | null, 
+          status: google.maps.places.PlacesServiceStatus
+        ) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+            const coffeeShopLocations: MapLocation[] = results.map((place: google.maps.places.PlaceResult) => {
+              const wifiSpeed = Math.floor(Math.random() * 50) + 5;
+              return {
+                name: place.name || 'Unknown Coffee Shop',
+                lat: place.geometry?.location ? place.geometry.location.lat() : center.lat,
+                lng: place.geometry?.location ? place.geometry.location.lng() : center.lng,
+                vicinity: place.vicinity,
+                rating: place.rating,
+                placeId: place.place_id,
+                photos: place.photos,
+                imageUrl: generateCoffeeIcon(wifiSpeed),
+                description: `Rating: ${place.rating || 'N/A'} • ${place.vicinity || ''}`,
+                wifiSpeed: wifiSpeed,
+                hourlyData: generateHourlyData(wifiSpeed),
+                internetStats: generateInternetStats(wifiSpeed)
+              };
+            });
+            
+            setCoffeeShops(coffeeShopLocations);
+          } else {
+            setCoffeeShops(sampleLocations);
+          }
+          setIsLoading(false);
+        });
       } else {
-        console.warn('Place search failed or returned no results:', status);
-        // Fall back to sample locations when Places API fails
+        console.log('Using sample locations as final fallback');
         setCoffeeShops(sampleLocations);
         setIsLoading(false);
       }
-    });
-  }, [placesService, map, center, radius]);
+    }
+  }, [map, center, radius, placesService, convertCoffeeShopToMapLocation]);
 
-  // Effect to search for coffee shops when placesService is ready
+  // Effect to search for coffee shops when map is ready
   useEffect(() => {
-    if (usePlacesAPI && placesService && map) {
+    if (usePlacesAPI && map) {
       searchCoffeeShops();
     }
-  }, [usePlacesAPI, placesService, map, searchCoffeeShops]);
+  }, [usePlacesAPI, map, searchCoffeeShops]);
 
   // Clear existing markers
   const clearMarkers = useCallback(() => {
@@ -386,139 +477,111 @@ const GoogleMapComponent = ({
         });
       };
       
-      // Create heatmap bar chart for a metric
-      const createHeatmapBar = (data: HourlyData[], metric: keyof HourlyData, label: string, color: string) => {
-        if (!data || data.length === 0) return '';
-        
-        const maxValue = Math.max(...data.map(d => d[metric] as number));
-        const bars = data.map(d => {
-          const value = d[metric] as number;
-          const height = Math.max(5, (value / maxValue) * 40);
-          const hour = d.hour;
-          const displayHour = hour === 0 ? '12AM' : hour <= 12 ? `${hour}${hour === 12 ? 'PM' : 'AM'}` : `${hour - 12}PM`;
-          
-          return `
-            <div class="flex flex-col items-center" style="width: 45px;">
-              <div class="text-xs text-gray-600 mb-1">${Math.round(value)}${metric === 'internetSpeed' ? 'M' : ''}</div>
-              <div style="width: 30px; height: ${height}px; background-color: ${color}; border-radius: 2px;"></div>
-              <div class="text-xs text-gray-500 mt-1">${displayHour}</div>
-            </div>
-          `;
-        }).join('');
-        
-        return `
-          <div class="mb-3">
-            <div class="text-sm font-semibold text-gray-700 mb-2">${label}</div>
-            <div class="flex justify-between items-end" style="height: 60px;">
-              ${bars}
-            </div>
-          </div>
-        `;
-      };
-
       // Create info window content
       const createInfoWindowContent = (location: MapLocation, placeDetails?: google.maps.places.PlaceResult) => {
         const photoUrl = location.imageUrl || '/icons/default-coffee.png';
         const stars = '★'.repeat(Math.floor(location.rating || 0)) + '☆'.repeat(5 - Math.floor(location.rating || 0));
         const { category, color } = getSpeedCategory(location.wifiSpeed || 0);
         
-        // Create heatmaps for next 4 hours
-        const heatmapsHtml = location.hourlyData ? `
-          <div class="mt-3 p-2 bg-gray-50 rounded" style="max-width: 300px;">
-            <h4 class="text-sm font-bold text-gray-800 mb-2">Next 4 Hours Forecast</h4>
-            ${createHeatmapBar(location.hourlyData, 'internetSpeed', 'Internet Speed (Mbps)', '#0066FF')}
-            ${createHeatmapBar(location.hourlyData, 'vibes', 'Vibes Score', '#00CC00')}
-            ${createHeatmapBar(location.hourlyData, 'noise', 'Noise Level', '#FF6600')}
-            ${createHeatmapBar(location.hourlyData, 'parking', 'Parking Availability', '#9966FF')}
-          </div>
-        ` : '';
-        
-        // Internet stats section
+        // Internet stats section - redesigned for modern look
         const internetStatsHtml = location.internetStats ? `
-          <div class="mt-2 p-2 bg-blue-50 rounded">
-            <div class="text-sm font-semibold text-gray-700 mb-1">30-Day Internet Stats</div>
-            <div class="flex justify-between text-xs text-gray-600">
-              <span>Mean: ${Math.round(location.internetStats.mean)}M</span>
-              <span>Median: ${Math.round(location.internetStats.median)}M</span>
-              <span>Max: ${Math.round(location.internetStats.max)}M</span>
+          <div class="mt-3 p-3 bg-white rounded-lg border border-gray-100 shadow-sm">
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex justify-between items-center">
+              <span>Speed Test Summary</span>
             </div>
-            <button class="text-xs bg-blue-500 text-white px-2 py-1 rounded mt-1 hover:bg-blue-600 detailed-stats-btn" data-location-name="${location.name}">
-              View Detailed Stats
-            </button>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="text-center p-2 bg-blue-50 rounded-md">
+                <div class="text-[10px] text-gray-500 uppercase">Mean</div>
+                <div class="font-bold text-blue-700 text-sm">${Math.round(location.internetStats.mean)}<span class="text-[10px] font-normal ml-0.5">Mbps</span></div>
+              </div>
+              <div class="text-center p-2 bg-blue-50 rounded-md">
+                <div class="text-[10px] text-gray-500 uppercase">Median</div>
+                <div class="font-bold text-blue-700 text-sm">${Math.round(location.internetStats.median)}<span class="text-[10px] font-normal ml-0.5">Mbps</span></div>
+              </div>
+              <div class="text-center p-2 bg-blue-50 rounded-md">
+                <div class="text-[10px] text-gray-500 uppercase">Max</div>
+                <div class="font-bold text-blue-700 text-sm">${Math.round(location.internetStats.max)}<span class="text-[10px] font-normal ml-0.5">Mbps</span></div>
+              </div>
+            </div>
           </div>
         ` : '';
+
+        // Address/Vicinity with icon
+        const addressHtml = location.vicinity ? `
+          <div class="flex items-start mt-2 text-gray-500 text-xs">
+            <svg class="w-3 h-3 mr-1 mt-0.5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="line-clamp-2">${location.vicinity}</span>
+          </div>
+        ` : '';
+
+        // Open status
+        const openStatus = placeDetails?.opening_hours?.isOpen ? 
+          `<span class="text-green-600 text-[10px] font-bold bg-green-50 px-2 py-0.5 rounded-full border border-green-100">OPEN</span>` : 
+          (placeDetails?.opening_hours ? `<span class="text-red-500 text-[10px] font-bold bg-red-50 px-2 py-0.5 rounded-full border border-red-100">CLOSED</span>` : '');
         
         return `
-          <div class="p-2" style="max-width: 320px;">
-            <div class="flex mb-2">
-              <img src="${photoUrl}" alt="${location.name}" class="w-20 h-20 object-cover rounded mr-2" onerror="this.src='/icons/default-coffee.png'" />
-              <div>
-                <h3 class="font-bold text-coffee-brown">${location.name}</h3>
-                <div class="text-yellow-500 text-sm">${stars}</div>
-                ${location.wifiSpeed ? `
-                  <div class="flex items-center text-sm">
-                    <span class="font-semibold" style="color: ${color}">${location.wifiSpeed} Mbps</span>
-                    <span class="mx-1">·</span>
-                    <span class="text-xs px-1 rounded" style="background-color: ${color}20; color: ${color}">${category}</span>
-                  </div>
-                ` : ''}
+          <div class="font-sans text-gray-800" style="min-width: 280px; max-width: 320px;">
+            <!-- Hero Image Section -->
+            <div class="relative h-36 w-full rounded-t-lg overflow-hidden bg-gray-100 group">
+              <img src="${photoUrl}" alt="${location.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='/icons/default-coffee.png'" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                <h3 class="font-bold text-lg leading-tight mb-1 text-shadow-sm">${location.name}</h3>
+                <div class="flex items-center justify-between">
+                   <div class="flex items-center">
+                     <span class="text-yellow-400 text-xs tracking-widest mr-1">${stars}</span>
+                     <span class="text-white/80 text-[10px]">(${location.rating || 'N/A'})</span>
+                   </div>
+                   ${openStatus}
+                </div>
               </div>
             </div>
-            <p class="text-sm text-gray-600 mb-2">${location.vicinity || location.description || ''}</p>
-            ${placeDetails?.formatted_phone_number ? `
-              <p class="text-sm text-gray-600 mb-2">
-                <strong>Phone:</strong> ${placeDetails.formatted_phone_number}
-              </p>
-            ` : ''}
-            ${placeDetails?.website ? `
-              <p class="text-sm text-gray-600 mb-2">
-                <a href="${placeDetails.website}" target="_blank" class="text-blue-500 hover:underline">Website</a>
-              </p>
-            ` : ''}
-            ${heatmapsHtml}
-            ${internetStatsHtml}
-            <div class="mt-3">
-              <div class="flex flex-wrap gap-1 mb-2">
-                <a 
-                  href="https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}" 
-                  target="_blank"
-                  class="text-xs bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 flex items-center gap-1"
-                >
-                  <i class="fas fa-map-marker-alt"></i> Google Maps
-                </a>
-                <a 
-                  href="https://maps.apple.com/?ll=${location.lat},${location.lng}" 
-                  target="_blank"
-                  class="text-xs bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-900 flex items-center gap-1"
-                >
-                  <i class="fab fa-apple"></i> Apple Maps
-                </a>
-                <a 
-                  href="https://www.waze.com/ul?ll=${location.lat},${location.lng}&navigate=yes" 
-                  target="_blank"
-                  class="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 flex items-center gap-1"
-                >
-                  <i class="fab fa-waze"></i> Waze
-                </a>
-                <button 
-                  class="text-xs bg-black text-white px-2 py-1 rounded hover:bg-gray-800 flex items-center gap-1 uber-btn"
-                  data-drop-lat="${location.lat}"
-                  data-drop-lng="${location.lng}"
-                  data-drop-name="${location.name}"
-                  data-drop-address="${location.vicinity || location.address || location.name}"
-                >
-                  <i class="fab fa-uber"></i> Uber
-                </button>
+            
+            <!-- Content Section -->
+            <div class="p-3 bg-white rounded-b-lg shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 rounded-md text-xs font-bold flex items-center shadow-sm" style="background-color: ${color}; color: white;">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    ${location.wifiSpeed || 0} Mbps
+                  </span>
+                  <span class="text-xs font-medium text-gray-500 px-2 py-1 bg-gray-100 rounded-md uppercase tracking-wide" style="color: ${color}">
+                    ${category}
+                  </span>
+                </div>
               </div>
-              ${location.placeId ? `
-                <button 
-                  class="text-sm bg-tech-blue text-white px-3 py-1 rounded hover:bg-opacity-90 view-details-btn w-full"
-                  data-place-id="${location.placeId}"
-                  data-location-name="${location.name}"
-                >
-                  View Details
-                </button>
-              ` : ''}
+
+              ${addressHtml}
+              
+              ${internetStatsHtml}
+              
+              <!-- Action Buttons -->
+              <div class="mt-4 pt-3 border-t border-gray-100 flex flex-wrap gap-2 justify-between">
+                 <div class="flex gap-1">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-500 transition-colors" title="Google Maps">
+                      <i class="fas fa-map-marker-alt text-sm"></i>
+                    </a>
+                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-black hover:text-white transition-colors uber-btn"
+                      data-drop-lat="${location.lat}"
+                      data-drop-lng="${location.lng}"
+                      data-drop-name="${location.name}"
+                      data-drop-address="${location.vicinity || location.address || location.name}"
+                      title="Uber">
+                      <i class="fab fa-uber text-sm"></i>
+                    </button>
+                 </div>
+
+                 ${location.placeId ? `
+                  <button 
+                    class="text-xs bg-gray-900 text-white px-3 py-1.5 rounded-md hover:bg-gray-800 transition-colors shadow-sm view-details-btn font-medium"
+                    data-place-id="${location.placeId}"
+                    data-location-name="${location.name}"
+                  >
+                    View Details
+                  </button>
+                ` : ''}
+              </div>
             </div>
           </div>
         `;
@@ -647,132 +710,63 @@ const GoogleMapComponent = ({
               alert('Destination unavailable. Please try again.');
               return;
             }
-            
-            const pickup = { mode: 'my_location' };
-            
+
             withOptionalGeolocation(() => {
-              const url = buildUberLink({ dropLat, dropLng, name, address, pickup });
-              // Open in same tab to allow mobile universal link handoff
-              window.location.href = url;
+              const url = buildUberLink({
+                dropLat,
+                dropLng,
+                name,
+                address,
+                pickup: { mode: 'my_location' }
+              });
+              window.open(url, '_blank');
             });
           });
         });
-        
       });
       
-      // Clean up the event listener
+      // Remove listener when info window is closed or map is unmounted
       return () => {
-        if (infoWindowListener) {
-          window.google.maps.event.removeListener(infoWindowListener);
-        }
+        window.google.maps.event.removeListener(infoWindowListener);
       };
     }
-    
-    // Fit map to bounds
-    if (!bounds.isEmpty() && map) {
-      map.fitBounds(bounds);
-    }
-    
-    // If only one location, zoom out a bit
-    if (locationsToShow.length === 1 && map) {
-      window.google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
-        map.setZoom(15);
-      });
-    }
-
-  }, [map, locations, coffeeShops, infoWindow, usePlacesAPI, clearMarkers, placesService]);
+  }, [map, coffeeShops, usePlacesAPI, locations, infoWindow]); // Removed createInfoWindowContent from deps as it's now internal
 
   return (
-    <div className="w-full h-full relative">
-      <div ref={mapRef} className="w-full h-full rounded-lg"></div>
+    <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg border border-coffee-brown/20">
+      <div ref={mapRef} className="w-full h-full min-h-[400px]" />
       
-      {/* Loading Indicator */}
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-          <div className="text-center">
-            <svg className="animate-spin h-10 w-10 text-tech-blue mx-auto mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <p className="text-gray-700">
-              {usePlacesAPI ? 'Finding coffee shops in Somerset West...' : 'Loading map...'}
-            </p>
-          </div>
+        <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-coffee-brown"></div>
         </div>
       )}
       
-      {/* Error Message */}
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-red-100 bg-opacity-50">
-          <div className="text-center p-4 bg-white rounded-lg shadow-lg">
-            <svg className="w-10 h-10 text-red-500 mx-auto mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p className="text-red-700 mb-2">{error}</p>
-            {error !== 'Google Maps API key not configured' && (
-              <button 
-                className="px-4 py-2 bg-tech-blue text-white rounded hover:bg-opacity-90"
-                onClick={() => {
-                  setError(null);
-                  setIsLoading(true);
-                  if (usePlacesAPI) {
-                    searchCoffeeShops();
-                  } else {
-                    setIsLoading(false);
-                  }
-                }}
-              >
-                Try Again
-              </button>
-            )}
-            {error === 'Google Maps API key not configured' && (
-              <p className="text-sm text-gray-600 mt-2">
-                Please configure the VITE_GOOGLE_MAPS_API_KEY environment variable.
-              </p>
-            )}
-          </div>
+        <div className="absolute top-4 left-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded z-10">
+          <p>{error}</p>
         </div>
       )}
       
-      {/* Empty Results Message */}
-      {!isLoading && !error && usePlacesAPI && coffeeShops.length === 0 && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-          <div className="text-center p-4 bg-white rounded-lg shadow-lg">
-            <svg className="w-10 h-10 text-gray-500 mx-auto mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <p className="text-gray-700 mb-2">No coffee shops found in this area.</p>
-            <button 
-              className="px-4 py-2 bg-tech-blue text-white rounded hover:bg-opacity-90"
-              onClick={() => {
-                setIsLoading(true);
-                searchCoffeeShops();
-              }}
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
-      )}
-      
+      {/* Coffee Shop Details Sidebar/Modal */}
       {selectedLocation && (
         <CoffeeShopDetails
           open={detailsOpen}
           onClose={() => setDetailsOpen(false)}
           name={selectedLocation.name}
-          description={selectedLocation.description || `A great coffee shop with ${selectedLocation.wifiSpeed} Mbps WiFi speed.`}
+          description={selectedLocation.description || ''}
           amenities={{
-            wheelchairAccessible: true,
-            parkingRating: Math.round((selectedLocation.hourlyData?.[0]?.parking || 3)) as 1 | 2 | 3 | 4 | 5,
-            videoCallRating: 4 as 1 | 2 | 3 | 4 | 5,
-            powerAvailability: 5 as 1 | 2 | 3 | 4 | 5,
-            coffeeQuality: 4 as 1 | 2 | 3 | 4 | 5
+            wheelchairAccessible: false,
+            parkingRating: selectedLocation.wifiSpeed && selectedLocation.wifiSpeed > 40 ? 5 : selectedLocation.wifiSpeed && selectedLocation.wifiSpeed > 25 ? 4 : 3,
+            videoCallRating: selectedLocation.wifiSpeed && selectedLocation.wifiSpeed > 40 ? 5 : selectedLocation.wifiSpeed && selectedLocation.wifiSpeed > 25 ? 4 : 3,
+            powerAvailability: 4,
+            coffeeQuality: 4
           }}
-          dominantTribe="Digital Nomads"
+          dominantTribe="Developers"
           location={{
-            address: selectedLocation.vicinity || selectedLocation.address || "Address not available",
-            city: "Cape Town",
-            country: "South Africa",
+            address: selectedLocation.address || selectedLocation.vicinity || '',
+            city: 'Somerset West', // Default city
+            country: 'South Africa', // Default country
             coordinates: {
               lat: selectedLocation.lat,
               lng: selectedLocation.lng

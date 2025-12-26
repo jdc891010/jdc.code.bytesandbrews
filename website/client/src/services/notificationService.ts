@@ -68,58 +68,20 @@ class NotificationService {
   // Validate notification content with Deepseek API
   private async validateWithDeepseek(request: DeepseekValidationRequest): Promise<DeepseekValidationResponse> {
     try {
-      const deepseekApiKey = ENV.DEEPSEEK_API_KEY || 'sk-73408321b0414f6da08ac5e7b2dcc341';
-      
-      if (!deepseekApiKey) {
-        console.warn('Deepseek API key not configured, skipping validation');
-        return { isValid: true, confidence: 0.5, reason: 'API key not configured' };
-      }
-
-      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      // Call backend API instead of direct external API to avoid CORS issues
+      const response = await fetch('/api/validate-notification', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${deepseekApiKey}`
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          model: 'deepseek-chat',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a content validation assistant for a coffee shop discovery app. Validate if user-submitted notifications about coffee shops are appropriate, factual, and helpful. Respond with a JSON object containing: isValid (boolean), confidence (0-1), reason (string), and suggestedAction (string if needed).'
-            },
-            {
-              role: 'user',
-              content: `Please validate this notification:\n\nContext: ${request.context}\nUser Input: ${request.userInput}\nMessage: ${request.message}\n\nIs this appropriate for a coffee shop app?`
-            }
-          ],
-          max_tokens: 200,
-          temperature: 0.1
-        })
+        body: JSON.stringify(request)
       });
 
       if (!response.ok) {
-        throw new Error(`Deepseek API error: ${response.status}`);
+        throw new Error(`Validation API error: ${response.status}`);
       }
 
-      const data = await response.json();
-      const content = data.choices?.[0]?.message?.content;
-      
-      if (content) {
-        try {
-          return JSON.parse(content);
-        } catch {
-          // Fallback parsing if JSON is malformed
-          const isValid = content.toLowerCase().includes('true') || content.toLowerCase().includes('valid');
-          return {
-            isValid,
-            confidence: 0.7,
-            reason: 'Parsed from text response'
-          };
-        }
-      }
-
-      return { isValid: true, confidence: 0.5, reason: 'No response from API' };
+      return await response.json();
     } catch (error) {
       console.error('Deepseek validation error:', error);
       // Fail open - allow notification but with low confidence

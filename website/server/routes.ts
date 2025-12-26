@@ -20,6 +20,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup admin routes
   setupAdminRoutes(app);
   
+  // Public API endpoint for coffee shops (for map display)
+  app.get("/api/coffee-shops", async (req, res) => {
+    try {
+      const { lat, lng, radius } = req.query;
+      
+      // Get all coffee shops from database
+      const coffeeShops = await storage.getAllCoffeeShops();
+      
+      // If location parameters are provided, filter by distance
+      if (lat && lng && radius) {
+        const centerLat = parseFloat(lat as string);
+        const centerLng = parseFloat(lng as string);
+        const searchRadius = parseFloat(radius as string);
+        
+        // Simple distance filtering (approximate)
+        const filteredShops = coffeeShops.filter(shop => {
+          if (!shop.latitude || !shop.longitude) return false;
+          
+          const shopLat = parseFloat(shop.latitude);
+          const shopLng = parseFloat(shop.longitude);
+          
+          // Calculate approximate distance using Haversine formula
+          const R = 6371000; // Earth's radius in meters
+          const dLat = (shopLat - centerLat) * Math.PI / 180;
+          const dLng = (shopLng - centerLng) * Math.PI / 180;
+          const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                   Math.cos(centerLat * Math.PI / 180) * Math.cos(shopLat * Math.PI / 180) *
+                   Math.sin(dLng/2) * Math.sin(dLng/2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          const distance = R * c;
+          
+          return distance <= searchRadius;
+        });
+        
+        return res.status(200).json({
+          success: true,
+          coffeeShops: filteredShops,
+          total: filteredShops.length
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        coffeeShops,
+        total: coffeeShops.length
+      });
+    } catch (error) {
+      console.error('Error fetching coffee shops:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch coffee shops'
+      });
+    }
+  });
+  
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
@@ -98,6 +153,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success: false,
         message: "Failed to process subscription"
       });
+    }
+  });
+
+  // Deepseek validation endpoint
+  app.post("/api/validate-notification", async (req, res) => {
+    try {
+      const { message, context, userInput } = req.body;
+      // Use environment variable
+      const deepseekApiKey = process.env.DEEPSEEK_API_KEY;
+
+      if (!deepseekApiKey) {
+        return res.json({ isValid: true, confidence: 0.5, reason: 'API key not configured' });
+      }
+
+      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${deepseekApiKey}`
+        },
+        body: JSON.stringify({
+          model: 'deepseek-chat',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a content validation assistant for a coffee shop discovery app. Validate if user-submitted notifications about coffee shops are appropriate, factual, and helpful. Respond with a JSON object containing: isValid (boolean), confidence (0-1), reason (string), and suggestedAction (string, optional).'
+            },
+            {
+              role: 'user',
+              content: `Please validate this notification:\n\nContext: ${context}\nUser Input: ${userInput}\nMessage: ${message}\n\nIs this appropriate for a coffee shop app?`
+            }
+          ],
+          max_tokens: 200,
+          temperature: 0.1
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Deepseek API error: ${response.status} ${errorText}`);
+        throw new Error(`Deepseek API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const content = data.choices?.[0]?.message?.content;
+      
+      if (content) {
+        try {
+          // Clean up potential markdown formatting from the response
+          const jsonStr = content.replace(/```json\n?|\n?```/g, '').trim();
+          const result = JSON.parse(jsonStr);
+          return res.json(result);
+        } catch (e) {
+          console.error('Failed to parse Deepseek response:', content);
+          const isValid = content.toLowerCase().includes('true') || content.toLowerCase().includes('valid');
+          return res.json({
+            isValid,
+            confidence: 0.7,
+            reason: 'Parsed from text response'
+          });
+        }
+      }
+
+      return res.json({ isValid: true, confidence: 0.5, reason: 'No response from API' });
+
+    } catch (error) {
+      console.error('Deepseek validation error:', error);
+      // Fail open
+      return res.json({ isValid: true, confidence: 0.3, reason: 'Validation service unavailable' });
     }
   });
 
@@ -211,6 +335,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({
         success: false,
         message: "Failed to retrieve blog post"
+      });
+    }
+  });
+
+  // Get active specials
+  app.get("/api/specials", async (req, res) => {
+    try {
+      const specials = await storage.getActiveSpecials();
+      return res.status(200).json({
+        success: true,
+        specials
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve specials"
+      });
+    }
+  });
+
+  // Get active featured spots
+  app.get("/api/featured-spots", async (req, res) => {
+    try {
+      const featuredSpots = await storage.getActiveFeaturedSpots();
+      
+      // We need to join with coffee shop details for the frontend
+      // Since we don't have a join method in storage yet, we'll fetch coffee shops and map them
+      // In a production app, we should add a joined query in storage layer
+      const spotsWithDetails = await Promise.all(featuredSpots.map(async (spot) => {
+        const coffeeShop = await storage.getCoffeeShop(spot.coffeeShopId);
+        return {
+          ...spot,
+          placeName: coffeeShop?.name || "Unknown Place",
+          description: spot.description || coffeeShop?.description,
+          imageUrl: coffeeShop?.imageUrl,
+          thumbnailUrl: coffeeShop?.thumbnailUrl
+        };
+      }));
+
+      return res.status(200).json({
+        success: true,
+        featuredSpots: spotsWithDetails
+      });
+    } catch (error) {
+      console.error("Error fetching featured spots:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve featured spots"
       });
     }
   });

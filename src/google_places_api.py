@@ -1,236 +1,229 @@
-import marimo
+import os
+import requests
+import json
+import logging
+import re
+from pathlib import Path
+from typing import List, Dict, Optional
 
-__generated_with = "0.11.17"
-app = marimo.App(width="medium")
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
+# Constants
+API_KEY_ENV_VAR = "GOOGLE_PLACES_API_KEY"
+BASE_URL = "https://places.googleapis.com/v1/places:searchText"
+IMAGES_DIR = "places_images"
+DATA_FILE = "places_data.json"
 
-@app.cell
-def _():
-    import json
-    return (json,)
-
-
-@app.cell
-def _():
-    bootleggers_coord_x = -34.082105713981006
-    bootleggers_coord_y = 18.851893312815577
-    return bootleggers_coord_x, bootleggers_coord_y
-
-
-@app.cell
-def _():
-    API_KEY = "AIzaSyDPEBZvSbVV6imnrW36PuyCJP5LbJDH1IM"
-    return (API_KEY,)
-
-
-app._unparsable_cell(
-    r"""
-    async function fetchNearbyRestaurants(lat, lng) {
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=2000&type=restaurant&key=YOUR_API_KEY`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.status === \"OK\") {
-            return data.results; // Array of restaurant objects
-        } else {
-            console.error(\"API Error:\", data.status);
-            return [];
-        }
-    }
-    """,
-    name="_"
-)
-
-
-@app.cell
-def _():
-    import requests
-    return (requests,)
-
-
-@app.cell
-def _(API_KEY, bootleggers_coord_x, bootleggers_coord_y, requests):
-    url_base = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={bootleggers_coord_x},{bootleggers_coord_y}&radius=100&type=cafe&key={API_KEY}"
-
-    response = requests.get(url_base)
-    return response, url_base
-
-
-@app.cell
-def _(response):
-    response.json()
-    return
-
-
-@app.cell
-def _():
-    # Parse the response into list:
-
-
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    import duckdb 
-
-    conn = duckdb.connect("locations.db")
-
-    conn.sql("""CREATE TABLE locations (
-    id TEXT,
-    name TEXT, 
-    place_id TEXT,
-    lat FLOAT,
-    long FLOAT,
-    address TEXT,
-    city TEXT,
-    created_at TIMESTAMP)
-    """)
-    return conn, duckdb
-
-
-@app.cell
-def _():
-    starting_lst = [
-        "Vida WaterStone",
-        "Bootleggers",
-        "Virgin Active Waterstone",
-        "MuggnBean Somerset Mall",
-        "MuggnBean Somerset West",
-        "Plato Coffee",
-        "Merkava Coffee Roastery",
-        "Spoon Bakery And Eatery",
-        "The Coffee Roasting Company",
-        "Babette's Bakery and Eatery",
-        "Sage & Thyme Village Coffee Shop",
-        "Cafe 1865",
-        "SCHOON Bright Street Café",
-        "The Modelist",
-        "PlaaslikLocal",
-        "Bossa",
-        "Haven Art Cafe",
-        "Locomotion Coffeatery",
-        "Coffee Couture Vergelegen"
-    ]
-    return (starting_lst,)
-
-
-@app.cell
-def _(API_KEY, conn, requests):
-    import os
-    from datetime import datetime, timezone
-
-    def get_place_coordinates(place_name):
-        params = {
-            "query": place_name,
-            "key": API_KEY
-        }
-    
-        # Make the Text Search request
-        response = requests.get(TEXT_SEARCH_URL, params=params)
-        data = response.json()
-        print(data)
-        # Check if request was successful and results exist
-        if data["status"] == "OK" and data["results"]:
-            result = data["results"][0]  # Take the top result
-            return {
-                "name": result["name"],
-                "address": result["formatted_address"],
-                "place_id": result["place_id"],
-                "lat": result["geometry"]["location"]["lat"],
-                "lng": result["geometry"]["location"]["lng"]
-            }
-        else:
-            print(f"Error: {data['status']} - {data.get('error_message', 'No results found')}")
-            return None
-        
-    LOCATION = "Somerset West"
-    PLACE_NAME = "Coffee Couture Vergelegen"
-    # API endpoint for Text Search
-    TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-
-    print(f"Searching for '{PLACE_NAME} in {LOCATION}'...\n")
-    result = get_place_coordinates(PLACE_NAME + " " + LOCATION)
-
-    if result:
-        print(f"Found {PLACE_NAME}:")
-        print(f"Name: {result['name']}")
-        print(f"Address: {result['address']}")
-        print(f"Place ID: {result['place_id']}")
-        print(f"Coordinates: ({result['lat']}, {result['lng']})")
-    else:
-        print(f"Couldn’t find {PLACE_NAME}—check the name or API key!")
-
-    root_dir = r"C:\Users\jdc\Documents\GithubPersonal\jdc.code.brewsandbytes\src\locations"
-
-    query = """
-        INSERT INTO locations (id, name, place_id, lat, long, address, city, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+class GooglePlacesClient:
     """
+    Client for interacting with the Google Places API (New).
+    """
+    def __init__(self, api_key: Optional[str] = None):
+        self.api_key = api_key or os.environ.get(API_KEY_ENV_VAR)
+        if not self.api_key:
+            logger.error(f"API Key not found. Please set {API_KEY_ENV_VAR} environment variable.")
+            raise ValueError(f"API Key not found. Please set {API_KEY_ENV_VAR} environment variable.")
+        
+    def search_places(self, query: str) -> List[Dict]:
+        """
+        Search for places using the Google Places API (New) Text Search.
+        
+        Args:
+            query (str): The text query to search for (e.g., "restaurants in Somerset West").
+            
+        Returns:
+            List[Dict]: A list of place objects containing the requested details.
+        """
+        headers = {
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": self.api_key,
+            # FieldMask specifies which fields to return to save bandwidth and latency.
+            # We request fields corresponding to the user's requirements:
+            # - Name: displayName
+            # - Address: formattedAddress
+            # - Coordinates: location
+            # - Ratings: rating, userRatingCount
+            # - Meta info: businessStatus, types, priceLevel
+            # - Accessibility: accessibilityOptions
+            # - Contact: internationalPhoneNumber, websiteUri
+            # - Photo: photos
+            "X-Goog-FieldMask": (
+                "places.id,"
+                "places.displayName,"
+                "places.formattedAddress,"
+                "places.location,"
+                "places.rating,"
+                "places.userRatingCount,"
+                "places.businessStatus,"
+                "places.types,"
+                "places.priceLevel,"
+                "places.accessibilityOptions,"
+                "places.internationalPhoneNumber,"
+                "places.websiteUri,"
+                "places.photos,"
+                "places.regularOpeningHours"
+            )
+        }
+        
+        payload = {
+            "textQuery": query
+        }
+        
+        response = None
+        try:
+            logger.info(f"Searching for: {query}")
+            response = requests.post(BASE_URL, headers=headers, json=payload)
+            response.raise_for_status()
+            
+            data = response.json()
+            places = data.get("places", [])
+            logger.info(f"Found {len(places)} places for query: {query}")
+            return places
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            if response is not None:
+                logger.error(f"Response content: {response.text}")
+            raise
 
-    values = (
-        result.get("place_id"),
-        result.get("name"),
-        result.get("place_id"),
-        result.get("lat"),
-        result.get("lng"),
-        result.get("address"),
-        LOCATION,  # Assuming LOCATION is a valid variable
-        datetime.now(timezone.utc),
-    )
+    def download_photo(self, photo_name: str, max_width: int = 1600, max_height: int = 1600) -> Optional[bytes]:
+        """
+        Download a photo from the Google Places API.
+        
+        Args:
+            photo_name (str): The resource name of the photo (e.g., "places/PLACE_ID/photos/PHOTO_ID").
+            max_width (int): The maximum width of the photo.
+            max_height (int): The maximum height of the photo.
+            
+        Returns:
+            bytes: The photo content if successful, None otherwise.
+        """
+        url = f"https://places.googleapis.com/v1/{photo_name}/media"
+        params = {
+            "key": self.api_key,
+            "maxHeightPx": max_height,
+            "maxWidthPx": max_width,
+        }
+        
+        try:
+            # By default, requests follows redirects. The API redirects to the image URL.
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            return response.content
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to download photo {photo_name}: {e}")
+            return None
 
-    conn.execute(query, values)
-    return (
-        LOCATION,
-        PLACE_NAME,
-        TEXT_SEARCH_URL,
-        datetime,
-        get_place_coordinates,
-        os,
-        query,
-        result,
-        root_dir,
-        timezone,
-        values,
-    )
+def sanitize_filename(name: str) -> str:
+    """Sanitize a string to be safe for use as a filename/directory name."""
+    # Remove invalid characters
+    return re.sub(r'[<>:"/\\|?*]', '', name).strip()
 
+def save_places_data(places: List[Dict], filename: str):
+    """
+    Append places to a JSON file.
+    Reads existing data, appends new unique places, and writes back.
+    """
+    existing_places = []
+    if os.path.exists(filename):
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                existing_places = json.load(f)
+        except json.JSONDecodeError:
+            logger.warning(f"Could not decode {filename}, starting with empty list.")
+    
+    # Create a map of existing places by ID to avoid duplicates
+    places_map = {p['id']: p for p in existing_places}
+    
+    # Update/Add new places
+    for p in places:
+        places_map[p['id']] = p
+        
+    final_list = list(places_map.values())
+    
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(final_list, f, ensure_ascii=False, indent=2)
+        logger.info(f"Saved {len(final_list)} places to {filename}")
+    except IOError as e:
+        logger.error(f"Failed to save to file: {e}")
 
-@app.cell
-def _(conn, locations, mo):
-    _df = mo.sql(
-        f"""
-        SELECT * FROM locations;
-        """,
-        engine=conn
-    )
-    return
+def main():
+    # Example usage
+    try:
+        # Check if API key is set, otherwise mock or warn
+        if not os.environ.get(API_KEY_ENV_VAR):
+            logger.warning("GOOGLE_PLACES_API_KEY not set. Please set it to run the script.")
+            return
 
+        client = GooglePlacesClient()
+        
+        categories = ["restaurants", "coffeeshops"]
+        location = "Somerset West"
+        
+        all_places = []
+        
+        for category in categories:
+            query = f"{category} in {location}"
+            places = client.search_places(query)
+            all_places.extend(places)
+            
+        # Deduplicate places based on 'id' locally before processing
+        unique_places_map = {p['id']: p for p in all_places}
+        unique_places = list(unique_places_map.values())
+        
+        logger.info(f"Total unique places found in this run: {len(unique_places)}")
+        
+        # Process photos and save
+        base_images_dir = Path(IMAGES_DIR)
+        base_images_dir.mkdir(exist_ok=True)
+        
+        for place in unique_places:
+            place_name = place.get('displayName', {}).get('text', 'Unknown')
+            place_id = place.get('id')
+            sanitized_name = sanitize_filename(place_name)
+            
+            # Create directory for the place
+            # We append ID to ensure uniqueness if names are same?
+            # User said "directory with the name of the place". 
+            # If duplicates exist, we might overwrite or mix. 
+            # Let's use name, but if we have multiple places with same name, maybe add ID.
+            # For now, just name as requested.
+            place_dir = base_images_dir / sanitized_name
+            place_dir.mkdir(exist_ok=True)
+            
+            photos = place.get('photos', [])
+            if photos:
+                logger.info(f"Downloading {len(photos)} photos for {place_name}...")
+                for i, photo in enumerate(photos):
+                    photo_name = photo.get('name')
+                    if photo_name:
+                        # Construct a filename.
+                        # photo_name looks like "places/PLACE_ID/photos/PHOTO_ID"
+                        # We can use the last part or just index.
+                        file_ext = "jpg" # API returns JPEG by default usually
+                        # we can try to infer content type from response headers if we want, 
+                        # but for now assume jpg or check later.
+                        
+                        image_filename = f"photo_{i+1}.{file_ext}"
+                        image_path = place_dir / image_filename
+                        
+                        # Check if already exists to avoid re-downloading
+                        if not image_path.exists():
+                            content = client.download_photo(photo_name)
+                            if content:
+                                with open(image_path, "wb") as f:
+                                    f.write(content)
+                        else:
+                            logger.info(f"Photo {image_filename} already exists.")
 
-@app.cell
-def _(mo):
-    mo.md(""" """)
-    return
-
-
-@app.cell
-def _():
-    import marimo as mo
-    return (mo,)
-
+        # Save data to JSON
+        save_places_data(unique_places, DATA_FILE)
+        
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    app.run()
+    main()

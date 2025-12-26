@@ -1,4 +1,64 @@
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap.xml
+# Major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Yahoo! Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Archival bots
+User-agent: ia_archiver
+Allow: /
+
+# AI agents and LLMs
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: claude-web
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Crawl delay for rate-limited bots
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://www.brewsandbytes.com/sitemap.xml
+
+# Host
+Host: https://www.brewsandbytes.com
+
+# Additional directives for better crawling
+Disallow: /admin/
+Disallow: /api/admin/
+Disallow: /private/

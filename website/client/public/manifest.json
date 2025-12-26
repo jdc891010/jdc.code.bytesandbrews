@@ -1,0 +1,21 @@
+{
+  "name": "Brews and Bytes",
+  "short_name": "BrewsBytes",
+  "description": "A community for coffee lovers and tech enthusiasts to discover, share, and connect over great coffee and great ideas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00A1D6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/map-animation.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

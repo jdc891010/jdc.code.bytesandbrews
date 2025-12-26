@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+  <loc>https://www.brewsandbytes.com/</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/about</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/community</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/contact</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/creature-tribes</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/download</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/features</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/blog</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/coffee-shops</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/signup</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.70</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/login</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.60</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/terms</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.brewsandbytes.com/privacy</loc>
+  <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>yearly</changefreq>
+</url>
+
+</urlset>

@@ -15,7 +15,10 @@ import {
   coffeeShopSchema, 
   couponSchema, 
   blogPostSchema, 
-  notificationSchema 
+  notificationSchema,
+  specialSchema,
+  featuredSpotSchema,
+  imageSchema
 } from '../shared/schema.js';
 import { upload, getImageUrl, deleteImage, validateImageFile, processUploadedImage, deleteProcessedImage, getOptimizedImageUrls } from './upload.js';
 import { googlePlacesService } from './google-places.js';
@@ -799,6 +802,460 @@ export function setupAdminRoutes(app: Express) {
       return res.status(500).json({
         success: false,
         message: 'Failed to get place details'
+      });
+    }
+  });
+
+  // ===== SPECIALS ROUTES =====
+  
+  // Get all specials
+  app.get('/api/admin/specials', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const specials = await storage.getAllSpecials();
+      return res.status(200).json({
+        success: true,
+        data: specials
+      });
+    } catch (error) {
+      console.error('Get specials error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch specials'
+      });
+    }
+  });
+
+  // Get single special
+  app.get('/api/admin/specials/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const special = await storage.getSpecial(id);
+      
+      if (!special) {
+        return res.status(404).json({
+          success: false,
+          message: 'Special not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        data: special
+      });
+    } catch (error) {
+      console.error('Get special error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch special'
+      });
+    }
+  });
+
+  // Create special
+  app.post('/api/admin/specials', authenticateAdmin, upload.single('image'), async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const specialData = specialSchema.parse(req.body);
+      
+      // Handle image upload if provided
+      let imageUrl = specialData.imageUrl;
+      let thumbnailUrl = specialData.thumbnailUrl;
+      
+      if (req.file) {
+        const processedImages = await processUploadedImage(req.file, 'specials');
+        imageUrl = processedImages.imageUrl;
+        thumbnailUrl = processedImages.thumbnailUrl;
+      }
+      
+      const special = await storage.createSpecial({
+        ...specialData,
+        imageUrl,
+        thumbnailUrl
+      });
+      
+      return res.status(201).json({
+        success: true,
+        message: 'Special created successfully',
+        data: special
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid special data',
+          errors: error.errors
+        });
+      }
+      
+      console.error('Create special error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to create special'
+      });
+    }
+  });
+
+  // Update special
+  app.put('/api/admin/specials/:id', authenticateAdmin, upload.single('image'), async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const specialData = specialSchema.partial().parse(req.body);
+      
+      // Handle image upload if provided
+      if (req.file) {
+        const processedImages = await processUploadedImage(req.file, 'specials');
+        specialData.imageUrl = processedImages.imageUrl;
+        specialData.thumbnailUrl = processedImages.thumbnailUrl;
+      }
+      
+      const special = await storage.updateSpecial(id, specialData);
+      
+      if (!special) {
+        return res.status(404).json({
+          success: false,
+          message: 'Special not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Special updated successfully',
+        data: special
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid special data',
+          errors: error.errors
+        });
+      }
+      
+      console.error('Update special error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to update special'
+      });
+    }
+  });
+
+  // Delete special
+  app.delete('/api/admin/specials/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deleteSpecial(id);
+      
+      if (!success) {
+        return res.status(404).json({
+          success: false,
+          message: 'Special not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Special deleted successfully'
+      });
+    } catch (error) {
+      console.error('Delete special error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to delete special'
+      });
+    }
+  });
+
+  // ===== FEATURED SPOTS ROUTES =====
+  
+  // Get all featured spots
+  app.get('/api/admin/featured-spots', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const featuredSpots = await storage.getAllFeaturedSpots();
+      return res.status(200).json({
+        success: true,
+        data: featuredSpots
+      });
+    } catch (error) {
+      console.error('Get featured spots error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch featured spots'
+      });
+    }
+  });
+
+  // Get current featured spot
+  app.get('/api/admin/featured-spots/current', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const featuredSpot = await storage.getCurrentFeaturedSpot();
+      return res.status(200).json({
+        success: true,
+        data: featuredSpot
+      });
+    } catch (error) {
+      console.error('Get current featured spot error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch current featured spot'
+      });
+    }
+  });
+
+  // Create featured spot
+  app.post('/api/admin/featured-spots', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const featuredSpotData = featuredSpotSchema.parse(req.body);
+      
+      // Check if a featured spot already exists for this month/year
+      const existing = await storage.getFeaturedSpotByMonth(featuredSpotData.month, featuredSpotData.year);
+      if (existing) {
+        return res.status(400).json({
+          success: false,
+          message: 'A featured spot already exists for this month and year'
+        });
+      }
+      
+      const featuredSpot = await storage.createFeaturedSpot(featuredSpotData);
+      
+      return res.status(201).json({
+        success: true,
+        message: 'Featured spot created successfully',
+        data: featuredSpot
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid featured spot data',
+          errors: error.errors
+        });
+      }
+      
+      console.error('Create featured spot error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to create featured spot'
+      });
+    }
+  });
+
+  // Update featured spot
+  app.put('/api/admin/featured-spots/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const featuredSpotData = featuredSpotSchema.partial().parse(req.body);
+      
+      const featuredSpot = await storage.updateFeaturedSpot(id, featuredSpotData);
+      
+      if (!featuredSpot) {
+        return res.status(404).json({
+          success: false,
+          message: 'Featured spot not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Featured spot updated successfully',
+        data: featuredSpot
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid featured spot data',
+          errors: error.errors
+        });
+      }
+      
+      console.error('Update featured spot error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to update featured spot'
+      });
+    }
+  });
+
+  // Delete featured spot
+  app.delete('/api/admin/featured-spots/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deleteFeaturedSpot(id);
+      
+      if (!success) {
+        return res.status(404).json({
+          success: false,
+          message: 'Featured spot not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Featured spot deleted successfully'
+      });
+    } catch (error) {
+      console.error('Delete featured spot error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to delete featured spot'
+      });
+    }
+  });
+
+  // ===== IMAGES ROUTES =====
+  
+  // Get all images
+  app.get('/api/admin/images', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const images = await storage.getAllImages();
+      return res.status(200).json({
+        success: true,
+        data: images
+      });
+    } catch (error) {
+      console.error('Get images error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch images'
+      });
+    }
+  });
+
+  // Get images by entity
+  app.get('/api/admin/images/:entityType/:entityId', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const { entityType, entityId } = req.params;
+      const images = await storage.getImagesByEntity(entityType, parseInt(entityId));
+      
+      return res.status(200).json({
+        success: true,
+        data: images
+      });
+    } catch (error) {
+      console.error('Get images by entity error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to fetch images'
+      });
+    }
+  });
+
+  // Upload image
+  app.post('/api/admin/images', authenticateAdmin, upload.single('image'), async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          message: 'No image file provided'
+        });
+      }
+      
+      const { entityType, entityId, altText, caption } = req.body;
+      
+      // Process the uploaded image
+      const processedImages = await processUploadedImage(req.file, entityType || 'general');
+      
+      // Create image record
+      const imageData = {
+        filename: req.file.filename,
+        originalName: req.file.originalname,
+        mimeType: req.file.mimetype,
+        size: req.file.size,
+        url: processedImages.imageUrl,
+        thumbnailUrl: processedImages.thumbnailUrl,
+        entityType: entityType || 'general',
+        entityId: entityId ? parseInt(entityId) : null,
+        altText: altText || null,
+        caption: caption || null
+      };
+      
+      const image = await storage.createImage(imageData);
+      
+      return res.status(201).json({
+        success: true,
+        message: 'Image uploaded successfully',
+        data: image
+      });
+    } catch (error) {
+      console.error('Upload image error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to upload image'
+      });
+    }
+  });
+
+  // Update image metadata
+  app.put('/api/admin/images/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      const imageData = imageSchema.partial().parse(req.body);
+      
+      const image = await storage.updateImage(id, imageData);
+      
+      if (!image) {
+        return res.status(404).json({
+          success: false,
+          message: 'Image not found'
+        });
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Image updated successfully',
+        data: image
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid image data',
+          errors: error.errors
+        });
+      }
+      
+      console.error('Update image error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to update image'
+      });
+    }
+  });
+
+  // Delete image
+  app.delete('/api/admin/images/:id', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      
+      // Get image details before deletion
+      const image = await storage.getImage(id);
+      if (!image) {
+        return res.status(404).json({
+          success: false,
+          message: 'Image not found'
+        });
+      }
+      
+      // Delete from storage
+      const success = await storage.deleteImage(id);
+      
+      if (success) {
+        // Delete physical files
+        try {
+          await deleteImage(image.filename);
+        } catch (fileError) {
+          console.warn('Failed to delete physical image files:', fileError);
+        }
+      }
+      
+      return res.status(200).json({
+        success: true,
+        message: 'Image deleted successfully'
+      });
+    } catch (error) {
+      console.error('Delete image error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to delete image'
       });
     }
   });

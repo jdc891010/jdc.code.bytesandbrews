@@ -1,0 +1,20 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Brews and Bytes",
+  "url": "https://www.brewsandbytes.com/",
+  "description": "Find the best coffee shops for remote work and studying. Brews and Bytes helps you discover locations with great coffee, reliable Wi-Fi, and a productive atmosphere.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Brews and Bytes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.brewsandbytes.com/favicon.svg"
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.brewsandbytes.com/coffee-shops?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}

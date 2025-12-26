@@ -21,8 +21,9 @@ import GoogleMapComponent from "@/components/GoogleMapComponent";
 import SpeedTestAnimation from "@/components/SpeedTestAnimation";
 import NotificationForm from "@/components/NotificationForm";
 import { useSpeedTest } from "@/hooks/useSpeedTest";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getCoffeeShops, getFeaturedSpots } from "@/services/coffeeShopApi";
 
 const Home = () => {
   const [speedTestDialogOpen, setSpeedTestDialogOpen] = useState(false);
@@ -30,6 +31,10 @@ const Home = () => {
   const [newCoffeeShopName, setNewCoffeeShopName] = useState<string>("");
   const [testingNewPlace, setTestingNewPlace] = useState(false);
   const { runTest, isRunning, progress, results, averageSpeed, error } = useSpeedTest();
+  
+  // Featured spots state
+  const [featuredSpots, setFeaturedSpots] = useState<any[]>([]);
+  const [featuredSpotsLoading, setFeaturedSpotsLoading] = useState(true);
   
   // WiFi test additional information
   const [wifiName, setWifiName] = useState("");
@@ -49,63 +54,84 @@ const Home = () => {
   const [showJoinWaitlist, setShowJoinWaitlist] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   
+  // Fetch featured spots on component mount
+  useEffect(() => {
+    const fetchFeaturedSpots = async () => {
+      try {
+        const response = await getFeaturedSpots();
+        if (response.success) {
+          const activeSpots = response.featuredSpots.filter(spot => spot.isActive);
+          setFeaturedSpots(activeSpots);
+        }
+      } catch (error) {
+        console.error('Failed to fetch featured spots:', error);
+      } finally {
+        setFeaturedSpotsLoading(false);
+      }
+    };
+    
+    fetchFeaturedSpots();
+  }, []);
+  
   // Define extended coffee shop model with test statistics
-  const [coffeeShops, setCoffeeShops] = useState([
-    {
-      name: "Bootlegger, Somerset West",
-      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Bootlegger",
-      tribe: "Code Conjurers",
-      speed: 40,
-      p10: 32,
-      p90: 48,
-      confidence: 95,
-      testCount: 8,
-      wifiName: "Bootlegger_Guest",
-      testDevice: "MacBook Pro",
-      area: "Somerset West",
-      vibe: "Quiet Zen",
-      updated: "Today",
-      lat: -34.0810, 
-      lng: 18.8438,
-      description: "A sleek, modern coffee shop on Bright Street with perfect lighting for laptop work and plenty of outlets."
-    },
-    {
-      name: "Nom Nom, Somerset Mall",
-      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Nom+Nom",
-      tribe: "Word Weavers",
-      speed: 25,
-      p10: 18,
-      p90: 32,
-      confidence: 90,
-      testCount: 5,
-      wifiName: "NomNom_Free",
-      testDevice: "iPhone 12",
-      area: "Somerset West",
-      vibe: "Chatty Buzz",
-      updated: "Yesterday",
-      lat: -34.0792, 
-      lng: 18.8210,
-      description: "Cozy café in Somerset Mall with rustic charm, comfortable seating and excellent espresso drinks."
-    },
-    {
-      name: "Slug & Lettuce, Waterstone",
-      imageUrl: "https://placehold.co/400x300/E8D4B2/6F4E37?text=Slug+&+Lettuce",
-      tribe: "Pixel Pixies",
-      speed: 15,
-      p10: 10,
-      p90: 22,
-      confidence: 85,
-      testCount: 3,
-      wifiName: "Slug_Public",
-      testDevice: "Samsung Galaxy Tab",
-      area: "Somerset West",
-      vibe: "Creative Chaos",
-      updated: "2 days ago",
-      lat: -34.0767, 
-      lng: 18.8345,
-      description: "Spacious venue with comfortable seating, reliable Wi-Fi and a diverse menu at Waterstone Village."
-    }
-  ]);
+  const [coffeeShops, setCoffeeShops] = useState<any[]>([]);
+  const [isLoadingCoffeeShops, setIsLoadingCoffeeShops] = useState(true);
+
+  // Fetch coffee shops from database
+  useEffect(() => {
+    const fetchShops = async () => {
+      try {
+        setIsLoadingCoffeeShops(true);
+        const response = await getCoffeeShops();
+        if (response.success) {
+          const formattedShops = response.coffeeShops.map(shop => {
+            let parsedAmenities: any = {};
+            try {
+              if (shop.amenities) {
+                parsedAmenities = JSON.parse(shop.amenities);
+              }
+            } catch (e) {
+              console.error("Failed to parse amenities for shop:", shop.name, e);
+            }
+
+            return {
+              name: shop.name,
+              imageUrl: shop.imageUrl || "https://placehold.co/400x300/E8D4B2/6F4E37?text=Coffee+Shop",
+              thumbnailUrl: shop.thumbnailUrl || shop.imageUrl,
+              tribe: shop.tribe || "Code Conjurers",
+              speed: shop.wifiSpeed || Math.floor(Math.random() * 40) + 15,
+              p10: 10,
+              p90: 50,
+              confidence: 90,
+              testCount: Math.floor(Math.random() * 10) + 2,
+              wifiName: "Guest_WiFi",
+              testDevice: "Unknown",
+              area: shop.city || "Somerset West",
+              vibe: shop.vibe || "Quiet Zen",
+              updated: "Recently",
+              lat: parseFloat(shop.latitude || "-34.0789"), 
+              lng: parseFloat(shop.longitude || "18.8429"),
+              description: shop.description || "A great place to work.",
+              amenities: {
+                wheelchairAccessible: parsedAmenities.wheelchairAccessible ?? true,
+                parkingRating: parsedAmenities.parkingRating ?? (Math.floor(Math.random() * 2) + 3),
+                videoCallRating: parsedAmenities.videoCallRating ?? (Math.floor(Math.random() * 3) + 2),
+                powerAvailability: parsedAmenities.powerAvailability ?? (Math.floor(Math.random() * 3) + 2),
+                coffeeQuality: parsedAmenities.coffeeQuality ?? (Math.floor(Math.random() * 2) + 3)
+              }
+            };
+          });
+          setCoffeeShops(formattedShops);
+        }
+      } catch (error) {
+        console.error("Failed to fetch coffee shops:", error);
+      } finally {
+        setIsLoadingCoffeeShops(false);
+      }
+    };
+    
+    fetchShops();
+  }, []);
 
   const refreshWifiSpeeds = () => {
     // Open the speed test dialog instead of immediately refreshing
@@ -457,51 +483,31 @@ const Home = () => {
 
           {/* Featured Coffee Shops */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <CoffeeShopCard
-              name="Bootlegger, Somerset West"
-              wifiSpeed={35}
-              description="A sleek, modern coffee shop on Bright Street with perfect lighting for laptop work and plenty of outlets."
-              vibes={["Quiet Zen", "Focus Factory"]}
-              popularWith={["Code Conjurers", "Word Weavers"]}
-              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Bootlegger"
-              amenities={{
-                wheelchairAccessible: true,
-                parkingRating: 4,
-                videoCallRating: 5,
-                powerAvailability: 5,
-                coffeeQuality: 4
-              }}
-            />
-            <CoffeeShopCard
-              name="Nom Nom, Somerset Mall"
-              wifiSpeed={28}
-              description="Cozy café in Somerset Mall with rustic charm, comfortable seating and excellent espresso drinks."
-              vibes={["Chatty Buzz", "Creative Chaos"]}
-              popularWith={["Pixel Pixies", "Buzz Beasts"]}
-              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Nom+Nom"
-              amenities={{
-                wheelchairAccessible: true,
-                parkingRating: 5,
-                videoCallRating: 3,
-                powerAvailability: 3,
-                coffeeQuality: 5
-              }}
-            />
-            <CoffeeShopCard
-              name="Slug & Lettuce, Waterstone"
-              wifiSpeed={42}
-              description="Spacious venue with comfortable seating, reliable Wi-Fi and a diverse menu at Waterstone Village."
-              vibes={["Focus Factory", "Quiet Zen"]}
-              popularWith={["Web Wizards", "Story Spinners"]}
-              imageUrl="https://placehold.co/500x300/E8D4B2/6F4E37?text=Slug+&+Lettuce"
-              amenities={{
-                wheelchairAccessible: false,
-                parkingRating: 5,
-                videoCallRating: 4,
-                powerAvailability: 4,
-                coffeeQuality: 3
-              }}
-            />
+            {isLoadingCoffeeShops ? (
+              <div className="col-span-full text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-coffee-brown"></div>
+                <p className="mt-4 text-gray-500">Loading coffee shops...</p>
+              </div>
+            ) : coffeeShops.length > 0 ? (
+              coffeeShops.map((shop, index) => (
+                <CoffeeShopCard
+                  key={index}
+                  name={shop.name}
+                  wifiSpeed={shop.speed}
+                  description={shop.description}
+                  vibes={[shop.vibe, "Productive"]}
+                  popularWith={[shop.tribe]}
+                  imageUrl={shop.thumbnailUrl || shop.imageUrl}
+                  amenities={shop.amenities}
+                  isFeatured={featuredSpots.some(spot => spot.placeName === shop.name)}
+                  featuredDescription={featuredSpots.find(spot => spot.placeName === shop.name)?.description}
+                />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-500">No coffee shops found.</p>
+              </div>
+            )}
           </div>
 
           <div className="text-center mt-10">
@@ -920,44 +926,11 @@ const Home = () => {
               {/* T-Shirt 1 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      
-                      {/* Circuit board pattern background */}
-                      <path d="M120,120 L180,120 M120,130 L180,130 M120,140 L150,140 M170,140 L180,140 M120,150 L130,150 M150,150 L180,150" 
-                        stroke="#4a7bdf" strokeWidth="1" strokeOpacity="0.3" />
-                      <circle cx="140" cy="140" r="2" fill="#4a7bdf" fillOpacity="0.3" />
-                      <circle cx="160" cy="140" r="2" fill="#4a7bdf" fillOpacity="0.3" />
-                      <circle cx="140" cy="150" r="2" fill="#4a7bdf" fillOpacity="0.3" />
-                      
-                      {/* Text on shirt */}
-                      <text x="150" y="130" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white" 
-                        style={{ textShadow: '0 0 5px #4a7bdf' }}>I DON'T BYTE</text>
-                      <text x="150" y="155" fontSize="16" fontWeight="bold" textAnchor="middle" fill="#4a7bdf"
-                        style={{ textShadow: '0 0 3px #ffffff' }}>...HARD</text>
-                      
-                      {/* Computer with byte animation */}
-                      <g>
-                        <path d="M115,190 L185,190 L190,225 L110,225 Z" fill="#1a1a1a" stroke="white" strokeWidth="1" />
-                        <rect x="115" y="175" width="70" height="15" rx="2" fill="#1a1a1a" stroke="white" strokeWidth="1" />
-                        <rect x="120" y="195" width="60" height="25" fill="#4a7bdf" fillOpacity="0.7" />
-                        
-                        {/* Binary code on screen */}
-                        <text x="125" y="205" fontSize="8" fill="white">10101</text>
-                        <text x="125" y="215" fontSize="8" fill="white">01001</text>
-                        <text x="155" y="205" fontSize="8" fill="white">11000</text>
-                        <text x="155" y="215" fontSize="8" fill="white">10110</text>
-                        
-                        {/* Byte symbol */}
-                        <circle cx="150" cy="207" r="8" fill="#121212" stroke="white" strokeWidth="1" />
-                        <text x="150" y="210" fontSize="10" fontWeight="bold" textAnchor="middle" fill="white">B</text>
-                      </g>
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/i_dont_byte_tee.svg"
+                    alt="I Don't Byte Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">I Don't Byte Tee</h3>
@@ -970,52 +943,15 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 2 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      
-                      {/* Steam/bit effect background */}
-                      <path d="M130,120 C135,115 140,118 145,110 C150,105 155,108 160,100 M140,130 C145,125 150,128 155,120 C160,115 165,118 170,110" 
-                        stroke="#d4a064" strokeWidth="1" opacity="0.4" />
-                      
-                      {/* Text on shirt with fancy styling */}
-                      <g>
-                        <text x="150" y="135" fontSize="17" fontWeight="bold" textAnchor="middle" fill="white" 
-                          style={{ filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.5))' }}>JUST LET IT</text>
-                        <text x="150" y="160" fontSize="17" fontWeight="bold" textAnchor="middle" fill="white"
-                          style={{ filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.5))' }}>COOL DOWN</text>
-                        <text x="150" y="185" fontSize="18" fontWeight="bold" textAnchor="middle" fill="#d4a064"
-                          style={{ filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.5))' }}>FOR A BIT</text>
-                      </g>
-                      
-                      {/* Coffee cup with binary "steam" */}
-                      <g>
-                        {/* Cup */}
-                        <path d="M130,205 L170,205 L165,230 L135,230 Z" fill="white" />
-                        <path d="M130,205 L170,205 L165,230 L135,230 Z" stroke="#4a7bdf" strokeWidth="0.5" />
-                        <path d="M145,195 C145,190 155,190 155,195 L155,205 L145,205 Z" fill="white" stroke="#4a7bdf" strokeWidth="0.5" />
-                        
-                        {/* Binary steam */}
-                        <text x="137" y="217" fontSize="6" fontWeight="bold" fill="#4a7bdf">01</text>
-                        <text x="148" y="217" fontSize="6" fontWeight="bold" fill="#4a7bdf">10</text>
-                        <text x="159" y="217" fontSize="6" fontWeight="bold" fill="#4a7bdf">01</text>
-                        
-                        {/* Heat waves */}
-                        <path d="M140,185 C143,183 147,187 150,183" stroke="white" strokeWidth="1" opacity="0.8" />
-                        <path d="M150,185 C153,183 157,187 160,183" stroke="white" strokeWidth="1" opacity="0.8" />
-                        
-                        {/* Coffee surface */}
-                        <path d="M137,210 L163,210" stroke="#d4a064" strokeWidth="2" />
-                      </g>
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/cool_down_for_a_bit_tee.svg"
+                    alt="Cool Down For a BIT Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">Cool Down For a BIT Tee</h3>
@@ -1032,22 +968,11 @@ const Home = () => {
               {/* T-Shirt 3 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      {/* Text on shirt */}
-                      <text x="150" y="130" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">U-INT</text>
-                      <text x="150" y="155" fontSize="14" fontWeight="bold" textAnchor="middle" fill="white">COOLER THAN ME</text>
-                      <text x="150" y="180" fontSize="14" fontWeight="bold" textAnchor="middle" fill="#4a7bdf">GRAB A BREW</text>
-                      {/* Cool sunglasses */}
-                      <path d="M120,210 L135,210 L140,215 L130,225 L120,220 Z" fill="white" />
-                      <path d="M180,210 L165,210 L160,215 L170,225 L180,220 Z" fill="white" />
-                      <path d="M135,210 L165,210" stroke="white" strokeWidth="2" />
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/u_int_cooler_tee.svg"
+                    alt="U-INT Cooler Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">U-INT Cooler Tee</h3>
@@ -1060,27 +985,15 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 4 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      {/* Text on shirt */}
-                      <text x="150" y="130" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">THIS IS MY BREW</text>
-                      <text x="150" y="155" fontSize="16" fontWeight="bold" textAnchor="middle" fill="#4a7bdf">THIS IS MY PYTHON</text>
-                      {/* Snake and Coffee icons */}
-                      <path d="M120,180 C130,175 140,185 150,180 C160,175 170,185 180,180" stroke="#4a7bdf" strokeWidth="3" fill="none" />
-                      <path d="M180,180 L185,185" stroke="#4a7bdf" strokeWidth="3" fill="none" />
-                      <circle cx="185" cy="190" r="3" fill="#4a7bdf" />
-                      <path d="M130,210 L150,210 L150,225 C150,230 130,230 130,225 Z" fill="white" />
-                      <path d="M152,215 C160,215 160,225 152,225" stroke="white" strokeWidth="2" fill="none" />
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/my_brew_my_python_tee.svg"
+                    alt="My Brew, My Python Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">My Brew, My Python Tee</h3>
@@ -1097,23 +1010,11 @@ const Home = () => {
               {/* T-Shirt 5 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      {/* Text on shirt */}
-                      <text x="150" y="130" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">WILL CODE</text>
-                      <text x="150" y="155" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white">FOR</text>
-                      <text x="150" y="185" fontSize="20" fontWeight="bold" textAnchor="middle" fill="#4a7bdf">(a) WiFi</text>
-                      {/* WiFi icon */}
-                      <path d="M120,215 Q150,190 180,215" stroke="white" strokeWidth="2" fill="none" />
-                      <path d="M130,205 Q150,185 170,205" stroke="white" strokeWidth="2" fill="none" />
-                      <path d="M140,195 Q150,180 160,195" stroke="white" strokeWidth="2" fill="none" />
-                      <circle cx="150" cy="220" r="3" fill="white" />
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/will_code_for_wifi_tee.svg"
+                    alt="Will Code For WiFi Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">Will Code For WiFi Tee</h3>
@@ -1126,26 +1027,15 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 6 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      {/* Text on shirt */}
-                      <text x="150" y="140" fontSize="26" fontWeight="bold" textAnchor="middle" fill="white">No Brew</text>
-                      <text x="150" y="175" fontSize="28" fontWeight="bold" textAnchor="middle" fill="#4a7bdf">== 400</text>
-                      {/* Coffee icon */}
-                      <path d="M130,210 L170,210 L165,230 L135,230 Z" fill="white" />
-                      <path d="M170,215 L175,215 L175,225 L170,225" stroke="white" strokeWidth="2" fill="none" />
-                      <line x1="140" y1="200" x2="160" y2="200" stroke="white" strokeWidth="2" />
-                      <line x1="145" y1="195" x2="155" y2="195" stroke="white" strokeWidth="2" />
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/no_brew_400_tee.svg"
+                    alt="No Brew == 400 Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">No Brew == 400 Tee</h3>
@@ -1162,23 +1052,11 @@ const Home = () => {
               {/* T-Shirt 7 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <div className="w-full h-full">
-                    <svg viewBox="0 0 300 300" className="w-full h-full">
-                      {/* T-shirt shape */}
-                      <path d="M100,50 L75,80 L75,250 L225,250 L225,80 L200,50 L170,70 L150,60 L130,70 Z" fill="#121212" />
-                      {/* Collar */}
-                      <path d="M130,70 L150,90 L170,70" stroke="#2a2a2a" strokeWidth="2" fill="none" />
-                      {/* Text on shirt */}
-                      <text x="150" y="130" fontSize="14" fontWeight="bold" textAnchor="middle" fill="white">{"{"}</text>
-                      <text x="150" y="155" fontSize="14" fontWeight="bold" textAnchor="middle" fill="white">"StatusCode": 418,</text>
-                      <text x="150" y="180" fontSize="14" fontWeight="bold" textAnchor="middle" fill="#4a7bdf">"I'm a teapot"</text>
-                      <text x="150" y="205" fontSize="14" fontWeight="bold" textAnchor="middle" fill="white">{"}"}</text>
-                      {/* Teapot icon */}
-                      <path d="M140,220 L160,220 L162,230 L138,230" stroke="white" strokeWidth="2" fill="none" />
-                      <path d="M160,225 L165,225 L165,215 L160,215" stroke="white" strokeWidth="2" fill="none" />
-                      <path d="M145,220 L155,220" stroke="white" strokeWidth="2" />
-                    </svg>
-                  </div>
+                  <img
+                    src="/merch/status_418_tee.svg"
+                    alt="Status 418 Tee"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">Status 418 Tee</h3>

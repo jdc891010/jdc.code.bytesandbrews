@@ -1,0 +1,873 @@
+[
+  {
+    "id": "ChIJV5paEli1zR0REBzxf_tjXeU",
+    "name": "Sanook Somerset, Cape Town",
+    "description": "Modern space designed for digital nomads and creatives. Rated 4.7 stars by locals.",
+    "imageUrl": "/places_images/Sanook Somerset, Cape Town/photo_1.jpg",
+    "wifiSpeed": 55,
+    "vibes": [
+      "Creative Chaos"
+    ],
+    "popularWith": [
+      "Pixel Pixies"
+    ],
+    "address": "9 Huising St, Lionviham, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.07989,
+      "lng": 18.84978
+    }
+  },
+  {
+    "id": "ChIJrw3BLcC1zR0RraTPYKDEfoc",
+    "name": "The Smokey Brisket",
+    "description": "Hidden gem with a relaxing vibe and delicious pastries. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/The Smokey Brisket/photo_1.jpg",
+    "wifiSpeed": 124,
+    "vibes": [
+      "Creative Chaos"
+    ],
+    "popularWith": [
+      "Pixel Pixies",
+      "Story Spinners"
+    ],
+    "address": "Unit 19, Corner of Drama &, Fountain Square, Caledon St, Somerset West, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0823004,
+      "lng": 18.850830500000004
+    }
+  },
+  {
+    "id": "ChIJ8W7yEV21zR0RvPXvVeyilqU",
+    "name": "Love Matcha Somerset",
+    "description": "Hidden gem with a relaxing vibe and delicious pastries. Rated 4.8 stars by locals.",
+    "imageUrl": "/places_images/Love Matcha Somerset/photo_1.jpg",
+    "wifiSpeed": 117,
+    "vibes": [
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Word Weavers"
+    ],
+    "address": "1 Bright St, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0797236,
+      "lng": 18.847569999999997
+    }
+  },
+  {
+    "id": "ChIJn_oZDR61zR0RcD7ZyzdYTKo",
+    "name": "Hennie's Somerset West.",
+    "description": "Hidden gem with a relaxing vibe and delicious pastries. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Hennie's Somerset West./photo_1.jpg",
+    "wifiSpeed": 100,
+    "vibes": [
+      "Industrial Chic",
+      "Creative Chaos"
+    ],
+    "popularWith": [
+      "Buzz Beasts",
+      "Data Druids"
+    ],
+    "address": "Shop 7, The Triangle, Urtel Cres, Somerset West, Cape Town, 7129, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0841143,
+      "lng": 18.8208602
+    }
+  },
+  {
+    "id": "ChIJG_isMcq1zR0RiAW79qAZuzs",
+    "name": "Fancy Frank's Somerset West",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/Fancy Frank's Somerset West/photo_1.jpg",
+    "wifiSpeed": 123,
+    "vibes": [
+      "Digital Hub",
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Data Druids",
+      "Buzz Beasts"
+    ],
+    "address": "Shop 1, 2 De Beers Ave, Firgrove Rural, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.088856899999996,
+      "lng": 18.8224879
+    }
+  },
+  {
+    "id": "ChIJuY3YOm61zR0RqWhYwGrsxRU",
+    "name": "3 Kitch3ns",
+    "description": "Rustic charm meets high-speed internet. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/3 Kitch3ns/photo_1.jpg",
+    "wifiSpeed": 88,
+    "vibes": [
+      "Cozy Corner",
+      "Green Oasis",
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Word Weavers",
+      "Digital Nomads"
+    ],
+    "address": "C/O Parel Vallei Road, and, Silverboomkloof Road, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.055734099999995,
+      "lng": 18.8591922
+    }
+  },
+  {
+    "id": "ChIJVVuiUXq1zR0RTO3-zo1aSWI",
+    "name": "Bossa Somerset West",
+    "description": "Rustic charm meets high-speed internet. Rated 4.2 stars by locals.",
+    "imageUrl": "/places_images/Bossa Somerset West/photo_1.jpg",
+    "wifiSpeed": 25,
+    "vibes": [
+      "Green Oasis"
+    ],
+    "popularWith": [
+      "Data Druids",
+      "Digital Nomads"
+    ],
+    "address": "178 Main Rd, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0773741,
+      "lng": 18.8468445
+    }
+  },
+  {
+    "id": "ChIJRaoa7Hu1zR0RDpNbXK3kvaA",
+    "name": "Henri's Restaurant and Wine Bar",
+    "description": "Bright and airy location with friendly staff. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Henri's Restaurant and Wine Bar/photo_1.jpg",
+    "wifiSpeed": 149,
+    "vibes": [
+      "Chatty Buzz",
+      "Creative Chaos",
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Story Spinners",
+      "Web Wizards"
+    ],
+    "address": "164 Main Rd, Lionviham, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.079437,
+      "lng": 18.848202999999998
+    }
+  },
+  {
+    "id": "ChIJJX9NMvu1zR0RoDcvRqXpdU0",
+    "name": "Millhouse Kitchen",
+    "description": "Great atmosphere for meetings and casual work. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/Millhouse Kitchen/photo_1.jpg",
+    "wifiSpeed": 73,
+    "vibes": [
+      "Creative Chaos",
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Web Wizards"
+    ],
+    "address": "Lourensford Wine Estate, Helderberg Rural, Cape Town, 7135, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.067772399999996,
+      "lng": 18.894723799999998
+    }
+  },
+  {
+    "id": "ChIJu_Dg5-u1zR0R2pscTu30kPM",
+    "name": "Mozambik Somerset West",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/Mozambik Somerset West/photo_1.jpg",
+    "wifiSpeed": 98,
+    "vibes": [
+      "Chatty Buzz",
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Code Conjurers",
+      "Word Weavers"
+    ],
+    "address": "Shop 27G, The Sanctuary Shopping Centre, Cnr De Beer ave & Broadway rd, R44, Somerset West, Cape Town, 6665, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0886834,
+      "lng": 18.8208528
+    }
+  },
+  {
+    "id": "ChIJg80DS3-1zR0RAVZMFL-FLeI",
+    "name": "The Village Bicycle Somerset West",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.1 stars by locals.",
+    "imageUrl": "/places_images/The Village Bicycle Somerset West/photo_1.jpg",
+    "wifiSpeed": 43,
+    "vibes": [
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Buzz Beasts"
+    ],
+    "address": "206 Main Rd, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0751262,
+      "lng": 18.8426228
+    }
+  },
+  {
+    "id": "ChIJdVe3CAC1zR0RHhXEbQ11Ky0",
+    "name": "Bella Italia Somerset West",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.7 stars by locals.",
+    "imageUrl": "/places_images/Bella Italia Somerset West/photo_1.jpg",
+    "wifiSpeed": 136,
+    "vibes": [
+      "Digital Hub",
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Data Druids"
+    ],
+    "address": "Oude Huis Centre, 122 Caledon St, Martinville, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0841223,
+      "lng": 18.8524573
+    }
+  },
+  {
+    "id": "ChIJnW1HS8a0zR0RBPSv8-ooSCo",
+    "name": "Avontuur Estate Restaurant",
+    "description": "Lively cafe with strong Wi-Fi and plenty of power outlets. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/Avontuur Estate Restaurant/photo_1.jpg",
+    "wifiSpeed": 145,
+    "vibes": [
+      "Cozy Corner",
+      "Digital Hub",
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Data Druids",
+      "Buzz Beasts"
+    ],
+    "address": "7130 R44, Firgrove Rural, Somerset West, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0268411,
+      "lng": 18.8205438
+    }
+  },
+  {
+    "id": "ChIJ-9eO3Ue1zR0RsZwB8nBGocg",
+    "name": "Cucina Di Giovanni",
+    "description": "Rustic charm meets high-speed internet. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Cucina Di Giovanni/photo_1.jpg",
+    "wifiSpeed": 113,
+    "vibes": [
+      "Focus Factory",
+      "Industrial Chic"
+    ],
+    "popularWith": [
+      "Code Conjurers"
+    ],
+    "address": "27, Giovanni Waterstone Village, Main Road 27, Giovanni Waterstone Village, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0710396,
+      "lng": 18.822860199999997
+    }
+  },
+  {
+    "id": "ChIJL6WqPw21zR0RS9c11o8DegA",
+    "name": "Steffanie’s Place",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/Steffanie’s Place/photo_1.jpg",
+    "wifiSpeed": 81,
+    "vibes": [
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Digital Nomads",
+      "Web Wizards"
+    ],
+    "address": "113 Irene Ave, Montclair, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.062435199999996,
+      "lng": 18.843815799999998
+    }
+  },
+  {
+    "id": "ChIJQdtViYjKzR0RJd4thXqD-YU",
+    "name": "Oceans 8 Seafood & Sushi Somerset West",
+    "description": "Hidden gem with a relaxing vibe and delicious pastries. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Oceans 8 Seafood & Sushi Somerset West/photo_1.jpg",
+    "wifiSpeed": 145,
+    "vibes": [
+      "Chatty Buzz",
+      "Digital Hub"
+    ],
+    "popularWith": [
+      "Pixel Pixies",
+      "Word Weavers"
+    ],
+    "address": "Corner of Main Rd &, Van Der Byl Straat, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.097740099999996,
+      "lng": 18.851789399999998
+    }
+  },
+  {
+    "id": "ChIJx6Rpb761zR0Ri-9IKnUP0E8",
+    "name": "Oak Terrace",
+    "description": "Rustic charm meets high-speed internet. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/Oak Terrace/photo_1.jpg",
+    "wifiSpeed": 96,
+    "vibes": [
+      "Chatty Buzz",
+      "Quiet Zen",
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Pixel Pixies"
+    ],
+    "address": "1 Erinvale Ave, Erinvale Golf Estate, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0732529,
+      "lng": 18.8880713
+    }
+  },
+  {
+    "id": "ChIJ2YgER0q1zR0R9xoNUZpAhHM",
+    "name": "Copper Kettle Restaurant",
+    "description": "Modern space designed for digital nomads and creatives. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Copper Kettle Restaurant/photo_1.jpg",
+    "wifiSpeed": 131,
+    "vibes": [
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Word Weavers"
+    ],
+    "address": "143 Raithby Rd, Somerset West, Raithby, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.020423199999996,
+      "lng": 18.80891
+    }
+  },
+  {
+    "id": "ChIJDQaCqy_LzR0R0M2tC0zVkKk",
+    "name": "Chorus Restaurant",
+    "description": "Bright and airy location with friendly staff. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/Chorus Restaurant/photo_1.jpg",
+    "wifiSpeed": 138,
+    "vibes": [
+      "Chatty Buzz",
+      "Digital Hub"
+    ],
+    "popularWith": [
+      "Digital Nomads",
+      "Buzz Beasts"
+    ],
+    "address": "Waterkloof Wine Estate, Old Sir Lowry's Pass Rd, Somerset West, Sir Lowry's Pass, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0988857,
+      "lng": 18.8895206
+    }
+  },
+  {
+    "id": "ChIJxYhH2vnLzR0R1_2sZHEN0ZY",
+    "name": "Osteria Cheese Bar",
+    "description": "Rustic charm meets high-speed internet. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Osteria Cheese Bar/photo_1.jpg",
+    "wifiSpeed": 100,
+    "vibes": [
+      "Creative Chaos",
+      "Chatty Buzz"
+    ],
+    "popularWith": [
+      "Digital Nomads"
+    ],
+    "address": "1 Old Sir Lowry's Pass Rd, Helderberg Rural, Cape Town, 7135, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.1078366,
+      "lng": 18.8817453
+    }
+  },
+  {
+    "id": "ChIJQf2v6421zR0RxmIn1Wted7w",
+    "name": "Our Spot Cafe",
+    "description": "Bright and airy location with friendly staff. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/Our Spot Cafe/photo_1.jpg",
+    "wifiSpeed": 120,
+    "vibes": [
+      "Digital Hub",
+      "Creative Chaos"
+    ],
+    "popularWith": [
+      "Buzz Beasts"
+    ],
+    "address": "Unit 2, 9 Nobel St, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0779421,
+      "lng": 18.8177377
+    }
+  },
+  {
+    "id": "ChIJByR1Vku1zR0RCQhfnAkt80I",
+    "name": "Platō Coffee - Somerset West",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.7 stars by locals.",
+    "imageUrl": "/places_images/Platō Coffee - Somerset West/photo_1.jpg",
+    "wifiSpeed": 123,
+    "vibes": [
+      "Creative Chaos",
+      "Quiet Zen",
+      "Digital Hub"
+    ],
+    "popularWith": [
+      "Story Spinners"
+    ],
+    "address": "1 Bright St, Audas Estate, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.079727999999996,
+      "lng": 18.8475592
+    }
+  },
+  {
+    "id": "ChIJ7R7Az1W1zR0RollpU8n7TGE",
+    "name": "Bootlegger Somerset Mall",
+    "description": "Lively cafe with strong Wi-Fi and plenty of power outlets. Rated 5 stars by locals.",
+    "imageUrl": "/places_images/Bootlegger Somerset Mall/photo_1.jpg",
+    "wifiSpeed": 23,
+    "vibes": [
+      "Green Oasis",
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Code Conjurers",
+      "Word Weavers"
+    ],
+    "address": "Shop 210A, Somerset Mall, Centenary Dr, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0827435,
+      "lng": 18.824147699999997
+    }
+  },
+  {
+    "id": "ChIJjYNjwTu1zR0ReD7EGSSj2JA",
+    "name": "Xpresso - Somerset West",
+    "description": "Modern space designed for digital nomads and creatives. Rated 4.1 stars by locals.",
+    "imageUrl": "/places_images/Xpresso - Somerset West/photo_1.jpg",
+    "wifiSpeed": 95,
+    "vibes": [
+      "Quiet Zen"
+    ],
+    "popularWith": [
+      "Data Druids"
+    ],
+    "address": "Somerset Mall, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0812027,
+      "lng": 18.8237816
+    }
+  },
+  {
+    "id": "ChIJy5gx5QW1zR0RbE0eEa_-ifM",
+    "name": "North Coffee",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.9 stars by locals.",
+    "imageUrl": "/places_images/North Coffee/photo_1.jpg",
+    "wifiSpeed": 106,
+    "vibes": [
+      "Chatty Buzz",
+      "Quiet Zen",
+      "Green Oasis"
+    ],
+    "popularWith": [
+      "Buzz Beasts"
+    ],
+    "address": "Shop 10, Melcksloot Village, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.088363,
+      "lng": 18.8259017
+    }
+  },
+  {
+    "id": "ChIJywFgUHm1zR0R8jcZQj4Si6E",
+    "name": "Merkava Coffee Roastery",
+    "description": "Bright and airy location with friendly staff. Rated 4.7 stars by locals.",
+    "imageUrl": "/places_images/Merkava Coffee Roastery/photo_1.jpg",
+    "wifiSpeed": 78,
+    "vibes": [
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Story Spinners"
+    ],
+    "address": "63 Caledon St, Lionviham, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.079705,
+      "lng": 18.849587
+    }
+  },
+  {
+    "id": "ChIJn9Tn0Fu1zR0R7mXwVtd29hA",
+    "name": "café olé",
+    "description": "A perfect spot for productivity with excellent coffee. Rated 4.3 stars by locals.",
+    "imageUrl": "/places_images/café olé/photo_1.jpg",
+    "wifiSpeed": 54,
+    "vibes": [
+      "Green Oasis",
+      "Digital Hub"
+    ],
+    "popularWith": [
+      "Code Conjurers"
+    ],
+    "address": "Intersection Of N2 & R44, 33 Centenary Dr, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0821766,
+      "lng": 18.8234298
+    }
+  },
+  {
+    "id": "ChIJZcG1L_u1zR0RMPpbhG3RDTw",
+    "name": "The Coffee Roasting Company",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/The Coffee Roasting Company/photo_1.jpg",
+    "wifiSpeed": 87,
+    "vibes": [
+      "Digital Hub",
+      "Quiet Zen",
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Word Weavers"
+    ],
+    "address": "Lourensford Wine Estate, Lourensford Rd, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.068185899999996,
+      "lng": 18.8944868
+    }
+  },
+  {
+    "id": "ChIJ_S6m90C1zR0R1aF8CMRDtt4",
+    "name": "Platō Coffee - F45 Somerset West",
+    "description": "Rustic charm meets high-speed internet. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Platō Coffee - F45 Somerset West/photo_1.jpg",
+    "wifiSpeed": 49,
+    "vibes": [
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Story Spinners"
+    ],
+    "address": "De MelckSloot Village, 2 De Beers Ave, Firgrove Rural, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.088046,
+      "lng": 18.8263641
+    }
+  },
+  {
+    "id": "ChIJC0p4qVW1zR0RsXaa50S_O0k",
+    "name": "Seattle Coffee Company Somerset Mall",
+    "description": "Lively cafe with strong Wi-Fi and plenty of power outlets. Rated 4.5 stars by locals.",
+    "imageUrl": "/places_images/Seattle Coffee Company Somerset Mall/photo_1.jpg",
+    "wifiSpeed": 36,
+    "vibes": [
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Word Weavers",
+      "Digital Nomads"
+    ],
+    "address": "Somerset Mall, Firgrove Rural, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0822583,
+      "lng": 18.823249
+    }
+  },
+  {
+    "id": "ChIJS880GZS1zR0RwyeEx9YZA9Q",
+    "name": "Woolworths Café Waterstone",
+    "description": "Modern space designed for digital nomads and creatives. Rated 2.6 stars by locals.",
+    "imageUrl": "/places_images/Woolworths Café Waterstone/photo_1.jpg",
+    "wifiSpeed": 65,
+    "vibes": [
+      "Chatty Buzz",
+      "Cozy Corner"
+    ],
+    "popularWith": [
+      "Code Conjurers"
+    ],
+    "address": "Shop 38/39, Waterstone Village Corner of R44 &, Main Rd, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0707033,
+      "lng": 18.8221495
+    }
+  },
+  {
+    "id": "ChIJ0_ssMi21zR0RB2Bsi3EDz_c",
+    "name": "Coffee Station",
+    "description": "Quiet and focused environment, ideal for coding sessions. Rated 4.7 stars by locals.",
+    "imageUrl": "/places_images/Coffee Station/photo_1.jpg",
+    "wifiSpeed": 60,
+    "vibes": [
+      "Green Oasis",
+      "Quiet Zen",
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Data Druids",
+      "Web Wizards"
+    ],
+    "address": "186 Main Rd, Somerset West, Cape Town, 8000, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0762648,
+      "lng": 18.8457257
+    }
+  },
+  {
+    "id": "ChIJwYWYT-G1zR0RHCjHg4ti9q8",
+    "name": "Crossley & Sons",
+    "description": "Great atmosphere for meetings and casual work. Rated 4.4 stars by locals.",
+    "imageUrl": "/places_images/Crossley & Sons/photo_1.jpg",
+    "wifiSpeed": 150,
+    "vibes": [
+      "Focus Factory",
+      "Industrial Chic"
+    ],
+    "popularWith": [
+      "Web Wizards"
+    ],
+    "address": "Shop 305, Entrance 4, Somerset Mall, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.083361599999996,
+      "lng": 18.825573900000002
+    }
+  },
+  {
+    "id": "ChIJw-zzgbm1zR0RMBDEpwc2syg",
+    "name": "Bootlegger Somerset West",
+    "description": "Bright and airy location with friendly staff. Rated 4.1 stars by locals.",
+    "imageUrl": "/places_images/Bootlegger Somerset West/photo_1.jpg",
+    "wifiSpeed": 39,
+    "vibes": [
+      "Quiet Zen",
+      "Digital Hub"
+    ],
+    "popularWith": [
+      "Code Conjurers",
+      "Data Druids"
+    ],
+    "address": "Caledon St, Lionviham, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0821065,
+      "lng": 18.851810699999998
+    }
+  },
+  {
+    "id": "ChIJO8r26cTLzR0R1clhGKEy_H0",
+    "name": "vida e caffè Riverside Somerset West",
+    "description": "Hidden gem with a relaxing vibe and delicious pastries. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/vida e caffè Riverside Somerset West/photo_1.jpg",
+    "wifiSpeed": 147,
+    "vibes": [
+      "Focus Factory"
+    ],
+    "popularWith": [
+      "Web Wizards",
+      "Code Conjurers"
+    ],
+    "address": "Cnr Main Road and, Fagan St, Riverside Centre, Somerset West Central, 7130, Riverside Centre, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0871557,
+      "lng": 18.8548917
+    }
+  },
+  {
+    "id": "ChIJb5MeDADLzR0R-cqetsa6iGk",
+    "name": "Montreal Paardevlei",
+    "description": "Great atmosphere for meetings and casual work. Rated 4.4 stars by locals.",
+    "imageUrl": "/places_images/Montreal Paardevlei/photo_1.jpg",
+    "wifiSpeed": 61,
+    "vibes": [
+      "Digital Hub",
+      "Chatty Buzz"
+    ],
+    "popularWith": [
+      "Story Spinners",
+      "Word Weavers"
+    ],
+    "address": "Gardner Williams Ave, Firgrove Rural, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0943985,
+      "lng": 18.8160612
+    }
+  },
+  {
+    "id": "ChIJ-_TzVX61zR0R92sH2IMKhCc",
+    "name": "Sage & Thyme Village Coffee Shop",
+    "description": "A perfect spot for productivity with excellent coffee. Rated 4.6 stars by locals.",
+    "imageUrl": "/places_images/Sage & Thyme Village Coffee Shop/photo_1.jpg",
+    "wifiSpeed": 147,
+    "vibes": [
+      "Focus Factory",
+      "Chatty Buzz"
+    ],
+    "popularWith": [
+      "Buzz Beasts"
+    ],
+    "address": "Caledon St, Somerset West, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.084897,
+      "lng": 18.8536349
+    }
+  },
+  {
+    "id": "ChIJudtUd6rKzR0RxNmovMlanP4",
+    "name": "Lorenzo Marx Coffee Bar Paardevlei",
+    "description": "Modern space designed for digital nomads and creatives. Rated 4.1 stars by locals.",
+    "imageUrl": "/places_images/Lorenzo Marx Coffee Bar Paardevlei/photo_1.jpg",
+    "wifiSpeed": 92,
+    "vibes": [
+      "Creative Chaos"
+    ],
+    "popularWith": [
+      "Data Druids",
+      "Digital Nomads"
+    ],
+    "address": "Unit G01, House of Amelie, 14c De Beers Ave, Paardevlei, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.090804,
+      "lng": 18.812836500000003
+    }
+  },
+  {
+    "id": "ChIJfYH9vyu1zR0RIe1GTxNcQzA",
+    "name": "vida e caffè Somerset Mall",
+    "description": "Great atmosphere for meetings and casual work. Rated 3.7 stars by locals.",
+    "imageUrl": "/places_images/vida e caffè Somerset Mall/photo_1.jpg",
+    "wifiSpeed": 48,
+    "vibes": [
+      "Industrial Chic"
+    ],
+    "popularWith": [
+      "Story Spinners",
+      "Word Weavers"
+    ],
+    "address": "Kiosk 35, Somerset Mall, 3 Centenary Dr, Firgrove Rural, Cape Town, 7130, South Africa",
+    "city": "Somerset West",
+    "country": "South Africa",
+    "updated": "Today",
+    "coordinates": {
+      "lat": -34.0822613,
+      "lng": 18.823487399999998
+    }
+  }
+]

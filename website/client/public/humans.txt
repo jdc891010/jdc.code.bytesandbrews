@@ -1,0 +1,20 @@
+/* TEAM */
+
+Developer: JDC
+Contact: jdc@brewsandbytes.com
+Twitter: @brewsandbytes
+Location: Toronto, Canada
+
+Designer: JDC
+Contact: design@brewsandbytes.com
+Location: Toronto, Canada
+
+/* THANKS */
+
+Special thanks to all our community members who contribute content and feedback.
+
+/* SITE */
+
+Standards: HTML5, CSS3, TypeScript, React
+Components: Tailwind CSS, Radix UI, Lucide Icons
+Software: Node.js, Express, SQLite, Drizzle ORM

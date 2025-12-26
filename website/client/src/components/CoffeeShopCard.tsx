@@ -42,6 +42,8 @@ interface CoffeeShopCardProps {
     lat: number;
     lng: number;
   };
+  isFeatured?: boolean;
+  featuredDescription?: string;
 }
 
 const CoffeeShopCard = ({
@@ -61,7 +63,9 @@ const CoffeeShopCard = ({
   address = "123 Bright Street",
   city = "Somerset West",
   country = "South Africa",
-  coordinates = { lat: -34.0731, lng: 18.8433 }
+  coordinates = { lat: -34.0731, lng: 18.8433 },
+  isFeatured = false,
+  featuredDescription
 }: CoffeeShopCardProps) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
   
@@ -93,7 +97,7 @@ const CoffeeShopCard = ({
   return (
     <>
       <motion.div 
-        className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
+        className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 ${isFeatured ? 'ring-2 ring-amber-400 ring-opacity-50' : ''}`}
         whileHover={{ y: -5 }}
       >
         <div className="h-48 overflow-hidden relative">
@@ -102,6 +106,14 @@ const CoffeeShopCard = ({
             alt={name} 
             className="w-full h-full object-cover"
           />
+          
+          {/* Featured Spot Ribbon */}
+          {isFeatured && (
+            <div className="absolute top-0 left-0 bg-gradient-to-r from-amber-500 to-yellow-500 text-white py-2 px-4 m-2 rounded-lg text-xs font-bold flex items-center shadow-lg transform -rotate-3">
+              <i className="fas fa-star mr-1 text-yellow-200"></i> Featured Spot
+            </div>
+          )}
+          
           <div className="absolute top-0 right-0 bg-vibe-yellow text-coffee-brown py-1 px-3 m-2 rounded-full text-xs font-bold flex items-center">
             <i className="fas fa-wifi mr-1"></i> {wifiSpeed} Mbps
           </div>
@@ -115,11 +127,24 @@ const CoffeeShopCard = ({
         <div className="p-5 flex flex-col min-h-[420px]">
           {/* Header - Fixed height */}
           <div className="mb-3">
-            <h3 className="font-bold text-xl text-coffee-brown mb-1 line-clamp-1">{name}</h3>
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="font-bold text-xl text-coffee-brown line-clamp-1 flex-1">{name}</h3>
+              {isFeatured && (
+                <div className="ml-2 flex items-center text-amber-600">
+                  <i className="fas fa-star text-sm"></i>
+                </div>
+              )}
+            </div>
             
             <p className={`text-sm ${wifiDetails.color} font-medium`}>
               <i className="fas fa-bolt mr-1"></i> {wifiDetails.text}
             </p>
+            
+            {isFeatured && featuredDescription && (
+              <p className="text-xs text-amber-700 mt-1 italic">
+                <i className="fas fa-crown mr-1"></i> {featuredDescription}
+              </p>
+            )}
           </div>
           
           {/* Description - Allow natural height with overflow */}

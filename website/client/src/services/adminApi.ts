@@ -140,6 +140,53 @@ export interface Notification {
   updatedAt: string;
 }
 
+export interface Special {
+  id: number;
+  title: string;
+  description: string;
+  coffeeShopId: number;
+  coffeeShopName?: string;
+  discountPercentage?: number;
+  originalPrice?: number;
+  specialPrice?: number;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  showOnHomepage: boolean;
+  imageUrl?: string;
+  thumbnailUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FeaturedSpot {
+  id: number;
+  coffeeShopId: number;
+  coffeeShopName?: string;
+  month: number;
+  year: number;
+  description?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ImageRecord {
+  id: number;
+  filename: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+  url: string;
+  thumbnailUrl?: string;
+  entityType: string;
+  entityId?: number;
+  altText?: string;
+  caption?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Auth utilities
 class AdminAuthService {
   private token: string | null = null;
@@ -415,8 +462,166 @@ class AdminAuthService {
   }
 
   async getPlaceDetails(placeId: string): Promise<CoffeeShopData> {
-    const response = await this.makeRequest<{ data: CoffeeShopData }>(`${API_BASE}/places/details/${placeId}`);
+    const response = await this.makeRequest<{ success: boolean; data: CoffeeShopData }>(`${API_BASE}/places/details/${placeId}`);
     return response.data;
+  }
+
+  // ===== SPECIALS METHODS =====
+  
+  async getSpecials(): Promise<Special[]> {
+    const response = await this.makeRequest<{ success: boolean; data: Special[] }>(`${API_BASE}/specials`);
+    return response.data;
+  }
+
+  async getSpecial(id: number): Promise<Special> {
+    const response = await this.makeRequest<{ success: boolean; data: Special }>(`${API_BASE}/specials/${id}`);
+    return response.data;
+  }
+
+  async createSpecial(special: Omit<Special, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>): Promise<Special> {
+    const response = await this.makeRequest<{ success: boolean; data: Special }>(`${API_BASE}/specials`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(special)
+    });
+    return response.data;
+  }
+
+  async updateSpecial(id: number, special: Partial<Omit<Special, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>>): Promise<Special> {
+    const response = await this.makeRequest<{ success: boolean; data: Special }>(`${API_BASE}/specials/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(special)
+    });
+    return response.data;
+  }
+
+  async deleteSpecial(id: number): Promise<void> {
+    await this.makeRequest(`${API_BASE}/specials/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async createSpecialWithImage(specialData: Omit<Special, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>, imageFile?: File): Promise<Special> {
+    const formData = new FormData();
+    
+    // Add special data to form
+    Object.entries(specialData).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, value.toString());
+      }
+    });
+    
+    // Add image if provided
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    
+    const response = await this.makeRequest<{ success: boolean; data: Special }>(`${API_BASE}/specials`, {
+      method: 'POST',
+      body: formData
+    });
+    return response.data;
+  }
+
+  async updateSpecialWithImage(id: number, specialData: Partial<Omit<Special, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>>, imageFile?: File): Promise<Special> {
+    const formData = new FormData();
+    
+    // Add special data to form
+    Object.entries(specialData).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, value.toString());
+      }
+    });
+    
+    // Add image if provided
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    
+    const response = await this.makeRequest<{ success: boolean; data: Special }>(`${API_BASE}/specials/${id}`, {
+      method: 'PUT',
+      body: formData
+    });
+    return response.data;
+  }
+
+  // ===== FEATURED SPOTS METHODS =====
+  
+  async getFeaturedSpots(): Promise<FeaturedSpot[]> {
+    const response = await this.makeRequest<{ success: boolean; data: FeaturedSpot[] }>(`${API_BASE}/featured-spots`);
+    return response.data;
+  }
+
+  async getCurrentFeaturedSpot(): Promise<FeaturedSpot | null> {
+    const response = await this.makeRequest<{ success: boolean; data: FeaturedSpot | null }>(`${API_BASE}/featured-spots/current`);
+    return response.data;
+  }
+
+  async createFeaturedSpot(featuredSpot: Omit<FeaturedSpot, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>): Promise<FeaturedSpot> {
+    const response = await this.makeRequest<{ success: boolean; data: FeaturedSpot }>(`${API_BASE}/featured-spots`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(featuredSpot)
+    });
+    return response.data;
+  }
+
+  async updateFeaturedSpot(id: number, featuredSpot: Partial<Omit<FeaturedSpot, 'id' | 'coffeeShopName' | 'createdAt' | 'updatedAt'>>): Promise<FeaturedSpot> {
+    const response = await this.makeRequest<{ success: boolean; data: FeaturedSpot }>(`${API_BASE}/featured-spots/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(featuredSpot)
+    });
+    return response.data;
+  }
+
+  async deleteFeaturedSpot(id: number): Promise<void> {
+    await this.makeRequest(`${API_BASE}/featured-spots/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
+  // ===== IMAGES METHODS =====
+  
+  async getImages(): Promise<ImageRecord[]> {
+    const response = await this.makeRequest<{ success: boolean; data: ImageRecord[] }>(`${API_BASE}/images`);
+    return response.data;
+  }
+
+  async getImagesByEntity(entityType: string, entityId: number): Promise<ImageRecord[]> {
+    const response = await this.makeRequest<{ success: boolean; data: ImageRecord[] }>(`${API_BASE}/images/${entityType}/${entityId}`);
+    return response.data;
+  }
+
+  async uploadImageRecord(file: File, entityType: string = 'general', entityId?: number, altText?: string, caption?: string): Promise<ImageRecord> {
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('entityType', entityType);
+    if (entityId) formData.append('entityId', entityId.toString());
+    if (altText) formData.append('altText', altText);
+    if (caption) formData.append('caption', caption);
+    
+    const response = await this.makeRequest<{ success: boolean; data: ImageRecord }>(`${API_BASE}/images`, {
+      method: 'POST',
+      body: formData
+    });
+    return response.data;
+  }
+
+  async updateImageRecord(id: number, imageData: Partial<Omit<ImageRecord, 'id' | 'filename' | 'originalName' | 'mimeType' | 'size' | 'url' | 'thumbnailUrl' | 'createdAt' | 'updatedAt'>>): Promise<ImageRecord> {
+    const response = await this.makeRequest<{ success: boolean; data: ImageRecord }>(`${API_BASE}/images/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(imageData)
+    });
+    return response.data;
+  }
+
+  async deleteImageRecord(id: number): Promise<void> {
+    await this.makeRequest(`${API_BASE}/images/${id}`, {
+      method: 'DELETE'
+    });
   }
 }
 

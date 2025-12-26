@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Plus, Edit, Trash2, MapPin, Wifi, Upload, X, Image as ImageIcon, Search } from 'lucide-react';
 import { adminApi, type CoffeeShop, type PlaceSearchResult, type CoffeeShopData } from '@/services/adminApi';
+import { clearCoffeeShopCache } from '@/services/coffeeShopApi';
 
 export default function CoffeeShopManagement() {
   const [coffeeShops, setCoffeeShops] = useState<CoffeeShop[]>([]);
@@ -138,6 +139,8 @@ export default function CoffeeShopManagement() {
       }
 
       await loadCoffeeShops();
+      // Clear cache to ensure map shows updated data
+      clearCoffeeShopCache();
       setIsDialogOpen(false);
       resetForm();
     } catch (err) {
@@ -199,6 +202,8 @@ export default function CoffeeShopManagement() {
     try {
       await adminApi.deleteCoffeeShop(id);
       await loadCoffeeShops();
+      // Clear cache to ensure map shows updated data
+      clearCoffeeShopCache();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete coffee shop');
     }
