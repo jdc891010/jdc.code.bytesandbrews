@@ -17,7 +17,7 @@ import FeatureRoadmap from "@/components/FeatureRoadmap";
 import CoffeeShopSpecials from "@/components/CoffeeShopSpecials";
 import RecommendationTabs from "@/components/RecommendationTabs";
 import ContactFormSimple from "@/components/ContactFormSimple";
-import GoogleMapComponent from "@/components/GoogleMapComponent";
+import LeafletMapComponent from "@/components/LeafletMapComponent";
 import SpeedTestAnimation from "@/components/SpeedTestAnimation";
 import NotificationForm from "@/components/NotificationForm";
 import { useSpeedTest } from "@/hooks/useSpeedTest";
@@ -464,8 +464,8 @@ const Home = () => {
 
           {/* Coffee Shop Map */}
           <div className="max-w-6xl mx-auto mb-10 bg-white rounded-xl overflow-hidden shadow-lg">
-            <div className="h-64 md:h-96 relative">
-              <GoogleMapComponent 
+            <div className="h-64 md:h-96 relative z-0">
+              <LeafletMapComponent 
                 locations={coffeeShops.map(shop => ({
                   name: shop.name,
                   lat: shop.lat,
@@ -475,8 +475,7 @@ const Home = () => {
                   imageUrl: shop.imageUrl
                 }))} 
                 center={{ lat: -34.0789, lng: 18.8429 }} // Center of Somerset West
-                usePlacesAPI={false} // Just use our predefined locations
-                radius={3000} // Restrict to Somerset West area (3km radius)
+                zoom={13}
               />
             </div>
           </div>
@@ -501,6 +500,10 @@ const Home = () => {
                   amenities={shop.amenities}
                   isFeatured={featuredSpots.some(spot => spot.placeName === shop.name)}
                   featuredDescription={featuredSpots.find(spot => spot.placeName === shop.name)?.description}
+                  priceLevel={shop.priceLevel}
+                  userRatingCount={shop.userRatingCount}
+                  businessStatus={shop.businessStatus}
+                  googleMapsUri={shop.googleMapsUri}
                 />
               ))
             ) : (

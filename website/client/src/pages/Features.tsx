@@ -3,11 +3,41 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WifiSpeedBar from "@/components/WifiSpeedBar";
-import GoogleMapComponent from "@/components/GoogleMapComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import LeafletMapComponent from "@/components/LeafletMapComponent";
+import { getCoffeeShopsWithCache } from "@/services/coffeeShopApi";
 
 const Features = () => {
+  const [mapLocations, setMapLocations] = useState<any[]>([]);
+  const [loadingMap, setLoadingMap] = useState(true);
+
+  useEffect(() => {
+    const fetchShops = async () => {
+      try {
+        const response = await getCoffeeShopsWithCache();
+        if (response.success) {
+          const locations = response.coffeeShops.map(shop => ({
+            name: shop.name,
+            lat: parseFloat(shop.latitude || "-34.0789"),
+            lng: parseFloat(shop.longitude || "18.8429"),
+            description: shop.description || "A great place to work.",
+            wifiSpeed: shop.wifiSpeed || Math.floor(Math.random() * 40) + 15,
+            imageUrl: shop.imageUrl || "https://placehold.co/400x300/E8D4B2/6F4E37?text=Coffee+Shop",
+            onViewDetails: () => console.log(`View details for ${shop.name}`)
+          }));
+          setMapLocations(locations);
+        }
+      } catch (error) {
+        console.error("Failed to fetch shops for map:", error);
+      } finally {
+        setLoadingMap(false);
+      }
+    };
+    
+    fetchShops();
+  }, []);
+
   const [wifiShops] = useState([
     {
       name: "Coffee Culture",
@@ -216,76 +246,37 @@ const Features = () => {
             </TabsContent>
 
             <TabsContent value="maps" className="mt-6">
-              <div className="grid grid-cols-1 gap-12 items-center">
-                <div className="text-center mb-6">
-                  <h2 className="font-bold text-3xl text-coffee-brown mb-4">Find Your Perfect Spot in Somerset West</h2>
-                  <p className="max-w-2xl mx-auto mb-4">Our map integration makes it easy to discover coffee shops around Somerset West. Explore coffee shops in the area using our interactive map powered by Google Places API.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="order-2 md:order-1 h-[400px] w-full rounded-lg overflow-hidden shadow-md">
+                  <LeafletMapComponent 
+                    locations={mapLocations}
+                    center={{ lat: -34.0722, lng: 18.8439 }} // Somerset West
+                  />
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                  <div className="col-span-1">
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                      <h3 className="font-bold text-xl text-coffee-brown mb-4">How It Works</h3>
-                      <ul className="space-y-4 mb-6">
-                        <li className="flex items-start">
-                          <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
-                          <span>Discover real coffee shops in Somerset West with our Google Places integration</span>
-                        </li>
-                        <li className="flex items-start">
-                          <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
-                          <span>Click on a marker to see details about the coffee shop</span>
-                        </li>
-                        <li className="flex items-start">
-                          <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
-                          <span>Get directions and contact information</span>
-                        </li>
-                        <li className="flex items-start">
-                          <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
-                          <span>See user ratings and photos</span>
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 mt-4">
-                      <h3 className="font-bold text-xl text-coffee-brown mb-4">Try These Locations</h3>
-                      <ul className="space-y-3">
-                        <li className="flex items-start border-b pb-2">
-                          <div className="w-2 h-2 bg-tech-blue rounded-full mt-2 mr-2"></div>
-                          <div>
-                            <p className="font-medium">Bootlegger Coffee</p>
-                            <p className="text-sm text-gray-600">Bright Street, Somerset West</p>
-                          </div>
-                        </li>
-                        <li className="flex items-start border-b pb-2">
-                          <div className="w-2 h-2 bg-tech-blue rounded-full mt-2 mr-2"></div>
-                          <div>
-                            <p className="font-medium">Blue Waters Café</p>
-                            <p className="text-sm text-gray-600">Beach Road, Somerset West</p>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="w-2 h-2 bg-tech-blue rounded-full mt-2 mr-2"></div>
-                          <div>
-                            <p className="font-medium">The Coffee Station</p>
-                            <p className="text-sm text-gray-600">Main Road, Somerset West</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div className="md:col-span-2 bg-white rounded-xl overflow-hidden shadow-lg">
-                    <div className="h-[500px] relative">
-                      <GoogleMapComponent 
-                        center={{ lat: -34.0722, lng: 18.8439 }} // Somerset West
-                        usePlacesAPI={true}
-                        radius={3000} // 3km radius
-                      />
-                    </div>
-                    <div className="p-4 bg-soft-cream">
-                      <p className="text-sm text-gray-600">This map displays real coffee shops in Somerset West fetched from Google Places API. Click on markers to see details and get directions.</p>
-                    </div>
-                  </div>
+                <div className="order-1 md:order-2">
+                  <h2 className="font-bold text-3xl text-coffee-brown mb-4">Interactive Map</h2>
+                  <p className="mb-4">Find coffee shops near you with our interactive map. Filter by speed, vibe, or amenities to find your perfect workspace.</p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start">
+                      <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
+                      <span>See real-time Wi-Fi speeds on the map</span>
+                    </li>
+                    <li className="flex items-start">
+                      <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
+                      <span>Filter by amenities like power outlets and parking</span>
+                    </li>
+                    <li className="flex items-start">
+                      <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
+                      <span>Get directions to your chosen workspace</span>
+                    </li>
+                    <li className="flex items-start">
+                      <i className="fas fa-check-circle text-tech-blue mt-1 mr-2"></i>
+                      <span>View popular times and busy hours</span>
+                    </li>
+                  </ul>
+                  <Button className="bg-tech-blue hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                    Open Full Map
+                  </Button>
                 </div>
               </div>
             </TabsContent>

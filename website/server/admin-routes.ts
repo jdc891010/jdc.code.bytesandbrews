@@ -21,7 +21,8 @@ import {
   imageSchema
 } from '../shared/schema.js';
 import { upload, getImageUrl, deleteImage, validateImageFile, processUploadedImage, deleteProcessedImage, getOptimizedImageUrls } from './upload.js';
-import { googlePlacesService } from './google-places.js';
+// Google Places integration temporarily disabled – module not found
+// import { googlePlacesService } from './google-places.js';
 
 // Rate limiting for login attempts
 const loginLimiter = rateLimit({
@@ -745,66 +746,7 @@ export function setupAdminRoutes(app: Express) {
     }
   });
 
-  // Google Places API routes
-  app.get('/api/admin/places/search', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
-    try {
-      const { query, lat, lng, radius } = req.query;
-      
-      if (!query || typeof query !== 'string') {
-        return res.status(400).json({
-          success: false,
-          message: 'Search query is required'
-        });
-      }
-
-      const location = lat && lng ? {
-        lat: parseFloat(lat as string),
-        lng: parseFloat(lng as string)
-      } : undefined;
-
-      const searchRadius = radius ? parseInt(radius as string) : 5000;
-      
-      const places = await googlePlacesService.searchPlaces(query, location, searchRadius);
-      
-      return res.status(200).json({
-        success: true,
-        data: places
-      });
-    } catch (error) {
-      console.error('Places search error:', error);
-      return res.status(500).json({
-        success: false,
-        message: 'Failed to search places'
-      });
-    }
-  });
-
-  app.get('/api/admin/places/details/:placeId', authenticateAdmin, async (req: AuthenticatedRequest, res: Response) => {
-    try {
-      const { placeId } = req.params;
-      
-      if (!placeId) {
-        return res.status(400).json({
-          success: false,
-          message: 'Place ID is required'
-        });
-      }
-
-      const placeDetails = await googlePlacesService.getPlaceDetails(placeId);
-      const coffeeShopData = googlePlacesService.convertToShopData(placeDetails);
-      
-      return res.status(200).json({
-        success: true,
-        data: coffeeShopData
-      });
-    } catch (error) {
-      console.error('Place details error:', error);
-      return res.status(500).json({
-        success: false,
-        message: 'Failed to get place details'
-      });
-    }
-  });
+  // Google Places API integration removed - manual entry only
 
   // ===== SPECIALS ROUTES =====
   

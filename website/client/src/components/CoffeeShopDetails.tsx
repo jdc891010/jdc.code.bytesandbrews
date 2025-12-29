@@ -195,8 +195,8 @@ const mockTips: GuideTip = {
 };
 
 // Navigation buttons for maps and ridesharing
-const NavigationButtons = ({ location }: { location: Location }) => {
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location.coordinates.lat},${location.coordinates.lng}`;
+const NavigationButtons = ({ location, googleMapsUri }: { location: Location, googleMapsUri?: string }) => {
+  const googleMapsUrl = googleMapsUri || `https://www.google.com/maps/search/?api=1&query=${location.coordinates.lat},${location.coordinates.lng}`;
   const appleMapsUrl = `https://maps.apple.com/?ll=${location.coordinates.lat},${location.coordinates.lng}`;
   const wazeUrl = `https://www.waze.com/ul?ll=${location.coordinates.lat},${location.coordinates.lng}&navigate=yes`;
   
@@ -357,6 +357,11 @@ interface CoffeeShopDetailsProps {
   dominantTribe: string;
   // Location data
   location: Location;
+  // New fields
+  priceLevel?: string;
+  userRatingCount?: number;
+  businessStatus?: string;
+  googleMapsUri?: string;
 }
 
 const CoffeeShopDetails = ({ 
@@ -366,7 +371,11 @@ const CoffeeShopDetails = ({
   description, 
   amenities, 
   dominantTribe,
-  location
+  location,
+  priceLevel,
+  userRatingCount,
+  businessStatus,
+  googleMapsUri
 }: CoffeeShopDetailsProps) => {
   const [activeTab, setActiveTab] = useState("wifi");
   const timeData = generateHeatMapData();
@@ -401,6 +410,26 @@ const CoffeeShopDetails = ({
         </DialogTitle>
         
         <div className="text-gray-700 mt-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {businessStatus && (
+              <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                businessStatus === 'Operational' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+              }`}>
+                {businessStatus}
+              </span>
+            )}
+            {priceLevel && (
+              <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">
+                {priceLevel}
+              </span>
+            )}
+            {userRatingCount !== undefined && (
+              <span className="px-2 py-1 rounded text-xs font-semibold bg-blue-100 text-blue-800">
+                {userRatingCount} reviews
+              </span>
+            )}
+          </div>
+
           <p>{description}</p>
           
           <div className="mt-3 bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
@@ -409,6 +438,10 @@ const CoffeeShopDetails = ({
               <div>
                 <p className="text-sm font-medium">{location.address}</p>
                 <p className="text-sm text-gray-500">{location.city}, {location.country}</p>
+                <p className="text-xs text-gray-400 mt-1 flex items-center">
+                  <i className="fas fa-location-crosshairs mr-1 text-[10px]"></i>
+                  {location.coordinates.lat.toFixed(5)}, {location.coordinates.lng.toFixed(5)}
+                </p>
               </div>
             </div>
             
@@ -430,7 +463,7 @@ const CoffeeShopDetails = ({
             </div>
           </div>
           
-          <NavigationButtons location={location} />
+          <NavigationButtons location={location} googleMapsUri={googleMapsUri} />
           
           {/* Heatmap Section */}
           <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">

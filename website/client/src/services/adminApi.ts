@@ -56,6 +56,10 @@ export interface CoffeeShop {
   wifiSpeed?: number;
   imageUrl?: string;
   thumbnailUrl?: string;
+  priceLevel?: string;
+  userRatingCount?: number;
+  businessStatus?: string;
+  googleMapsUri?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -96,6 +100,10 @@ export interface CoffeeShopData {
   opensAt?: string; // Earliest opening time
   closesAt?: string; // Latest closing time
   isOpen24Hours?: boolean;
+  priceLevel?: string;
+  userRatingCount?: number;
+  businessStatus?: string;
+  googleMapsUri?: string;
 }
 
 export interface Coupon {

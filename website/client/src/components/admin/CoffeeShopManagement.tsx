@@ -7,8 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Plus, Edit, Trash2, MapPin, Wifi, Upload, X, Image as ImageIcon, Search } from 'lucide-react';
-import { adminApi, type CoffeeShop, type PlaceSearchResult, type CoffeeShopData } from '@/services/adminApi';
+import { Plus, Edit, Trash2, MapPin, Wifi, Image as ImageIcon, X, Upload } from 'lucide-react';
+import { adminApi, type CoffeeShop, type CoffeeShopData } from '@/services/adminApi';
 import { clearCoffeeShopCache } from '@/services/coffeeShopApi';
 
 export default function CoffeeShopManagement() {
@@ -29,18 +29,18 @@ export default function CoffeeShopManagement() {
     website: '',
     phoneNumber: '',
     rating: '',
-    googlePlacesId: '',
     openingHours: '',
     opensAt: '',
     closesAt: '',
     isOpen24Hours: false,
     wifiSpeed: '',
     imageUrl: '',
-    thumbnailUrl: ''
+    thumbnailUrl: '',
+    priceLevel: '',
+    userRatingCount: '',
+    businessStatus: '',
+    googleMapsUri: ''
   });
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<PlaceSearchResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -75,19 +75,20 @@ export default function CoffeeShopManagement() {
       website: '',
       phoneNumber: '',
       rating: '',
-      googlePlacesId: '',
       openingHours: '',
       opensAt: '',
       closesAt: '',
       isOpen24Hours: false,
       wifiSpeed: '',
       imageUrl: '',
-      thumbnailUrl: ''
+      thumbnailUrl: '',
+      priceLevel: '',
+      userRatingCount: '',
+      businessStatus: '',
+      googleMapsUri: ''
     });
     setEditingShop(null);
     setImagePreview(null);
-    setSearchQuery('');
-    setSearchResults([]);
   };
 
   const handleCreate = () => {
@@ -108,14 +109,17 @@ export default function CoffeeShopManagement() {
       website: shop.website || '',
       phoneNumber: shop.phoneNumber || '',
       rating: shop.rating || '',
-      googlePlacesId: shop.googlePlacesId || '',
       openingHours: shop.openingHours || '',
       opensAt: shop.opensAt || '',
       closesAt: shop.closesAt || '',
       isOpen24Hours: shop.isOpen24Hours || false,
       wifiSpeed: shop.wifiSpeed?.toString() || '',
       imageUrl: shop.imageUrl || '',
-      thumbnailUrl: shop.thumbnailUrl || ''
+      thumbnailUrl: shop.thumbnailUrl || '',
+      priceLevel: shop.priceLevel || '',
+      userRatingCount: shop.userRatingCount?.toString() || '',
+      businessStatus: shop.businessStatus || '',
+      googleMapsUri: shop.googleMapsUri || ''
     });
     setEditingShop(shop);
     setImagePreview(shop.imageUrl || null);
@@ -129,7 +133,8 @@ export default function CoffeeShopManagement() {
     try {
       const shopData = {
         ...formData,
-        wifiSpeed: formData.wifiSpeed ? parseInt(formData.wifiSpeed) : undefined
+        wifiSpeed: formData.wifiSpeed ? parseInt(formData.wifiSpeed) : undefined,
+        userRatingCount: formData.userRatingCount ? parseInt(formData.userRatingCount) : undefined
       };
 
       if (editingShop) {
@@ -147,50 +152,6 @@ export default function CoffeeShopManagement() {
       setError(err instanceof Error ? err.message : 'Failed to save coffee shop');
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handlePlacesSearch = async () => {
-    if (!searchQuery.trim()) return;
-    
-    setIsSearching(true);
-    try {
-      const results = await adminApi.searchPlaces(searchQuery);
-      setSearchResults(results);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to search places');
-    } finally {
-      setIsSearching(false);
-    }
-  };
-
-  const handleSelectPlace = async (place: PlaceSearchResult) => {
-    try {
-      const placeData = await adminApi.getPlaceDetails(place.place_id);
-      setFormData({
-        ...formData,
-        name: placeData.name,
-        address: placeData.address,
-        city: placeData.city,
-        country: placeData.country,
-        postalCode: placeData.postalCode || '',
-        latitude: placeData.latitude,
-        longitude: placeData.longitude,
-        website: placeData.website || '',
-        phoneNumber: placeData.phoneNumber || '',
-        rating: placeData.rating || '',
-        googlePlacesId: placeData.googlePlacesId,
-        openingHours: placeData.openingHours || '',
-        opensAt: placeData.opensAt || '',
-        closesAt: placeData.closesAt || '',
-        isOpen24Hours: placeData.isOpen24Hours || false,
-        imageUrl: placeData.imageUrl || formData.imageUrl
-      });
-      setImagePreview(placeData.imageUrl || null);
-      setSearchResults([]);
-      setSearchQuery('');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to get place details');
     }
   };
 
@@ -411,47 +372,6 @@ export default function CoffeeShopManagement() {
           </DialogHeader>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4 py-4">
-              {/* Google Places Search */}
-              {!editingShop && (
-                <div className="space-y-2">
-                  <Label>Search Coffee Shops (Google Places)</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search for coffee shops..."
-                      onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handlePlacesSearch())}
-                    />
-                    <Button
-                      type="button"
-                      onClick={handlePlacesSearch}
-                      disabled={isSearching || !searchQuery.trim()}
-                      variant="outline"
-                    >
-                      <Search className="h-4 w-4" />
-                      {isSearching ? 'Searching...' : 'Search'}
-                    </Button>
-                  </div>
-                  {searchResults.length > 0 && (
-                    <div className="max-h-48 overflow-y-auto border rounded-md">
-                      {searchResults.map((place) => (
-                        <div
-                          key={place.place_id}
-                          className="p-3 hover:bg-gray-50 cursor-pointer border-b last:border-b-0"
-                          onClick={() => handleSelectPlace(place)}
-                        >
-                          <div className="font-medium">{place.name}</div>
-                          <div className="text-sm text-gray-600">{place.formatted_address}</div>
-                          {place.rating && (
-                            <div className="text-sm text-yellow-600">★ {place.rating}</div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-              
               <div className="space-y-2">
                 <Label htmlFor="name">Name *</Label>
                 <Input
@@ -505,7 +425,6 @@ export default function CoffeeShopManagement() {
                 </div>
               </div>
               
-              {/* Additional Google Places Fields */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="postalCode">Postal Code</Label>
@@ -523,30 +442,62 @@ export default function CoffeeShopManagement() {
                     value={formData.rating}
                     onChange={handleInputChange('rating')}
                     placeholder="e.g., 4.5"
-                    readOnly={!!formData.googlePlacesId}
                   />
                 </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="userRatingCount">Review Count</Label>
+                  <Input
+                    id="userRatingCount"
+                    type="number"
+                    value={formData.userRatingCount}
+                    onChange={handleInputChange('userRatingCount')}
+                    placeholder="e.g., 120"
+                    min="0"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="priceLevel">Price Level</Label>
+                  <Input
+                    id="priceLevel"
+                    value={formData.priceLevel}
+                    onChange={handleInputChange('priceLevel')}
+                    placeholder="e.g., Moderate"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="businessStatus">Business Status</Label>
+                <Input
+                  id="businessStatus"
+                  value={formData.businessStatus}
+                  onChange={handleInputChange('businessStatus')}
+                  placeholder="e.g., Operational"
+                />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="latitude">Latitude</Label>
+                  <Label htmlFor="latitude">Latitude *</Label>
                   <Input
                     id="latitude"
                     value={formData.latitude}
                     onChange={handleInputChange('latitude')}
                     placeholder="e.g., 40.7128"
-                    readOnly={!!formData.googlePlacesId}
+                    required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="longitude">Longitude</Label>
+                  <Label htmlFor="longitude">Longitude *</Label>
                   <Input
                     id="longitude"
                     value={formData.longitude}
                     onChange={handleInputChange('longitude')}
                     placeholder="e.g., -74.0060"
-                    readOnly={!!formData.googlePlacesId}
+                    required
                   />
                 </div>
               </div>
@@ -559,6 +510,17 @@ export default function CoffeeShopManagement() {
                   value={formData.website}
                   onChange={handleInputChange('website')}
                   placeholder="https://example.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="googleMapsUri">Google Maps URL</Label>
+                <Input
+                  id="googleMapsUri"
+                  type="url"
+                  value={formData.googleMapsUri}
+                  onChange={handleInputChange('googleMapsUri')}
+                  placeholder="https://maps.google.com/..."
                 />
               </div>
               
@@ -593,7 +555,6 @@ export default function CoffeeShopManagement() {
                   onChange={handleInputChange('openingHours')}
                   placeholder="e.g., Monday: 7:00 AM – 9:00 PM\nTuesday: 7:00 AM – 9:00 PM\n..."
                   rows={4}
-                  readOnly={!!formData.googlePlacesId}
                 />
               </div>
               
@@ -605,7 +566,6 @@ export default function CoffeeShopManagement() {
                     type="time"
                     value={formData.opensAt}
                     onChange={handleInputChange('opensAt')}
-                    readOnly={!!formData.googlePlacesId}
                   />
                 </div>
                 <div className="space-y-2">
@@ -615,7 +575,6 @@ export default function CoffeeShopManagement() {
                     type="time"
                     value={formData.closesAt}
                     onChange={handleInputChange('closesAt')}
-                    readOnly={!!formData.googlePlacesId}
                   />
                 </div>
               </div>
@@ -627,7 +586,6 @@ export default function CoffeeShopManagement() {
                   checked={formData.isOpen24Hours}
                   onChange={(e) => setFormData(prev => ({ ...prev, isOpen24Hours: e.target.checked }))}
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  disabled={!!formData.googlePlacesId}
                 />
                 <Label htmlFor="isOpen24Hours" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Open 24 Hours

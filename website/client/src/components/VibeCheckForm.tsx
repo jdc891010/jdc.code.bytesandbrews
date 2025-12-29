@@ -23,9 +23,9 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import CoffeeShopAutocomplete from "@/components/CoffeeShopAutocomplete";
 import { useSpeedTest } from "@/hooks/useSpeedTest";
 import SpeedTestAnimation from "@/components/SpeedTestAnimation";
+
 
 const vibeCheckSchema = z.object({
   locationName: z.string().min(2, { message: "Please enter a valid location name" }),
@@ -232,10 +232,7 @@ const VibeCheckForm = () => {
                     <FormItem>
                       <FormLabel>Coffee Shop Name</FormLabel>
                       <FormControl>
-                        <CoffeeShopAutocomplete 
-                          value={field.value} 
-                          onChange={field.onChange}
-                        />
+                        <Input placeholder="Enter coffee shop name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

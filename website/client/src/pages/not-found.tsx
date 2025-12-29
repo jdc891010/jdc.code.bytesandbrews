@@ -19,119 +19,113 @@ export default function NotFound() {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            {/* Shy and surprised coffee cup SVG */}
+            {/* Animated shy coffee cup SVG */}
             <div className="relative mx-auto w-64 h-64 mb-8">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                {/* Coffee cup */}
-                <path 
-                  d="M50,100 Q50,50 100,50 Q150,50 150,100 Q150,150 100,150 Q50,150 50,100 Z" 
-                  fill="#4A2C2A" 
-                  stroke="#2A1A18" 
-                  strokeWidth="2"
+              <motion.svg 
+                viewBox="0 0 200 200" 
+                className="w-full h-full"
+                animate={{ 
+                  y: [0, -5, 0],
+                  rotate: [0, -2, 0, 2, 0]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  ease: "easeInOut" 
+                }}
+              >
+                {/* Steam */}
+                <motion.g
+                  animate={{ opacity: [0.4, 0.7, 0.4], y: [-2, -8, -2] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path d="M85 40 Q 95 30, 105 40 T 125 40" fill="none" stroke="#D4A574" strokeWidth="4" strokeLinecap="round" opacity="0.6" />
+                  <path d="M75 55 Q 85 45, 95 55 T 115 55" fill="none" stroke="#D4A574" strokeWidth="4" strokeLinecap="round" opacity="0.6" />
+                </motion.g>
+
+                {/* Cup Body */}
+                <path
+                  d="M60 80 L 60 150 Q 60 180, 100 180 Q 140 180, 140 150 L 140 80 Z"
+                  fill="#FFFFFF"
+                  stroke="#4A2C2A"
+                  strokeWidth="4"
                 />
                 
-                {/* Coffee liquid */}
-                <path 
-                  d="M60,100 Q60,70 100,70 Q140,70 140,100 Q140,130 100,130 Q60,130 60,100 Z" 
-                  fill="#8B4513" 
-                  opacity="0.8"
-                />
+                {/* Coffee Liquid Surface */}
+                <ellipse cx="100" cy="80" rx="40" ry="10" fill="#6F4E37" />
                 
-                {/* Cup handle */}
-                <path 
-                  d="M150,90 Q170,90 170,110 Q170,130 150,130" 
-                  fill="none" 
-                  stroke="#4A2C2A" 
-                  strokeWidth="8" 
+                {/* Handle */}
+                <path
+                  d="M140 100 Q 170 100, 170 130 Q 170 150, 140 150"
+                  fill="none"
+                  stroke="#4A2C2A"
+                  strokeWidth="8"
                   strokeLinecap="round"
                 />
-                
-                {/* Shy/surprised eyes - one open, one closed */}
-                <ellipse cx="85" cy="90" rx="5" ry="8" fill="#F5E8C7" />
-                <ellipse cx="115" cy="90" rx="5" ry="2" fill="#F5E8C7" />
-                
-                {/* Blushing cheeks */}
-                <circle cx="70" cy="110" r="6" fill="#FF6B6B" opacity="0.6" />
-                <circle cx="130" cy="110" r="6" fill="#FF6B6B" opacity="0.6" />
-                
-                {/* Small surprised mouth */}
-                <path 
-                  d="M90,125 Q100,135 110,125" 
-                  fill="none" 
-                  stroke="#F5E8C7" 
-                  strokeWidth="2"
-                />
-                
-                {/* Steam with surprised/exclamation effect */}
-                <path 
-                  d="M90,60 C95,55 105,55 110,60 C115,65 105,70 100,70 C95,70 85,65 90,60 Z" 
-                  fill="#F5E8C7" 
-                  opacity="0.7"
-                />
-                <path 
-                  d="M100,45 L100,55" 
-                  stroke="#F5E8C7" 
-                  strokeWidth="3" 
-                  strokeLinecap="round"
-                />
-                <circle cx="100" cy="40" r="2" fill="#F5E8C7" />
-              </svg>
+
+                {/* Shy Face */}
+                <g transform="translate(0, 10)">
+                  {/* Eyes looking sideways */}
+                  <circle cx="90" cy="120" r="3" fill="#2A1A18" />
+                  <circle cx="120" cy="120" r="3" fill="#2A1A18" />
+                  
+                  {/* Blush */}
+                  <motion.circle 
+                    cx="80" cy="130" r="6" fill="#FFB7B2" opacity="0.6"
+                    animate={{ opacity: [0.4, 0.8, 0.4] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <motion.circle 
+                    cx="130" cy="130" r="6" fill="#FFB7B2" opacity="0.6"
+                    animate={{ opacity: [0.4, 0.8, 0.4] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+
+                  {/* Small nervous mouth */}
+                  <path d="M102 135 Q 105 132, 108 135" fill="none" stroke="#2A1A18" strokeWidth="2" strokeLinecap="round" />
+                  
+                  {/* Sweat drop */}
+                  <motion.path
+                    d="M135 100 Q 135 110, 138 110 Q 141 110, 141 100 Q 141 90, 138 90 Q 135 90, 135 100"
+                    fill="#E0F7FA"
+                    stroke="#4FC3F7"
+                    strokeWidth="1"
+                    animate={{ y: [0, 5, 0], opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  />
+                </g>
+              </motion.svg>
             </div>
             
             <motion.h1 
-              className="font-montserrat font-bold text-4xl md:text-5xl text-coffee-brown mb-4"
+              className="font-montserrat font-bold text-3xl md:text-4xl text-coffee-brown mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              404
+              This is not where I parked my car
             </motion.h1>
             
-            <motion.p 
-              className="font-montserrat text-xl text-coffee-brown mb-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              Nothing to see here!
-            </motion.p>
-            
-            <motion.p 
-              className="text-gray-600 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            <motion.p
+              className="text-text-secondary mb-8 max-w-sm mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Oops! The page you're looking for seems to have vanished into the coffee mist.
+              Looks like you've wandered into the wrong cafe. Let's get you back to the main menu.
             </motion.p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <Link href="/">
-              <Button className="bg-tech-blue hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 brand-btn mx-auto">
-                <i className="fas fa-home mr-2"></i>
-                Back to Home
-              </Button>
-            </Link>
-            
-            <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/features">
-                <Button variant="outline" className="border-tech-blue text-tech-blue hover:bg-tech-blue hover:bg-opacity-10 font-bold py-2 px-6 rounded-lg transition-all duration-300">
-                  <i className="fas fa-wifi mr-2"></i>
-                  Explore Features
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <Link href="/">
+                <Button size="lg" className="bg-coffee-brown hover:bg-coffee-bean text-cream">
+                  Take Me Home
                 </Button>
               </Link>
-              <Link href="/coffee-shops">
-                <Button variant="outline" className="border-coffee-brown text-coffee-brown hover:bg-coffee-brown hover:bg-opacity-10 font-bold py-2 px-6 rounded-lg transition-all duration-300">
-                  <i className="fas fa-mug-hot mr-2"></i>
-                  Find Coffee Shops
-                </Button>
-              </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

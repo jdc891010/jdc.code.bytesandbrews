@@ -44,6 +44,10 @@ interface CoffeeShopCardProps {
   };
   isFeatured?: boolean;
   featuredDescription?: string;
+  priceLevel?: string;
+  userRatingCount?: number;
+  businessStatus?: string;
+  googleMapsUri?: string;
 }
 
 const CoffeeShopCard = ({
@@ -65,7 +69,11 @@ const CoffeeShopCard = ({
   country = "South Africa",
   coordinates = { lat: -34.0731, lng: 18.8433 },
   isFeatured = false,
-  featuredDescription
+  featuredDescription,
+  priceLevel,
+  userRatingCount,
+  businessStatus,
+  googleMapsUri
 }: CoffeeShopCardProps) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
   
@@ -264,6 +272,10 @@ const CoffeeShopCard = ({
           country,
           coordinates
         }}
+        priceLevel={priceLevel}
+        userRatingCount={userRatingCount}
+        businessStatus={businessStatus}
+        googleMapsUri={googleMapsUri}
       />
     </>
   );

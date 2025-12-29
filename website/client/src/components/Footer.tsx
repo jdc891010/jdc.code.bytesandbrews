@@ -149,6 +149,7 @@ const Footer = () => {
             <Link href="/privacy-policy" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</Link>
             <Link href="/terms-of-service" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Terms of Service</Link>
             <a href="#" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Cookie Policy</a>
+            <Link href="/admin/login" className="text-xs opacity-70 hover:opacity-100 transition-opacity">Admin Portal</Link>
           </div>
         </div>
       </div>

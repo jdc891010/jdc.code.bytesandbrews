@@ -86,6 +86,10 @@ export const coffeeShops = sqliteTable("coffee_shops", {
   phoneNumber: text("phone_number"),
   rating: text("rating"),
   googlePlacesId: text("google_places_id"),
+  priceLevel: text("price_level"),
+  userRatingCount: integer("user_rating_count"),
+  businessStatus: text("business_status"),
+  googleMapsUri: text("google_maps_uri"),
   // Opening hours stored as JSON string with day-wise hours
   openingHours: text("opening_hours"), // JSON: {"monday": {"open": "08:00", "close": "18:00"}, ...}
   // Simplified opening/closing times for quick queries
@@ -115,6 +119,10 @@ export const coffeeShopSchema = createInsertSchema(coffeeShops).pick({
   phoneNumber: true,
   rating: true,
   googlePlacesId: true,
+  priceLevel: true,
+  userRatingCount: true,
+  businessStatus: true,
+  googleMapsUri: true,
   openingHours: true,
   opensAt: true,
   closesAt: true,
