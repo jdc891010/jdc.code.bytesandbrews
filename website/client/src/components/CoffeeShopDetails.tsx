@@ -3,12 +3,12 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { 
-  RadarChart, 
-  PolarGrid, 
-  PolarAngleAxis, 
-  PolarRadiusAxis, 
-  Radar, 
+import {
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
   ResponsiveContainer,
   Tooltip as RechartsTooltip,
   Legend,
@@ -86,7 +86,7 @@ interface Amenities {
 const generateHeatMapData = (): TimeData[] => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const hours = Array.from({ length: 14 }, (_, i) => `${i + 7}:00`); // 7am to 8pm
-  
+
   return days.map(day => ({
     day,
     data: hours.flatMap(hour => {
@@ -199,7 +199,7 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
   const googleMapsUrl = googleMapsUri || `https://www.google.com/maps/search/?api=1&query=${location.coordinates.lat},${location.coordinates.lng}`;
   const appleMapsUrl = `https://maps.apple.com/?ll=${location.coordinates.lat},${location.coordinates.lng}`;
   const wazeUrl = `https://www.waze.com/ul?ll=${location.coordinates.lat},${location.coordinates.lng}&navigate=yes`;
-  
+
   // Uber click handler with advanced logic
   const handleUberClick = () => {
     /**
@@ -213,7 +213,7 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
       pickup: { mode: string; lat?: number; lng?: number };
     }) {
       const params = new URLSearchParams({ action: 'setPickup' });
- 
+
       if (!pickup || pickup.mode === 'my_location') {
         params.set('pickup', 'my_location');
       } else if (pickup.mode === 'fixed' && isFinite(pickup.lat!) && isFinite(pickup.lng!)) {
@@ -223,17 +223,17 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
         // Fallback to in-app manual pickup UI
         params.set('pickup', 'my_location');
       }
- 
+
       params.set('dropoff[latitude]', String(dropLat));
       params.set('dropoff[longitude]', String(dropLng));
       if (name) params.set('dropoff[nickname]', name);
       if (typeof address === 'string' && address.trim().length > 0) {
         params.set('dropoff[formatted_address]', address);
       }
- 
+
       return `https://m.uber.com/ul/?${params.toString()}`;
     }
- 
+
     /**
      * Attempt geolocation to validate permission (optional).
      * If granted, we still use pickup=my_location (Uber app uses device GPS).
@@ -243,7 +243,7 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
       if (!navigator.geolocation) { continueFn(); return; }
       let resolved = false;
       const timer = setTimeout(() => { if (!resolved) continueFn(); }, 1200);
- 
+
       navigator.geolocation.getCurrentPosition(
         () => { resolved = true; clearTimeout(timer); continueFn(); },
         () => { resolved = true; clearTimeout(timer); continueFn(); },
@@ -263,7 +263,7 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
       window.location.href = url;
     });
   };
-  
+
   return (
     <div className="flex flex-wrap gap-2 mt-4">
       <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
@@ -281,8 +281,8 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
           <i className="fab fa-waze text-blue-500"></i> Waze
         </Button>
       </a>
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         className="flex items-center gap-2 bg-white hover:bg-gray-100"
         onClick={handleUberClick}
         data-drop-lat={location.coordinates.lat}
@@ -300,7 +300,7 @@ const NavigationButtons = ({ location, googleMapsUri }: { location: Location, go
 const getHeatColor = (value: number, max: number) => {
   // Convert to a value between 0 and 1
   const normalized = value / max;
-  
+
   if (normalized < 0.2) {
     return '#22c55e'; // Bright green
   } else if (normalized < 0.4) {
@@ -337,8 +337,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
       </div>
       <div className="flex items-center mb-2">
         {Array.from({ length: 5 }).map((_, i) => (
-          <i 
-            key={i} 
+          <i
+            key={i}
             className={`fas fa-star text-sm ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
           ></i>
         ))}
@@ -364,12 +364,12 @@ interface CoffeeShopDetailsProps {
   googleMapsUri?: string;
 }
 
-const CoffeeShopDetails = ({ 
-  open, 
-  onClose, 
-  name, 
-  description, 
-  amenities, 
+const CoffeeShopDetails = ({
+  open,
+  onClose,
+  name,
+  description,
+  amenities,
   dominantTribe,
   location,
   priceLevel,
@@ -379,13 +379,13 @@ const CoffeeShopDetails = ({
 }: CoffeeShopDetailsProps) => {
   const [activeTab, setActiveTab] = useState("wifi");
   const timeData = generateHeatMapData();
-  
+
   // Get current day and time to highlight
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const currentDate = new Date();
   const currentDay = days[currentDate.getDay()];
   const currentHour = currentDate.getHours();
-  
+
   // Calculate composite score (average of all amenities + 4.2 for wifi)
   const scores = [
     4.2, // WiFi
@@ -396,417 +396,416 @@ const CoffeeShopDetails = ({
     3.8, // Ambience
     4.0 // Table Space
   ];
-  
+
   const compositeScore = (scores.reduce((sum, score) => sum + score, 0) / scores.length).toFixed(1);
-  
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl w-[95vw] h-[95vh] bg-soft-cream coffee-shop-dialog p-0 overflow-hidden">
         <ScrollArea className="h-full w-full">
           <div className="p-6">
-        <DialogTitle className="text-2xl font-bold text-coffee-brown flex items-center">
-          <i className="fas fa-mug-hot mr-2 text-vibe-yellow"></i>
-          {name}
-        </DialogTitle>
-        
-        <div className="text-gray-700 mt-2 mb-4">
-          <div className="flex flex-wrap gap-2 mb-3">
-            {businessStatus && (
-              <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                businessStatus === 'Operational' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-              }`}>
-                {businessStatus}
-              </span>
-            )}
-            {priceLevel && (
-              <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">
-                {priceLevel}
-              </span>
-            )}
-            {userRatingCount !== undefined && (
-              <span className="px-2 py-1 rounded text-xs font-semibold bg-blue-100 text-blue-800">
-                {userRatingCount} reviews
-              </span>
-            )}
-          </div>
+            <DialogTitle className="text-2xl font-bold text-coffee-brown flex items-center">
+              <i className="fas fa-mug-hot mr-2 text-vibe-yellow"></i>
+              {name}
+            </DialogTitle>
 
-          <p>{description}</p>
-          
-          <div className="mt-3 bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
-            <div className="flex items-center mb-2">
-              <i className="fas fa-map-marker-alt text-coffee-brown mr-2"></i>
-              <div>
-                <p className="text-sm font-medium">{location.address}</p>
-                <p className="text-sm text-gray-500">{location.city}, {location.country}</p>
-                <p className="text-xs text-gray-400 mt-1 flex items-center">
-                  <i className="fas fa-location-crosshairs mr-1 text-[10px]"></i>
-                  {location.coordinates.lat.toFixed(5)}, {location.coordinates.lng.toFixed(5)}
-                </p>
+            <div className="text-gray-700 mt-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-3">
+                {businessStatus && (
+                  <span className={`px-2 py-1 rounded text-xs font-semibold ${businessStatus === 'Operational' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    }`}>
+                    {businessStatus}
+                  </span>
+                )}
+                {priceLevel && (
+                  <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">
+                    {priceLevel}
+                  </span>
+                )}
+                {userRatingCount !== undefined && (
+                  <span className="px-2 py-1 rounded text-xs font-semibold bg-blue-100 text-blue-800">
+                    {userRatingCount} reviews
+                  </span>
+                )}
               </div>
-            </div>
-            
-            <div className="border-t pt-2 mt-2">
-              <div className="flex items-center mb-1">
-                <i className="fas fa-phone text-coffee-brown mr-2"></i>
-                <p className="text-sm">+27 21 555 6789</p>
+
+              <p>{description}</p>
+
+              <div className="mt-3 bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                <div className="flex items-center mb-2">
+                  <i className="fas fa-map-marker-alt text-coffee-brown mr-2"></i>
+                  <div>
+                    <p className="text-sm font-medium">{location.address}</p>
+                    <p className="text-sm text-gray-500">{location.city}, {location.country}</p>
+                    <p className="text-xs text-gray-400 mt-1 flex items-center">
+                      <i className="fas fa-location-crosshairs mr-1 text-[10px]"></i>
+                      {location.coordinates.lat.toFixed(5)}, {location.coordinates.lng.toFixed(5)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-t pt-2 mt-2">
+                  <div className="flex items-center mb-1">
+                    <i className="fas fa-phone text-coffee-brown mr-2"></i>
+                    <p className="text-sm">+27 21 555 6789</p>
+                  </div>
+
+                  <div className="flex items-center mb-1">
+                    <i className="fas fa-globe text-coffee-brown mr-2"></i>
+                    <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="text-sm text-tech-blue hover:underline">www.example.com</a>
+                  </div>
+
+                  <div className="flex items-center">
+                    <i className="fas fa-envelope text-coffee-brown mr-2"></i>
+                    <a href="mailto:info@example.com" className="text-sm text-tech-blue hover:underline">info@example.com</a>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex items-center mb-1">
-                <i className="fas fa-globe text-coffee-brown mr-2"></i>
-                <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="text-sm text-tech-blue hover:underline">www.example.com</a>
-              </div>
-              
-              <div className="flex items-center">
-                <i className="fas fa-envelope text-coffee-brown mr-2"></i>
-                <a href="mailto:info@example.com" className="text-sm text-tech-blue hover:underline">info@example.com</a>
-              </div>
-            </div>
-          </div>
-          
-          <NavigationButtons location={location} googleMapsUri={googleMapsUri} />
-          
-          {/* Heatmap Section */}
-          <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
-              <i className="fas fa-fire-flame-curved mr-2 text-vibe-yellow"></i>
-              Usage Heatmap
-            </h3>
-            
-            <Tabs defaultValue="wifi" value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-4 bg-soft-cream rounded-md">
-                <TabsTrigger value="wifi">Internet Speeds</TabsTrigger>
-                <TabsTrigger value="parking">Parking Availability</TabsTrigger>
-                <TabsTrigger value="noise">Noise Levels</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="wifi" className="pt-2">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full border-collapse">
-                    <thead>
-                      <tr>
-                        <th className="p-2 border"></th>
-                        {Array.from({ length: 14 }).map((_, i) => (
-                          <th key={i} className="p-2 border text-center" colSpan={2}>
-                            {i + 7}:00
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {timeData.map((day) => (
-                        <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
-                          <td className="p-2 border font-medium">{day.day}</td>
-                          {day.data.map((timeSlot, i) => {
-                            const hour = parseInt(timeSlot.time.split(':')[0]);
-                            const isCurrentTimeSlot = day.day === currentDay && 
-                              ((hour === currentHour) || 
-                              (hour === currentHour && timeSlot.time.includes('30')));
-                            
-                            return (
-                              <td 
-                                key={i} 
-                                className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
-                                style={{ 
-                                  backgroundColor: getHeatColor(timeSlot.wifiSpeed.p50, 70),
-                                  cursor: 'pointer'
-                                }}
-                                title={`Time: ${timeSlot.time}
+
+              <NavigationButtons location={location} googleMapsUri={googleMapsUri} />
+
+              {/* Heatmap Section */}
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
+                  <i className="fas fa-fire-flame-curved mr-2 text-vibe-yellow"></i>
+                  Usage Heatmap
+                </h3>
+
+                <Tabs defaultValue="wifi" value={activeTab} onValueChange={setActiveTab}>
+                  <TabsList className="mb-4 bg-soft-cream rounded-md">
+                    <TabsTrigger value="wifi">Internet Speeds</TabsTrigger>
+                    <TabsTrigger value="parking">Parking Availability</TabsTrigger>
+                    <TabsTrigger value="noise">Noise Levels</TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="wifi" className="pt-2">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full border-collapse">
+                        <thead>
+                          <tr>
+                            <th className="p-2 border"></th>
+                            {Array.from({ length: 14 }).map((_, i) => (
+                              <th key={i} className="p-2 border text-center" colSpan={2}>
+                                {i + 7}:00
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {timeData.map((day) => (
+                            <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
+                              <td className="p-2 border font-medium">{day.day}</td>
+                              {day.data.map((timeSlot, i) => {
+                                const hour = parseInt(timeSlot.time.split(':')[0]);
+                                const isCurrentTimeSlot = day.day === currentDay &&
+                                  ((hour === currentHour) ||
+                                    (hour === currentHour && timeSlot.time.includes('30')));
+
+                                return (
+                                  <td
+                                    key={i}
+                                    className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
+                                    style={{
+                                      backgroundColor: getHeatColor(timeSlot.wifiSpeed.p50, 70),
+                                      cursor: 'pointer'
+                                    }}
+                                    title={`Time: ${timeSlot.time}
                                   10%: ${timeSlot.wifiSpeed.p10} Mbps
                                   50%: ${timeSlot.wifiSpeed.p50} Mbps 
                                   90%: ${timeSlot.wifiSpeed.p90} Mbps`}
-                              >
-                                &nbsp;
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                
-                <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
-                    <span>Excellent</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
-                    <span>Great</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
-                    <span>Good</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
-                    <span>Fair</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
-                    <span>Poor</span>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="parking" className="pt-2">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full border-collapse">
-                    <thead>
-                      <tr>
-                        <th className="p-2 border"></th>
-                        {Array.from({ length: 14 }).map((_, i) => (
-                          <th key={i} className="p-2 border text-center" colSpan={2}>
-                            {i + 7}:00
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {timeData.map((day) => (
-                        <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
-                          <td className="p-2 border font-medium">{day.day}</td>
-                          {day.data.map((timeSlot, i) => {
-                            const hour = parseInt(timeSlot.time.split(':')[0]);
-                            const isCurrentTimeSlot = day.day === currentDay && 
-                              ((hour === currentHour) || 
-                              (hour === currentHour && timeSlot.time.includes('30')));
-                            
-                            return (
-                              <td 
-                                key={i} 
-                                className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
-                                style={{ 
-                                  backgroundColor: getHeatColor(timeSlot.parking.p50, 5),
-                                  cursor: 'pointer'
-                                }}
-                                title={`Time: ${timeSlot.time}
+                                  >
+                                    &nbsp;
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
+                        <span>Excellent</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
+                        <span>Great</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
+                        <span>Good</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
+                        <span>Fair</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
+                        <span>Poor</span>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="parking" className="pt-2">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full border-collapse">
+                        <thead>
+                          <tr>
+                            <th className="p-2 border"></th>
+                            {Array.from({ length: 14 }).map((_, i) => (
+                              <th key={i} className="p-2 border text-center" colSpan={2}>
+                                {i + 7}:00
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {timeData.map((day) => (
+                            <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
+                              <td className="p-2 border font-medium">{day.day}</td>
+                              {day.data.map((timeSlot, i) => {
+                                const hour = parseInt(timeSlot.time.split(':')[0]);
+                                const isCurrentTimeSlot = day.day === currentDay &&
+                                  ((hour === currentHour) ||
+                                    (hour === currentHour && timeSlot.time.includes('30')));
+
+                                return (
+                                  <td
+                                    key={i}
+                                    className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
+                                    style={{
+                                      backgroundColor: getHeatColor(timeSlot.parking.p50, 5),
+                                      cursor: 'pointer'
+                                    }}
+                                    title={`Time: ${timeSlot.time}
                                   10%: ${timeSlot.parking.p10}/5
                                   50%: ${timeSlot.parking.p50}/5 
                                   90%: ${timeSlot.parking.p90}/5`}
-                              >
-                                &nbsp;
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                
-                <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
-                    <span>Very Easy</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
-                    <span>Easy</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
-                    <span>Average</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
-                    <span>Difficult</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
-                    <span>Very Difficult</span>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="noise" className="pt-2">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full border-collapse">
-                    <thead>
-                      <tr>
-                        <th className="p-2 border"></th>
-                        {Array.from({ length: 14 }).map((_, i) => (
-                          <th key={i} className="p-2 border text-center" colSpan={2}>
-                            {i + 7}:00
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {timeData.map((day) => (
-                        <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
-                          <td className="p-2 border font-medium">{day.day}</td>
-                          {day.data.map((timeSlot, i) => {
-                            const hour = parseInt(timeSlot.time.split(':')[0]);
-                            const isCurrentTimeSlot = day.day === currentDay && 
-                              ((hour === currentHour) || 
-                              (hour === currentHour && timeSlot.time.includes('30')));
-                            
-                            return (
-                              <td 
-                                key={i} 
-                                className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
-                                style={{ 
-                                  backgroundColor: getHeatColor(timeSlot.noise.p50, 5),
-                                  cursor: 'pointer'
-                                }}
-                                title={`Time: ${timeSlot.time}
+                                  >
+                                    &nbsp;
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
+                        <span>Very Easy</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
+                        <span>Easy</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
+                        <span>Average</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
+                        <span>Difficult</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
+                        <span>Very Difficult</span>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="noise" className="pt-2">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full border-collapse">
+                        <thead>
+                          <tr>
+                            <th className="p-2 border"></th>
+                            {Array.from({ length: 14 }).map((_, i) => (
+                              <th key={i} className="p-2 border text-center" colSpan={2}>
+                                {i + 7}:00
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {timeData.map((day) => (
+                            <tr key={day.day} className={day.day === currentDay ? 'bg-gray-100' : ''}>
+                              <td className="p-2 border font-medium">{day.day}</td>
+                              {day.data.map((timeSlot, i) => {
+                                const hour = parseInt(timeSlot.time.split(':')[0]);
+                                const isCurrentTimeSlot = day.day === currentDay &&
+                                  ((hour === currentHour) ||
+                                    (hour === currentHour && timeSlot.time.includes('30')));
+
+                                return (
+                                  <td
+                                    key={i}
+                                    className={`p-2 border text-center ${isCurrentTimeSlot ? 'ring-2 ring-tech-blue' : ''}`}
+                                    style={{
+                                      backgroundColor: getHeatColor(timeSlot.noise.p50, 5),
+                                      cursor: 'pointer'
+                                    }}
+                                    title={`Time: ${timeSlot.time}
                                   10%: ${timeSlot.noise.p10}/5
                                   50%: ${timeSlot.noise.p50}/5 
                                   90%: ${timeSlot.noise.p90}/5`}
-                              >
-                                &nbsp;
-                              </td>
-                            );
-                          })}
-                        </tr>
+                                  >
+                                    &nbsp;
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
+                        <span>Silent</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
+                        <span>Quiet</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
+                        <span>Moderate</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
+                        <span>Noisy</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
+                        <span>Very Noisy</span>
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </div>
+
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                <h3 className="text-lg font-bold text-coffee-brown mb-2 flex items-center">
+                  <i className="fas fa-users mr-2 text-vibe-yellow"></i>
+                  Most Common Tribe: {dominantTribe}
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h4 className="text-green-700 font-medium mb-2">Dos:</h4>
+                    <ul className="list-disc pl-5 text-sm">
+                      {mockTips.do.map((item, idx) => (
+                        <li key={`do-${idx}`} className="mb-1">{item}</li>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-                
-                <div className="grid grid-cols-5 gap-2 mt-4 text-sm">
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-sm"></div>
-                    <span>Silent</span>
+                    </ul>
                   </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-lime-500 mr-2 rounded-sm"></div>
-                    <span>Quiet</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-yellow-400 mr-2 rounded-sm"></div>
-                    <span>Moderate</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-orange-400 mr-2 rounded-sm"></div>
-                    <span>Noisy</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 bg-red-500 mr-2 rounded-sm"></div>
-                    <span>Very Noisy</span>
+
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <h4 className="text-red-700 font-medium mb-2">Don'ts:</h4>
+                    <ul className="list-disc pl-5 text-sm">
+                      {mockTips.dont.map((item, idx) => (
+                        <li key={`dont-${idx}`} className="mb-1">{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-          
-          <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-lg font-bold text-coffee-brown mb-2 flex items-center">
-              <i className="fas fa-users mr-2 text-vibe-yellow"></i>
-              Most Common Tribe: {dominantTribe}
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="text-green-700 font-medium mb-2">Dos:</h4>
-                <ul className="list-disc pl-5 text-sm">
-                  {mockTips.do.map((item, idx) => (
-                    <li key={`do-${idx}`} className="mb-1">{item}</li>
-                  ))}
-                </ul>
               </div>
-              
-              <div className="bg-red-50 p-4 rounded-lg">
-                <h4 className="text-red-700 font-medium mb-2">Don'ts:</h4>
-                <ul className="list-disc pl-5 text-sm">
-                  {mockTips.dont.map((item, idx) => (
-                    <li key={`dont-${idx}`} className="mb-1">{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          {/* Composite Score and Radar Chart */}
-          <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
-              <i className="fas fa-chart-radar mr-2 text-vibe-yellow"></i>
-              Composite Score
-            </h3>
-            
-            <div className="flex flex-col items-center mb-3">
-              <div className="text-3xl font-bold text-tech-blue">{compositeScore}</div>
-              <div className="text-sm text-gray-500">Overall Rating</div>
-            </div>
-            
-            <div className="h-72 relative">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart 
-                  outerRadius={90} 
-                  data={[
-                    { category: 'Wi-Fi', value: 4.2 },
-                    { category: 'Parking', value: amenities.parkingRating || 3 },
-                    { category: 'Video Calls', value: amenities.videoCallRating || 3 },
-                    { category: 'Power', value: amenities.powerAvailability || 3 },
-                    { category: 'Coffee', value: amenities.coffeeQuality || 4 },
-                    { category: 'Ambience', value: 3.8 },
-                    { category: 'Table Space', value: 4.0 }
-                  ]}
-                >
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="category" />
-                  <PolarRadiusAxis angle={30} domain={[0, 5]} />
-                  <Radar
-                    name="Score"
-                    dataKey="value"
-                    stroke="#8884d8"
-                    fill="#1e40af"
-                    fillOpacity={0.6}
-                  />
-                  <RechartsTooltip />
-                  <Legend />
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-            
-            <p className="text-sm text-center italic mt-2 text-gray-600">
-              Composite score based on 42 reviews and WiFi tests
-            </p>
-          </div>
-          
-          {/* Reviews Section with Scrollable Area */}
-          <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
-              <i className="fas fa-comments mr-2 text-vibe-yellow"></i>
-              Reviews
-            </h3>
-            
-            <div className="flex justify-between items-center mb-4">
-              <div className="text-lg font-semibold">
-                <span className="text-tech-blue">4.1</span> 
-                <span className="text-gray-500 text-sm ml-1">(42 reviews)</span>
-              </div>
-              
-              <div className="flex items-center">
-                <BarChart width={140} height={40} data={[
-                  { name: 'Positive', value: mockReviews.filter(r => r.sentiment === 'positive').length, color: '#4ade80' },
-                  { name: 'Neutral', value: mockReviews.filter(r => r.sentiment === 'neutral').length, color: '#facc15' },
-                  { name: 'Negative', value: mockReviews.filter(r => r.sentiment === 'negative').length, color: '#ef4444' }
-                ]}>
-                  <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                    {mockReviews.map((_, index) => (
-                      <Cell 
-                        key={`cell-${index}`} 
-                        fill={
-                          index === 0 ? '#4ade80' : 
-                          index === 1 ? '#facc15' : 
-                          '#ef4444'
-                        } 
+
+              {/* Composite Score and Radar Chart */}
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
+                  <i className="fas fa-chart-radar mr-2 text-vibe-yellow"></i>
+                  Composite Score
+                </h3>
+
+                <div className="flex flex-col items-center mb-3">
+                  <div className="text-3xl font-bold text-tech-blue">{compositeScore}</div>
+                  <div className="text-sm text-gray-500">Overall Rating</div>
+                </div>
+
+                <div className="h-72 relative">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart
+                      outerRadius={90}
+                      data={[
+                        { category: 'Wi-Fi', value: 4.2 },
+                        { category: 'Parking', value: amenities.parkingRating || 3 },
+                        { category: 'Video Calls', value: amenities.videoCallRating || 3 },
+                        { category: 'Power', value: amenities.powerAvailability || 3 },
+                        { category: 'Coffee', value: amenities.coffeeQuality || 4 },
+                        { category: 'Ambience', value: 3.8 },
+                        { category: 'Table Space', value: 4.0 }
+                      ]}
+                    >
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="category" />
+                      <PolarRadiusAxis angle={30} domain={[0, 5]} />
+                      <Radar
+                        name="Score"
+                        dataKey="value"
+                        stroke="#8884d8"
+                        fill="#1e40af"
+                        fillOpacity={0.6}
                       />
-                    ))}
-                  </Bar>
-                </BarChart>
+                      <RechartsTooltip />
+                      <Legend />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <p className="text-sm text-center italic mt-2 text-gray-600">
+                  Composite score based on 42 reviews and WiFi tests
+                </p>
+              </div>
+
+              {/* Reviews Section with Scrollable Area */}
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                <h3 className="text-lg font-bold text-coffee-brown mb-4 flex items-center">
+                  <i className="fas fa-comments mr-2 text-vibe-yellow"></i>
+                  Reviews
+                </h3>
+
+                <div className="flex justify-between items-center mb-4">
+                  <div className="text-lg font-semibold">
+                    <span className="text-tech-blue">4.1</span>
+                    <span className="text-gray-500 text-sm ml-1">(42 reviews)</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <BarChart width={140} height={40} data={[
+                      { name: 'Positive', value: mockReviews.filter(r => r.sentiment === 'positive').length, color: '#4ade80' },
+                      { name: 'Neutral', value: mockReviews.filter(r => r.sentiment === 'neutral').length, color: '#facc15' },
+                      { name: 'Negative', value: mockReviews.filter(r => r.sentiment === 'negative').length, color: '#ef4444' }
+                    ]}>
+                      <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                        {mockReviews.map((_, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={
+                              index === 0 ? '#4ade80' :
+                                index === 1 ? '#facc15' :
+                                  '#ef4444'
+                            }
+                          />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </div>
+                </div>
+
+                <ScrollArea className="h-60 rounded-md border p-2">
+                  {mockReviews.map(review => (
+                    <ReviewCard key={review.id} review={review} />
+                  ))}
+                </ScrollArea>
               </div>
             </div>
-            
-            <ScrollArea className="h-60 rounded-md border p-2">
-              {mockReviews.map(review => (
-                <ReviewCard key={review.id} review={review} />
-              ))}
-            </ScrollArea>
-          </div>
-        </div>
           </div>
         </ScrollArea>
       </DialogContent>

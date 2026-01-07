@@ -23,6 +23,7 @@ export interface CoffeeShop {
   tribe?: string;
   vibe?: string;
   amenities?: string;
+  priceLevel?: number;
 }
 
 export interface CoffeeShopsResponse {
@@ -77,27 +78,27 @@ export async function getCoffeeShops(
 ): Promise<CoffeeShopsResponse> {
   try {
     const params = new URLSearchParams();
-    
+
     if (lat !== undefined && lng !== undefined && radius !== undefined) {
       params.append('lat', lat.toString());
       params.append('lng', lng.toString());
       params.append('radius', radius.toString());
     }
-    
+
     const url = `/api/coffee-shops${params.toString() ? `?${params.toString()}` : ''}`;
-    
+
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
+
     if (!data.success) {
       throw new Error(data.message || 'Failed to fetch coffee shops');
     }
-    
+
     return data;
   } catch (error) {
     console.error('Error fetching coffee shops:', error);
@@ -111,30 +112,30 @@ export async function getCoffeeShops(
 class CoffeeShopCache {
   private cache: Map<string, { data: CoffeeShopsResponse; timestamp: number }> = new Map();
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-  
+
   private getCacheKey(lat?: number, lng?: number, radius?: number): string {
     if (lat !== undefined && lng !== undefined && radius !== undefined) {
       return `${lat.toFixed(4)}_${lng.toFixed(4)}_${radius}`;
     }
     return 'all';
   }
-  
+
   get(lat?: number, lng?: number, radius?: number): CoffeeShopsResponse | null {
     const key = this.getCacheKey(lat, lng, radius);
     const cached = this.cache.get(key);
-    
+
     if (cached && Date.now() - cached.timestamp < this.CACHE_DURATION) {
       return cached.data;
     }
-    
+
     // Remove expired cache entry
     if (cached) {
       this.cache.delete(key);
     }
-    
+
     return null;
   }
-  
+
   set(data: CoffeeShopsResponse, lat?: number, lng?: number, radius?: number): void {
     const key = this.getCacheKey(lat, lng, radius);
     this.cache.set(key, {
@@ -142,7 +143,7 @@ class CoffeeShopCache {
       timestamp: Date.now()
     });
   }
-  
+
   clear(): void {
     this.cache.clear();
   }
@@ -166,14 +167,14 @@ export async function getCoffeeShopsWithCache(
     console.log('Using cached coffee shop data');
     return cached;
   }
-  
+
   // Fetch from API
   console.log('Fetching coffee shops from database');
   const data = await getCoffeeShops(lat, lng, radius);
-  
+
   // Cache the result
   coffeeShopCache.set(data, lat, lng, radius);
-  
+
   return data;
 }
 
@@ -186,23 +187,23 @@ export function clearCoffeeShopCache(): void {
 }
 
 export async function getSpecials(): Promise<{ success: boolean; specials: Special[] }> {
-    try {
-        const response = await fetch('/api/specials');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching specials:', error);
-        throw error;
-    }
+  try {
+    const response = await fetch('/api/specials');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching specials:', error);
+    throw error;
+  }
 }
 
 export async function getFeaturedSpots(): Promise<{ success: boolean; featuredSpots: FeaturedSpot[] }> {
-    try {
-        const response = await fetch('/api/featured-spots');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching featured spots:', error);
-        throw error;
-    }
+  try {
+    const response = await fetch('/api/featured-spots');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching featured spots:', error);
+    throw error;
+  }
 }

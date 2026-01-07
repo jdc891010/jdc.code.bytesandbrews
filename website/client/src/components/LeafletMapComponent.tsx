@@ -4,21 +4,32 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 // Set up default icon and fix Leaflet's default icon path issues
-// We're using inline SVG to avoid external file loading issues
-const coffeeIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#6b4925" width="32" height="32">
-  <path d="M2,21V19H20V21H2M20,8V5H18V8H20M20,3A2,2 0 0,1 22,5V8A2,2 0 0,1 20,10H18V13A4,4 0 0,1 14,17H8A4,4 0 0,1 4,13V3H20M16,5H6V13A2,2 0 0,0 8,15H14A2,2 0 0,0 16,13V5Z" />
-</svg>`;
+// We're using simple divIcons for colored dots
 
-// Create base64 URL from SVG
-const svgUrl = 'data:image/svg+xml;base64,' + btoa(coffeeIconSvg);
+// Helper to determine color based on speed
+const getMarkerColor = (speed: number) => {
+  if (speed >= 50) return '#10B981'; // Green (Fast)
+  if (speed >= 25) return '#FBBF24'; // Yellow (Medium)
+  return '#EF4444'; // Red (Slow)
+};
 
-// Coffee cup icon
-const coffeeIcon = new L.Icon({
-  iconUrl: svgUrl,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
+const createCustomIcon = (speed: number) => {
+  const color = getMarkerColor(speed);
+  return L.divIcon({
+    className: 'custom-map-marker',
+    html: `<div style="
+      background-color: ${color};
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    "></div>`,
+    iconSize: [16, 16],
+    iconAnchor: [8, 8],
+    popupAnchor: [0, -8],
+  });
+};
 
 interface MapLocation {
   name: string;
@@ -27,7 +38,20 @@ interface MapLocation {
   description: string;
   wifiSpeed: number;
   imageUrl: string;
+  id?: string;
+  address?: string;
+  phone?: string;
+  openingHours?: string;
+  websiteUri?: string;
   onViewDetails?: () => void;
+  overallScore?: number;
+  parkingScore?: number;
+  priceLevel?: number; // 1-4 scale usually
+  speedMetrics?: {
+    min: number;
+    max: number;
+    mean: number;
+  };
 }
 
 interface LeafletMapComponentProps {
@@ -62,6 +86,30 @@ const LeafletMapComponent = ({
     );
   }
 
+  // Helper to render star rating
+  const renderStars = (score: number) => {
+    return (
+      <span className="text-yellow-500 text-xs">
+        {Array(5).fill(0).map((_, i) => (
+          <i key={i} className={`fas fa-star ${i < Math.floor(score) ? '' : 'text-gray-300'}`}></i>
+        ))}
+      </span>
+    );
+  };
+
+  // Helper for price level
+  const renderPrice = (level: number = 2) => {
+    let val = Number(level);
+    if (isNaN(val)) val = 2;
+    const safeLevel = Math.max(0, Math.min(Math.floor(val), 4));
+    return (
+      <span className="text-green-600 font-medium text-xs">
+        {Array(safeLevel).fill('$').join('')}
+        <span className="text-gray-300">{Array(4 - safeLevel).fill('$').join('')}</span>
+      </span>
+    );
+  };
+
   return (
     <MapContainer
       center={[center.lat, center.lng]}
@@ -77,34 +125,77 @@ const LeafletMapComponent = ({
         <Marker
           key={`${location.name}-${location.lat}-${location.lng}`}
           position={[location.lat, location.lng]}
-          icon={coffeeIcon}
+          icon={createCustomIcon(location.wifiSpeed)}
         >
-          <Popup>
-            <div className="p-1 max-w-xs">
-              <div className="flex mb-2">
+          <Popup maxWidth={320}>
+            <div className="p-1 min-w-[250px]">
+              {/* Header */}
+              <div className="flex mb-3 items-start border-b pb-2">
                 <img
                   src={location.imageUrl}
                   alt={location.name}
-                  className="w-16 h-16 object-cover rounded mr-2"
+                  className="w-16 h-16 object-cover rounded mr-3 shadow-sm"
                 />
-                <div>
-                  <h3 className="font-bold text-coffee-brown">{location.name}</h3>
-                  <div className="flex items-center text-sm">
-                    <span className="text-tech-blue font-semibold">
+                <div className="flex-1">
+                  <h3 className="font-bold text-coffee-brown text-base leading-tight mb-1">{location.name}</h3>
+                  <div className="flex items-center text-sm gap-2">
+                    <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
                       {location.wifiSpeed} Mbps
                     </span>
-                    <span className="mx-1">·</span>
-                    <span className="text-gray-500">WiFi</span>
+                    {location.overallScore && renderStars(location.overallScore)}
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mb-2">{location.description}</p>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-2 mb-3 bg-gray-50 p-2 rounded">
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 uppercase tracking-wide">Parking</span>
+                  <div className="flex items-center">
+                    <i className="fas fa-parking text-gray-400 mr-1 text-xs"></i>
+                    {renderStars(location.parkingScore || 0)}
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 uppercase tracking-wide">Price</span>
+                  <div className="flex items-center">
+                    <i className="fas fa-tag text-gray-400 mr-1 text-xs"></i>
+                    {renderPrice(location.priceLevel)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Speed Metrics */}
+              {location.speedMetrics && (
+                <div className="mb-3">
+                  <span className="text-xs text-gray-500 uppercase tracking-wide block mb-1">Speed Stats (Mbps)</span>
+                  <div className="flex justify-between text-xs bg-blue-50 p-2 rounded text-blue-800">
+                    <div className="text-center">
+                      <span className="block font-bold">{location.speedMetrics.min}</span>
+                      <span className="text-[10px] opacity-75">Min</span>
+                    </div>
+                    <div className="text-center border-l border-blue-200 pl-2 ml-2">
+                      <span className="block font-bold">{location.speedMetrics.mean}</span>
+                      <span className="text-[10px] opacity-75">Avg</span>
+                    </div>
+                    <div className="text-center border-l border-blue-200 pl-2 ml-2">
+                      <span className="block font-bold">{location.speedMetrics.max}</span>
+                      <span className="text-[10px] opacity-75">Max</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Description & Action */}
+              <p className="text-xs text-gray-600 mb-3 italic">"{location.description}"</p>
+
               {location.onViewDetails && (
                 <button
                   onClick={location.onViewDetails}
-                  className="text-sm bg-tech-blue text-white px-3 py-1 rounded hover:bg-opacity-90"
+                  className="w-full text-sm bg-coffee-brown text-white py-2 rounded hover:bg-opacity-90 font-medium transition-colors flex items-center justify-center"
                 >
                   View Details
+                  <i className="fas fa-arrow-right ml-2 text-xs"></i>
                 </button>
               )}
             </div>

@@ -31,16 +31,16 @@ const Home = () => {
   const [newCoffeeShopName, setNewCoffeeShopName] = useState<string>("");
   const [testingNewPlace, setTestingNewPlace] = useState(false);
   const { runTest, isRunning, progress, results, averageSpeed, error } = useSpeedTest();
-  
+
   // Featured spots state
   const [featuredSpots, setFeaturedSpots] = useState<any[]>([]);
   const [featuredSpotsLoading, setFeaturedSpotsLoading] = useState(true);
-  
+
   // WiFi test additional information
   const [wifiName, setWifiName] = useState("");
   const [testDevice, setTestDevice] = useState("");
   const [selectedArea, setSelectedArea] = useState("Somerset West");
-  
+
   // Review dialog states
   const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const [reviewName, setReviewName] = useState('');
@@ -49,11 +49,11 @@ const Home = () => {
   const [reviewCoffeeType, setReviewCoffeeType] = useState('');
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState('');
-  
+
   // Waitlist dialog state
   const [showJoinWaitlist, setShowJoinWaitlist] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
-  
+
   // Fetch featured spots on component mount
   useEffect(() => {
     const fetchFeaturedSpots = async () => {
@@ -69,10 +69,10 @@ const Home = () => {
         setFeaturedSpotsLoading(false);
       }
     };
-    
+
     fetchFeaturedSpots();
   }, []);
-  
+
   // Define extended coffee shop model with test statistics
   const [coffeeShops, setCoffeeShops] = useState<any[]>([]);
   const [isLoadingCoffeeShops, setIsLoadingCoffeeShops] = useState(true);
@@ -109,9 +109,17 @@ const Home = () => {
               area: shop.city || "Somerset West",
               vibe: shop.vibe || "Quiet Zen",
               updated: "Recently",
-              lat: parseFloat(shop.latitude || "-34.0789"), 
+              lat: parseFloat(shop.latitude || "-34.0789"),
               lng: parseFloat(shop.longitude || "18.8429"),
               description: shop.description || "A great place to work.",
+              overallScore: shop.rating || 4.5,
+              parkingScore: parsedAmenities.parkingRating ?? (Math.floor(Math.random() * 2) + 3),
+              priceLevel: shop.priceLevel || (Math.floor(Math.random() * 2) + 1),
+              speedMetrics: {
+                min: Math.floor((shop.wifiSpeed || 20) * 0.8),
+                mean: shop.wifiSpeed || 25,
+                max: Math.floor((shop.wifiSpeed || 30) * 1.2)
+              },
               amenities: {
                 wheelchairAccessible: parsedAmenities.wheelchairAccessible ?? true,
                 parkingRating: parsedAmenities.parkingRating ?? (Math.floor(Math.random() * 2) + 3),
@@ -129,7 +137,7 @@ const Home = () => {
         setIsLoadingCoffeeShops(false);
       }
     };
-    
+
     fetchShops();
   }, []);
 
@@ -137,11 +145,36 @@ const Home = () => {
     // Open the speed test dialog instead of immediately refreshing
     setSpeedTestDialogOpen(true);
   };
-  
+
+  // Filter and Pagination state
+  const [filterType, setFilterType] = useState<'highest-rated' | 'fastest' | 'most-reviews'>('highest-rated');
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+
   // Thank you animation dialog state
   const [showThankYouDialog, setShowThankYouDialog] = useState(false);
   const [thankYouMessage, setThankYouMessage] = useState("");
-  
+
+  // Filter logic
+  const filteredShops = [...coffeeShops].sort((a, b) => {
+    if (filterType === 'highest-rated') return (b.overallScore || 0) - (a.overallScore || 0);
+    if (filterType === 'fastest') return b.speed - a.speed;
+    if (filterType === 'most-reviews') return (b.userRatingCount || 0) - (a.userRatingCount || 0);
+    return 0;
+  });
+
+  const totalPages = Math.ceil(filteredShops.length / itemsPerPage);
+  const displayedShops = filteredShops.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+
   const handleSpeedTestComplete = () => {
     // Update coffee shop speeds with the test results
     if (averageSpeed !== null) {
@@ -165,7 +198,7 @@ const Home = () => {
           lng: 18.8429 + (Math.random() * 0.01 - 0.005),
           description: `A newly discovered workspace in Somerset West with a measured WiFi speed of ${averageSpeed} Mbps.`
         };
-        
+
         setCoffeeShops(prevShops => [...prevShops, newShop]);
       } else if (selectedCoffeeShop) {
         // Update existing coffee shop with new statistics
@@ -176,7 +209,7 @@ const Home = () => {
               const newP10 = Math.floor((shop.p10 || (shop.speed * 0.8) + averageSpeed * 0.8) / 2);
               const newP90 = Math.floor((shop.p90 || (shop.speed * 1.2) + averageSpeed * 1.2) / 2);
               const newTestCount = (shop.testCount || 1) + 1;
-              
+
               return {
                 ...shop,
                 speed: averageSpeed,
@@ -194,7 +227,7 @@ const Home = () => {
         });
       }
     }
-    
+
     // Reset speed test states
     setSpeedTestDialogOpen(false);
     setSelectedCoffeeShop(null);
@@ -202,17 +235,17 @@ const Home = () => {
     setTestingNewPlace(false);
     setWifiName("");
     setTestDevice("");
-    
+
     // Show thank you animation
     setThankYouMessage("Thanks for submitting your speed test! You're awesome!");
     setShowThankYouDialog(true);
-    
+
     // Auto close thank you dialog after 3 seconds
     setTimeout(() => {
       setShowThankYouDialog(false);
     }, 3000);
   };
-  
+
   const handleReviewSubmit = () => {
     // Here you would typically send the review data to your backend
     console.log('Review submitted:', {
@@ -223,7 +256,7 @@ const Home = () => {
       rating: reviewRating,
       comment: reviewComment
     });
-    
+
     // Reset the form and close the dialog
     setReviewName('');
     setReviewEmail('');
@@ -232,23 +265,23 @@ const Home = () => {
     setReviewRating(5);
     setReviewComment('');
     setReviewDialogOpen(false);
-    
+
     // Show thank you animation
     setThankYouMessage("Thanks for your review! Your feedback helps other remote workers!");
     setShowThankYouDialog(true);
-    
+
     // Auto close thank you dialog after 3 seconds
     setTimeout(() => {
       setShowThankYouDialog(false);
     }, 3000);
   };
-  
+
   // This function is no longer needed as the MerchWaitlistDialog component handles form submission internally
   // const handleWaitlistSubmit = () => {
   //   console.log('Waitlist email submitted:', waitlistEmail);
   //   setWaitlistEmail('');
   //   setShowJoinWaitlist(false);
-    
+
   // Note: MerchWaitlistDialog now handles the thank you animation internally
 
   return (
@@ -260,14 +293,14 @@ const Home = () => {
       {/* Hero Section */}
       <section id="home" className="relative h-[70vh] flex items-center page-section">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/bytesbrews_hero.avif" 
-            alt="Coffee shop atmosphere" 
-            className="w-full h-full object-cover filter brightness-50" 
+          <img
+            src="/bytesbrews_hero.avif"
+            alt="Coffee shop atmosphere"
+            className="w-full h-full object-cover filter brightness-50"
           />
         </div>
         <div className="container mx-auto px-4 z-10 text-center">
-          <motion.h1 
+          <motion.h1
             className="font-pacifico text-4xl md:text-6xl text-cream-white mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -275,7 +308,7 @@ const Home = () => {
           >
             Sip, Surf, Succeed
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="font-montserrat text-xl md:text-2xl text-cream-white mb-8 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -283,7 +316,7 @@ const Home = () => {
           >
             Find coffee shops where brews power bytes and vibes spark brilliance
           </motion.p>
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -322,9 +355,9 @@ const Home = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <a 
-                href="https://open.spotify.com/playlist/67Qq5C4QdSDs76aWdb64ry?si=ULIHQNjmTIWugIoMgN5aEQ" 
-                target="_blank" 
+              <a
+                href="https://open.spotify.com/playlist/67Qq5C4QdSDs76aWdb64ry?si=ULIHQNjmTIWugIoMgN5aEQ"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-green-600 hover:bg-gray-100 font-bold py-2 px-6 rounded-full transition-all duration-300 flex items-center gap-2"
               >
@@ -340,8 +373,8 @@ const Home = () => {
         {/* Animated background elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute -top-4 -left-4 w-8 h-8 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute top-1/2 right-1/4 w-6 h-6 bg-white/10 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute bottom-2 left-1/3 w-4 h-4 bg-white/10 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 right-1/4 w-6 h-6 bg-white/10 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute bottom-2 left-1/3 w-4 h-4 bg-white/10 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
       </section>
 
@@ -357,28 +390,28 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard 
+            <FeatureCard
               icon={<i className="fas fa-wifi text-tech-blue text-2xl"></i>}
               iconType="wifi"
               title="Speed Tests"
               description="Real-time Wi-Fi checks—because 40 Mbps beats 4 Mbps every time."
               colorClass="bg-tech-blue"
             />
-            <FeatureCard 
+            <FeatureCard
               icon={<i className="fas fa-heart text-vibe-yellow text-2xl"></i>}
               iconType="coffee"
               title="Vibe Ratings"
               description="User-submitted vibes (e.g., 'Chatty Buzz,' 'Quiet Zen') for the perfect match."
               colorClass="bg-vibe-yellow"
             />
-            <FeatureCard 
+            <FeatureCard
               icon={<i className="fas fa-users text-coffee-brown text-2xl"></i>}
               iconType="users"
               title="Creature Tribes"
               description="Connect with like-minded 'Code Conjurers,' 'Word Weavers,' and more!"
               colorClass="bg-coffee-brown"
             />
-            <FeatureCard 
+            <FeatureCard
               icon={<i className="fas fa-map-marker-alt text-tech-blue text-2xl"></i>}
               iconType="map"
               title="Coffee Shop Finder"
@@ -401,24 +434,24 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <HowItWorksStep 
+            <HowItWorksStep
               number={1}
               title="Select your hangout"
               description="Browse coffee shops in Somerset West and find potential spots to work from."
             />
-            <HowItWorksStep 
+            <HowItWorksStep
               number={2}
               title="Submit Vibe Checks"
               description="Rate Wi-Fi speeds and workspace features at coffee shops you visit."
             />
-            <HowItWorksStep 
+            <HowItWorksStep
               number={3}
               title="Find perfect spots"
               description="Discover workspaces that match your needs using our crowdsourced data."
               isLast={true}
             />
           </div>
-          
+
           <div className="text-center mt-12">
             <a href="#speed-test">
               <Button className="bg-tech-blue hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 brand-btn mx-2">
@@ -426,7 +459,7 @@ const Home = () => {
               </Button>
             </a>
             <a href="#coffee-shops">
-              <Button 
+              <Button
                 onClick={() => {
                   // First scroll to the coffee shops section
                   document.getElementById('coffee-shops')?.scrollIntoView({ behavior: 'smooth' });
@@ -441,7 +474,7 @@ const Home = () => {
                       }
                     });
                   }, 1000);
-                }} 
+                }}
                 className="bg-vibe-yellow hover:bg-opacity-80 text-coffee-brown font-bold py-3 px-6 rounded-lg transition-all duration-300 brand-btn mx-2"
               >
                 Submit Vibe Check
@@ -465,49 +498,112 @@ const Home = () => {
           {/* Coffee Shop Map */}
           <div className="max-w-6xl mx-auto mb-10 bg-white rounded-xl overflow-hidden shadow-lg">
             <div className="h-64 md:h-96 relative z-0">
-              <LeafletMapComponent 
+              <LeafletMapComponent
                 locations={coffeeShops.map(shop => ({
                   name: shop.name,
                   lat: shop.lat,
                   lng: shop.lng,
                   description: shop.description,
                   wifiSpeed: shop.speed,
-                  imageUrl: shop.imageUrl
-                }))} 
+                  imageUrl: shop.imageUrl,
+                  overallScore: shop.overallScore,
+                  parkingScore: shop.parkingScore,
+                  priceLevel: shop.priceLevel,
+                  speedMetrics: shop.speedMetrics,
+                  onViewDetails: () => {
+                    document.getElementById('coffee-shops')?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }))}
                 center={{ lat: -34.0789, lng: 18.8429 }} // Center of Somerset West
                 zoom={13}
               />
             </div>
           </div>
 
-          {/* Featured Coffee Shops */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Filters */}
+          <div className="flex justify-center mb-8 gap-4">
+            <Button
+              variant={filterType === 'highest-rated' ? 'default' : 'outline'}
+              onClick={() => { setFilterType('highest-rated'); setCurrentPage(0); }}
+              className={filterType === 'highest-rated' ? 'bg-vibe-yellow text-coffee-brown hover:bg-opacity-90' : ''}
+            >
+              <i className="fas fa-star mr-2"></i> Highest Rated
+            </Button>
+            <Button
+              variant={filterType === 'fastest' ? 'default' : 'outline'}
+              onClick={() => { setFilterType('fastest'); setCurrentPage(0); }}
+              className={filterType === 'fastest' ? 'bg-tech-blue text-white hover:bg-opacity-90' : ''}
+            >
+              <i className="fas fa-bolt mr-2"></i> Fastest Wi-Fi
+            </Button>
+            <Button
+              variant={filterType === 'most-reviews' ? 'default' : 'outline'}
+              onClick={() => { setFilterType('most-reviews'); setCurrentPage(0); }}
+              className={filterType === 'most-reviews' ? 'bg-coffee-brown text-white hover:bg-opacity-90' : ''}
+            >
+              <i className="fas fa-users mr-2"></i> Most Popular
+            </Button>
+          </div>
+
+          {/* Featured Coffee Shops Grid with Slider */}
+          <div className="relative max-w-6xl mx-auto">
             {isLoadingCoffeeShops ? (
-              <div className="col-span-full text-center py-12">
+              <div className="text-center py-12">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-coffee-brown"></div>
                 <p className="mt-4 text-gray-500">Loading coffee shops...</p>
               </div>
-            ) : coffeeShops.length > 0 ? (
-              coffeeShops.map((shop, index) => (
-                <CoffeeShopCard
-                  key={index}
-                  name={shop.name}
-                  wifiSpeed={shop.speed}
-                  description={shop.description}
-                  vibes={[shop.vibe, "Productive"]}
-                  popularWith={[shop.tribe]}
-                  imageUrl={shop.thumbnailUrl || shop.imageUrl}
-                  amenities={shop.amenities}
-                  isFeatured={featuredSpots.some(spot => spot.placeName === shop.name)}
-                  featuredDescription={featuredSpots.find(spot => spot.placeName === shop.name)?.description}
-                  priceLevel={shop.priceLevel}
-                  userRatingCount={shop.userRatingCount}
-                  businessStatus={shop.businessStatus}
-                  googleMapsUri={shop.googleMapsUri}
-                />
-              ))
+            ) : filteredShops.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[500px]">
+                  {displayedShops.map((shop, index) => (
+                    <CoffeeShopCard
+                      key={`${shop.name}-${index}`}
+                      name={shop.name}
+                      wifiSpeed={shop.speed}
+                      description={shop.description}
+                      vibes={[shop.vibe, "Productive"]}
+                      popularWith={[shop.tribe]}
+                      imageUrl={shop.thumbnailUrl || shop.imageUrl}
+                      amenities={shop.amenities}
+                      isFeatured={featuredSpots.some(spot => spot.placeName === shop.name)}
+                      featuredDescription={featuredSpots.find(spot => spot.placeName === shop.name)?.description}
+                      priceLevel={shop.priceLevel}
+                      userRatingCount={shop.userRatingCount}
+                      businessStatus={shop.businessStatus}
+                      googleMapsUri={shop.googleMapsUri}
+                    />
+                  ))}
+                </div>
+
+                {/* Slider Controls */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center mt-8 gap-6">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handlePrevPage}
+                      className="rounded-full h-12 w-12 border-2 border-coffee-brown text-coffee-brown hover:bg-coffee-brown hover:text-white transition-all"
+                    >
+                      <i className="fas fa-chevron-left"></i>
+                    </Button>
+
+                    <span className="text-coffee-brown font-medium">
+                      Page {currentPage + 1} of {totalPages}
+                    </span>
+
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleNextPage}
+                      className="rounded-full h-12 w-12 border-2 border-coffee-brown text-coffee-brown hover:bg-coffee-brown hover:text-white transition-all"
+                    >
+                      <i className="fas fa-chevron-right"></i>
+                    </Button>
+                  </div>
+                )}
+              </>
             ) : (
-              <div className="col-span-full text-center py-12">
+              <div className="text-center py-12">
                 <p className="text-gray-500">No coffee shops found.</p>
               </div>
             )}
@@ -518,7 +614,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Wi-Fi Speed Demo */}
       <section id="speed-test" className="py-16 bg-tech-blue bg-opacity-5 page-section relative">
         <div className="container mx-auto px-4">
@@ -552,18 +648,18 @@ const Home = () => {
                   <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-500">Locked</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center text-sm text-gray-500">
                 <i className="fas fa-info-circle mr-2 text-tech-blue"></i>
                 <span>Showing {coffeeShops.length} places in Somerset West</span>
               </div>
             </div>
-            
+
             {/* WiFi speed bars in scrollable container */}
             <div className="space-y-6 max-h-[400px] overflow-y-auto pr-1 mb-4">
               {coffeeShops.map((shop, index) => (
-                <WifiSpeedBar 
-                  key={shop.name} 
+                <WifiSpeedBar
+                  key={shop.name}
                   coffeeShop={shop}
                   animate={shop.speed === 0}
                   showDetails={index === 0} // Show details for the first item by default
@@ -572,7 +668,7 @@ const Home = () => {
             </div>
 
             <div className="mt-8 text-center">
-              <Button 
+              <Button
                 onClick={refreshWifiSpeeds}
                 className="bg-tech-blue hover:bg-opacity-80 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 brand-btn"
               >
@@ -615,9 +711,9 @@ const Home = () => {
                 imageUrl="https://placehold.co/100x100/E8D4B2/6F4E37?text=PM"
               />
             </div>
-            
+
             <div className="text-center mt-10">
-              <Button 
+              <Button
                 onClick={() => setReviewDialogOpen(true)}
                 className="bg-vibe-yellow hover:bg-opacity-80 text-coffee-brown font-bold py-3 px-6 rounded-lg transition-all duration-300 brand-btn"
               >
@@ -645,7 +741,7 @@ const Home = () => {
           <DialogHeader>
             <DialogTitle className="text-center">Wi-Fi Speed Test</DialogTitle>
           </DialogHeader>
-          
+
           <div className="py-4 space-y-4">
             {!selectedCoffeeShop && !testingNewPlace && !isRunning && (
               <div className="space-y-6">
@@ -655,17 +751,16 @@ const Home = () => {
                     {coffeeShops.map(shop => (
                       <button
                         key={shop.name}
-                        className={`w-full py-3 px-4 flex justify-between items-center rounded-lg border ${
-                          selectedCoffeeShop === shop.name
-                            ? 'bg-tech-blue/10 border-tech-blue'
-                            : 'hover:bg-tech-blue/5 border-gray-200'
-                        }`}
+                        className={`w-full py-3 px-4 flex justify-between items-center rounded-lg border ${selectedCoffeeShop === shop.name
+                          ? 'bg-tech-blue/10 border-tech-blue'
+                          : 'hover:bg-tech-blue/5 border-gray-200'
+                          }`}
                         onClick={() => setSelectedCoffeeShop(shop.name)}
                       >
                         <div className="flex items-center">
                           <div className="h-10 w-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
-                            <img 
-                              src={shop.imageUrl} 
+                            <img
+                              src={shop.imageUrl}
                               alt={shop.name}
                               className="h-full w-full object-cover"
                             />
@@ -683,10 +778,10 @@ const Home = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="text-center">
                   <p className="text-sm text-gray-500 mb-2">Or add a new workspace</p>
-                  <Button 
+                  <Button
                     onClick={() => setTestingNewPlace(true)}
                     className="bg-tech-blue hover:bg-opacity-80 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 brand-btn"
                   >
@@ -695,7 +790,7 @@ const Home = () => {
                 </div>
               </div>
             )}
-            
+
             {testingNewPlace && !isRunning && !averageSpeed && (
               <div className="space-y-4">
                 <p className="text-center">Enter details for the new workspace</p>
@@ -713,7 +808,7 @@ const Home = () => {
                       className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tech-blue"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="wifi-name" className="block text-sm font-medium text-gray-700 mb-1">
                       WiFi Network Name <span className="text-gray-400">(optional)</span>
@@ -727,7 +822,7 @@ const Home = () => {
                       className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tech-blue"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="test-device" className="block text-sm font-medium text-gray-700 mb-1">
                       Device Used <span className="text-gray-400">(optional)</span>
@@ -741,7 +836,7 @@ const Home = () => {
                       className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tech-blue"
                     />
                   </div>
-                  
+
                   <div className="flex space-x-3">
                     <Button
                       variant="outline"
@@ -761,14 +856,14 @@ const Home = () => {
                 </div>
               </div>
             )}
-            
+
             {selectedCoffeeShop && !isRunning && !averageSpeed && (
               <div className="space-y-4">
                 <div className="text-center mb-4">
                   <p>Ready to test Wi-Fi speed at <span className="font-semibold">{selectedCoffeeShop}</span>?</p>
                   <p className="text-sm text-gray-500">This will run a quick speed test on your current connection.</p>
                 </div>
-                
+
                 <div className="space-y-4 border-t border-gray-200 pt-4">
                   <div>
                     <label htmlFor="wifi-name-existing" className="block text-sm font-medium text-gray-700 mb-1">
@@ -783,7 +878,7 @@ const Home = () => {
                       className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tech-blue"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="test-device-existing" className="block text-sm font-medium text-gray-700 mb-1">
                       Device Used <span className="text-gray-400">(optional)</span>
@@ -798,7 +893,7 @@ const Home = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="flex space-x-3">
                   <Button
                     variant="outline"
@@ -816,7 +911,7 @@ const Home = () => {
                 </div>
               </div>
             )}
-            
+
             {isRunning && (
               <div className="space-y-6">
                 <SpeedTestAnimation isActive={isRunning} />
@@ -830,7 +925,7 @@ const Home = () => {
                 <p className="text-center text-sm text-gray-500">Please don't close this window during the test</p>
               </div>
             )}
-            
+
             {!isRunning && averageSpeed && (
               <div className="space-y-6 text-center">
                 <div className="mx-auto w-24 h-24 rounded-full bg-tech-blue/10 flex items-center justify-center">
@@ -839,7 +934,7 @@ const Home = () => {
                     <div className="text-xs">Mbps</div>
                   </div>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold text-lg mb-2">Results</h4>
                   <div className="bg-gray-50 rounded-lg p-4">
@@ -857,7 +952,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="pt-4">
                   <Button
                     onClick={handleSpeedTestComplete}
@@ -869,13 +964,13 @@ const Home = () => {
               </div>
             )}
           </div>
-          
+
           {error && (
             <div className="bg-red-50 text-red-500 p-4 rounded-lg text-sm">
               {error}
             </div>
           )}
-          
+
           <DialogFooter className="sm:justify-center">
             {!isRunning && !averageSpeed && (
               <Button
@@ -896,11 +991,11 @@ const Home = () => {
             <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-coffee-brown mb-4">Brews & Bytes Merch</h2>
             <p className="text-lg max-w-2xl mx-auto">Show off your remote worker style with our quirky coffee and tech-themed gear</p>
           </div>
-          
+
           {/* Carousel of t-shirts with navigation arrows */}
           <div className="relative max-w-5xl mx-auto mb-12 overflow-hidden">
             {/* Left navigation arrow */}
-            <button 
+            <button
               className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-coffee-brown text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-80 hover:opacity-100 transition-opacity"
               onClick={() => {
                 const container = document.querySelector('.merch-carousel');
@@ -911,9 +1006,9 @@ const Home = () => {
             >
               <i className="fas fa-chevron-left"></i>
             </button>
-            
+
             {/* Right navigation arrow */}
-            <button 
+            <button
               className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-coffee-brown text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-80 hover:opacity-100 transition-opacity"
               onClick={() => {
                 const container = document.querySelector('.merch-carousel');
@@ -924,7 +1019,7 @@ const Home = () => {
             >
               <i className="fas fa-chevron-right"></i>
             </button>
-            
+
             <div className="flex gap-8 overflow-x-auto pb-6 snap-x snap-mandatory modern-horizontal-scroll px-4 merch-carousel">
               {/* T-Shirt 1 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
@@ -967,7 +1062,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 3 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
@@ -1009,7 +1104,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 5 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
@@ -1051,7 +1146,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* T-Shirt 7 */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 shrink-0 w-full max-w-xs snap-center">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
@@ -1073,13 +1168,13 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            
+
 
           </div>
-          
+
           <div className="text-center mt-6">
             <p className="text-gray-600 mb-4">All merchandise will be available for purchase soon. Join our waiting list to be notified!</p>
-            <Button 
+            <Button
               onClick={() => setShowJoinWaitlist(true)}
               className="bg-tech-blue hover:bg-opacity-80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 brand-btn"
             >
@@ -1100,9 +1195,9 @@ const Home = () => {
               Share important updates with the coffee community. Report WiFi issues, special offers, or other relevant information.
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto">
-            <NotificationForm 
+            <NotificationForm
               onSubmit={(data) => {
                 console.log('Notification submitted:', data);
                 // Handle successful submission
@@ -1119,11 +1214,11 @@ const Home = () => {
             <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-coffee-brown mb-4">Get In Touch</h2>
             <p className="text-lg max-w-2xl mx-auto">Have a question or suggestion? We'd love to hear from you!</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
             <div className="bg-tech-blue bg-opacity-5 rounded-xl p-6 md:p-8">
               <h3 className="font-bold text-xl text-coffee-brown mb-4">Contact Information</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center">
                   <i className="fas fa-envelope text-tech-blue mr-3 text-xl w-8"></i>
@@ -1132,7 +1227,7 @@ const Home = () => {
                     <p className="text-gray-600">hello@brewsandbytes.com</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <i className="fas fa-map-marker-alt text-tech-blue mr-3 text-xl w-8"></i>
                   <div>
@@ -1140,7 +1235,7 @@ const Home = () => {
                     <p className="text-gray-600">Somerset West, South Africa</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <i className="fas fa-comments text-tech-blue mr-3 text-xl w-8"></i>
                   <div>
@@ -1159,7 +1254,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8 bg-white p-6 rounded-lg">
                 <h3 className="font-bold text-lg mb-3">For Coffee Shop Owners</h3>
                 <p className="text-gray-600 mb-4">Own a coffee shop and want to be featured on Brews and Bytes? We'd love to partner with you!</p>
@@ -1170,24 +1265,24 @@ const Home = () => {
                 </a>
               </div>
             </div>
-            
+
             <ContactFormSimple />
           </div>
         </div>
       </section>
-      
+
       {/* Review Dialog */}
       <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-center">Share Your Feedback</DialogTitle>
           </DialogHeader>
-          
+
           <div className="py-4 space-y-5">
             <p className="text-center text-sm text-gray-600">
               Tell us about your experience with Brews & Bytes and how it has helped you find great workspaces
             </p>
-            
+
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -1203,7 +1298,7 @@ const Home = () => {
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tech-blue"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium">
                     Email (optional)
@@ -1218,7 +1313,7 @@ const Home = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="occupation" className="block text-sm font-medium">
@@ -1239,7 +1334,7 @@ const Home = () => {
                     <option value="Other">Other</option>
                   </select>
                 </div>
-                
+
                 <div className="space-y-2">
                   <label htmlFor="coffeeType" className="block text-sm font-medium">
                     Favorite Coffee Type
@@ -1263,7 +1358,7 @@ const Home = () => {
                   </select>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <label htmlFor="rating" className="block text-sm font-medium">
                   How would you rate your experience with Brews & Bytes? (1-5)
@@ -1274,9 +1369,8 @@ const Home = () => {
                       key={star}
                       type="button"
                       onClick={() => setReviewRating(star)}
-                      className={`text-2xl ${
-                        star <= reviewRating ? 'text-vibe-yellow' : 'text-gray-300'
-                      }`}
+                      className={`text-2xl ${star <= reviewRating ? 'text-vibe-yellow' : 'text-gray-300'
+                        }`}
                     >
                       ★
                     </button>
@@ -1290,7 +1384,7 @@ const Home = () => {
                   </span>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <label htmlFor="comment" className="block text-sm font-medium">
                   Your Review
@@ -1306,7 +1400,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           <DialogFooter className="sm:justify-between flex-col sm:flex-row space-y-2 sm:space-y-0">
             <Button
               variant="outline"
@@ -1324,20 +1418,20 @@ const Home = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      
+
       {/* Thank you animation */}
-      <ThankYouAnimation 
+      <ThankYouAnimation
         open={showThankYouDialog}
         message={thankYouMessage}
         onClose={() => setShowThankYouDialog(false)}
       />
-      
+
       {/* Merch waitlist dialog */}
-      <MerchWaitlistDialog 
+      <MerchWaitlistDialog
         open={showJoinWaitlist}
         onOpenChange={setShowJoinWaitlist}
       />
-      
+
       {/* Global scroll to top button */}
       <ScrollToTopButton />
     </>
