@@ -14,6 +14,8 @@ erDiagram
     COFFEE_SHOPS ||--o{ SPECIALS : "offers"
     COFFEE_SHOPS ||--o{ FEATURED_SPOTS : "is_featured_as"
     ADMIN_USERS ||--o{ BLOG_POSTS : "authors"
+    PROFESSIONS ||--o{ TALKING_POINTS : "has"
+    TRIBES ||--o{ SIGNUPS : "selected_by"
     
     %% Polymorphic Image Relationships (Logical)
     COFFEE_SHOPS ||--o{ IMAGES : "has_images (entity_type='coffee_shop')"
@@ -64,6 +66,27 @@ erDiagram
         string email
         string tribe
     }
+
+    TRIBES {
+        int id PK
+        string name
+        string description
+    }
+
+    PROFESSIONS {
+        int id PK
+        string main_group
+        string secondary_label
+        string fun_label
+    }
+
+    TALKING_POINTS {
+        string id PK
+        int profession_id FK
+        boolean try_these
+        boolean avoid_these
+        string text
+    }
 ```
 
 ## 2. Data Flow Architecture
@@ -101,10 +124,13 @@ flowchart TD
 
 | Table Name | Drizzle Definition | API Routes | Frontend Service | Description |
 |------------|-------------------|------------|------------------|-------------|
-| **coffee_shops** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L75) | `GET /api/coffee-shops`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L22) | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L1) | Stores main workspace data. Indexed on `city`, `wifi_speed`. |
-| **specials** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L239) | `GET /api/specials` | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L32) | Promotions linked to coffee shops. |
-| **featured_spots** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L281) | `GET /api/featured-spots` | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L55) | Monthly featured locations. |
-| **blog_posts** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L186) | `GET /api/blog-posts`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L301) | [adminApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/adminApi.ts) | Content marketing posts. |
+| **coffee_shops** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L75) | `GET /api/coffee-shops`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L24) | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L1) | Stores main workspace data. Indexed on `city`, `wifi_speed`. |
+| **specials** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L247) | `GET /api/specials`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L343) | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L32) | Promotions linked to coffee shops. |
+| **featured_spots** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L289) | `GET /api/featured-spots`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L359) | [coffeeShopApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/coffeeShopApi.ts#L55) | Monthly featured locations. |
+| **blog_posts** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L194) | `GET /api/blog-posts`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L294) | [adminApi.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/client/src/services/adminApi.ts) | Content marketing posts. |
+| **tribes** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L347) | `GET /api/tribes`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L391) | - | Community tribes (e.g., Creatives, Techies). |
+| **professions** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L362) | `GET /api/professions`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L407) | - | List of 80+ remote work professions. |
+| **talking_points** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L379) | `GET /api/talking-points`<br>[routes.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L423) | - | Conversation starters for specific professions. |
 
 ### User Interaction Tables
 
@@ -120,14 +146,14 @@ flowchart TD
 |------------|-------------------|------------|-------------|
 | **admin_users** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L134) | `/api/admin/*` | Back-office authentication. |
 | **notifications** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L214) | `/api/admin/notifications` | System alerts. |
-| **images** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L305) | `/api/upload` | Polymorphic image storage. |
+| **images** | [schema.ts](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L313) | `/api/upload` | Polymorphic image storage. |
 
 ## 4. Code Block Links
 
 ### Schema Definitions
 - [User Schema](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L5)
 - [Coffee Shop Schema](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L75)
-- [Blog Post Schema](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L186)
+- [Blog Post Schema](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/shared/schema.ts#L194)
 
 ### Server Storage Implementation
 - [MemStorage Class](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/storage.ts#L96)
@@ -135,4 +161,4 @@ flowchart TD
 
 ### API Routes
 - [Coffee Shop Routes](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L22)
-- [Blog Routes](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L301)
+- [Blog Routes](file:///c:/Users/jdc/Documents/GithubPersonal/jdc.code.brewsandbytes/website/server/routes.ts#L294)
