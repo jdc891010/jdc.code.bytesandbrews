@@ -1,13 +1,13 @@
 import csv
 
-# Base data from previous professions (shortened for brevity here, full list in actual run)
-professions = [
-    {"secondary_label": "Software Developer", "fun_labels": "Code Conjurer"},
-    {"secondary_label": "Web Developer", "fun_labels": "Web Wizard"},
-    {"secondary_label": "Graphic Designer", "fun_labels": "Pixel Pixie"},
-    # ... (full 80 professions added in actual script)
-    {"secondary_label": "Virtual Event Host", "fun_labels": "Stream Sage"},
-]
+# Read professions from the previously created CSV
+professions = []
+with open("remote_work_professions.csv", "r") as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        professions.append(row)
+
+print(f"Loaded {len(professions)} professions from CSV.")
 
 # Talking points for each profession (example structure, expanded fully below)
 talking_points = {
@@ -104,8 +104,9 @@ for profession in professions:
     # Add Try These
     for i, text in enumerate(talking_points[sec_prof]["try_these"], 1):
         full_talking_points.append({
-            "id": f"T{i}-{sec_prof}",
+            "id": f"T{i}-{profession['main_group']}-{sec_prof}",
             "secondary_profession": sec_prof,
+            "main_group": profession['main_group'],
             "try_these": True,
             "avoid_these": False,
             "text": text
@@ -113,8 +114,9 @@ for profession in professions:
     # Add Avoid These
     for i, text in enumerate(talking_points[sec_prof]["avoid_these"], 1):
         full_talking_points.append({
-            "id": f"A{i}-{sec_prof}",
+            "id": f"A{i}-{profession['main_group']}-{sec_prof}",
             "secondary_profession": sec_prof,
+            "main_group": profession['main_group'],
             "try_these": False,
             "avoid_these": True,
             "text": text
@@ -122,7 +124,7 @@ for profession in professions:
 
 # Write to CSV
 with open("talking_points.csv", "w", newline="") as csvfile:
-    fieldnames = ["id", "secondary_profession", "try_these", "avoid_these", "text"]
+    fieldnames = ["id", "secondary_profession", "main_group", "try_these", "avoid_these", "text"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     writer.writeheader()

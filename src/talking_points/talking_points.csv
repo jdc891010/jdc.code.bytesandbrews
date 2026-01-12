@@ -1,0 +1,801 @@
+id,secondary_profession,main_group,try_these,avoid_these,text
+T1-Technology & IT-Software Developer,Software Developer,Technology & IT,True,False,Spill the beans—what's your wildest coding hack?
+T2-Technology & IT-Software Developer,Software Developer,Technology & IT,True,False,Favorite IDE: Vim or VS Code? Brews on the line!
+T3-Technology & IT-Software Developer,Software Developer,Technology & IT,True,False,Ever debugged code over a latte? Tell me more!
+T4-Technology & IT-Software Developer,Software Developer,Technology & IT,True,False,What's the quirkiest bug you've squashed lately?
+T5-Technology & IT-Software Developer,Software Developer,Technology & IT,True,False,Python or JavaScript—pick your potion!
+A1-Technology & IT-Software Developer,Software Developer,Technology & IT,False,True,Why don't you just work in an office?
+A2-Technology & IT-Software Developer,Software Developer,Technology & IT,False,True,Coding's so boring—how do you stand it?
+A3-Technology & IT-Software Developer,Software Developer,Technology & IT,False,True,Did you break the internet again?
+A4-Technology & IT-Software Developer,Software Developer,Technology & IT,False,True,Why not switch to a 'real' job?
+A5-Technology & IT-Software Developer,Software Developer,Technology & IT,False,True,"Your code's a mess, huh?"
+T1-Technology & IT-Web Developer,Web Developer,Technology & IT,True,False,Best CSS trick you've pulled off lately?
+T2-Technology & IT-Web Developer,Web Developer,Technology & IT,True,False,Ever built a site over a cold brew? Spill it!
+T3-Technology & IT-Web Developer,Web Developer,Technology & IT,True,False,What's your go-to browser for testing vibes?
+T4-Technology & IT-Web Developer,Web Developer,Technology & IT,True,False,Responsive design wins—brag a bit!
+T5-Technology & IT-Web Developer,Web Developer,Technology & IT,True,False,HTML or React—which brews your buzz?
+A1-Technology & IT-Web Developer,Web Developer,Technology & IT,False,True,Why do websites always crash?
+A2-Technology & IT-Web Developer,Web Developer,Technology & IT,False,True,"You just copy templates, right?"
+A3-Technology & IT-Web Developer,Web Developer,Technology & IT,False,True,Who needs web devs with AI now?
+A4-Technology & IT-Web Developer,Web Developer,Technology & IT,False,True,Your site looks dated already.
+A5-Technology & IT-Web Developer,Web Developer,Technology & IT,False,True,Can't you make it load faster?
+T1-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,True,False,Best mobile app developer hack you've brewed up?
+T2-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,True,False,Which vibe fuels your mobile app developer?
+A1-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,False,True,Why's your mobile app developer so slow?
+A2-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,False,True,Why bother with mobile app developer?
+A5-Technology & IT-Mobile App Developer,Mobile App Developer,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,True,False,Best devops engineer hack you've brewed up?
+T2-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,True,False,Which vibe fuels your devops engineer?
+A1-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,False,True,Why's your devops engineer so slow?
+A2-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,False,True,Why bother with devops engineer?
+A5-Technology & IT-DevOps Engineer,DevOps Engineer,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,True,False,Best systems administrator hack you've brewed up?
+T2-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,True,False,Which vibe fuels your systems administrator?
+A1-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,False,True,Why's your systems administrator so slow?
+A2-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,False,True,Why bother with systems administrator?
+A5-Technology & IT-Systems Administrator,Systems Administrator,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,True,False,Best cybersecurity analyst hack you've brewed up?
+T2-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,True,False,Which vibe fuels your cybersecurity analyst?
+A1-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,False,True,Why's your cybersecurity analyst so slow?
+A2-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,False,True,Why bother with cybersecurity analyst?
+A5-Technology & IT-Cybersecurity Analyst,Cybersecurity Analyst,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-Data Scientist,Data Scientist,Technology & IT,True,False,Best data scientist hack you've brewed up?
+T2-Technology & IT-Data Scientist,Data Scientist,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Data Scientist,Data Scientist,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Data Scientist,Data Scientist,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Data Scientist,Data Scientist,Technology & IT,True,False,Which vibe fuels your data scientist?
+A1-Technology & IT-Data Scientist,Data Scientist,Technology & IT,False,True,Why's your data scientist so slow?
+A2-Technology & IT-Data Scientist,Data Scientist,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Data Scientist,Data Scientist,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Data Scientist,Data Scientist,Technology & IT,False,True,Why bother with data scientist?
+A5-Technology & IT-Data Scientist,Data Scientist,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,True,False,Best machine learning engineer hack you've brewed up?
+T2-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,True,False,Which vibe fuels your machine learning engineer?
+A1-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,False,True,Why's your machine learning engineer so slow?
+A2-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,False,True,Why bother with machine learning engineer?
+A5-Technology & IT-Machine Learning Engineer,Machine Learning Engineer,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,True,False,Best it support specialist hack you've brewed up?
+T2-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,True,False,Which vibe fuels your it support specialist?
+A1-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,False,True,Why's your it support specialist so slow?
+A2-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,False,True,Why bother with it support specialist?
+A5-Technology & IT-IT Support Specialist,IT Support Specialist,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,True,False,Best cloud architect hack you've brewed up?
+T2-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,True,False,Ever worked on this over a latte?
+T3-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,True,False,What's your fave tool for the gig?
+T4-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,True,False,Wildest win in your field—spill it!
+T5-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,True,False,Which vibe fuels your cloud architect?
+A1-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,False,True,Why's your cloud architect so slow?
+A2-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,False,True,Isn't that just a hobby job?
+A3-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,False,True,"You're replaceable by AI, right?"
+A4-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,False,True,Why bother with cloud architect?
+A5-Technology & IT-Cloud Architect,Cloud Architect,Technology & IT,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,True,False,Fave font combo—spill the pixel tea!
+T2-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,True,False,Ever sketched a logo over espresso?
+T3-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,True,False,What's your wildest Photoshop win?
+T4-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,True,False,Color palette that screams vibe—go!
+T5-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,True,False,Illustrator or Figma—which fuels you?
+A1-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,False,True,Your designs all look the same.
+A2-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,False,True,Why so many colors? It's tacky.
+A3-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,False,True,Can't you just use Canva instead?
+A4-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,False,True,That logo's ugly—redo it quick.
+A5-Creative & Design-Graphic Designer,Graphic Designer,Creative & Design,False,True,"Art's not a real job, right?"
+T1-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,True,False,Best ui/ux designer hack you've brewed up?
+T2-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,True,False,Which vibe fuels your ui/ux designer?
+A1-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,False,True,Why's your ui/ux designer so slow?
+A2-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,False,True,Why bother with ui/ux designer?
+A5-Creative & Design-UI/UX Designer,UI/UX Designer,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Illustrator,Illustrator,Creative & Design,True,False,Best illustrator hack you've brewed up?
+T2-Creative & Design-Illustrator,Illustrator,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Illustrator,Illustrator,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Illustrator,Illustrator,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Illustrator,Illustrator,Creative & Design,True,False,Which vibe fuels your illustrator?
+A1-Creative & Design-Illustrator,Illustrator,Creative & Design,False,True,Why's your illustrator so slow?
+A2-Creative & Design-Illustrator,Illustrator,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Illustrator,Illustrator,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Illustrator,Illustrator,Creative & Design,False,True,Why bother with illustrator?
+A5-Creative & Design-Illustrator,Illustrator,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Video Editor,Video Editor,Creative & Design,True,False,Best video editor hack you've brewed up?
+T2-Creative & Design-Video Editor,Video Editor,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Video Editor,Video Editor,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Video Editor,Video Editor,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Video Editor,Video Editor,Creative & Design,True,False,Which vibe fuels your video editor?
+A1-Creative & Design-Video Editor,Video Editor,Creative & Design,False,True,Why's your video editor so slow?
+A2-Creative & Design-Video Editor,Video Editor,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Video Editor,Video Editor,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Video Editor,Video Editor,Creative & Design,False,True,Why bother with video editor?
+A5-Creative & Design-Video Editor,Video Editor,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,True,False,Best motion graphics designer hack you've brewed up?
+T2-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,True,False,Which vibe fuels your motion graphics designer?
+A1-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,False,True,Why's your motion graphics designer so slow?
+A2-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,False,True,Why bother with motion graphics designer?
+A5-Creative & Design-Motion Graphics Designer,Motion Graphics Designer,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-3D Animator,3D Animator,Creative & Design,True,False,Best 3d animator hack you've brewed up?
+T2-Creative & Design-3D Animator,3D Animator,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-3D Animator,3D Animator,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-3D Animator,3D Animator,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-3D Animator,3D Animator,Creative & Design,True,False,Which vibe fuels your 3d animator?
+A1-Creative & Design-3D Animator,3D Animator,Creative & Design,False,True,Why's your 3d animator so slow?
+A2-Creative & Design-3D Animator,3D Animator,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-3D Animator,3D Animator,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-3D Animator,3D Animator,Creative & Design,False,True,Why bother with 3d animator?
+A5-Creative & Design-3D Animator,3D Animator,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Photographer,Photographer,Creative & Design,True,False,Best photographer hack you've brewed up?
+T2-Creative & Design-Photographer,Photographer,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Photographer,Photographer,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Photographer,Photographer,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Photographer,Photographer,Creative & Design,True,False,Which vibe fuels your photographer?
+A1-Creative & Design-Photographer,Photographer,Creative & Design,False,True,Why's your photographer so slow?
+A2-Creative & Design-Photographer,Photographer,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Photographer,Photographer,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Photographer,Photographer,Creative & Design,False,True,Why bother with photographer?
+A5-Creative & Design-Photographer,Photographer,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Art Director,Art Director,Creative & Design,True,False,Best art director hack you've brewed up?
+T2-Creative & Design-Art Director,Art Director,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Art Director,Art Director,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Art Director,Art Director,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Art Director,Art Director,Creative & Design,True,False,Which vibe fuels your art director?
+A1-Creative & Design-Art Director,Art Director,Creative & Design,False,True,Why's your art director so slow?
+A2-Creative & Design-Art Director,Art Director,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Art Director,Art Director,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Art Director,Art Director,Creative & Design,False,True,Why bother with art director?
+A5-Creative & Design-Art Director,Art Director,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Web Designer,Web Designer,Creative & Design,True,False,Best web designer hack you've brewed up?
+T2-Creative & Design-Web Designer,Web Designer,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Web Designer,Web Designer,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Web Designer,Web Designer,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Web Designer,Web Designer,Creative & Design,True,False,Which vibe fuels your web designer?
+A1-Creative & Design-Web Designer,Web Designer,Creative & Design,False,True,Why's your web designer so slow?
+A2-Creative & Design-Web Designer,Web Designer,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Web Designer,Web Designer,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Web Designer,Web Designer,Creative & Design,False,True,Why bother with web designer?
+A5-Creative & Design-Web Designer,Web Designer,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Creative & Design-Game Designer,Game Designer,Creative & Design,True,False,Best game designer hack you've brewed up?
+T2-Creative & Design-Game Designer,Game Designer,Creative & Design,True,False,Ever worked on this over a latte?
+T3-Creative & Design-Game Designer,Game Designer,Creative & Design,True,False,What's your fave tool for the gig?
+T4-Creative & Design-Game Designer,Game Designer,Creative & Design,True,False,Wildest win in your field—spill it!
+T5-Creative & Design-Game Designer,Game Designer,Creative & Design,True,False,Which vibe fuels your game designer?
+A1-Creative & Design-Game Designer,Game Designer,Creative & Design,False,True,Why's your game designer so slow?
+A2-Creative & Design-Game Designer,Game Designer,Creative & Design,False,True,Isn't that just a hobby job?
+A3-Creative & Design-Game Designer,Game Designer,Creative & Design,False,True,"You're replaceable by AI, right?"
+A4-Creative & Design-Game Designer,Game Designer,Creative & Design,False,True,Why bother with game designer?
+A5-Creative & Design-Game Designer,Game Designer,Creative & Design,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,True,False,Best copywriter hack you've brewed up?
+T2-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,True,False,Which vibe fuels your copywriter?
+A1-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,False,True,Why's your copywriter so slow?
+A2-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,False,True,Why bother with copywriter?
+A5-Writing & Content Creation-Copywriter,Copywriter,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,True,False,Best content writer hack you've brewed up?
+T2-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,True,False,Which vibe fuels your content writer?
+A1-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,False,True,Why's your content writer so slow?
+A2-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,False,True,Why bother with content writer?
+A5-Writing & Content Creation-Content Writer,Content Writer,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,True,False,Best technical writer hack you've brewed up?
+T2-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,True,False,Which vibe fuels your technical writer?
+A1-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,False,True,Why's your technical writer so slow?
+A2-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,False,True,Why bother with technical writer?
+A5-Writing & Content Creation-Technical Writer,Technical Writer,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,True,False,Best journalist hack you've brewed up?
+T2-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,True,False,Which vibe fuels your journalist?
+A1-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,False,True,Why's your journalist so slow?
+A2-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,False,True,Why bother with journalist?
+A5-Writing & Content Creation-Journalist,Journalist,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,True,False,Best blogger hack you've brewed up?
+T2-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,True,False,Which vibe fuels your blogger?
+A1-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,False,True,Why's your blogger so slow?
+A2-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,False,True,Why bother with blogger?
+A5-Writing & Content Creation-Blogger,Blogger,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,True,False,Best editor/proofreader hack you've brewed up?
+T2-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,True,False,Which vibe fuels your editor/proofreader?
+A1-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,False,True,Why's your editor/proofreader so slow?
+A2-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,False,True,Why bother with editor/proofreader?
+A5-Writing & Content Creation-Editor/Proofreader,Editor/Proofreader,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,True,False,Best scriptwriter hack you've brewed up?
+T2-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,True,False,Which vibe fuels your scriptwriter?
+A1-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,False,True,Why's your scriptwriter so slow?
+A2-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,False,True,Why bother with scriptwriter?
+A5-Writing & Content Creation-Scriptwriter,Scriptwriter,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,True,False,Best social media content creator hack you've brewed up?
+T2-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,True,False,Which vibe fuels your social media content creator?
+A1-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,False,True,Why's your social media content creator so slow?
+A2-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,False,True,Why bother with social media content creator?
+A5-Writing & Content Creation-Social Media Content Creator,Social Media Content Creator,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,True,False,Best seo specialist hack you've brewed up?
+T2-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,True,False,Which vibe fuels your seo specialist?
+A1-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,False,True,Why's your seo specialist so slow?
+A2-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,False,True,Why bother with seo specialist?
+A5-Writing & Content Creation-SEO Specialist,SEO Specialist,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Writing & Content Creation-Author,Author,Writing & Content Creation,True,False,Best author hack you've brewed up?
+T2-Writing & Content Creation-Author,Author,Writing & Content Creation,True,False,Ever worked on this over a latte?
+T3-Writing & Content Creation-Author,Author,Writing & Content Creation,True,False,What's your fave tool for the gig?
+T4-Writing & Content Creation-Author,Author,Writing & Content Creation,True,False,Wildest win in your field—spill it!
+T5-Writing & Content Creation-Author,Author,Writing & Content Creation,True,False,Which vibe fuels your author?
+A1-Writing & Content Creation-Author,Author,Writing & Content Creation,False,True,Why's your author so slow?
+A2-Writing & Content Creation-Author,Author,Writing & Content Creation,False,True,Isn't that just a hobby job?
+A3-Writing & Content Creation-Author,Author,Writing & Content Creation,False,True,"You're replaceable by AI, right?"
+A4-Writing & Content Creation-Author,Author,Writing & Content Creation,False,True,Why bother with author?
+A5-Writing & Content Creation-Author,Author,Writing & Content Creation,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,True,False,Best digital marketer hack you've brewed up?
+T2-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,True,False,Which vibe fuels your digital marketer?
+A1-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,False,True,Why's your digital marketer so slow?
+A2-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,False,True,Why bother with digital marketer?
+A5-Marketing & Sales-Digital Marketer,Digital Marketer,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,True,False,Best social media manager hack you've brewed up?
+T2-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,True,False,Which vibe fuels your social media manager?
+A1-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,False,True,Why's your social media manager so slow?
+A2-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,False,True,Why bother with social media manager?
+A5-Marketing & Sales-Social Media Manager,Social Media Manager,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,True,False,Best email marketing specialist hack you've brewed up?
+T2-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,True,False,Which vibe fuels your email marketing specialist?
+A1-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,False,True,Why's your email marketing specialist so slow?
+A2-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,False,True,Why bother with email marketing specialist?
+A5-Marketing & Sales-Email Marketing Specialist,Email Marketing Specialist,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,True,False,Best seo specialist hack you've brewed up?
+T2-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,True,False,Which vibe fuels your seo specialist?
+A1-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,False,True,Why's your seo specialist so slow?
+A2-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,False,True,Why bother with seo specialist?
+A5-Marketing & Sales-SEO Specialist,SEO Specialist,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,True,False,Best ppc manager hack you've brewed up?
+T2-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,True,False,Which vibe fuels your ppc manager?
+A1-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,False,True,Why's your ppc manager so slow?
+A2-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,False,True,Why bother with ppc manager?
+A5-Marketing & Sales-PPC Manager,PPC Manager,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,True,False,Best marketing consultant hack you've brewed up?
+T2-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,True,False,Which vibe fuels your marketing consultant?
+A1-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,False,True,Why's your marketing consultant so slow?
+A2-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,False,True,Why bother with marketing consultant?
+A5-Marketing & Sales-Marketing Consultant,Marketing Consultant,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,True,False,Best sales representative hack you've brewed up?
+T2-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,True,False,Which vibe fuels your sales representative?
+A1-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,False,True,Why's your sales representative so slow?
+A2-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,False,True,Why bother with sales representative?
+A5-Marketing & Sales-Sales Representative,Sales Representative,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,True,False,Best affiliate marketer hack you've brewed up?
+T2-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,True,False,Which vibe fuels your affiliate marketer?
+A1-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,False,True,Why's your affiliate marketer so slow?
+A2-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,False,True,Why bother with affiliate marketer?
+A5-Marketing & Sales-Affiliate Marketer,Affiliate Marketer,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,True,False,Best brand strategist hack you've brewed up?
+T2-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,True,False,Which vibe fuels your brand strategist?
+A1-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,False,True,Why's your brand strategist so slow?
+A2-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,False,True,Why bother with brand strategist?
+A5-Marketing & Sales-Brand Strategist,Brand Strategist,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,True,False,Best market research analyst hack you've brewed up?
+T2-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,True,False,Ever worked on this over a latte?
+T3-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,True,False,What's your fave tool for the gig?
+T4-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,True,False,Wildest win in your field—spill it!
+T5-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,True,False,Which vibe fuels your market research analyst?
+A1-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,False,True,Why's your market research analyst so slow?
+A2-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,False,True,Isn't that just a hobby job?
+A3-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,False,True,"You're replaceable by AI, right?"
+A4-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,False,True,Why bother with market research analyst?
+A5-Marketing & Sales-Market Research Analyst,Market Research Analyst,Marketing & Sales,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,True,False,Best virtual assistant hack you've brewed up?
+T2-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,True,False,Which vibe fuels your virtual assistant?
+A1-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,False,True,Why's your virtual assistant so slow?
+A2-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,False,True,Why bother with virtual assistant?
+A5-Business & Administration-Virtual Assistant,Virtual Assistant,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Project Manager,Project Manager,Business & Administration,True,False,Best project manager hack you've brewed up?
+T2-Business & Administration-Project Manager,Project Manager,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Project Manager,Project Manager,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Project Manager,Project Manager,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Project Manager,Project Manager,Business & Administration,True,False,Which vibe fuels your project manager?
+A1-Business & Administration-Project Manager,Project Manager,Business & Administration,False,True,Why's your project manager so slow?
+A2-Business & Administration-Project Manager,Project Manager,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Project Manager,Project Manager,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Project Manager,Project Manager,Business & Administration,False,True,Why bother with project manager?
+A5-Business & Administration-Project Manager,Project Manager,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Operations Manager,Operations Manager,Business & Administration,True,False,Best operations manager hack you've brewed up?
+T2-Business & Administration-Operations Manager,Operations Manager,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Operations Manager,Operations Manager,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Operations Manager,Operations Manager,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Operations Manager,Operations Manager,Business & Administration,True,False,Which vibe fuels your operations manager?
+A1-Business & Administration-Operations Manager,Operations Manager,Business & Administration,False,True,Why's your operations manager so slow?
+A2-Business & Administration-Operations Manager,Operations Manager,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Operations Manager,Operations Manager,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Operations Manager,Operations Manager,Business & Administration,False,True,Why bother with operations manager?
+A5-Business & Administration-Operations Manager,Operations Manager,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,True,False,Best customer support representative hack you've brewed up?
+T2-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,True,False,Which vibe fuels your customer support representative?
+A1-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,False,True,Why's your customer support representative so slow?
+A2-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,False,True,Why bother with customer support representative?
+A5-Business & Administration-Customer Support Representative,Customer Support Representative,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-HR Consultant,HR Consultant,Business & Administration,True,False,Best hr consultant hack you've brewed up?
+T2-Business & Administration-HR Consultant,HR Consultant,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-HR Consultant,HR Consultant,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-HR Consultant,HR Consultant,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-HR Consultant,HR Consultant,Business & Administration,True,False,Which vibe fuels your hr consultant?
+A1-Business & Administration-HR Consultant,HR Consultant,Business & Administration,False,True,Why's your hr consultant so slow?
+A2-Business & Administration-HR Consultant,HR Consultant,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-HR Consultant,HR Consultant,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-HR Consultant,HR Consultant,Business & Administration,False,True,Why bother with hr consultant?
+A5-Business & Administration-HR Consultant,HR Consultant,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,True,False,Best bookkeeper hack you've brewed up?
+T2-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,True,False,Which vibe fuels your bookkeeper?
+A1-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,False,True,Why's your bookkeeper so slow?
+A2-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,False,True,Why bother with bookkeeper?
+A5-Business & Administration-Bookkeeper,Bookkeeper,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Accountant,Accountant,Business & Administration,True,False,Best accountant hack you've brewed up?
+T2-Business & Administration-Accountant,Accountant,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Accountant,Accountant,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Accountant,Accountant,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Accountant,Accountant,Business & Administration,True,False,Which vibe fuels your accountant?
+A1-Business & Administration-Accountant,Accountant,Business & Administration,False,True,Why's your accountant so slow?
+A2-Business & Administration-Accountant,Accountant,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Accountant,Accountant,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Accountant,Accountant,Business & Administration,False,True,Why bother with accountant?
+A5-Business & Administration-Accountant,Accountant,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Business Analyst,Business Analyst,Business & Administration,True,False,Best business analyst hack you've brewed up?
+T2-Business & Administration-Business Analyst,Business Analyst,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Business Analyst,Business Analyst,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Business Analyst,Business Analyst,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Business Analyst,Business Analyst,Business & Administration,True,False,Which vibe fuels your business analyst?
+A1-Business & Administration-Business Analyst,Business Analyst,Business & Administration,False,True,Why's your business analyst so slow?
+A2-Business & Administration-Business Analyst,Business Analyst,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Business Analyst,Business Analyst,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Business Analyst,Business Analyst,Business & Administration,False,True,Why bother with business analyst?
+A5-Business & Administration-Business Analyst,Business Analyst,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,True,False,Best executive assistant hack you've brewed up?
+T2-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,True,False,Which vibe fuels your executive assistant?
+A1-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,False,True,Why's your executive assistant so slow?
+A2-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,False,True,Why bother with executive assistant?
+A5-Business & Administration-Executive Assistant,Executive Assistant,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Business & Administration-Event Planner,Event Planner,Business & Administration,True,False,Best event planner hack you've brewed up?
+T2-Business & Administration-Event Planner,Event Planner,Business & Administration,True,False,Ever worked on this over a latte?
+T3-Business & Administration-Event Planner,Event Planner,Business & Administration,True,False,What's your fave tool for the gig?
+T4-Business & Administration-Event Planner,Event Planner,Business & Administration,True,False,Wildest win in your field—spill it!
+T5-Business & Administration-Event Planner,Event Planner,Business & Administration,True,False,Which vibe fuels your event planner?
+A1-Business & Administration-Event Planner,Event Planner,Business & Administration,False,True,Why's your event planner so slow?
+A2-Business & Administration-Event Planner,Event Planner,Business & Administration,False,True,Isn't that just a hobby job?
+A3-Business & Administration-Event Planner,Event Planner,Business & Administration,False,True,"You're replaceable by AI, right?"
+A4-Business & Administration-Event Planner,Event Planner,Business & Administration,False,True,Why bother with event planner?
+A5-Business & Administration-Event Planner,Event Planner,Business & Administration,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Online Tutor,Online Tutor,Education & Training,True,False,Best online tutor hack you've brewed up?
+T2-Education & Training-Online Tutor,Online Tutor,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Online Tutor,Online Tutor,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Online Tutor,Online Tutor,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Online Tutor,Online Tutor,Education & Training,True,False,Which vibe fuels your online tutor?
+A1-Education & Training-Online Tutor,Online Tutor,Education & Training,False,True,Why's your online tutor so slow?
+A2-Education & Training-Online Tutor,Online Tutor,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Online Tutor,Online Tutor,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Online Tutor,Online Tutor,Education & Training,False,True,Why bother with online tutor?
+A5-Education & Training-Online Tutor,Online Tutor,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,True,False,Best e-learning developer hack you've brewed up?
+T2-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,True,False,Which vibe fuels your e-learning developer?
+A1-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,False,True,Why's your e-learning developer so slow?
+A2-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,False,True,Why bother with e-learning developer?
+A5-Education & Training-E-Learning Developer,E-Learning Developer,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Instructional Designer,Instructional Designer,Education & Training,True,False,Best instructional designer hack you've brewed up?
+T2-Education & Training-Instructional Designer,Instructional Designer,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Instructional Designer,Instructional Designer,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Instructional Designer,Instructional Designer,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Instructional Designer,Instructional Designer,Education & Training,True,False,Which vibe fuels your instructional designer?
+A1-Education & Training-Instructional Designer,Instructional Designer,Education & Training,False,True,Why's your instructional designer so slow?
+A2-Education & Training-Instructional Designer,Instructional Designer,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Instructional Designer,Instructional Designer,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Instructional Designer,Instructional Designer,Education & Training,False,True,Why bother with instructional designer?
+A5-Education & Training-Instructional Designer,Instructional Designer,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Language Teacher,Language Teacher,Education & Training,True,False,Best language teacher hack you've brewed up?
+T2-Education & Training-Language Teacher,Language Teacher,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Language Teacher,Language Teacher,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Language Teacher,Language Teacher,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Language Teacher,Language Teacher,Education & Training,True,False,Which vibe fuels your language teacher?
+A1-Education & Training-Language Teacher,Language Teacher,Education & Training,False,True,Why's your language teacher so slow?
+A2-Education & Training-Language Teacher,Language Teacher,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Language Teacher,Language Teacher,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Language Teacher,Language Teacher,Education & Training,False,True,Why bother with language teacher?
+A5-Education & Training-Language Teacher,Language Teacher,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,True,False,Best corporate trainer hack you've brewed up?
+T2-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,True,False,Which vibe fuels your corporate trainer?
+A1-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,False,True,Why's your corporate trainer so slow?
+A2-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,False,True,Why bother with corporate trainer?
+A5-Education & Training-Corporate Trainer,Corporate Trainer,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Life Coach,Life Coach,Education & Training,True,False,Best life coach hack you've brewed up?
+T2-Education & Training-Life Coach,Life Coach,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Life Coach,Life Coach,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Life Coach,Life Coach,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Life Coach,Life Coach,Education & Training,True,False,Which vibe fuels your life coach?
+A1-Education & Training-Life Coach,Life Coach,Education & Training,False,True,Why's your life coach so slow?
+A2-Education & Training-Life Coach,Life Coach,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Life Coach,Life Coach,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Life Coach,Life Coach,Education & Training,False,True,Why bother with life coach?
+A5-Education & Training-Life Coach,Life Coach,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,True,False,Best fitness instructor hack you've brewed up?
+T2-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,True,False,Which vibe fuels your fitness instructor?
+A1-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,False,True,Why's your fitness instructor so slow?
+A2-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,False,True,Why bother with fitness instructor?
+A5-Education & Training-Fitness Instructor,Fitness Instructor,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Career Counselor,Career Counselor,Education & Training,True,False,Best career counselor hack you've brewed up?
+T2-Education & Training-Career Counselor,Career Counselor,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Career Counselor,Career Counselor,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Career Counselor,Career Counselor,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Career Counselor,Career Counselor,Education & Training,True,False,Which vibe fuels your career counselor?
+A1-Education & Training-Career Counselor,Career Counselor,Education & Training,False,True,Why's your career counselor so slow?
+A2-Education & Training-Career Counselor,Career Counselor,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Career Counselor,Career Counselor,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Career Counselor,Career Counselor,Education & Training,False,True,Why bother with career counselor?
+A5-Education & Training-Career Counselor,Career Counselor,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Academic Researcher,Academic Researcher,Education & Training,True,False,Best academic researcher hack you've brewed up?
+T2-Education & Training-Academic Researcher,Academic Researcher,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Academic Researcher,Academic Researcher,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Academic Researcher,Academic Researcher,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Academic Researcher,Academic Researcher,Education & Training,True,False,Which vibe fuels your academic researcher?
+A1-Education & Training-Academic Researcher,Academic Researcher,Education & Training,False,True,Why's your academic researcher so slow?
+A2-Education & Training-Academic Researcher,Academic Researcher,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Academic Researcher,Academic Researcher,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Academic Researcher,Academic Researcher,Education & Training,False,True,Why bother with academic researcher?
+A5-Education & Training-Academic Researcher,Academic Researcher,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Education & Training-Course Creator,Course Creator,Education & Training,True,False,Best course creator hack you've brewed up?
+T2-Education & Training-Course Creator,Course Creator,Education & Training,True,False,Ever worked on this over a latte?
+T3-Education & Training-Course Creator,Course Creator,Education & Training,True,False,What's your fave tool for the gig?
+T4-Education & Training-Course Creator,Course Creator,Education & Training,True,False,Wildest win in your field—spill it!
+T5-Education & Training-Course Creator,Course Creator,Education & Training,True,False,Which vibe fuels your course creator?
+A1-Education & Training-Course Creator,Course Creator,Education & Training,False,True,Why's your course creator so slow?
+A2-Education & Training-Course Creator,Course Creator,Education & Training,False,True,Isn't that just a hobby job?
+A3-Education & Training-Course Creator,Course Creator,Education & Training,False,True,"You're replaceable by AI, right?"
+A4-Education & Training-Course Creator,Course Creator,Education & Training,False,True,Why bother with course creator?
+A5-Education & Training-Course Creator,Course Creator,Education & Training,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,True,False,Best management consultant hack you've brewed up?
+T2-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,True,False,Which vibe fuels your management consultant?
+A1-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,False,True,Why's your management consultant so slow?
+A2-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,False,True,Why bother with management consultant?
+A5-Consulting & Freelance Expertise-Management Consultant,Management Consultant,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,True,False,Best financial advisor hack you've brewed up?
+T2-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,True,False,Which vibe fuels your financial advisor?
+A1-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,False,True,Why's your financial advisor so slow?
+A2-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,False,True,Why bother with financial advisor?
+A5-Consulting & Freelance Expertise-Financial Advisor,Financial Advisor,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,True,False,Best legal consultant hack you've brewed up?
+T2-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,True,False,Which vibe fuels your legal consultant?
+A1-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,False,True,Why's your legal consultant so slow?
+A2-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,False,True,Why bother with legal consultant?
+A5-Consulting & Freelance Expertise-Legal Consultant,Legal Consultant,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,True,False,Best translation/interpreter hack you've brewed up?
+T2-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,True,False,Which vibe fuels your translation/interpreter?
+A1-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,False,True,Why's your translation/interpreter so slow?
+A2-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,False,True,Why bother with translation/interpreter?
+A5-Consulting & Freelance Expertise-Translation/Interpreter,Translation/Interpreter,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,True,False,Best voice-over artist hack you've brewed up?
+T2-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,True,False,Which vibe fuels your voice-over artist?
+A1-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,False,True,Why's your voice-over artist so slow?
+A2-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,False,True,Why bother with voice-over artist?
+A5-Consulting & Freelance Expertise-Voice-Over Artist,Voice-Over Artist,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,True,False,Best podcast producer hack you've brewed up?
+T2-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,True,False,Which vibe fuels your podcast producer?
+A1-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,False,True,Why's your podcast producer so slow?
+A2-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,False,True,Why bother with podcast producer?
+A5-Consulting & Freelance Expertise-Podcast Producer,Podcast Producer,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,True,False,Best sustainability consultant hack you've brewed up?
+T2-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,True,False,Which vibe fuels your sustainability consultant?
+A1-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,False,True,Why's your sustainability consultant so slow?
+A2-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,False,True,Why bother with sustainability consultant?
+A5-Consulting & Freelance Expertise-Sustainability Consultant,Sustainability Consultant,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,True,False,Best health/wellness coach hack you've brewed up?
+T2-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,True,False,Which vibe fuels your health/wellness coach?
+A1-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,False,True,Why's your health/wellness coach so slow?
+A2-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,False,True,Why bother with health/wellness coach?
+A5-Consulting & Freelance Expertise-Health/Wellness Coach,Health/Wellness Coach,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,True,False,Best startup advisor hack you've brewed up?
+T2-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,True,False,Which vibe fuels your startup advisor?
+A1-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,False,True,Why's your startup advisor so slow?
+A2-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,False,True,Why bother with startup advisor?
+A5-Consulting & Freelance Expertise-Startup Advisor,Startup Advisor,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,True,False,Best grant writer hack you've brewed up?
+T2-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,True,False,Ever worked on this over a latte?
+T3-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,True,False,What's your fave tool for the gig?
+T4-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,True,False,Wildest win in your field—spill it!
+T5-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,True,False,Which vibe fuels your grant writer?
+A1-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,False,True,Why's your grant writer so slow?
+A2-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,False,True,Isn't that just a hobby job?
+A3-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,False,True,"You're replaceable by AI, right?"
+A4-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,False,True,Why bother with grant writer?
+A5-Consulting & Freelance Expertise-Grant Writer,Grant Writer,Consulting & Freelance Expertise,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,True,False,Best podcaster hack you've brewed up?
+T2-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,True,False,Which vibe fuels your podcaster?
+A1-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,False,True,Why's your podcaster so slow?
+A2-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,False,True,Why bother with podcaster?
+A5-Media & Entertainment-Podcaster,Podcaster,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,True,False,Best youtuber/streamer hack you've brewed up?
+T2-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,True,False,Which vibe fuels your youtuber/streamer?
+A1-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,False,True,Why's your youtuber/streamer so slow?
+A2-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,False,True,Why bother with youtuber/streamer?
+A5-Media & Entertainment-YouTuber/Streamer,YouTuber/Streamer,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,True,False,Best music producer hack you've brewed up?
+T2-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,True,False,Which vibe fuels your music producer?
+A1-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,False,True,Why's your music producer so slow?
+A2-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,False,True,Why bother with music producer?
+A5-Media & Entertainment-Music Producer,Music Producer,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,True,False,Best audio engineer hack you've brewed up?
+T2-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,True,False,Which vibe fuels your audio engineer?
+A1-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,False,True,Why's your audio engineer so slow?
+A2-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,False,True,Why bother with audio engineer?
+A5-Media & Entertainment-Audio Engineer,Audio Engineer,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,True,False,Best film critic hack you've brewed up?
+T2-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,True,False,Which vibe fuels your film critic?
+A1-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,False,True,Why's your film critic so slow?
+A2-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,False,True,Why bother with film critic?
+A5-Media & Entertainment-Film Critic,Film Critic,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,True,False,Best game tester hack you've brewed up?
+T2-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,True,False,Which vibe fuels your game tester?
+A1-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,False,True,Why's your game tester so slow?
+A2-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,False,True,Why bother with game tester?
+A5-Media & Entertainment-Game Tester,Game Tester,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,True,False,Best digital artist hack you've brewed up?
+T2-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,True,False,Which vibe fuels your digital artist?
+A1-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,False,True,Why's your digital artist so slow?
+A2-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,False,True,Why bother with digital artist?
+A5-Media & Entertainment-Digital Artist,Digital Artist,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,True,False,Best radio host hack you've brewed up?
+T2-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,True,False,Which vibe fuels your radio host?
+A1-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,False,True,Why's your radio host so slow?
+A2-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,False,True,Why bother with radio host?
+A5-Media & Entertainment-Radio Host,Radio Host,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,True,False,Best sound designer hack you've brewed up?
+T2-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,True,False,Ever worked on this over a latte?
+T3-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,True,False,What's your fave tool for the gig?
+T4-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,True,False,Wildest win in your field—spill it!
+T5-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,True,False,Which vibe fuels your sound designer?
+A1-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,False,True,Why's your sound designer so slow?
+A2-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,False,True,Isn't that just a hobby job?
+A3-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,False,True,"You're replaceable by AI, right?"
+A4-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,False,True,Why bother with sound designer?
+A5-Media & Entertainment-Sound Designer,Sound Designer,Media & Entertainment,False,True,"That last gig flopped, huh?"
+T1-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,True,False,Craziest virtual event glitch you've survived?
+T2-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,True,False,Best brew to sip while hosting online?
+T3-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,True,False,What's your secret to streaming vibes?
+T4-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,True,False,Ever ad-libbed a lag—tell me how!
+T5-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,True,False,Zoom or Twitch—which byte rocks?
+A1-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,False,True,Why'd your last stream crash?
+A2-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,False,True,"Virtual events are so dull, huh?"
+A3-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,False,True,"You just talk—easy gig, right?"
+A4-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,False,True,"No one showed up, did they?"
+A5-Media & Entertainment-Virtual Event Host,Virtual Event Host,Media & Entertainment,False,True,Can't you host in person instead?

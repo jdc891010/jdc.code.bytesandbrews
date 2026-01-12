@@ -1,0 +1,101 @@
+id,secondary_profession,try_these,avoid_these,text
+T1-Graphic Designer,Graphic Designer,True,False,Fave font duo you’ve brewed up lately?
+T2-Graphic Designer,Graphic Designer,True,False,Ever sketched a logo over a latte?
+T3-Graphic Designer,Graphic Designer,True,False,What’s your wildest Photoshop layer win?
+T4-Graphic Designer,Graphic Designer,True,False,Bold or minimal—which vibe’s your brew?
+T5-Graphic Designer,Graphic Designer,True,False,Illustrator or Affinity—pick your pixie tool!
+A1-Graphic Designer,Graphic Designer,False,True,Your designs are so basic—step it up!
+A2-Graphic Designer,Graphic Designer,False,True,Why’s that color palette so loud?
+A3-Graphic Designer,Graphic Designer,False,True,Can’t you just use Canva instead?
+A4-Graphic Designer,Graphic Designer,False,True,That logo’s a flop—redo it fast!
+A5-Graphic Designer,Graphic Designer,False,True,"Graphic design’s not real work, huh?"
+T1-UI/UX Designer,UI/UX Designer,True,False,Slickest Figma prototype you’ve crafted?
+T2-UI/UX Designer,UI/UX Designer,True,False,Ever tested a flow over cold brew?
+T3-UI/UX Designer,UI/UX Designer,True,False,Wireframe or mockup—which brews better?
+T4-UI/UX Designer,UI/UX Designer,True,False,What’s your quirkiest user feedback win?
+T5-UI/UX Designer,UI/UX Designer,True,False,Best UX hack—spill the interface tea!
+A1-UI/UX Designer,UI/UX Designer,False,True,Why’s your app so hard to use?
+A2-UI/UX Designer,UI/UX Designer,False,True,"UI’s just pretty pictures, right?"
+A3-UI/UX Designer,UI/UX Designer,False,True,That flow’s a mess—fix it!
+A4-UI/UX Designer,UI/UX Designer,False,True,"You just copy other designs, huh?"
+A5-UI/UX Designer,UI/UX Designer,False,True,UX is overrated—agree?
+T1-Illustrator,Illustrator,True,False,Craziest sketch you’ve inked over coffee?
+T2-Illustrator,Illustrator,True,False,Procreate or pencil—which vibe’s your spell?
+T3-Illustrator,Illustrator,True,False,What’s your smoothest vector win?
+T4-Illustrator,Illustrator,True,False,Ever doodled a masterpiece mid-brew?
+T5-Illustrator,Illustrator,True,False,Best tablet trick—spill the sorcery!
+A1-Illustrator,Illustrator,False,True,Your drawings look childish—grow up!
+A2-Illustrator,Illustrator,False,True,Why’s that sketch so sloppy?
+A3-Illustrator,Illustrator,False,True,"Illustrating’s just doodling, huh?"
+A4-Illustrator,Illustrator,False,True,That art’s ugly—try harder!
+A5-Illustrator,Illustrator,False,True,"You can’t make money with this, right?"
+T1-Video Editor,Video Editor,True,False,Wildest Premiere cut you’ve brewed up?
+T2-Video Editor,Video Editor,True,False,Ever synced a clip over an espresso?
+T3-Video Editor,Video Editor,True,False,After Effects or DaVinci—which frame’s your jam?
+T4-Video Editor,Video Editor,True,False,What’s your slickest transition story?
+T5-Video Editor,Video Editor,True,False,Best edit hack—spill the reel tea!
+A1-Video Editor,Video Editor,False,True,Why’s your video so choppy?
+A2-Video Editor,Video Editor,False,True,"You just slap clips together, huh?"
+A3-Video Editor,Video Editor,False,True,That cut’s awful—redo it!
+A4-Video Editor,Video Editor,False,True,Editing’s so tedious—true?
+A5-Video Editor,Video Editor,False,True,Your footage looks cheap—admit it!
+T1-Motion Graphics Designer,Motion Graphics Designer,True,False,Craziest After Effects move you’ve spun?
+T2-Motion Graphics Designer,Motion Graphics Designer,True,False,Ever animated over a flat white?
+T3-Motion Graphics Designer,Motion Graphics Designer,True,False,2D or 3D—which motion brews your buzz?
+T4-Motion Graphics Designer,Motion Graphics Designer,True,False,What’s your smoothest keyframes win?
+T5-Motion Graphics Designer,Motion Graphics Designer,True,False,Best animation trick—spill the maestro tea!
+A1-Motion Graphics Designer,Motion Graphics Designer,False,True,Your graphics are too flashy—tone it down!
+A2-Motion Graphics Designer,Motion Graphics Designer,False,True,Why’s that animation so laggy?
+A3-Motion Graphics Designer,Motion Graphics Designer,False,True,"Motion’s just eye candy, right?"
+A4-Motion Graphics Designer,Motion Graphics Designer,False,True,That loop’s boring—fix it!
+A5-Motion Graphics Designer,Motion Graphics Designer,False,True,You can’t animate well—agree?
+T1-3D Animator,3D Animator,True,False,Wildest Blender rig you’ve brewed up?
+T2-3D Animator,3D Animator,True,False,Ever rendered a scene over a mocha?
+T3-3D Animator,3D Animator,True,False,Maya or Unity—which depth’s your dance?
+T4-3D Animator,3D Animator,True,False,What’s your quirkiest 3D character win?
+T5-3D Animator,3D Animator,True,False,Best rigging hack—spill the 3D tea!
+A1-3D Animator,3D Animator,False,True,Why’s your model so glitchy?
+A2-3D Animator,3D Animator,False,True,3D’s too slow—who cares?
+A3-3D Animator,3D Animator,False,True,That render’s ugly—scrap it!
+A4-3D Animator,3D Animator,False,True,"You just copy game assets, huh?"
+A5-3D Animator,3D Animator,False,True,Animation’s a waste—true?
+T1-Photographer,Photographer,True,False,Craziest shot you’ve snapped over coffee?
+T2-Photographer,Photographer,True,False,Lightroom or Capture One—which lens shines?
+T3-Photographer,Photographer,True,False,What’s your smoothest shutter win?
+T4-Photographer,Photographer,True,False,Ever caught a vibe mid-brew?
+T5-Photographer,Photographer,True,False,Best photo hack—spill the luminary tea!
+A1-Photographer,Photographer,False,True,Your pics are blurry—fix them!
+A2-Photographer,Photographer,False,True,Why’s that edit so overdone?
+A3-Photographer,Photographer,False,True,Anyone can take photos—right?
+A4-Photographer,Photographer,False,True,That shot’s dull—try harder!
+A5-Photographer,Photographer,False,True,Photography’s not art—agree?
+T1-Art Director,Art Director,True,False,Boldest vision you’ve brewed up lately?
+T2-Art Director,Art Director,True,False,Ever led a shoot over a cappuccino?
+T3-Art Director,Art Director,True,False,Mood board or sketch—which vibe’s your spark?
+T4-Art Director,Art Director,True,False,What’s your quirkiest campaign win?
+T5-Art Director,Art Director,True,False,Best creative call—spill the vanguard tea!
+A1-Art Director,Art Director,False,True,Your direction’s all over—focus!
+A2-Art Director,Art Director,False,True,Why’d that campaign flop?
+A3-Art Director,Art Director,False,True,"Art direction’s just bossing, huh?"
+A4-Art Director,Art Director,False,True,That concept’s lame—redo it!
+A5-Art Director,Art Director,False,True,You’re too artsy—tone it down!
+T1-Web Designer,Web Designer,True,False,Slickest site layout you’ve brewed?
+T2-Web Designer,Web Designer,True,False,Ever mocked up a page over cold brew?
+T3-Web Designer,Web Designer,True,False,Figma or Sketch—which tool’s your decor?
+T4-Web Designer,Web Designer,True,False,What’s your wildest design win?
+T5-Web Designer,Web Designer,True,False,Best web vibe—spill the digital tea!
+A1-Web Designer,Web Designer,False,True,Why’s your site so cluttered?
+A2-Web Designer,Web Designer,False,True,"You just use templates, right?"
+A3-Web Designer,Web Designer,False,True,That design’s outdated—ugh!
+A4-Web Designer,Web Designer,False,True,Web design’s too easy—true?
+A5-Web Designer,Web Designer,False,True,Your colors clash—fix it!
+T1-Game Designer,Game Designer,True,False,Craziest game mechanic you’ve brewed up?
+T2-Game Designer,Game Designer,True,False,Ever built a level over a latte?
+T3-Game Designer,Game Designer,True,False,Unity or Unreal—which play’s your vibe?
+T4-Game Designer,Game Designer,True,False,What’s your smoothest gameplay win?
+T5-Game Designer,Game Designer,True,False,Best game hack—spill the playmaker tea!
+A1-Game Designer,Game Designer,False,True,Why’s your game so buggy?
+A2-Game Designer,Game Designer,False,True,Games are for kids—agree?
+A3-Game Designer,Game Designer,False,True,That level’s awful—scrap it!
+A4-Game Designer,Game Designer,False,True,"You just copy other games, huh?"
+A5-Game Designer,Game Designer,False,True,Game design’s a fad—right?

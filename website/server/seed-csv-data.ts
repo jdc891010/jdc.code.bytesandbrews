@@ -14,7 +14,7 @@ function parseCSV(content: string) {
 
     const headers = lines[0].split(',').map(h => h.trim());
     return lines.slice(1).map(line => {
-        const values = [];
+        const values: string[] = [];
         let current = '';
         let inQuotes = false;
         for (let i = 0; i < line.length; i++) {
@@ -46,6 +46,10 @@ async function seed() {
     console.log('🌱 Seeding CSV data...');
 
     try {
+        // Disable foreign key checks for the duration of the seed
+        sqlite.exec('PRAGMA foreign_keys = OFF');
+        console.log('Foreign key checks disabled for seeding...');
+
         // 1. Seed Tribes
         console.log('Seeding Tribes...');
         const tribesPath = '../database/mock_tribes.csv';
@@ -67,15 +71,18 @@ async function seed() {
             console.log(`✅ Seeded ${tribesData.length} tribes`);
         }
 
-        // 2. Seed Professions
+        // 2. Clear professions and talking points (dependent order)
+        console.log('Clearing old professions and talking points...');
+        await db.delete(talkingPoints);
+        await db.delete(professions);
+
+        // 3. Seed Professions
         console.log('Seeding Professions...');
         const professionsPath = '../src/talking_points/remote_work_professions.csv';
         const insertedProfessions: any[] = [];
         if (fs.existsSync(professionsPath)) {
             const professionsCsv = fs.readFileSync(professionsPath, 'utf-8');
             const professionsData = parseCSV(professionsCsv);
-
-            await db.delete(professions);
 
             for (const prof of professionsData) {
                 if (!prof.main_group || !prof.secondary_label) continue;
@@ -89,36 +96,66 @@ async function seed() {
             console.log(`✅ Seeded ${insertedProfessions.length} professions`);
         }
 
-        // 3. Seed Talking Points
+        // 4. Seed Talking Points (Iterative)
         console.log('Seeding Talking Points...');
-        const talkingPointsPath = '../src/talking_points/tech_it_talking_points.csv';
-        if (fs.existsSync(talkingPointsPath)) {
-            const talkingPointsCsv = fs.readFileSync(talkingPointsPath, 'utf-8');
-            const talkingPointsData = parseCSV(talkingPointsCsv);
+        const tpFiles = [
+            'creative_design_talking_points.csv',
+            'marketing_sales_talking_points.csv',
+            'tech_it_talking_points.csv',
+            'writing_content_talking_points.csv',
+            'talking_points.csv' // Fallback for all 80 professions
+        ];
 
-            await db.delete(talkingPoints);
+        let totalSeededTp = 0;
+        for (const fileName of tpFiles) {
+            const tpPath = `../src/talking_points/${fileName}`;
+            if (fs.existsSync(tpPath)) {
+                console.log(`Processing ${fileName}...`);
+                const tpCsv = fs.readFileSync(tpPath, 'utf-8');
+                const tpData = parseCSV(tpCsv);
 
-            let seededTpCount = 0;
-            for (const tp of talkingPointsData) {
-                if (!tp.id || !tp.secondary_profession) continue;
-                // Find matching profession
-                const prof = insertedProfessions.find(p => p.secondaryLabel === tp.secondary_profession);
-                if (prof) {
-                    await db.insert(talkingPoints).values({
-                        id: tp.id,
-                        professionId: prof.id,
-                        tryThese: tp.try_these.toLowerCase() === 'true',
-                        avoidThese: tp.avoid_these.toLowerCase() === 'true',
-                        text: tp.text
+                let fileSeededCount = 0;
+                for (const tp of tpData) {
+                    if (!tp.id || !tp.secondary_profession) continue;
+
+                    // Find matching profession
+                    // If the CSV has main_group, use it. Otherwise, fallback to just secondaryLabel
+                    const prof = insertedProfessions.find(p => {
+                        if (tp.main_group) {
+                            return p.secondaryLabel === tp.secondary_profession && p.mainGroup === tp.main_group;
+                        }
+                        return p.secondaryLabel === tp.secondary_profession;
                     });
-                    seededTpCount++;
+
+                    if (prof) {
+                        try {
+                            await db.insert(talkingPoints).values({
+                                id: tp.id,
+                                professionId: prof.id,
+                                tryThese: tp.try_these.toLowerCase() === 'true',
+                                avoidThese: tp.avoid_these.toLowerCase() === 'true',
+                                text: tp.text
+                            }).onConflictDoNothing();
+                            fileSeededCount++;
+                        } catch (err) {
+                            // Silent catch for individual row errors if any
+                        }
+                    }
                 }
+                console.log(`  - Seeded ${fileSeededCount} points from ${fileName}`);
+                totalSeededTp += fileSeededCount;
             }
-            console.log(`✅ Seeded ${seededTpCount} talking points`);
         }
+        console.log(`✅ Total seeded ${totalSeededTp} talking points across all files`);
+
+        // Re-enable foreign key checks
+        sqlite.exec('PRAGMA foreign_keys = ON');
+        console.log('Foreign key checks re-enabled.');
 
         console.log('🎉 CSV data seeding completed successfully!');
     } catch (error) {
+        // Ensure FK checks are re-enabled if there's an error
+        sqlite.exec('PRAGMA foreign_keys = ON');
         console.error('❌ Error during seeding:', error);
         throw error;
     }

@@ -1,0 +1,101 @@
+id,secondary_profession,try_these,avoid_these,text
+T1-Digital Marketer,Digital Marketer,True,False,Wildest campaign you’ve brewed over a latte?
+T2-Digital Marketer,Digital Marketer,True,False,Ever spiked clicks mid-espresso?
+T3-Digital Marketer,Digital Marketer,True,False,SEO or PPC—which buzz beast’s your vibe?
+T4-Digital Marketer,Digital Marketer,True,False,What’s your slickest ad win?
+T5-Digital Marketer,Digital Marketer,True,False,Best Google Analytics trick—spill the tea!
+A1-Digital Marketer,Digital Marketer,False,True,Your ads are so annoying—stop it!
+A2-Digital Marketer,Digital Marketer,False,True,Why’d that campaign tank so hard?
+A3-Digital Marketer,Digital Marketer,False,True,Marketing’s just spam—right?
+A4-Digital Marketer,Digital Marketer,False,True,That click rate’s a joke—fix it!
+A5-Digital Marketer,Digital Marketer,False,True,Digital’s overhyped—agree?
+T1-Social Media Manager,Social Media Manager,True,False,Craziest viral post you’ve tamed over coffee?
+T2-Social Media Manager,Social Media Manager,True,False,Ever trended mid-cold brew?
+T3-Social Media Manager,Social Media Manager,True,False,Insta or X—which platform’s your roar?
+T4-Social Media Manager,Social Media Manager,True,False,What’s your quirkiest hashtag win?
+T5-Social Media Manager,Social Media Manager,True,False,Best engagement hack—spill the trend tea!
+A1-Social Media Manager,Social Media Manager,False,True,Your posts are so cringey—ugh!
+A2-Social Media Manager,Social Media Manager,False,True,Social’s a waste of time—true?
+A3-Social Media Manager,Social Media Manager,False,True,Why’d that reel flop so bad?
+A4-Social Media Manager,Social Media Manager,False,True,You just post memes—right?
+A5-Social Media Manager,Social Media Manager,False,True,No one follows you—admit it!
+T1-Email Marketing Specialist,Email Marketing Specialist,True,False,Slickest subject line you’ve brewed up?
+T2-Email Marketing Specialist,Email Marketing Specialist,True,False,Ever spiked opens over a cappuccino?
+T3-Email Marketing Specialist,Email Marketing Specialist,True,False,Mailchimp or Klaviyo—which inbox rocks?
+T4-Email Marketing Specialist,Email Marketing Specialist,True,False,What’s your smoothest campaign win?
+T5-Email Marketing Specialist,Email Marketing Specialist,True,False,Best CTA twist—spill the instigator tea!
+A1-Email Marketing Specialist,Email Marketing Specialist,False,True,Your emails are pure spam—stop!
+A2-Email Marketing Specialist,Email Marketing Specialist,False,True,Why’s that open rate so low?
+A3-Email Marketing Specialist,Email Marketing Specialist,False,True,Email’s dead—agree?
+A4-Email Marketing Specialist,Email Marketing Specialist,False,True,That newsletter’s trash—fix it!
+A5-Email Marketing Specialist,Email Marketing Specialist,False,True,You just clog inboxes—huh?
+T1-SEO Specialist,SEO Specialist,True,False,Craziest rank you’ve brewed over a doppio?
+T2-SEO Specialist,SEO Specialist,True,False,Ever topped Google mid-latte?
+T3-SEO Specialist,SEO Specialist,True,False,Ahrefs or SEMrush—which range’s your vibe?
+T4-SEO Specialist,SEO Specialist,True,False,What’s your slickest keyword win?
+T5-SEO Specialist,SEO Specialist,True,False,Best backlink hack—spill the ranger tea!
+A1-SEO Specialist,SEO Specialist,False,True,Your SEO sank us—admit it!
+A2-SEO Specialist,SEO Specialist,False,True,SEO’s just gaming search—right?
+A3-SEO Specialist,SEO Specialist,False,True,Why’s that rank so pathetic?
+A4-SEO Specialist,SEO Specialist,False,True,You can’t boost traffic—huh?
+A5-SEO Specialist,SEO Specialist,False,True,Search is dying—true?
+T1-PPC Manager,PPC Manager,True,False,Wildest Google Ads win you’ve brewed?
+T2-PPC Manager,PPC Manager,True,False,Ever clicked big over cold brew?
+T3-PPC Manager,PPC Manager,True,False,Search or display—which captain’s your click?
+T4-PPC Manager,PPC Manager,True,False,What’s your quirkiest ad copy story?
+T5-PPC Manager,PPC Manager,True,False,Best bid tweak—spill the PPC tea!
+A1-PPC Manager,PPC Manager,False,True,Your ads waste cash—stop it!
+A2-PPC Manager,PPC Manager,False,True,Why’s that CTR so lousy?
+A3-PPC Manager,PPC Manager,False,True,PPC’s a scam—agree?
+A4-PPC Manager,PPC Manager,False,True,That campaign flopped—fix it!
+A5-PPC Manager,PPC Manager,False,True,You just burn budgets—right?
+T1-Marketing Consultant,Marketing Consultant,True,False,Boldest strategy you’ve brewed over coffee?
+T2-Marketing Consultant,Marketing Consultant,True,False,Ever saved a brand mid-mocha?
+T3-Marketing Consultant,Marketing Consultant,True,False,HubSpot or intuition—which star’s your shine?
+T4-Marketing Consultant,Marketing Consultant,True,False,What’s your smoothest client win?
+T5-Marketing Consultant,Marketing Consultant,True,False,Best growth hack—spill the strategy tea!
+A1-Marketing Consultant,Marketing Consultant,False,True,Your advice tanked us—admit it!
+A2-Marketing Consultant,Marketing Consultant,False,True,Consulting’s just hot air—huh?
+A3-Marketing Consultant,Marketing Consultant,False,True,Why’s that plan so vague?
+A4-Marketing Consultant,Marketing Consultant,False,True,You’re too expensive—true?
+A5-Marketing Consultant,Marketing Consultant,False,True,Your ideas flop—agree?
+T1-Sales Representative,Sales Representative,True,False,Craziest deal you’ve driven over a brew?
+T2-Sales Representative,Sales Representative,True,False,Ever closed a sale mid-flat white?
+T3-Sales Representative,Sales Representative,True,False,Cold call or email—which drive’s your deal?
+T4-Sales Representative,Sales Representative,True,False,What’s your slickest pitch win?
+T5-Sales Representative,Sales Representative,True,False,Best objection flip—spill the driver tea!
+A1-Sales Representative,Sales Representative,False,True,Your sales are so pushy—stop!
+A2-Sales Representative,Sales Representative,False,True,Why’d that deal fall through?
+A3-Sales Representative,Sales Representative,False,True,Sales is sleazy—right?
+A4-Sales Representative,Sales Representative,False,True,You can’t close—admit it!
+A5-Sales Representative,Sales Representative,False,True,That pitch was weak—ugh!
+T1-Affiliate Marketer,Affiliate Marketer,True,False,Wildest link win you’ve brewed up?
+T2-Affiliate Marketer,Affiliate Marketer,True,False,Ever cashed in mid-espresso?
+T3-Affiliate Marketer,Affiliate Marketer,True,False,Amazon or ClickBank—which lord’s your vibe?
+T4-Affiliate Marketer,Affiliate Marketer,True,False,What’s your quirkiest commission story?
+T5-Affiliate Marketer,Affiliate Marketer,True,False,Best promo hack—spill the link tea!
+A1-Affiliate Marketer,Affiliate Marketer,False,True,Your links are spammy—stop it!
+A2-Affiliate Marketer,Affiliate Marketer,False,True,Affiliate’s a scam—true?
+A3-Affiliate Marketer,Affiliate Marketer,False,True,Why’s that payout so low?
+A4-Affiliate Marketer,Affiliate Marketer,False,True,You just peddle junk—huh?
+A5-Affiliate Marketer,Affiliate Marketer,False,True,No one clicks those—right?
+T1-Brand Strategist,Brand Strategist,True,False,Boldest brand vibe you’ve brewed over coffee?
+T2-Brand Strategist,Brand Strategist,True,False,Ever shaped a logo mid-latte?
+T3-Brand Strategist,Brand Strategist,True,False,Voice or visuals—which buccaneer’s your sail?
+T4-Brand Strategist,Brand Strategist,True,False,What’s your smoothest rebrand win?
+T5-Brand Strategist,Brand Strategist,True,False,Best brand story—spill the pirate tea!
+A1-Brand Strategist,Brand Strategist,False,True,Your brand’s so bland—fix it!
+A2-Brand Strategist,Brand Strategist,False,True,Why’d that identity flop?
+A3-Brand Strategist,Brand Strategist,False,True,Branding’s just logos—huh?
+A4-Brand Strategist,Brand Strategist,False,True,That strategy’s stale—redo it!
+A5-Brand Strategist,Brand Strategist,False,True,You can’t sell a vibe—agree?
+T1-Market Research Analyst,Market Research Analyst,True,False,Craziest insight you’ve brewed over a brew?
+T2-Market Research Analyst,Market Research Analyst,True,False,Ever cracked a trend mid-cappuccino?
+T3-Market Research Analyst,Market Research Analyst,True,False,Surveys or focus groups—which digs your vibe?
+T4-Market Research Analyst,Market Research Analyst,True,False,What’s your slickest data win?
+T5-Market Research Analyst,Market Research Analyst,True,False,Best consumer hack—spill the insight tea!
+A1-Market Research Analyst,Market Research Analyst,False,True,Your data’s all wrong—admit it!
+A2-Market Research Analyst,Market Research Analyst,False,True,Research is pointless—true?
+A3-Market Research Analyst,Market Research Analyst,False,True,Why’s that report so dull?
+A4-Market Research Analyst,Market Research Analyst,False,True,You just guess trends—huh?
+A5-Market Research Analyst,Market Research Analyst,False,True,That insight’s useless—fix it!

@@ -1,0 +1,101 @@
+id,secondary_profession,try_these,avoid_these,text
+T1-Copywriter,Copywriter,True,False,Best tagline you’ve spun over a latte?
+T2-Copywriter,Copywriter,True,False,Ever nailed an ad with one word?
+T3-Copywriter,Copywriter,True,False,What’s your quirkiest client pitch story?
+T4-Copywriter,Copywriter,True,False,Short copy or long—which brews your vibe?
+T5-Copywriter,Copywriter,True,False,Google Docs or Word—pick your weave tool!
+A1-Copywriter,Copywriter,False,True,Your ads are so dull—spice it up!
+A2-Copywriter,Copywriter,False,True,Why’d that campaign bomb so hard?
+A3-Copywriter,Copywriter,False,True,"Copywriting’s just slogans, huh?"
+A4-Copywriter,Copywriter,False,True,That pitch was weak—redo it!
+A5-Copywriter,Copywriter,False,True,Words don’t sell—agree?
+T1-Content Writer,Content Writer,True,False,Wildest blog hook you’ve brewed up?
+T2-Content Writer,Content Writer,True,False,Ever spun a tale over cold brew?
+T3-Content Writer,Content Writer,True,False,Narrative or listicle—which story’s your jam?
+T4-Content Writer,Content Writer,True,False,What’s your slickest 500-word win?
+T5-Content Writer,Content Writer,True,False,Best keyword twist—spill the spinner tea!
+A1-Content Writer,Content Writer,False,True,Why’s your content so boring?
+A2-Content Writer,Content Writer,False,True,"You just fluff words, right?"
+A3-Content Writer,Content Writer,False,True,That post’s a snooze—fix it!
+A4-Content Writer,Content Writer,False,True,Writing’s too easy—true?
+A5-Content Writer,Content Writer,False,True,"No one reads blogs anymore, huh?"
+T1-Technical Writer,Technical Writer,True,False,Craziest manual you’ve brewed over coffee?
+T2-Technical Writer,Technical Writer,True,False,Ever simplified tech mid-espresso?
+T3-Technical Writer,Technical Writer,True,False,Markdown or Word—which tech’s your tell?
+T4-Technical Writer,Technical Writer,True,False,What’s your smoothest doc win?
+T5-Technical Writer,Technical Writer,True,False,Best jargon hack—spill the teller tea!
+A1-Technical Writer,Technical Writer,False,True,Your docs are so confusing—ugh!
+A2-Technical Writer,Technical Writer,False,True,Tech writing’s dry—admit it!
+A3-Technical Writer,Technical Writer,False,True,Why’s that guide so long?
+A4-Technical Writer,Technical Writer,False,True,"You just copy manuals, huh?"
+A5-Technical Writer,Technical Writer,False,True,No one reads instructions—right?
+T1-Journalist,Journalist,True,False,Wildest scoop you’ve nabbed over a brew?
+T2-Journalist,Journalist,True,False,Ever filed a story mid-latte?
+T3-Journalist,Journalist,True,False,Print or digital—which news nomad’s you?
+T4-Journalist,Journalist,True,False,What’s your quirkiest interview win?
+T5-Journalist,Journalist,True,False,Best lead line—spill the scoop tea!
+A1-Journalist,Journalist,False,True,Your story’s fake news—true?
+A2-Journalist,Journalist,False,True,Why’d that piece flop so bad?
+A3-Journalist,Journalist,False,True,Journalism’s dead—agree?
+A4-Journalist,Journalist,False,True,That headline’s lame—fix it!
+A5-Journalist,Journalist,False,True,"You just chase clicks, huh?"
+T1-Blogger,Blogger,True,False,Craziest post you’ve brewed up lately?
+T2-Blogger,Blogger,True,False,Ever typed a rant over a cappuccino?
+T3-Blogger,Blogger,True,False,WordPress or Medium—which bard’s your vibe?
+T4-Blogger,Blogger,True,False,What’s your slickest viral win?
+T5-Blogger,Blogger,True,False,Best blog hack—spill the bardic tea!
+A1-Blogger,Blogger,False,True,Your blog’s so outdated—update it!
+A2-Blogger,Blogger,False,True,"Blogging’s not real writing, huh?"
+A3-Blogger,Blogger,False,True,Why’s that post so wordy?
+A4-Blogger,Blogger,False,True,No one cares about blogs—right?
+A5-Blogger,Blogger,False,True,You just ramble—admit it!
+T1-Editor/Proofreader,Editor/Proofreader,True,False,Wildest typo you’ve fixed over coffee?
+T2-Editor/Proofreader,Editor/Proofreader,True,False,Ever polished a draft mid-mocha?
+T3-Editor/Proofreader,Editor/Proofreader,True,False,Grammarly or manual—which guru’s your brew?
+T4-Editor/Proofreader,Editor/Proofreader,True,False,What’s your smoothest edit win?
+T5-Editor/Proofreader,Editor/Proofreader,True,False,Best red-pen story—spill the tea!
+A1-Editor/Proofreader,Editor/Proofreader,False,True,You missed that typo—sloppy!
+A2-Editor/Proofreader,Editor/Proofreader,False,True,"Editing’s just nitpicking, huh?"
+A3-Editor/Proofreader,Editor/Proofreader,False,True,Why’s your edit so harsh?
+A4-Editor/Proofreader,Editor/Proofreader,False,True,That draft’s still bad—fix it!
+A5-Editor/Proofreader,Editor/Proofreader,False,True,Proofing’s boring—true?
+T1-Scriptwriter,Scriptwriter,True,False,Craziest scene you’ve scripted over a brew?
+T2-Scriptwriter,Scriptwriter,True,False,Ever penned a twist mid-flat white?
+T3-Scriptwriter,Scriptwriter,True,False,Celtx or Final Draft—which scribe’s your vibe?
+T4-Scriptwriter,Scriptwriter,True,False,What’s your slickest dialogue win?
+T5-Scriptwriter,Scriptwriter,True,False,Best plot hook—spill the script tea!
+A1-Scriptwriter,Scriptwriter,False,True,Your script’s so predictable—ugh!
+A2-Scriptwriter,Scriptwriter,False,True,Why’s that scene so flat?
+A3-Scriptwriter,Scriptwriter,False,True,Scripting’s just words—right?
+A4-Scriptwriter,Scriptwriter,False,True,That twist sucked—redo it!
+A5-Scriptwriter,Scriptwriter,False,True,You can’t write drama—agree?
+T1-Social Media Content Creator,Social Media Content Creator,True,False,Wildest TikTok you’ve brewed up lately?
+T2-Social Media Content Creator,Social Media Content Creator,True,False,Ever posted a banger over espresso?
+T3-Social Media Content Creator,Social Media Content Creator,True,False,Insta or X—which post’s your prodigy?
+T4-Social Media Content Creator,Social Media Content Creator,True,False,What’s your quirkiest viral win?
+T5-Social Media Content Creator,Social Media Content Creator,True,False,Best hashtag hack—spill the tea!
+A1-Social Media Content Creator,Social Media Content Creator,False,True,Your posts are so cringe—stop it!
+A2-Social Media Content Creator,Social Media Content Creator,False,True,Social media’s a waste—true?
+A3-Social Media Content Creator,Social Media Content Creator,False,True,Why’d that reel flop?
+A4-Social Media Content Creator,Social Media Content Creator,False,True,"You just chase likes, huh?"
+A5-Social Media Content Creator,Social Media Content Creator,False,True,That caption’s lame—fix it!
+T1-SEO Specialist,SEO Specialist,True,False,Craziest rank you’ve brewed up over coffee?
+T2-SEO Specialist,SEO Specialist,True,False,Ever topped Google mid-latte?
+T3-SEO Specialist,SEO Specialist,True,False,Ahrefs or SEMrush—which sage’s your brew?
+T4-SEO Specialist,SEO Specialist,True,False,What’s your slickest keyword win?
+T5-SEO Specialist,SEO Specialist,True,False,Best SEO trick—spill the search tea!
+A1-SEO Specialist,SEO Specialist,False,True,Your SEO’s why we sank—admit it!
+A2-SEO Specialist,SEO Specialist,False,True,"SEO’s just gaming Google, huh?"
+A3-SEO Specialist,SEO Specialist,False,True,Why’s that rank so low?
+A4-SEO Specialist,SEO Specialist,False,True,You can’t boost traffic—right?
+A5-SEO Specialist,SEO Specialist,False,True,Search is dead—agree?
+T1-Author,Author,True,False,Wildest chapter you’ve brewed over a doppio?
+T2-Author,Author,True,False,Ever penned an epic mid-cold brew?
+T3-Author,Author,True,False,Scrivener or pen—which tale’s your titan?
+T4-Author,Author,True,False,What’s your smoothest plot twist win?
+T5-Author,Author,True,False,Best book idea—spill the epic tea!
+A1-Author,Author,False,True,Your book’s so dull—scrap it!
+A2-Author,Author,False,True,Why’s that chapter so long?
+A3-Author,Author,False,True,Writing novels is pointless—huh?
+A4-Author,Author,False,True,That ending sucked—fix it!
+A5-Author,Author,False,True,You’ll never sell—true?
