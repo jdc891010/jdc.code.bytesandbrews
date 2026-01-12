@@ -1,53 +1,61 @@
-# Brews and Bytes
+# Brews and Bytes: Insights by the crowd for the crowd
 
-A web application for finding optimal remote work locations in Somerset West, South Africa. Brews and Bytes helps remote workers, freelancers, and digital nomads discover the perfect cafes and workspaces based on internet speed, ambiance, noise levels, and parking availability.
+A social infrastructure platform for finding and optimizing remote work locations in Somerset West, South Africa. Brews and Bytes leverages **crowdsourced wisdom** to help professionals discover the perfect workspaces while providing businesses with data-driven insights to improve their revenue and infrastructure.
 
 ![Brews and Bytes](https://placeholder-for-screenshot.com/brewsandbytes-screenshot.png)
 
+## 📊 Project Vision
+View our latest project presentation and strategic roadmap:
+- **[Interactive HTML Presentation](./docs/Brews_and_Bytes_Presentation.html)** (Best for viewing)
+- **[Executive Summary (Markdown)](./docs/Brews_and_Bytes_Presentation.md)**
+
+## Core Strategy
+1. **Phase 1: Crowdsourcing**: Initial value through community-contributed metrics (WiFi, noise, atmosphere).
+2. **Phase 2: Targeted Feedback**: Using questionnaires to identify "pain points" and understand why specific spaces are avoided.
+3. **Phase 3: Business Solutions**: Partnering with cafes to optimize revenue and WiFi (e.g., dead spot scanning and placement optimization).
+
 ## Features
 
-- **Interactive Map**: Locate and explore workspaces across Somerset West
-- **Detailed Metrics**: Compare locations based on:
+- **Interactive Map**: Locate and explore workspaces across Somerset West.
+- **Crowdsourced Metrics**: Real-time community data on:
   - Internet Speed (Mbps)
-  - Vibe/Ambiance (1-5 scale)
-  - Noise Level (1-5 scale)
-  - Parking Availability (1-5 scale)
-- **Data Visualization**:
-  - Heatmaps showing best times to visit
-  - Box plots for statistical distribution of metrics
-  - Weekly and monthly trend graphs
-- **Tribe System**: Find locations popular among different professional groups:
+  - Vibe & Ambiance
+  - Noise Levels
+  - Parking Availability
+- **Subjective Insights**: Targeted feedback via questionnaires to identify workspace blockers.
+- **Business Intelligence**: Data-driven recommendations for coffee shop owners to attract remote workers.
+- **Tribe System**: Find locations popular among your professional "tribe":
   - Code Conjurers (Developers)
   - Word Weavers (Writers)
   - Pixel Pixies (Designers)
-  - Buzz Beasts (Marketers/Social Media)
-  - Data Diviners (Analysts/Data Scientists)
-- **Integrated Speed Test**: Test and contribute internet speed data
-- **Accessibility Information**: Filter locations based on handicapped facilities
-- **Community Reviews**: Read and contribute comments from other users
+  - Buzz Beasts (Marketers)
+- **Monetization & Promotion**:
+  - Advertised Specials & Partner Promotions.
+  - Branded Merchandise (Caffeine-fueled tech gear).
+  - WiFi Optimization Partnerships.
 
 ## Technology Stack
 
 ### Frontend
-- HTML5, CSS3, JavaScript
-- D3.js for data visualization
-- Google Maps API for location mapping
+- React.js, Tailwind CSS, Framer Motion
+- Recharts for data visualization
+- Leaflet/Google Maps for location mapping
 
 ### Backend
 - Node.js with Express
-- Environment variables for API key management
+- SQLite (via Drizzle ORM) for development; planned Supabase migration
+- Multer for image management
 
 ### Data Analysis
 - Python 3.12+
-- Libraries: pandas, geopandas, duckdb, pyarrow, marimo
+- Libraries: pandas, geopandas, duckdb, pyarrow
 
 ## Setup
 
 ### Prerequisites
-- Node.js (v14+)
+- Node.js (v18+)
 - npm or yarn
 - Python 3.12+
-- Google Maps API key
 
 ### Installation
 
@@ -57,78 +65,41 @@ A web application for finding optimal remote work locations in Somerset West, So
    cd brewsandbytes
    ```
 
-2. Set up the backend
+2. Set up the website
    ```bash
    cd website
    npm install
    ```
 
-3. Create a `.env` file in the website directory with your Google Maps API key:
-   ```
-   GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
-   ```
+3. Create a `.env` file in the `website` directory (see `.env.example`).
 
-4. Set up the Python environment (for data analysis tools)
+4. Running the application
    ```bash
-   # From the project root
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -e .
+   npm run dev
    ```
-
-## Running the Application
-
-### Development Mode
-```bash
-cd website
-npm run dev
-```
-The application will be available at http://localhost:3000
-
-### Production Mode
-```bash
-cd website
-npm start
-```
 
 ## Project Structure
 
 ```
 brewsandbytes/
-├── .venv/                  # Python virtual environment
-├── ookla/                  # Speedtest data analysis
-├── src/                    # Python source code for data processing
-├── tools/                  # Utility scripts
-├── website/                # Web application
-│   ├── data_models/        # Data structure definitions
-│   ├── public/             # Static assets and frontend code
-│   │   ├── *.js            # JavaScript modules
-│   │   ├── *.css           # Stylesheets
-│   │   └── index.html      # Main HTML file
-│   ├── .env                # Environment variables (not in repo)
-│   ├── package.json        # Node.js dependencies
-│   └── server.js           # Express server
-├── .gitignore              # Git ignore file
-├── pyproject.toml          # Python project configuration
-└── README.md               # This file
+├── docs/                   # Presentation and strategy documents
+├── website/                # Full-stack web application
+│   ├── client/             # React frontend
+│   ├── server/             # Node.js/Express backend
+│   ├── shared/             # Shared types and schema
+│   └── migrations/         # Database migrations
+├── architecture.md         # System design diagrams
+├── TODO.md                 # Project roadmap status
+└── TASKS.md                # Actionable task breakdown
 ```
 
 ## Contributing
 
-We welcome contributions to Brews and Bytes! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Data Contributions
-
-You can contribute to our dataset by:
-- Using the integrated speed test at various locations
-- Submitting reviews and ratings for workspaces
-- Suggesting new locations to add to the map
+We are a "crowd for the crowd" platform! You can chip in by:
+1. Submitting real-time WiFi speed tests.
+2. Answering questionnaires about your workspace experiences.
+3. Suggesting new locations.
+4. Developing new visualization tools for our community data.
 
 ## License
 
@@ -136,6 +107,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Coffee shops of Somerset West for providing workspaces
-- The remote working community for inspiration and feedback
-- All contributors who have helped improve this application
+- The Somerset West remote work community for their invaluable crowdsourced data.
+- Local cafes for providing the "brews" while we provide the "bytes".

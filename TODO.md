@@ -2,54 +2,54 @@
 
 ## Core Setup
 
-- [ ] **Use GooglePlaces API** – create cached entries in DB to reduce API calls
-- [ ] **Register Domain & add reCAPTCHA** – secure forms for credibility & safety
-- [ ] **Setup Supabase project** – free database for development
+- [ ] **Use GooglePlaces API** – [/] Data imported from JSON, but dynamic API integration pending
+- [ ] **Register Domain & add reCAPTCHA** – [/] Dependency added, implementation in forms pending
+- [ ] **Setup Supabase project** – [ ] Currently using SQLite via Drizzle; migration planned
 
 ---
 
 ## Database & Backend
 
-- [ ] **Map out necessary tables** – plan schema to feed website
-- [ ] **Create database tables** – implement schema in Supabase
+- [x] **Map out necessary tables** – [x] Comprehensive schema implemented in `schema.ts`
+- [x] **Create database tables** – [x] Drizzle migrations and SQLite storage active
 
 ---
 
 ## User Features
 
-- [*] **Notification board** – allow users to post downtime/closure updates
-- [*] **Integrate navigation links** – Google Maps, Apple Maps, Waze
-- [*] **Uber deep-link research** – preload address if app is installed
-- [ ] **User Reviews and Ratings** - Allow users to leave reviews and ratings for coffee shops.
-- [ ] **Advanced Search and Filtering** - Implement filtering by amenities like Wi-Fi speed, availability of power outlets, pet-friendliness, etc.
-- [ ] **User Profiles** - Allow users to create profiles to save favorite spots, track reviews, and manage preferences.
-- [ ] **Gamification/Rewards System** - Award points/badges for reviews, check-ins, and adding new places to encourage engagement.
+- [x] **Notification board** – [x] Admin-managed notifications live via `NotificationPanel`
+- [x] **Integrate navigation links** – [x] Google Maps, Apple Maps, Waze live in `CoffeeShopDetails`
+- [x] **Uber deep-link research** – [x] Custom deep-link builder implemented with location preloading
+- [ ] **User Reviews and Ratings** - [/] UI mocked in details view; separate DB table pending
+- [ ] **Advanced Search and Filtering** - [/] Amenities schema exists; advanced filter UI refinement pending
+- [ ] **User Profiles** - [ ] Basic `users` table exists, but profile features (favorites, history) pending
+- [ ] **Gamification/Rewards System** - [ ] Pending
 
 ---
 
 ## Admin & Coffee Shop Owner Features
 
-- [*] **Admin Panel** - Create a dashboard for managing users, listings, and content.
-- [ ] **Login for Coffee Shop Owners** - Allow owners to claim their listings and manage their coffee shop's profile.
-- [ ] **Manage Specials and Coupons** - Allow owners to post and manage promotional offers.
-- [ ] **Image Uploads** - Allow owners to upload pictures of their coffee shops.
+- [x] **Admin Panel** - [x] Fully functional dashboard for managing shops, blogs, coupons, and notifications
+- [ ] **Login for Coffee Shop Owners** - [ ] `adminUsers` roles exist, but owner self-service pending
+- [x] **Manage Specials and Coupons** - [x] Schema and Admin UI implemented
+- [x] **Image Uploads** - [x] Multer-based upload system and image management live
 
 ---
 
 ## Marketing & Growth
 
-- [ ] **Coffee shop launch campaign** – specials, coupons, partnerships
-- [ ] **Blog & community content** – stories on remote work & connection
-- [ ] **User growth campaign** – motivate users to visit & share
-- [ ] **Partner outreach** – introduce platform to owners, build partnerships
+- [x] **Coffee shop launch campaign** – [x] `LaunchCampaign` page and backend tools (coupons/specials) ready
+- [x] **Blog & community content** – [x] Blog management system and community pages live
+- [ ] **User growth campaign** – [ ] Pending
+- [ ] **Partner outreach** – [ ] Pending
 
 ---
 
 ## Data Acquisition & Expansion
 
-- [ ] **Expansion roadmap** – plan rollout to Strand, Gordonsbay, Stellenbosch
-- [ ] **Automated Data Scraping** - Develop a scraper to automatically pull data from Google Maps, Zomato, or other local directories to find new coffee shops.
-- [ ] **Hosting migration research** – AWS vs Cloudways feasibility
+- [x] **Expansion roadmap** – [x] Roadmap page and rollout plan visible
+- [ ] **Automated Data Scraping** - [/] `import-places.ts` utility exists for JSON imports
+- [ ] **Hosting migration research** – [/] AWS vs Cloudways feasibility research in progress
 
 ---
 
