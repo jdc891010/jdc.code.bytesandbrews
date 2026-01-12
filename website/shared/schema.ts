@@ -342,3 +342,55 @@ export const imageSchema = createInsertSchema(images).pick({
 
 export type Image = typeof images.$inferSelect;
 export type InsertImage = z.infer<typeof imageSchema>;
+
+// Tribes Table
+export const tribes = sqliteTable("tribes", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  description: text("description"),
+});
+
+export const insertTribeSchema = createInsertSchema(tribes).pick({
+  name: true,
+  description: true,
+});
+
+export type Tribe = typeof tribes.$inferSelect;
+export type InsertTribe = z.infer<typeof insertTribeSchema>;
+
+// Professions Table (from remote_work_professions.csv)
+export const professions = sqliteTable("professions", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  mainGroup: text("main_group").notNull(),
+  secondaryLabel: text("secondary_label").notNull(),
+  funLabel: text("fun_label").notNull(),
+});
+
+export const insertProfessionSchema = createInsertSchema(professions).pick({
+  mainGroup: true,
+  secondaryLabel: true,
+  funLabel: true,
+});
+
+export type Profession = typeof professions.$inferSelect;
+export type InsertProfession = z.infer<typeof insertProfessionSchema>;
+
+// Talking Points Table (from tech_it_talking_points.csv)
+export const talkingPoints = sqliteTable("talking_points", {
+  id: text("id").primaryKey(), // Using the string ID from CSV like 'T1-Software Developer'
+  professionId: integer("profession_id").references(() => professions.id),
+  tryThese: integer("try_these", { mode: "boolean" }).notNull(),
+  avoidThese: integer("avoid_these", { mode: "boolean" }).notNull(),
+  text: text("text").notNull(),
+});
+
+export const insertTalkingPointSchema = createInsertSchema(talkingPoints).pick({
+  id: true,
+  professionId: true,
+  tryThese: true,
+  avoidThese: true,
+  text: true,
+});
+
+export type TalkingPoint = typeof talkingPoints.$inferSelect;
+export type InsertTalkingPoint = z.infer<typeof insertTalkingPointSchema>;

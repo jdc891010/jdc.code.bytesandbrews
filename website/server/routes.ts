@@ -2,13 +2,13 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
-import { 
-  contactFormSchema, 
-  signUpFormSchema, 
+import {
+  contactFormSchema,
+  signUpFormSchema,
   subscribeSchema,
   type Contact,
   type SignUp,
-  type Subscriber 
+  type Subscriber
 } from "@shared/schema";
 import { setupAdminRoutes } from "./admin-routes.js";
 import { createDefaultAdmin } from "./auth.js";
@@ -16,51 +16,51 @@ import { createDefaultAdmin } from "./auth.js";
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize default admin user
   await createDefaultAdmin();
-  
+
   // Setup admin routes
   setupAdminRoutes(app);
-  
+
   // Public API endpoint for coffee shops (for map display)
   app.get("/api/coffee-shops", async (req, res) => {
     try {
       const { lat, lng, radius } = req.query;
-      
+
       // Get all coffee shops from database
       const coffeeShops = await storage.getAllCoffeeShops();
-      
+
       // If location parameters are provided, filter by distance
       if (lat && lng && radius) {
         const centerLat = parseFloat(lat as string);
         const centerLng = parseFloat(lng as string);
         const searchRadius = parseFloat(radius as string);
-        
+
         // Simple distance filtering (approximate)
         const filteredShops = coffeeShops.filter(shop => {
           if (!shop.latitude || !shop.longitude) return false;
-          
+
           const shopLat = parseFloat(shop.latitude);
           const shopLng = parseFloat(shop.longitude);
-          
+
           // Calculate approximate distance using Haversine formula
           const R = 6371000; // Earth's radius in meters
           const dLat = (shopLat - centerLat) * Math.PI / 180;
           const dLng = (shopLng - centerLng) * Math.PI / 180;
-          const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                   Math.cos(centerLat * Math.PI / 180) * Math.cos(shopLat * Math.PI / 180) *
-                   Math.sin(dLng/2) * Math.sin(dLng/2);
-          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(centerLat * Math.PI / 180) * Math.cos(shopLat * Math.PI / 180) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
           const distance = R * c;
-          
+
           return distance <= searchRadius;
         });
-        
+
         return res.status(200).json({
           success: true,
           coffeeShops: filteredShops,
           total: filteredShops.length
         });
       }
-      
+
       return res.status(200).json({
         success: true,
         coffeeShops,
@@ -74,13 +74,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
-  
+
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
       const data = contactFormSchema.parse(req.body);
       const contact = await storage.createContact(data);
-      
+
       return res.status(201).json({
         success: true,
         message: "Contact form submitted successfully",
@@ -94,7 +94,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors
         });
       }
-      
+
       return res.status(500).json({
         success: false,
         message: "Failed to submit contact form"
@@ -107,7 +107,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const data = signUpFormSchema.parse(req.body);
       const signup = await storage.createSignUp(data);
-      
+
       return res.status(201).json({
         success: true,
         message: "Sign up successful",
@@ -121,7 +121,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors
         });
       }
-      
+
       return res.status(500).json({
         success: false,
         message: "Failed to process sign up"
@@ -134,7 +134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const data = subscribeSchema.parse(req.body);
       const subscriber = await storage.createSubscriber(data);
-      
+
       return res.status(201).json({
         success: true,
         message: "Subscription successful",
@@ -148,7 +148,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors
         });
       }
-      
+
       return res.status(500).json({
         success: false,
         message: "Failed to process subscription"
@@ -198,7 +198,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const data = await response.json();
       const content = data.choices?.[0]?.message?.content;
-      
+
       if (content) {
         try {
           // Clean up potential markdown formatting from the response
@@ -311,14 +311,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { slug } = req.params;
       const blogPost = await storage.getBlogPostBySlug(slug);
-      
+
       if (!blogPost) {
         return res.status(404).json({
           success: false,
           message: "Blog post not found"
         });
       }
-      
+
       // Only return published posts to the public
       if (blogPost.status !== "published") {
         return res.status(404).json({
@@ -326,7 +326,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: "Blog post not found"
         });
       }
-      
+
       return res.status(200).json({
         success: true,
         blogPost
@@ -359,7 +359,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/featured-spots", async (req, res) => {
     try {
       const featuredSpots = await storage.getActiveFeaturedSpots();
-      
+
       // We need to join with coffee shop details for the frontend
       // Since we don't have a join method in storage yet, we'll fetch coffee shops and map them
       // In a production app, we should add a joined query in storage layer
@@ -383,6 +383,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({
         success: false,
         message: "Failed to retrieve featured spots"
+      });
+    }
+  });
+
+  // Get all tribes
+  app.get("/api/tribes", async (req, res) => {
+    try {
+      const tribes = await storage.getAllTribes();
+      return res.status(200).json({
+        success: true,
+        tribes
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve tribes"
+      });
+    }
+  });
+
+  // Get all professions
+  app.get("/api/professions", async (req, res) => {
+    try {
+      const professions = await storage.getAllProfessions();
+      return res.status(200).json({
+        success: true,
+        professions
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve professions"
+      });
+    }
+  });
+
+  // Get talking points
+  app.get("/api/talking-points", async (req, res) => {
+    try {
+      const { professionId } = req.query;
+      let talkingPoints;
+      if (professionId) {
+        talkingPoints = await storage.getTalkingPointsByProfession(parseInt(professionId as string));
+      } else {
+        talkingPoints = await storage.getAllTalkingPoints();
+      }
+      return res.status(200).json({
+        success: true,
+        talkingPoints
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve talking points"
       });
     }
   });

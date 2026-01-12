@@ -10,6 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useQuery } from "@tanstack/react-query";
+import { Profession } from "@shared/schema";
 
 const signUpFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -26,7 +28,12 @@ type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 const SignUpForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
+
+  const { data: professionsResponse } = useQuery<{ success: boolean, professions: Profession[] }>({
+    queryKey: ["/api/professions"],
+  });
+  const professions = professionsResponse?.professions || [];
+
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -40,15 +47,15 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpFormValues) => {
     setIsSubmitting(true);
-    
+
     try {
       await apiRequest("POST", "/api/signup", data);
-      
+
       toast({
         title: "Thank you for signing up!",
         description: "You've been added to our waitlist. We'll notify you when we launch in your city.",
       });
-      
+
       form.reset();
     } catch (error) {
       toast({
@@ -65,7 +72,7 @@ const SignUpForm = () => {
     <div className="bg-white text-dark-brown rounded-xl p-6 shadow-lg">
       <h3 className="font-bold text-xl mb-4 text-center">Join the Waitlist</h3>
       <p className="text-sm mb-6 text-center">Be the first to know when we launch in your city or sign up for our beta program.</p>
-      
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -81,7 +88,7 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="email"
@@ -95,7 +102,7 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="city"
@@ -109,7 +116,7 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="tribe"
@@ -122,22 +129,26 @@ const SignUpForm = () => {
                       <SelectValue placeholder="Select your tribe" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="code-conjurer">Code Conjurer</SelectItem>
-                    <SelectItem value="web-wizard">Web Wizard</SelectItem>
-                    <SelectItem value="pixel-pixie">Pixel Pixie</SelectItem>
-                    <SelectItem value="frame-fiend">Frame Fiend</SelectItem>
-                    <SelectItem value="word-weaver">Word Weaver</SelectItem>
-                    <SelectItem value="story-spinner">Story Spinner</SelectItem>
-                    <SelectItem value="buzz-beast">Buzz Beast</SelectItem>
-                    <SelectItem value="deal-driver">Deal Driver</SelectItem>
+                  <SelectContent className="max-h-[300px]">
+                    {professions.length > 0 ? professions.map((prof) => (
+                      <SelectItem key={prof.id} value={prof.secondaryLabel}>
+                        {prof.funLabel} ({prof.secondaryLabel})
+                      </SelectItem>
+                    )) : (
+                      <>
+                        <SelectItem value="code-conjurer">Code Conjurer</SelectItem>
+                        <SelectItem value="web-wizard">Web Wizard</SelectItem>
+                        <SelectItem value="pixel-pixie">Pixel Pixie</SelectItem>
+                        <SelectItem value="word-weaver">Word Weaver</SelectItem>
+                      </>
+                    )}
                   </SelectContent>
                 </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="termsAccepted"
@@ -167,9 +178,9 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          
-          <Button 
-            type="submit" 
+
+          <Button
+            type="submit"
             className="w-full bg-tech-blue hover:bg-opacity-80 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 brand-btn"
             disabled={isSubmitting}
           >

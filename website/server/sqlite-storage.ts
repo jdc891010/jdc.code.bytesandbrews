@@ -4,6 +4,7 @@ import { eq, and, lte, gte } from "drizzle-orm";
 import {
   users, contacts, signups, subscribers, coffeeShops, adminUsers,
   coupons, blogPosts, notifications, specials, featuredSpots, images,
+  tribes, professions, talkingPoints,
   type User, type InsertUser,
   type Contact, type InsertContact,
   type SignUp, type InsertSignUp,
@@ -15,7 +16,8 @@ import {
   type Notification, type InsertNotification,
   type Special, type InsertSpecial,
   type FeaturedSpot, type InsertFeaturedSpot,
-  type Image, type InsertImage
+  type Image, type InsertImage,
+  type Tribe, type Profession, type TalkingPoint
 } from "../shared/schema.js";
 import { type IStorage } from "./storage.js";
 
@@ -220,7 +222,7 @@ export class SQLiteStorage implements IStorage {
   async incrementCouponUsage(id: number): Promise<boolean> {
     const coupon = await this.getCoupon(id);
     if (!coupon) return false;
-    
+
     const result = await this.db.update(coupons)
       .set({ currentUses: coupon.currentUses + 1 })
       .where(eq(coupons.id, id));
@@ -392,7 +394,7 @@ export class SQLiteStorage implements IStorage {
     const now = new Date();
     const currentMonth = now.getMonth() + 1;
     const currentYear = now.getFullYear();
-    
+
     const result = await this.db.select().from(featuredSpots)
       .where(and(
         eq(featuredSpots.isActive, true),
@@ -466,5 +468,22 @@ export class SQLiteStorage implements IStorage {
   async deleteImage(id: number): Promise<boolean> {
     const result = await this.db.delete(images).where(eq(images.id, id));
     return result.changes > 0;
+  }
+
+  // Tribe, Profession, and Talking Point operations
+  async getAllTribes(): Promise<Tribe[]> {
+    return await this.db.select().from(tribes).orderBy(tribes.id);
+  }
+
+  async getAllProfessions(): Promise<Profession[]> {
+    return await this.db.select().from(professions).orderBy(professions.id);
+  }
+
+  async getAllTalkingPoints(): Promise<TalkingPoint[]> {
+    return await this.db.select().from(talkingPoints);
+  }
+
+  async getTalkingPointsByProfession(professionId: number): Promise<TalkingPoint[]> {
+    return await this.db.select().from(talkingPoints).where(eq(talkingPoints.professionId, professionId));
   }
 }

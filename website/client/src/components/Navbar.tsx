@@ -33,6 +33,7 @@ const Navbar = () => {
     { name: "Tribes", path: "/tribes" },
     { name: "Launch Campaign", path: "/launch-campaign" },
     { name: "Blog", path: "/blog" },
+    { name: "Download", path: "/download" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -47,12 +48,12 @@ const Navbar = () => {
         <Link href="/" className="flex items-center">
           <Logo />
         </Link>
-        
+
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.path} 
+            <Link
+              key={link.path}
               href={link.path}
               className={`text-cream-white hover:text-vibe-yellow font-medium transition-colors ${isActive(link.path) ? 'text-vibe-yellow' : ''}`}
             >
@@ -66,23 +67,23 @@ const Navbar = () => {
             </Button>
           </a>
         </div>
-        
+
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-cream-white focus:outline-none" 
+        <button
+          className="md:hidden text-cream-white focus:outline-none"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`}></i>
         </button>
       </nav>
-      
+
       {/* Mobile Navigation Menu */}
       <div className={`md:hidden bg-coffee-brown transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="container mx-auto px-4 py-3 flex flex-col space-y-3">
           {navLinks.map((link) => (
-            <Link 
-              key={link.path} 
+            <Link
+              key={link.path}
               href={link.path}
               className={`text-cream-white hover:text-vibe-yellow font-medium py-2 transition-colors ${isActive(link.path) ? 'text-vibe-yellow' : ''}`}
               onClick={() => setIsMenuOpen(false)}
