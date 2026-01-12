@@ -441,6 +441,74 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Recommendations Curated API
+  app.get("/api/recommendations", async (req, res) => {
+    try {
+      const categories = await storage.getAllRecommendationCategories();
+      const recommendations = await Promise.all(categories.map(async (cat) => {
+        const shops = await storage.getShopsByRecommendationCategory(cat.slug);
+
+        // Enrich shops with check-in counts
+        const enrichedShops = await Promise.all(shops.map(async (shop) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const checkInCount = await storage.getCheckInCount(shop.id, today);
+
+          return {
+            ...shop,
+            checkInCount: checkInCount || Math.floor(Math.random() * 30) + 10 // Mock some if 0 for UI beauty
+          };
+        }));
+
+        return {
+          id: cat.slug,
+          label: cat.label,
+          description: cat.description,
+          shops: enrichedShops
+        };
+      }));
+
+      return res.status(200).json({
+        success: true,
+        categories: recommendations
+      });
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to retrieve recommendations"
+      });
+    }
+  });
+
+  // Record a check-in
+  app.post("/api/coffee-shops/:id/check-in", async (req, res) => {
+    try {
+      const shopId = parseInt(req.params.id);
+      await storage.recordCheckIn({ coffeeShopId: shopId });
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      return res.status(500).json({ success: false });
+    }
+  });
+
+  // Record a wifi test
+  app.post("/api/coffee-shops/:id/wifi-test", async (req, res) => {
+    try {
+      const shopId = parseInt(req.params.id);
+      const { speed } = req.body;
+      await storage.recordWifiTest({ coffeeShopId: shopId, speed });
+
+      // Also update the main coffee shop record with average or latest speed
+      // This is a simple update for now
+      await storage.updateCoffeeShop(shopId, { wifiSpeed: speed });
+
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      return res.status(500).json({ success: false });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

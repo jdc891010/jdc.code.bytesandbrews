@@ -394,3 +394,64 @@ export const insertTalkingPointSchema = createInsertSchema(talkingPoints).pick({
 
 export type TalkingPoint = typeof talkingPoints.$inferSelect;
 export type InsertTalkingPoint = z.infer<typeof insertTalkingPointSchema>;
+// WiFi Tests Table (to track history and counts)
+export const wifiTests = sqliteTable("wifi_tests", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  coffeeShopId: integer("coffee_shop_id").references(() => coffeeShops.id).notNull(),
+  speed: integer("speed").notNull(),
+  testedAt: integer("tested_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export const insertWifiTestSchema = createInsertSchema(wifiTests).pick({
+  coffeeShopId: true,
+  speed: true,
+});
+
+export type WifiTest = typeof wifiTests.$inferSelect;
+export type InsertWifiTest = z.infer<typeof insertWifiTestSchema>;
+
+// Check-ins Table
+export const checkIns = sqliteTable("check_ins", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  coffeeShopId: integer("coffee_shop_id").references(() => coffeeShops.id).notNull(),
+  checkedInAt: integer("checked_in_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export const insertCheckInSchema = createInsertSchema(checkIns).pick({
+  coffeeShopId: true,
+});
+
+export type CheckIn = typeof checkIns.$inferSelect;
+export type InsertCheckIn = z.infer<typeof insertCheckInSchema>;
+
+// Recommendation Categories Table for curated sections
+export const recommendationCategories = sqliteTable("recommendation_categories", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  slug: text("slug").notNull().unique(), // e.g., 'safe', 'surprise', 'upcoming', 'fresh'
+  label: text("label").notNull(), // e.g., 'Safe Options'
+  description: text("description"),
+});
+
+export const insertRecommendationCategorySchema = createInsertSchema(recommendationCategories).pick({
+  slug: true,
+  label: true,
+  description: true,
+});
+
+export type RecommendationCategory = typeof recommendationCategories.$inferSelect;
+export type InsertRecommendationCategory = z.infer<typeof insertRecommendationCategorySchema>;
+
+// Junction Table for Shops and Recommendation Categories
+export const shopCategories = sqliteTable("shop_categories", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  coffeeShopId: integer("coffee_shop_id").references(() => coffeeShops.id).notNull(),
+  categoryId: integer("category_id").references(() => recommendationCategories.id).notNull(),
+});
+
+export const insertShopCategorySchema = createInsertSchema(shopCategories).pick({
+  coffeeShopId: true,
+  categoryId: true,
+});
+
+export type ShopCategory = typeof shopCategories.$inferSelect;
+export type InsertShopCategory = z.infer<typeof insertShopCategorySchema>;

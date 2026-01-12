@@ -48,6 +48,9 @@ interface CoffeeShopCardProps {
   userRatingCount?: number;
   businessStatus?: string;
   googleMapsUri?: string;
+  website?: string;
+  phoneNumber?: string;
+  id?: string;
 }
 
 const CoffeeShopCard = ({
@@ -73,7 +76,10 @@ const CoffeeShopCard = ({
   priceLevel,
   userRatingCount,
   businessStatus,
-  googleMapsUri
+  googleMapsUri,
+  website,
+  phoneNumber,
+  id
 }: CoffeeShopCardProps) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
 
@@ -105,6 +111,7 @@ const CoffeeShopCard = ({
   return (
     <>
       <motion.div
+        id={id}
         className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 ${isFeatured ? 'ring-2 ring-amber-400 ring-opacity-50' : ''}`}
         whileHover={{ y: -5 }}
       >
@@ -169,7 +176,6 @@ const CoffeeShopCard = ({
                 <span
                   className="bg-gray-100 rounded-full px-2 py-0.5 font-medium text-tech-blue cursor-pointer hover:bg-tech-blue hover:text-white transition-colors duration-200"
                   title="Parking availability rating"
-                  onClick={() => alert(`This location has a parking rating of ${amenities.parkingRating}/5`)}
                 >
                   {amenities.parkingRating}/5
                 </span>
@@ -184,7 +190,6 @@ const CoffeeShopCard = ({
                 <span
                   className="bg-gray-100 rounded-full px-2 py-0.5 font-medium text-tech-blue cursor-pointer hover:bg-tech-blue hover:text-white transition-colors duration-200"
                   title="Video call quality rating"
-                  onClick={() => alert(`This location has a video call quality rating of ${amenities.videoCallRating}/5`)}
                 >
                   {amenities.videoCallRating}/5
                 </span>
@@ -199,7 +204,6 @@ const CoffeeShopCard = ({
                 <span
                   className="bg-gray-100 rounded-full px-2 py-0.5 font-medium text-tech-blue cursor-pointer hover:bg-tech-blue hover:text-white transition-colors duration-200"
                   title="Power outlet availability rating"
-                  onClick={() => alert(`This location has a power availability rating of ${amenities.powerAvailability}/5`)}
                 >
                   {amenities.powerAvailability}/5
                 </span>
@@ -214,7 +218,6 @@ const CoffeeShopCard = ({
                 <span
                   className="bg-gray-100 rounded-full px-2 py-0.5 font-medium text-tech-blue cursor-pointer hover:bg-tech-blue hover:text-white transition-colors duration-200"
                   title="Coffee quality rating"
-                  onClick={() => alert(`This location has a coffee quality rating of ${amenities.coffeeQuality}/5`)}
                 >
                   {amenities.coffeeQuality}/5
                 </span>
@@ -250,7 +253,7 @@ const CoffeeShopCard = ({
           {/* Button positioned at the bottom using mt-auto */}
           <div className="mt-auto">
             <Button
-              className="w-full bg-coffee-brown hover:bg-coffee-brown hover:bg-opacity-90 text-white font-medium transition-all duration-300 transform hover:scale-105"
+              className="w-full bg-coffee-brown hover:bg-coffee-brown hover:bg-opacity-90 text-white font-medium transition-all duration-300 transform hover:scale-105 view-details-trigger"
               onClick={() => setDetailsOpen(true)}
             >
               <i className="fas fa-mug-hot mr-2"></i> View Details
@@ -276,6 +279,8 @@ const CoffeeShopCard = ({
         userRatingCount={userRatingCount}
         businessStatus={businessStatus}
         googleMapsUri={googleMapsUri}
+        website={website}
+        phoneNumber={phoneNumber}
       />
     </>
   );

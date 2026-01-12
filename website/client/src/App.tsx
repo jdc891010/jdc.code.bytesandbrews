@@ -7,6 +7,7 @@ import Features from "@/pages/Features";
 import CreatureTribes from "@/pages/CreatureTribes";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
+import Merch from "@/pages/Merch";
 
 import Download from "@/pages/Download";
 import Contact from "@/pages/Contact";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/features" component={Features} />
           <Route path="/tribes" component={CreatureTribes} />
+          <Route path="/merch" component={Merch} />
           <Route path="/launch-campaign" component={LaunchCampaign} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/struggles-of-remote-work" component={StrugglesOfRemoteWork} />

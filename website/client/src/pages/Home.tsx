@@ -115,6 +115,14 @@ const Home = () => {
               overallScore: shop.rating || 4.5,
               parkingScore: parsedAmenities.parkingRating ?? (Math.floor(Math.random() * 2) + 3),
               priceLevel: shop.priceLevel || (Math.floor(Math.random() * 2) + 1),
+              address: shop.address,
+              city: shop.city,
+              country: shop.country,
+              website: shop.website,
+              phoneNumber: shop.phoneNumber,
+              googleMapsUri: shop.googleMapsUri,
+              userRatingCount: shop.userRatingCount,
+              businessStatus: shop.businessStatus,
               speedMetrics: {
                 min: Math.floor((shop.wifiSpeed || 20) * 0.8),
                 mean: shop.wifiSpeed || 25,
@@ -172,6 +180,32 @@ const Home = () => {
 
   const handlePrevPage = () => {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const handleNavigateToShop = (shopName: string) => {
+    // 1. Find the shop in the filtered list to handle pagination
+    const shopIndex = filteredShops.findIndex(s => s.name === shopName);
+    if (shopIndex !== -1) {
+      const pageNum = Math.floor(shopIndex / itemsPerPage);
+      setCurrentPage(pageNum);
+
+      // 2. Scroll to the coffee shops section
+      document.getElementById('coffee-shops')?.scrollIntoView({ behavior: 'smooth' });
+
+      // 3. After pagination update and scroll, trigger the modal
+      // We use a timeout to ensure the DOM has updated with the correct page's content
+      setTimeout(() => {
+        const shopId = `shop-${shopName.replace(/\s+/g, '-').toLowerCase()}`;
+        const shopElement = document.getElementById(shopId);
+        if (shopElement) {
+          // Trigger the details modal by clicking the specialized trigger button we added
+          const detailButton = shopElement.querySelector('.view-details-trigger') as HTMLElement;
+          if (detailButton) {
+            detailButton.click();
+          }
+        }
+      }, 600);
+    }
   };
 
 
@@ -511,8 +545,9 @@ const Home = () => {
                   priceLevel: shop.priceLevel,
                   speedMetrics: shop.speedMetrics,
                   onViewDetails: () => {
-                    document.getElementById('coffee-shops')?.scrollIntoView({ behavior: 'smooth' });
-                  }
+                    handleNavigateToShop(shop.name);
+                  },
+                  address: shop.address
                 }))}
                 center={{ lat: -34.0789, lng: 18.8429 }} // Center of Somerset West
                 zoom={13}
@@ -571,6 +606,13 @@ const Home = () => {
                       userRatingCount={shop.userRatingCount}
                       businessStatus={shop.businessStatus}
                       googleMapsUri={shop.googleMapsUri}
+                      address={shop.address}
+                      city={shop.city}
+                      country={shop.country}
+                      website={shop.website}
+                      phoneNumber={shop.phoneNumber}
+                      coordinates={{ lat: shop.lat, lng: shop.lng }}
+                      id={`shop-${shop.name.replace(/\s+/g, '-').toLowerCase()}`}
                     />
                   ))}
                 </div>

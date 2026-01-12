@@ -5,6 +5,7 @@ import {
   users, contacts, signups, subscribers, coffeeShops, adminUsers,
   coupons, blogPosts, notifications, specials, featuredSpots, images,
   tribes, professions, talkingPoints,
+  wifiTests, checkIns, recommendationCategories, shopCategories,
   type User, type InsertUser,
   type Contact, type InsertContact,
   type SignUp, type InsertSignUp,
@@ -17,9 +18,14 @@ import {
   type Special, type InsertSpecial,
   type FeaturedSpot, type InsertFeaturedSpot,
   type Image, type InsertImage,
-  type Tribe, type Profession, type TalkingPoint
+  type Tribe, type Profession, type TalkingPoint,
+  type WifiTest, type InsertWifiTest,
+  type CheckIn, type InsertCheckIn,
+  type RecommendationCategory, type InsertRecommendationCategory,
+  type ShopCategory, type InsertShopCategory
 } from "../shared/schema.js";
 import { type IStorage } from "./storage.js";
+import { count } from "drizzle-orm";
 
 export class SQLiteStorage implements IStorage {
   private db: ReturnType<typeof drizzle>;
@@ -485,5 +491,78 @@ export class SQLiteStorage implements IStorage {
 
   async getTalkingPointsByProfession(professionId: number): Promise<TalkingPoint[]> {
     return await this.db.select().from(talkingPoints).where(eq(talkingPoints.professionId, professionId));
+  }
+
+  // WiFi Test and Check-in operations
+  async recordWifiTest(test: InsertWifiTest): Promise<WifiTest> {
+    const result = await this.db.insert(wifiTests).values({
+      ...test,
+      testedAt: new Date()
+    }).returning();
+    return result[0];
+  }
+
+  async recordCheckIn(checkIn: InsertCheckIn): Promise<CheckIn> {
+    const result = await this.db.insert(checkIns).values({
+      ...checkIn,
+      checkedInAt: new Date()
+    }).returning();
+    return result[0];
+  }
+
+  async getCheckInCount(coffeeShopId: number, since?: Date): Promise<number> {
+    const conditions = [eq(checkIns.coffeeShopId, coffeeShopId)];
+    if (since) {
+      conditions.push(gte(checkIns.checkedInAt, since));
+    }
+    const result = await this.db.select({ value: count() })
+      .from(checkIns)
+      .where(and(...conditions));
+    return result[0].value;
+  }
+
+  async getWifiTestCount(coffeeShopId: number): Promise<number> {
+    const result = await this.db.select({ value: count() })
+      .from(wifiTests)
+      .where(eq(wifiTests.coffeeShopId, coffeeShopId));
+    return result[0].value;
+  }
+
+  // Recommendation Category operations
+  async createRecommendationCategory(category: InsertRecommendationCategory): Promise<RecommendationCategory> {
+    const result = await this.db.insert(recommendationCategories).values(category).returning();
+    return result[0];
+  }
+
+  async getAllRecommendationCategories(): Promise<RecommendationCategory[]> {
+    return await this.db.select().from(recommendationCategories);
+  }
+
+  async getShopsByRecommendationCategory(categorySlug: string): Promise<CoffeeShop[]> {
+    const categoryResult = await this.db.select()
+      .from(recommendationCategories)
+      .where(eq(recommendationCategories.slug, categorySlug))
+      .limit(1);
+
+    if (categoryResult.length === 0) return [];
+
+    const categoryId = categoryResult[0].id;
+
+    // Join shopCategories with coffeeShops
+    const results = await this.db.select({
+      shop: coffeeShops
+    })
+      .from(shopCategories)
+      .innerJoin(coffeeShops, eq(shopCategories.coffeeShopId, coffeeShops.id))
+      .where(eq(shopCategories.categoryId, categoryId));
+
+    return results.map(r => r.shop);
+  }
+
+  async addShopToCategory(coffeeShopId: number, categoryId: number): Promise<void> {
+    await this.db.insert(shopCategories).values({
+      coffeeShopId,
+      categoryId
+    });
   }
 }

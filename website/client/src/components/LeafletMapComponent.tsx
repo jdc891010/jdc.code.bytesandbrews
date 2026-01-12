@@ -144,6 +144,12 @@ const LeafletMapComponent = ({
                     </span>
                     {location.overallScore && renderStars(location.overallScore)}
                   </div>
+                  {location.address && (
+                    <p className="text-[10px] text-gray-500 mt-1 line-clamp-1">
+                      <i className="fas fa-map-marker-alt mr-1"></i>
+                      {location.address}
+                    </p>
+                  )}
                 </div>
               </div>
 

@@ -1,131 +1,73 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CoffeeShopCard from "@/components/CoffeeShopCard";
 import CoffeeShopDetails from "@/components/CoffeeShopDetails";
 import SectionScrollButton from "@/components/SectionScrollButton";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/animations";
-import { popularCoffeeShops } from "@/lib/data";
+import { useQuery } from "@tanstack/react-query";
 
-// Extended coffee shop data with recommendation categories
 interface RecommendedShop {
   id: number;
   name: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
+  thumbnailUrl?: string;
   wifiSpeed: number;
-  vibes: string[];
-  popularWith: string[];
-  categories: Array<"safe" | "surprise" | "upcoming" | "fresh">;
+  tribe?: string;
+  vibe?: string;
+  address: string;
+  city: string;
+  country: string;
+  checkInCount: number;
+  latitude?: string;
+  longitude?: string;
+  website?: string;
+  phoneNumber?: string;
+  amenities?: string;
 }
 
-const recommendedShops: RecommendedShop[] = [
-  {
-    id: 1,
-    name: "Bootlegger, Somerset West",
-    description: "A sleek, modern coffee shop on Bright Street with perfect lighting for laptop work and plenty of outlets.",
-    imageUrl: "https://picsum.photos/500/300?random=10",
-    wifiSpeed: 35,
-    vibes: ["Quiet Zen", "Focus Factory"],
-    popularWith: ["Code Conjurers", "Word Weavers"],
-    categories: ["safe", "fresh"]
-  },
-  {
-    id: 2,
-    name: "Nom Nom, Somerset Mall",
-    description: "Cozy café in Somerset Mall with rustic charm, comfortable seating and excellent espresso drinks.",
-    imageUrl: "https://picsum.photos/500/300?random=11",
-    wifiSpeed: 28,
-    vibes: ["Chatty Buzz", "Creative Chaos"],
-    popularWith: ["Pixel Pixies", "Buzz Beasts"],
-    categories: ["upcoming", "surprise"]
-  },
-  {
-    id: 3,
-    name: "Slug & Lettuce, Waterstone",
-    description: "Spacious venue with comfortable seating, reliable Wi-Fi and a diverse menu at Waterstone Village.",
-    imageUrl: "https://picsum.photos/500/300?random=12",
-    wifiSpeed: 42,
-    vibes: ["Focus Factory", "Quiet Zen"],
-    popularWith: ["Web Wizards", "Story Spinners"],
-    categories: ["safe", "fresh"]
-  },
-  {
-    id: 4,
-    name: "Blue Waters Café, Beach Road",
-    description: "Beachfront café with a relaxed atmosphere, good Wi-Fi, and inspiring ocean views.",
-    imageUrl: "https://picsum.photos/500/300?random=13",
-    wifiSpeed: 32,
-    vibes: ["Beach Vibes", "Relaxed"],
-    popularWith: ["Code Conjurers", "Data Druids"],
-    categories: ["upcoming"]
-  },
-  {
-    id: 5,
-    name: "Seattle Coffee Co, Paardevlei",
-    description: "Modern workspace with good networking opportunities and a variety of seating options.",
-    imageUrl: "https://picsum.photos/500/300?random=14",
-    wifiSpeed: 38,
-    vibes: ["Creative Chaos", "Tech Haven"],
-    popularWith: ["Web Wizards", "Pixel Pixies"],
-    categories: ["surprise", "fresh"]
-  },
-  {
-    id: 6,
-    name: "Craft Burger Bar, Helderberg",
-    description: "Not just burgers - they offer a surprisingly good workspace with excellent Wi-Fi and charging stations.",
-    imageUrl: "https://picsum.photos/500/300?random=15",
-    wifiSpeed: 45,
-    vibes: ["Focus Factory", "Collaborative"],
-    popularWith: ["Deal Drivers", "Buzz Beasts"],
-    categories: ["surprise", "upcoming"]
-  }
-];
-
-interface CategoryTab {
-  id: string;
-  label: string;
-  description: string;
+interface RecommendationsResponse {
+  success: boolean;
+  categories: {
+    id: string;
+    label: string;
+    description: string;
+    shops: RecommendedShop[];
+  }[];
 }
-
-const categoryTabs: CategoryTab[] = [
-  {
-    id: "safe", 
-    label: "Safe Options", 
-    description: "Reliable workspaces with consistent Wi-Fi and great amenities"
-  },
-  {
-    id: "surprise", 
-    label: "Surprise Me", 
-    description: "Unique spaces with unexpected perks and interesting vibes"
-  },
-  {
-    id: "upcoming", 
-    label: "Up and Coming", 
-    description: "New locations gaining popularity in the community"
-  },
-  {
-    id: "fresh", 
-    label: "Fresh For Real", 
-    description: "Recently reviewed locations with the latest updates"
-  }
-];
 
 const RecommendationTabs = () => {
   const [activeTab, setActiveTab] = useState("safe");
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedShop, setSelectedShop] = useState<RecommendedShop | null>(null);
 
-  const getShopsByCategory = (category: string) => {
-    return recommendedShops.filter(shop => 
-      shop.categories.includes(category as "safe" | "surprise" | "upcoming" | "fresh")
-    ).slice(0, 3);
+  const { data, isLoading } = useQuery<RecommendationsResponse>({
+    queryKey: ['/api/recommendations'],
+  });
+
+  const categoryTabs = data?.categories || [];
+
+  const getShopsByCategory = (categoryId: string) => {
+    return categoryTabs.find(c => c.id === categoryId)?.shops || [];
   };
-  
+
   const openShopDetails = (shop: RecommendedShop) => {
     setSelectedShop(shop);
     setDetailsOpen(true);
   };
+
+  if (isLoading) {
+    return (
+      <section className="py-20 bg-gradient-to-b from-tech-blue/5 to-soft-cream/60 relative min-h-[600px] flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-tech-blue border-t-transparent rounded-full animate-spin"></div>
+          <p className="mt-4 text-gray-500">Curating the best workspaces...</p>
+        </div>
+      </section>
+    );
+  }
+
 
   return (
     <section className="py-20 bg-gradient-to-b from-tech-blue/5 to-soft-cream/60 relative">
@@ -134,7 +76,7 @@ const RecommendationTabs = () => {
           <SectionScrollButton targetId="home" position="top" />
         </div>
         <div className="text-center mb-14">
-          <motion.span 
+          <motion.span
             className="inline-block px-4 py-1 bg-tech-blue/10 text-tech-blue rounded-full text-sm font-semibold mb-4"
             variants={fadeIn("up")}
             initial="hidden"
@@ -143,7 +85,7 @@ const RecommendationTabs = () => {
           >
             CURATED SELECTION
           </motion.span>
-          <motion.h2 
+          <motion.h2
             className="font-montserrat font-bold text-3xl md:text-4xl text-coffee-brown mb-4"
             variants={fadeIn("up")}
             initial="hidden"
@@ -152,7 +94,7 @@ const RecommendationTabs = () => {
           >
             Find Your Perfect Workspace
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-lg max-w-2xl mx-auto text-gray-600"
             variants={fadeIn("up")}
             initial="hidden"
@@ -171,7 +113,7 @@ const RecommendationTabs = () => {
               <div className="md:w-1/4 bg-soft-cream/30">
                 <TabsList className="flex flex-row md:flex-col h-auto md:h-full w-full rounded-none p-0">
                   {categoryTabs.map(tab => (
-                    <TabsTrigger 
+                    <TabsTrigger
                       key={tab.id}
                       value={tab.id}
                       className="flex-1 md:flex-none w-full rounded-none border-b md:border-b-0 md:border-r border-gray-200
@@ -189,7 +131,7 @@ const RecommendationTabs = () => {
                   ))}
                 </TabsList>
               </div>
-              
+
               {/* Content area */}
               <div className="md:w-3/4 p-6 md:p-8">
                 {categoryTabs.map(tab => (
@@ -213,7 +155,7 @@ const RecommendationTabs = () => {
                         </button>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-6">
                       {getShopsByCategory(tab.id).map((shop) => (
                         <motion.div
@@ -226,8 +168,8 @@ const RecommendationTabs = () => {
                           className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden flex flex-col md:flex-row"
                         >
                           <div className="md:w-1/3 h-48 md:h-auto relative">
-                            <img 
-                              src={shop.imageUrl} 
+                            <img
+                              src={shop.imageUrl || `https://picsum.photos/500/300?random=${shop.id}`}
                               alt={shop.name}
                               className="w-full h-full object-cover absolute inset-0"
                             />
@@ -240,22 +182,22 @@ const RecommendationTabs = () => {
                                 <span className="font-semibold">{shop.wifiSpeed} Mbps</span>
                               </div>
                             </div>
-                            
+
                             <p className="text-gray-600 mb-4">{shop.description}</p>
-                            
+
                             <div className="flex flex-wrap gap-2 mb-4">
-                              {shop.vibes.map(vibe => (
-                                <span key={vibe} className="bg-vibe-yellow/10 text-coffee-brown px-3 py-1 rounded-full text-sm">
-                                  {vibe}
+                              {shop.vibe && (
+                                <span className="bg-vibe-yellow/10 text-coffee-brown px-3 py-1 rounded-full text-sm">
+                                  {shop.vibe}
                                 </span>
-                              ))}
-                              {shop.popularWith.map(tribe => (
-                                <span key={tribe} className="bg-tech-blue/10 text-tech-blue px-3 py-1 rounded-full text-sm">
-                                  {tribe}
+                              )}
+                              {shop.tribe && (
+                                <span className="bg-tech-blue/10 text-tech-blue px-3 py-1 rounded-full text-sm">
+                                  {shop.tribe}
                                 </span>
-                              ))}
+                              )}
                             </div>
-                            
+
                             <div className="flex justify-between items-center mt-2">
                               <div className="flex items-center">
                                 <div className="flex -space-x-2">
@@ -269,10 +211,10 @@ const RecommendationTabs = () => {
                                     <i className="fas fa-user"></i>
                                   </div>
                                 </div>
-                                <span className="ml-3 text-gray-500 text-sm">28 checked in today</span>
+                                <span className="ml-3 text-gray-500 text-sm">{shop.checkInCount || 0} checked in today</span>
                               </div>
-                              
-                              <button 
+
+                              <button
                                 className="text-tech-blue hover:bg-tech-blue/10 px-4 py-2 rounded-lg transition-colors text-sm font-medium"
                                 onClick={() => openShopDetails(shop)}
                               >
@@ -283,7 +225,7 @@ const RecommendationTabs = () => {
                         </motion.div>
                       ))}
                     </div>
-                    
+
                     <div className="text-center mt-8">
                       <button className="inline-flex items-center justify-center gap-2 text-tech-blue hover:text-tech-blue/80 font-medium transition-colors">
                         See all workspaces
@@ -297,32 +239,33 @@ const RecommendationTabs = () => {
           </Tabs>
         </div>
       </div>
-      
+
       {selectedShop && (
         <CoffeeShopDetails
           open={detailsOpen}
           onClose={() => setDetailsOpen(false)}
           name={selectedShop.name}
-          description={selectedShop.description}
-          amenities={{
-            wheelchairAccessible: true,
-            parkingRating: 4,
-            videoCallRating: 4,
-            powerAvailability: 5,
-            coffeeQuality: 4
+          description={selectedShop.description || ""}
+          amenities={selectedShop.amenities ? JSON.parse(selectedShop.amenities) : {
+            wifi: true,
+            power: true,
+            parking: true
           }}
-          dominantTribe={selectedShop.popularWith[0] || "Code Conjurers"}
+          dominantTribe={selectedShop.tribe || "Digital Nomad"}
           location={{
-            address: "123 Main Street",
-            city: "Somerset West",
-            country: "South Africa",
+            address: selectedShop.address,
+            city: selectedShop.city,
+            country: selectedShop.country,
             coordinates: {
-              lat: -34.0789,
-              lng: 18.8429
+              lat: parseFloat(selectedShop.latitude || "-34.0789"),
+              lng: parseFloat(selectedShop.longitude || "18.8429")
             }
           }}
+          website={selectedShop.website}
+          phoneNumber={selectedShop.phoneNumber}
         />
       )}
+
     </section>
   );
 };

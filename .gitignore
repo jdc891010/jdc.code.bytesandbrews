@@ -17,3 +17,5 @@ data/*
 
 ookla
 ookla/*
+website/migrations/*
+website/migrations

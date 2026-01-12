@@ -98,6 +98,18 @@ export interface IStorage {
   getAllProfessions(): Promise<Profession[]>;
   getAllTalkingPoints(): Promise<TalkingPoint[]>;
   getTalkingPointsByProfession(professionId: number): Promise<TalkingPoint[]>;
+
+  // WiFi Test and Check-in operations
+  recordWifiTest(test: any): Promise<any>;
+  recordCheckIn(checkIn: any): Promise<any>;
+  getCheckInCount(coffeeShopId: number, since?: Date): Promise<number>;
+  getWifiTestCount(coffeeShopId: number): Promise<number>;
+
+  // Recommendation Category operations
+  getAllRecommendationCategories(): Promise<any[]>;
+  getShopsByRecommendationCategory(categorySlug: string): Promise<any[]>;
+  addShopToCategory(coffeeShopId: number, categoryId: number): Promise<void>;
+  createRecommendationCategory(category: any): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
@@ -524,6 +536,32 @@ export class MemStorage implements IStorage {
   async getTalkingPointsByProfession(professionId: number): Promise<TalkingPoint[]> {
     return [];
   }
+
+  // WiFi Test and Check-in operations
+  async recordWifiTest(test: any): Promise<any> { return {}; }
+  async recordCheckIn(checkIn: any): Promise<any> { return {}; }
+  async getCheckInCount(coffeeShopId: number, since?: Date): Promise<number> { return 0; }
+  async getWifiTestCount(coffeeShopId: number): Promise<number> { return 0; }
+
+  // Recommendation Category operations
+  async getAllRecommendationCategories(): Promise<any[]> { return []; }
+  async getShopsByRecommendationCategory(categorySlug: string): Promise<any[]> { return []; }
+  async addShopToCategory(coffeeShopId: number, categoryId: number): Promise<void> { }
+  async createRecommendationCategory(category: any): Promise<any> { return {}; }
+
+  // Missing methods from IStorage
+  async createSpecial(special: any): Promise<any> { return {}; }
+  async getSpecial(id: number): Promise<any> { return undefined; }
+  async getAllSpecials(): Promise<any[]> { return []; }
+  async getActiveSpecials(): Promise<any[]> { return []; }
+  async updateSpecial(id: number, special: any): Promise<any> { return undefined; }
+  async deleteSpecial(id: number): Promise<boolean> { return false; }
+  async createFeaturedSpot(featuredSpot: any): Promise<any> { return {}; }
+  async getFeaturedSpot(id: number): Promise<any> { return undefined; }
+  async getAllFeaturedSpots(): Promise<any[]> { return []; }
+  async getActiveFeaturedSpots(): Promise<any[]> { return []; }
+  async updateFeaturedSpot(id: number, featuredSpot: any): Promise<any> { return undefined; }
+  async deleteFeaturedSpot(id: number): Promise<boolean> { return false; }
 }
 
 import { SQLiteStorage } from "./sqlite-storage.js";

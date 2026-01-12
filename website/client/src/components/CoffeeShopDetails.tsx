@@ -358,10 +358,12 @@ interface CoffeeShopDetailsProps {
   // Location data
   location: Location;
   // New fields
-  priceLevel?: string;
   userRatingCount?: number;
   businessStatus?: string;
   googleMapsUri?: string;
+  website?: string;
+  phoneNumber?: string;
+  priceLevel?: string;
 }
 
 const CoffeeShopDetails = ({
@@ -372,10 +374,12 @@ const CoffeeShopDetails = ({
   amenities,
   dominantTribe,
   location,
-  priceLevel,
   userRatingCount,
   businessStatus,
-  googleMapsUri
+  googleMapsUri,
+  website,
+  phoneNumber,
+  priceLevel
 }: CoffeeShopDetailsProps) => {
   const [activeTab, setActiveTab] = useState("wifi");
   const timeData = generateHeatMapData();
@@ -445,20 +449,30 @@ const CoffeeShopDetails = ({
                 </div>
 
                 <div className="border-t pt-2 mt-2">
-                  <div className="flex items-center mb-1">
-                    <i className="fas fa-phone text-coffee-brown mr-2"></i>
-                    <p className="text-sm">+27 21 555 6789</p>
-                  </div>
+                  {phoneNumber && (
+                    <div className="flex items-center mb-1">
+                      <i className="fas fa-phone text-coffee-brown mr-2"></i>
+                      <p className="text-sm">{phoneNumber}</p>
+                    </div>
+                  )}
 
-                  <div className="flex items-center mb-1">
-                    <i className="fas fa-globe text-coffee-brown mr-2"></i>
-                    <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="text-sm text-tech-blue hover:underline">www.example.com</a>
-                  </div>
+                  {website && (
+                    <div className="flex items-center mb-1">
+                      <i className="fas fa-globe text-coffee-brown mr-2"></i>
+                      <a
+                        href={website.startsWith('http') ? website : `https://${website}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-tech-blue hover:underline truncate max-w-[250px]"
+                      >
+                        {website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                      </a>
+                    </div>
+                  )}
 
-                  <div className="flex items-center">
-                    <i className="fas fa-envelope text-coffee-brown mr-2"></i>
-                    <a href="mailto:info@example.com" className="text-sm text-tech-blue hover:underline">info@example.com</a>
-                  </div>
+                  {!phoneNumber && !website && (
+                    <p className="text-xs text-gray-400 italic">No direct contact information available.</p>
+                  )}
                 </div>
               </div>
 
