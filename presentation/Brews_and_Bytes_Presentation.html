@@ -299,6 +299,51 @@
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
             transform: translateY(-2px);
         }
+
+        /* Showcase Styling */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .showcase-item {
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: top;
+            border-bottom: 1px solid var(--glass-border);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover .showcase-img {
+            transform: scale(1.03);
+        }
+
+        .showcase-content {
+            padding: 30px;
+        }
+
+        .showcase-content h3 {
+            color: var(--vibe-yellow);
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        .showcase-content p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
     </style>
 </head>
 
@@ -424,8 +469,72 @@
                         </p>
                         <p
                             style="color: var(--tech-light); font-weight: 600; font-size: 1.1rem; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: 20px;">
-                            Status: 90% Prototype Complete
+                            Status: Live Prototype Verified & Captured
                         </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section id="showcase">
+            <div class="section-header">
+                <h2><i class="fas fa-laptop-code"></i> Product Showcase</h2>
+                <p>The Brews & Bytes platform is more than just a concept. Here is the verified live environment.</p>
+            </div>
+
+            <div class="showcase-grid">
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/home.png" alt="Home Page" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Intelligent Hub</h3>
+                        <p>The landing experience focuses on the "Sip, Surf, Succeed" mission, providing immediate
+                            access to the best workspace data.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/features.png" alt="Features Page" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Community Diagnostics</h3>
+                        <p>Real-time WiFi speed tests and crowdsourced "Vibe Ratings" ensure every professional finds
+                            their flow.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/tribes.png" alt="Creature Tribes" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Creature Tribes</h3>
+                        <p>Revolutionizing networking through professional archetypes. Find your tribe in any coffee
+                            shop or coworking space.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/merch.png" alt="Merch Store" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Eco-System Growth</h3>
+                        <p>Integrated merchandise strategy fuels brand awareness and supports our specialized
+                            remote-work community.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/download.png" alt="Download App" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Multi-Platform Access</h3>
+                        <p>Available across web and mobile, ensuring the nomad community always has a guide to the best
+                            bytes and brews.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card showcase-item">
+                    <img src="../screenshots/blog.png" alt="Blog" class="showcase-img">
+                    <div class="showcase-content">
+                        <h3>Nomadic Knowledge</h3>
+                        <p>A content-rich blog system providing value beyond coordinates, helping users master the art
+                            of remote work.</p>
                     </div>
                 </div>
             </div>
@@ -514,7 +623,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Brews & Bytes. Developed by Advanced Agentic Coding Team.</p>
+        <p>&copy; 2026 Brews & Bytes. Developed by Nimble Slug Coding Team.</p>
         <p style="font-size: 0.8rem; margin-top: 10px;">Draft Version 2.0 | Confidential & Proprietary</p>
     </footer>
 

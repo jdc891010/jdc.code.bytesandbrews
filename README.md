@@ -78,6 +78,29 @@ View our latest project presentation and strategic roadmap:
    npm run dev
    ```
 
+## 🚢 Deployment (Cloudways)
+
+This project includes automation scripts for deploying to a Linux environment like Cloudways.
+
+### 1. Setup & Installation
+Run this once to install global dependencies (like PM2) and project-specific libraries:
+```bash
+bash scripts/install_deps.sh
+```
+
+### 2. Deploy & Launch
+Use this to pull the latest code, build the production bundle, and start/reload the app with PM2:
+```bash
+bash scripts/deploy.sh
+```
+
+### 3. Management
+Monitor logs or status using the management utility:
+```bash
+bash scripts/manage.sh status
+bash scripts/manage.sh logs
+```
+
 ## Project Structure
 
 ```

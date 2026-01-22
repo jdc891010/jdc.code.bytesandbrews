@@ -50,11 +50,23 @@ Our unique differentiator. We solve the social isolation of remote work by:
 ## 💻 Technical Architecture
 - **Lightweight & Efficient**: A robust web application backed by a scalable database. No unnecessary complexity.
 - **Auto-Scaling**: Designed to introduce auto-scaling as traffic plateaus and grows, ensuring zero-downtime performance.
-- **Current Status**: Prototype is **90% completed** and currently entering the real-world testing phase to gather live data.
+- **Current Status**: Prototype is **Live & Verified** following a comprehensive navigation test and feature audit.
 
 ---
 
-## � Revenue & Monetization
+## 🖼️ Product Showcase: Live & Verified
+A look at the verified state of the platform—fully responsive and feature-rich.
+
+| Feature | Preview | Description |
+| :--- | :--- | :--- |
+| **Intelligent Hub** | ![Home](../screenshots/home.png) | The landing experience focused on "Sip, Surf, Succeed". |
+| **Diagnostics** | ![Features](../screenshots/features.png) | Real-time WiFi speed tests and crowdsourced "Vibe Ratings". |
+| **Creature Tribes** | ![Tribes](../screenshots/tribes.png) | Professional archetypes for coffee-shop networking. |
+| **Eco-System** | ![Merch](../screenshots/merch.png) | Integrated merchandise storefront and growth strategy. |
+
+---
+
+## 💸 Revenue & Monetization
 1. **Business Insights (B2B)**: Providing cafes/venues with data-driven revenue solutions and WiFi optimization.
 2. **Advertised Specials**: Allowing venues to promote specific deals or community events for a placement fee.
 3. **Branded Merchandise**: Caffeine-fueled gear for the digital nomad community.
