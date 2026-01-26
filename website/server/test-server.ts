@@ -15,7 +15,7 @@ app.get('/test', (req, res) => {
 });
 
 // Start server on a different port for testing
-const testPort = 5001;
+const testPort = 5002;
 server.listen(testPort, () => {
   console.log(`Test server running on port ${testPort}`);
   console.log('You can now test the blog endpoints:');

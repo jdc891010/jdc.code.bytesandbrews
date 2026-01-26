@@ -4,5 +4,5 @@
 cd website || exit
 
 # Start the application using the start script defined in package.json
-# This runs on PORT 5001 by default as per server/index.ts
+# This runs on PORT 5002 by default as per server/index.ts
 npm start
