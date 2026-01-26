@@ -34,7 +34,6 @@ const Navbar = () => {
     { name: "Merch", path: "/merch" },
     { name: "Launch Campaign", path: "/launch-campaign" },
     { name: "Blog", path: "/blog" },
-    { name: "Download", path: "/download" },
     { name: "Contact", path: "/contact" },
   ];
 

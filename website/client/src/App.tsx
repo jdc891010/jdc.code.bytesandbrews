@@ -9,7 +9,6 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import Merch from "@/pages/Merch";
 
-import Download from "@/pages/Download";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 import AdminLogin from "@/pages/admin/AdminLogin";
@@ -40,7 +39,6 @@ function App() {
           <Route path="/blog/science-of-coffee" component={TheScienceOfCoffee} />
           <Route path="/blog/beyond-the-bean" component={BeyondTheBean} />
           <Route path="/blog/art-of-the-power-nap" component={TheArtOfThePowerNap} />
-          <Route path="/download" component={Download} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/terms-of-service" component={TermsOfService} />

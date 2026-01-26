@@ -128,8 +128,8 @@ const LaunchCampaign = () => {
             </motion.p>
             <div className="flex justify-center gap-4">
               <Link href="/contact">
-                <motion.a
-                  className="bg-vibe-yellow text-coffee-brown px-10 py-4 rounded-full font-montserrat font-semibold text-lg hover:bg-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                <motion.div
+                  className="bg-vibe-yellow text-coffee-brown px-10 py-4 rounded-full font-montserrat font-semibold text-lg hover:bg-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 cursor-pointer"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 1.2 }}
@@ -137,11 +137,11 @@ const LaunchCampaign = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   Partner With Us
-                </motion.a>
+                </motion.div>
               </Link>
               <Link href="/#find-your-spot">
-                <motion.a
-                  className="bg-white text-coffee-brown px-10 py-4 rounded-full font-montserrat font-semibold text-lg hover:bg-gray-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                <motion.div
+                  className="bg-white text-coffee-brown px-10 py-4 rounded-full font-montserrat font-semibold text-lg hover:bg-gray-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 cursor-pointer"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 1.2 }}
@@ -149,7 +149,7 @@ const LaunchCampaign = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   Find a Spot
-                </motion.a>
+                </motion.div>
               </Link>
             </div>
           </div>

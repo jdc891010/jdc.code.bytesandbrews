@@ -13,6 +13,9 @@ export interface CoffeeShop {
   phoneNumber?: string;
   rating?: number;
   googlePlacesId?: string;
+  userRatingCount?: number;
+  businessStatus?: string;
+  googleMapsUri?: string;
   openingHours?: string;
   opensAt?: string;
   closesAt?: string;

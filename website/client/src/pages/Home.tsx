@@ -596,7 +596,7 @@ const Home = () => {
                       name={shop.name}
                       wifiSpeed={shop.speed}
                       description={shop.description}
-                      vibes={[shop.vibe, "Productive"]}
+                      vibes={Array.from(new Set([shop.vibe, "Productive"]))}
                       popularWith={[shop.tribe]}
                       imageUrl={shop.thumbnailUrl || shop.imageUrl}
                       amenities={shop.amenities}
