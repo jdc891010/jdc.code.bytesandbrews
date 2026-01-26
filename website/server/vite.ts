@@ -1,11 +1,15 @@
 import express from "express";
 import * as fs from "fs";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config.js";
 import { nanoid } from "nanoid";
 import { IncomingMessage, ServerResponse } from "http";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const viteLogger = createLogger();
 
@@ -47,7 +51,7 @@ export async function setupVite(app: express.Application, server: Server) {
 
     try {
       const clientTemplate = path.resolve(
-        path.dirname(import.meta.url.substring(process.platform === 'win32' ? 8 : 7)),
+        __dirname,
         "..",
         "client",
         "index.html",
@@ -69,7 +73,7 @@ export async function setupVite(app: express.Application, server: Server) {
 }
 
 export function serveStatic(app: express.Application) {
-  const distPath = path.resolve(path.dirname(import.meta.url.substring(process.platform === 'win32' ? 8 : 7)), "../dist/public");
+  const distPath = path.resolve(__dirname, "../dist/public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
