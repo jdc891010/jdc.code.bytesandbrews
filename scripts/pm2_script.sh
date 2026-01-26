@@ -4,7 +4,7 @@
 # We use 'npm run start' to ensure all environment variables defined in package.json are loaded
 
 # Navigate to the website directory
-cd "$(dirname "$0")/../website" || exit
+cd "../website" || exit
 
 # Check if build exists, if not, build it
 if [ ! -d "dist" ]; then
