@@ -1,134 +1,164 @@
-# Brews and Bytes: Insights by the crowd for the crowd
+# Brews and Bytes ☕️💻
 
-A social infrastructure platform for finding and optimizing remote work locations in Somerset West, South Africa. Brews and Bytes leverages **crowdsourced wisdom** to help professionals discover the perfect workspaces while providing businesses with data-driven insights to improve their revenue and infrastructure.
+> **Insights by the crowd, for the crowd.**
 
-![Brews and Bytes](https://placeholder-for-screenshot.com/brewsandbytes-screenshot.png)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![React](https://img.shields.io/badge/React-18.0-61dafb)
+![Node](https://img.shields.io/badge/Node-18%2B-green)
 
-## 📊 Project Vision
-View our latest project presentation and strategic roadmap:
-- **[Interactive HTML Presentation](./docs/Brews_and_Bytes_Presentation.html)** (Best for viewing)
-- **[Executive Summary (Markdown)](./docs/Brews_and_Bytes_Presentation.md)**
+**Brews and Bytes** is a social infrastructure platform dedicated to helping remote workers, freelancers, and digital nomads find the perfect workspace in Somerset West. We leverage **crowdsourced wisdom** to rate coffee shops not just on their coffee, but on what matters to *us*: WiFi speed, power outlet availability, noise levels, and community vibe.
 
-## Core Strategy
-1. **Phase 1: Crowdsourcing**: Initial value through community-contributed metrics (WiFi, noise, atmosphere).
-2. **Phase 2: Targeted Feedback**: Using questionnaires to identify "pain points" and understand why specific spaces are avoided.
-3. **Phase 3: Business Solutions**: Partnering with cafes to optimize revenue and WiFi (e.g., dead spot scanning and placement optimization).
+---
 
-## Features
+## 📸 Snapshots
 
-- **Interactive Map**: Locate and explore workspaces across Somerset West.
-- **Crowdsourced Metrics**: Real-time community data on:
-  - Internet Speed (Mbps)
-  - Vibe & Ambiance
-  - Noise Levels
-  - Parking Availability
-- **Subjective Insights**: Targeted feedback via questionnaires to identify workspace blockers.
-- **Business Intelligence**: Data-driven recommendations for coffee shop owners to attract remote workers.
-- **Tribe System**: Find locations popular among your professional "tribe":
-  - Code Conjurers (Developers)
-  - Word Weavers (Writers)
-  - Pixel Pixies (Designers)
-  - Buzz Beasts (Marketers)
-- **Monetization & Promotion**:
-  - Advertised Specials & Partner Promotions.
-  - Branded Merchandise (Caffeine-fueled tech gear).
-  - WiFi Optimization Partnerships.
+| Landing Page | Interactive Map |
+|:---:|:---:|
+| ![Home](./screenshots/home.png) | ![Features](./screenshots/features.png) |
 
-## Technology Stack
+| Tribe System | Merchandise |
+|:---:|:---:|
+| ![Tribes](./screenshots/tribes.png) | ![Merch](./screenshots/merch.png) |
+
+---
+
+## ✨ Features
+
+- 🗺️ **Interactive Workspace Map**: Filter locations by WiFi speed, "vibe", and amenities.
+- 📊 **Crowdsourced Metrics**: Real-time data on internet quality, noise levels, and seat availability.
+- 👥 **Tribe System**: Find where your people hang out. Are you a *Code Conjurer* or a *Pixel Pixie*?
+- 📝 **Detailed Reviews**: "Talking Points" to help you break the ice with fellow nomads.
+- 🛍️ **Merch Store**: Grab some caffeine-fueled gear.
+- 📱 **Mobile Responsive**: Works perfectly on your phone while you're on the go.
+
+---
+
+## 🏗 Architecture
+
+```mermaid
+graph TD
+    User((User))
+    subgraph "Frontend (Client)"
+        UI[React UI]
+        Map[Leaflet Map]
+        State[React Query / Context]
+    end
+    
+    subgraph "Backend (Server)"
+        API[Express API]
+        Auth[Auth Middleware]
+        Services[Business Logic]
+    end
+    
+    subgraph "Data & External"
+        DB[(SQLite / Drizzle)]
+        GMaps[Google Places API]
+    end
+
+    User -->|HTTPS| UI
+    UI -->|REST API| API
+    UI -->|Tiles| Map
+    API -->|Query| DB
+    API -->|Fetch| GMaps
+```
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
-- React.js, Tailwind CSS, Framer Motion
-- Recharts for data visualization
-- Leaflet/Google Maps for location mapping
+*   **Framework**: React 18 (Vite)
+*   **Language**: TypeScript
+*   **Styling**: Tailwind CSS, Framer Motion
+*   **Maps**: Leaflet / React-Leaflet
+*   **State**: TanStack Query
 
 ### Backend
-- Node.js with Express
-- SQLite (via Drizzle ORM) for development; planned Supabase migration
-- Multer for image management
+*   **Runtime**: Node.js
+*   **Framework**: Express.js
+*   **Database**: SQLite (Dev) / PostgreSQL (Prod ready)
+*   **ORM**: Drizzle ORM
+*   **Validation**: Zod
 
-### Data Analysis
-- Python 3.12+
-- Libraries: pandas, geopandas, duckdb, pyarrow
+### Tools
+*   **Scripts**: Bash / Python automation
+*   **Process Manager**: PM2
 
-## Setup
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- npm or yarn
-- Python 3.12+
+*   Node.js (v18 or higher)
+*   npm or yarn
+*   Python 3.12+ (for data processing scripts)
 
 ### Installation
 
-1. Clone the repository
-   ```bash
-   git clone https://github.com/yourusername/brewsandbytes.git
-   cd brewsandbytes
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yourusername/brewsandbytes.git
+    cd brewsandbytes
+    ```
 
-2. Set up the website
-   ```bash
-   cd website
-   npm install
-   ```
+2.  **Install dependencies**
+    ```bash
+    cd website
+    npm install
+    ```
 
-3. Create a `.env` file in the `website` directory (see `.env.example`).
+3.  **Environment Setup**
+    Create a `.env` file in the `website` directory based on `.env.example`.
 
-4. Running the application
-   ```bash
-   npm run dev
-   ```
+4.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
+    Visit `http://localhost:5000` (or the port shown in terminal).
 
-## 🚢 Deployment (Cloudways)
-
-This project includes automation scripts for deploying to a Linux environment like Cloudways.
-
-### 1. Setup & Installation
-Run this once to install global dependencies (like PM2) and project-specific libraries:
+### Production Build
+To build and serve the production version:
 ```bash
-bash scripts/install_deps.sh
+npm run build
+npm start
 ```
 
-### 2. Deploy & Launch
-Use this to pull the latest code, build the production bundle, and start/reload the app with PM2:
-```bash
-bash scripts/deploy.sh
-```
+---
 
-### 3. Management
-Monitor logs or status using the management utility:
-```bash
-bash scripts/manage.sh status
-bash scripts/manage.sh logs
-```
-
-## Project Structure
+## 📂 Project Structure
 
 ```
 brewsandbytes/
-├── docs/                   # Presentation and strategy documents
-├── website/                # Full-stack web application
-│   ├── client/             # React frontend
-│   ├── server/             # Node.js/Express backend
-│   ├── shared/             # Shared types and schema
-│   └── migrations/         # Database migrations
-├── architecture.md         # System design diagrams
-├── TODO.md                 # Project roadmap status
-└── TASKS.md                # Actionable task breakdown
+├── 📂 docs/            # Documentation & Presentations
+├── 📂 screenshots/     # Project screenshots
+├── 📂 scripts/         # Automation & Deployment scripts
+├── 📂 website/         # Main Application
+│   ├── 📂 client/      # React Frontend
+│   ├── 📂 server/      # Express Backend
+│   ├── 📂 shared/      # Shared Types/Schemas
+│   └── ...
+└── 📂 database/        # DB schemas and mock data
 ```
 
-## Contributing
+---
 
-We are a "crowd for the crowd" platform! You can chip in by:
-1. Submitting real-time WiFi speed tests.
-2. Answering questionnaires about your workspace experiences.
-3. Suggesting new locations.
-4. Developing new visualization tools for our community data.
+## 🤝 Contributing
 
-## License
+We love contributions! Whether you're a *Code Conjurer* fixing bugs or a *Word Weaver* improving documentation, you're welcome here.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+1.  Fork the repo
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-## Acknowledgments
+---
 
-- The Somerset West remote work community for their invaluable crowdsourced data.
-- Local cafes for providing the "brews" while we provide the "bytes".
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+*Built with ☕️ and 💻 in Somerset West.*
